@@ -1,0 +1,33 @@
+indexer status 4 Hz IXStt
+
+channel 0 Pinch Valve
+  position 1 Hz PVStep
+  status   1 Hz PVStat Diagram PVStatFlag
+  scanstat PVScan
+  scan
+  invert direction
+  disable zeroref
+  speed 1067 Hz
+  # Swap Limits
+  # Invert Step
+  # Invert Direction
+  # Invert Run
+  # Invert In Limit
+  # Invert Out Limit
+  # Chop
+
+channel 1 Throttle Valve
+   position 1 Hz TVStep
+   status   1 Hz TVStat Diagram TVStatFlag
+   scanstat TVScan
+   scan
+   invert direction
+   disable zeroref
+   speed 1067 Hz
+  # Swap Limits
+  # Invert Step
+  # Invert Direction
+  # Invert Run
+  # Invert In Limit
+  # Invert Out Limit
+  # Chop

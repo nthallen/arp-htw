@@ -1,0 +1,93 @@
+%{
+  /* dstat.tmc */
+  static const char *on_off_status_text[] = {
+    "Off",
+    "On "
+  };
+%}
+TM typedef unsigned char On_Off_t { text "%3d" on_off_status_text[]; }
+
+On_Off_t Scroll_Pump_DS; Invalidate Scroll_Pump_DS;
+  { Scroll_Pump_DS = (DS822>>0)&1; Validate Scroll_Pump_DS; }
+On_Off_t Cal_Bub1_Vlv_DS; Invalidate Cal_Bub1_Vlv_DS;
+  { Cal_Bub1_Vlv_DS = (DS822>>1)&1; Validate Cal_Bub1_Vlv_DS; }
+On_Off_t Cal_Bub2_Vlv_DS; Invalidate Cal_Bub2_Vlv_DS;
+  { Cal_Bub2_Vlv_DS = (DS822>>2)&1; Validate Cal_Bub2_Vlv_DS; }
+On_Off_t TE_HC1_DS; Invalidate TE_HC1_DS;
+  { TE_HC1_DS = (DS822>>3)&1; Validate TE_HC1_DS; }
+On_Off_t LPV_HC_DS; Invalidate LPV_HC_DS;
+  { LPV_HC_DS = (DS822>>4)&1; Validate LPV_HC_DS; }
+On_Off_t Cell_HC_DS; Invalidate Cell_HC_DS;
+  { Cell_HC_DS = (DS822>>5)&1; Validate Cell_HC_DS; }
+On_Off_t DPV_HC_DS; Invalidate DPV_HC_DS;
+  { DPV_HC_DS = (DS822>>6)&1; Validate DPV_HC_DS; }
+On_Off_t SpCmd1_DS; Invalidate SpCmd1_DS;
+  { SpCmd1_DS = (DS822>>7)&1; Validate SpCmd1_DS; }
+On_Off_t SpCmd2_DS; Invalidate SpCmd2_DS;
+  { SpCmd2_DS = (DS822>>8)&1; Validate SpCmd2_DS; }
+On_Off_t L1Cmd_DS; Invalidate L1Cmd_DS;
+  { L1Cmd_DS = (DS822>>9)&1; Validate L1Cmd_DS; }
+On_Off_t TE_HC2_DS; Invalidate TE_HC2_DS;
+  { TE_HC2_DS = (DS822>>A)&1; Validate TE_HC2_DS; }
+On_Off_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
+  { Gas_Vlv_DS = (DS822>>B)&1; Validate Gas_Vlv_DS; }
+On_Off_t Edw_Vlv_DS; Invalidate Edw_Vlv_DS;
+  { Edw_Vlv_DS = (DS822>>C)&1; Validate Edw_Vlv_DS; }
+On_Off_t Bub_Gas_Vlv_DS; Invalidate Bub_Gas_Vlv_DS;
+  { Bub_Gas_Vlv_DS = (DS822>>D)&1; Validate Bub_Gas_Vlv_DS; }
+On_Off_t Gas_Flw_Open_DS; Invalidate Gas_Flw_Open_DS;
+  { Gas_Flw_Open_DS = (DS834>>0)&1; Validate Gas_Flw_Open_DS; }
+On_Off_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
+  { Gas_Flw_Closed_DS = (DS834>>1)&1; Validate Gas_Flw_Closed_DS; }
+On_Off_t Bub_Gas_Flw_Open_DS; Invalidate Bub_Gas_Flw_Open_DS;
+  { Bub_Gas_Flw_Open_DS = (DS834>>2)&1; Validate Bub_Gas_Flw_Open_DS; }
+On_Off_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
+  { Bub_Gas_Flw_Closed_DS = (DS834>>3)&1; Validate Bub_Gas_Flw_Closed_DS; }
+On_Off_t Cal_Gas_Flw_Open_DS; Invalidate Cal_Gas_Flw_Open_DS;
+  { Cal_Gas_Flw_Open_DS = (DS834>>4)&1; Validate Cal_Gas_Flw_Open_DS; }
+On_Off_t Cal_Gas_Flw_Closed_DS; Invalidate Cal_Gas_Flw_Closed_DS;
+  { Cal_Gas_Flw_Closed_DS = (DS834>>5)&1; Validate Cal_Gas_Flw_Closed_DS; }
+On_Off_t Cal_Bub1_Flw_Open_DS; Invalidate Cal_Bub1_Flw_Open_DS;
+  { Cal_Bub1_Flw_Open_DS = (DS834>>6)&1; Validate Cal_Bub1_Flw_Open_DS; }
+On_Off_t Cal_Bub1_Flw_Closed_DS; Invalidate Cal_Bub1_Flw_Closed_DS;
+  { Cal_Bub1_Flw_Closed_DS = (DS834>>7)&1; Validate Cal_Bub1_Flw_Closed_DS; }
+On_Off_t Cal_Bub2_Flw_Open_DS; Invalidate Cal_Bub2_Flw_Open_DS;
+  { Cal_Bub2_Flw_Open_DS = (DS84A>>0)&1; Validate Cal_Bub2_Flw_Open_DS; }
+On_Off_t Cal_Bub2_Flw_Closed_DS; Invalidate Cal_Bub2_Flw_Closed_DS;
+  { Cal_Bub2_Flw_Closed_DS = (DS84A>>1)&1; Validate Cal_Bub2_Flw_Closed_DS; }
+On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
+  { QCLI_Reset_DS = (DS84A>>2)&1; Validate QCLI_Reset_DS; }
+On_Off_t Gas_Vlv_D_DS; Invalidate Gas_Vlv_D_DS;
+  { Gas_Vlv_D_DS = (DS84A>>3)&1; Validate Gas_Vlv_D_DS; }
+On_Off_t Bub_Gas_Vlv_D_DS; Invalidate Bub_Gas_Vlv_D_DS;
+  { Bub_Gas_Vlv_D_DS = (DS84A>>4)&1; Validate Bub_Gas_Vlv_D_DS; }
+On_Off_t Bub_Gas_Vlv_Flw_DS; Invalidate Bub_Gas_Vlv_Flw_DS;
+  { Bub_Gas_Vlv_Flw_DS = (DS84A>>5)&1; Validate Bub_Gas_Vlv_Flw_DS; }
+On_Off_t Scroll_Pump_S; Invalidate Scroll_Pump_S;
+  { Scroll_Pump_S = (DS844>>0)&1; Validate Scroll_Pump_S; }
+On_Off_t Cal_Bub1_Vlv_S; Invalidate Cal_Bub1_Vlv_S;
+  { Cal_Bub1_Vlv_S = (DS844>>1)&1; Validate Cal_Bub1_Vlv_S; }
+On_Off_t Cal_Bub2_Vlv_S; Invalidate Cal_Bub2_Vlv_S;
+  { Cal_Bub2_Vlv_S = (DS844>>2)&1; Validate Cal_Bub2_Vlv_S; }
+On_Off_t TE_HC1_S; Invalidate TE_HC1_S;
+  { TE_HC1_S = (DS844>>3)&1; Validate TE_HC1_S; }
+On_Off_t LPV_HC_S; Invalidate LPV_HC_S;
+  { LPV_HC_S = (DS844>>4)&1; Validate LPV_HC_S; }
+On_Off_t Cell_HC_S; Invalidate Cell_HC_S;
+  { Cell_HC_S = (DS844>>5)&1; Validate Cell_HC_S; }
+On_Off_t DPV_HC_S; Invalidate DPV_HC_S;
+  { DPV_HC_S = (DS844>>6)&1; Validate DPV_HC_S; }
+On_Off_t SpCmd1_S; Invalidate SpCmd1_S;
+  { SpCmd1_S = (DS844>>7)&1; Validate SpCmd1_S; }
+On_Off_t SpCmd2_S; Invalidate SpCmd2_S;
+  { SpCmd2_S = (DS844>>8)&1; Validate SpCmd2_S; }
+On_Off_t L1Cmd_S; Invalidate L1Cmd_S;
+  { L1Cmd_S = (DS844>>9)&1; Validate L1Cmd_S; }
+On_Off_t TE_HC2_S; Invalidate TE_HC2_S;
+  { TE_HC2_S = (DS844>>A)&1; Validate TE_HC2_S; }
+On_Off_t Gas_Vlv_S; Invalidate Gas_Vlv_S;
+  { Gas_Vlv_S = (DS844>>B)&1; Validate Gas_Vlv_S; }
+On_Off_t Edw_Vlv_S; Invalidate Edw_Vlv_S;
+  { Edw_Vlv_S = (DS844>>C)&1; Validate Edw_Vlv_S; }
+On_Off_t Bub_Gas_Vlv_S; Invalidate Bub_Gas_Vlv_S;
+  { Bub_Gas_Vlv_S = (DS844>>D)&1; Validate Bub_Gas_Vlv_S; }

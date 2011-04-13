@@ -3,6 +3,8 @@ Software Requirements:
 Analog Inputs
   Get list and addresses from connector spreadsheet
 
+Analog Outputs
+
 Indexer Channels
   Get list from connector spreadsheet
 
