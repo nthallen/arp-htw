@@ -129,7 +129,7 @@ TM 1 Hz AI_X1 Cal1T; Address Cal1T 0xC8E; /* AI07_4, J2.1, J22CB-1 Calibration B
 TM 1 Hz AI_X1 Cal2T; Address Cal2T 0xCAE; /* AI07_5, J2.2, J22CB-3 Calibration Bench Temp 2 */
 TM 1 Hz AI_X1 Cal3T; Address Cal3T 0xCCE; /* AI07_6, J2.5, J22CB-5 Calibration Bench Temp 3 */
 TM 1 Hz AI_X1 Cal4T; Address Cal4T 0xCEE; /* AI07_7, J2.6, J22CB-7 Calibration Bench Temp 4 */
-TM 0 Hz AI_X1 open; Address open 0xC10; /* AI08_0, J2.9, E127(Ret E181)  */
+/* TM 0 Hz AI_X1 open; Address open 0xC10; */ /* AI08_0, J2.9, E127(Ret E181)  */
 TM 1 Hz AI_X1 L1Flw; Address L1Flw 0xC30; /* AI08_1, J2.10, J130CB-1 Lab 1 Flow */
 TM 1 Hz AI_X1 L2Flw; Address L2Flw 0xC50; /* AI08_2, J2.13, J130CB-3 Lab 2 Flow */
 TM 1 Hz AI_X1 L3Flw; Address L3Flw 0xC70; /* AI08_3, J2.14, J130CB-5 Lab 3 Flow */

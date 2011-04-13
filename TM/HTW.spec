@@ -9,11 +9,11 @@ cmdbase = /usr/local/share/huarp/root.cmd
 cmdbase = /usr/local/share/huarp/getcon.cmd
 cmdbase = /usr/local/share/huarp/idx64.cmd
 cmdbase = /usr/local/share/huarp/phrtg.cmd
+cmdbase = swstat.cmd
 cmdbase = idxdrv.cmd
 cmdbase = qcli.cmd
 cmdbase = ssp.cmd
 cmdbase = waves.cmd
-cmdbase = swstat.cmd
 cmdbase = ai.cmd
 cmdbase = ao.cmd
 cmdbase = dccc.cmd
@@ -28,6 +28,7 @@ SRC = swstat.h ptrh.h
 TGTDIR = $(TGTNODE)/home/htw
 
 HTWcol : HTWcol.tmc sspcol.tmc -lsubbus
+HTWsrvr : -lsubbus
 # HTWdisp : dstat.tmc qclibits.tmc HTW.tbl
 %%
 CFLAGS=-Wall -g

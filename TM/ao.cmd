@@ -25,9 +25,9 @@
   : Calibration Flow 2 Set Point { $0 = Cal2FSt_Address; }
   : Calibration Flow 3 Set Point { $0 = Cal3FSt_Address; }
   : TE2 Temperature Set Point { $0 = TE2TSt_Address; }
-  : Spare AO 1 { $0 = SpA01St_Address; }
-  : Spare AO 2 { $0 = SpA02St_Address; }
-  : Spare AO 3 { $0 = SpAO3St_Address; }
-  : Spare AO 4 { $0 = SpAO4St_Address; }
-  : Spare AO 5 { $0 = SpAO5St_Address; }
-	;
+# : Spare AO 1 { $0 = SpA01St_Address; }
+# : Spare AO 2 { $0 = SpA02St_Address; }
+# : Spare AO 3 { $0 = SpAO3St_Address; }
+# : Spare AO 4 { $0 = SpAO4St_Address; }
+# : Spare AO 5 { $0 = SpAO5St_Address; }
+  ;

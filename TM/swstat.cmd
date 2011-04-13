@@ -1,4 +1,5 @@
 %{
+  #include "subbus.h"
   #include "swstat.h"
   #ifdef SERVER
     CmdData_t SWStat;
@@ -14,11 +15,11 @@
   ;
 &SWTM
   : SW Status &swstat {
-        SWStat.SWStat = $3;
+        SWStat.SW_St = $3;
       }
-  : Set Pinch Valve Gain Gp &gain { SWStat.PV_Gp = $6; }
-  : Set Pinch Valve Gain Gi &gain { SWStat.PV_Gi = $6; }
-  : Set Cell Pressure Setpoint &gain { SWStat.PV_SetP = $4; }
+  : Set Gain Gp for Pinch Valve &gain { SWStat.PV_Gp = $7; }
+  : Set Gain Gi for Pinch Valve &gain { SWStat.PV_Gi = $7; }
+  : Set Cell Pressure Setpoint &gain { SWStat.PV_SetP = $5; }
   ;
 &swstat <int>
   : Set %d { $0 = $2; }
@@ -36,7 +37,7 @@
 	: Pinch Valve PI { $0 = SWS_PV_PI; }
 	: Pinch Valve Scan { $0 = SWS_PV_SCAN; }
 
-  : Time Warp { $0 = SWS_TIME_WARP; }
+  : Time Warp { $0 = SWS_TIMEWARP; }
   : ReadFile { $0 = SWS_READFILE; }
   : Shutdown { $0 = SWS_SHUTDOWN; }
   ;

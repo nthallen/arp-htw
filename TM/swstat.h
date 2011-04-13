@@ -13,7 +13,7 @@ typedef struct {
 /* SW_St Values */
 #define SWS_READY 0
 #define SWS_TAKEOFF 1
-#define SWS_CRUISE 2
+#define SWS_CLIMB 2
 #define SWS_DESCEND 3
 #define SWS_LAND 4
 
