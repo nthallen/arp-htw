@@ -140,6 +140,20 @@ TM 1 Hz AI_X1 LFB_T; Address LFB_T 0xCF0; /* AI08_7, J2.22, J130CB-13 Lab Flow B
 TM 1 Hz AI_X1 LFT_P; Address LFT_P 0xC12; /* AI09_0, J2.25, J130CB-15 Lab Flow Tube Pressure */
 TM 1 Hz AI_X1 Sp2AI; Address Sp2AI 0xC32; /* AI09_1, J2.26, J130CB-17 Spare Ana Channel 2 */
 TM 1 Hz AI_X1 Sp3AI; Address Sp3AI 0xC52; /* AI09_2, J2.29, J130CB-19 Spare Ana Channel 3 */
+TM 1 Hz AI_X1 Cmd0_I; Address Cmd0_I 0xD10; /* AI15_0_0 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd1_I; Address Cmd1_I 0xD12; /* AI15_0_1 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd2_I; Address Cmd2_I 0xD14; /* AI15_0_2 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd3_I; Address Cmd3_I 0xD16; /* AI15_0_3 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd4_I; Address Cmd4_I 0xD18; /* AI15_0_4 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd5_I; Address Cmd5_I 0xD1A; /* AI15_0_5 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd6_I; Address Cmd6_I 0xD1C; /* AI15_0_6 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd7_I; Address Cmd7_I 0xD1E; /* AI15_0_7 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd8_I; Address Cmd8_I 0xD30; /* AI15_2_0 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd9_I; Address Cmd9_I 0xD32; /* AI15_2_1 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd10_I; Address Cmd10_I 0xD34; /* AI15_2_2 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd11_I; Address Cmd11_I 0xD36; /* AI15_2_3 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; /* AI15_2_4 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd13_I; Address Cmd13_I 0xD3A; /* AI15_2_5 Power Board Command Current */
 
 /* AO */
 TM 1 Hz AO LTETSt; Address LTETSt 0x400; /* AO0, J5.1, J60CB-8 */
