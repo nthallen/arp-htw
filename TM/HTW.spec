@@ -29,7 +29,7 @@ TGTDIR = $(TGTNODE)/home/htw
 
 HTWcol : HTWcol.tmc sspcol.tmc -lsubbus
 HTWsrvr : -lsubbus
-# HTWdisp : dstat.tmc qclibits.tmc HTW.tbl
+HTWdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc HTW.tbl
 %%
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g

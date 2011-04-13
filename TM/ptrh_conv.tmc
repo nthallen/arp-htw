@@ -1,0 +1,30 @@
+TM typedef double PTRHT_t { text "%5.1lf"; }
+TM typedef double SHT21RH_t { text "%4.1lf"; }
+TM typedef double PTRHP_t { text "%7.2lf"; }
+
+PTRHT_t DACS_T1C; invalidate DACS_T1C;
+{ DACS_T1C = DACS_ptrh.SHT21T(DACS_T1); Validate DACS_T1C; }
+PTRHT_t DACS_T2C; invalidate DACS_T2C;
+{ DACS_T2C = DACS_ptrh.MS5607T(DACS_T2a, DACS_T2b); Validate DACS_T2C; }
+SHT21RH_t DACS_RHC; invalidate DACS_RHC;
+{ DACS_RHC = DACS_ptrh.SHT21RH(DACS_RH); Validate DACS_RHC; }
+PTRHP_t DACS_P; invalidate DACS_P;
+{ DACS_P = DACS_ptrh.MS5607P(DACS_Pa, DACS_Pb) * 760./1013.; Validate DACS_P; }
+
+PTRHT_t LPV_T1C; invalidate LPV_T1C;
+{ LPV_T1C = LPV_ptrh.SHT21T(LPV_T1); Validate LPV_T1C; }
+PTRHT_t LPV_T2C; invalidate LPV_T2C;
+{ LPV_T2C = LPV_ptrh.MS5607T(LPV_T2a, LPV_T2b); Validate LPV_T2C; }
+SHT21RH_t LPV_RHC; invalidate LPV_RHC;
+{ LPV_RHC = LPV_ptrh.SHT21RH(LPV_RH); Validate LPV_RHC; }
+PTRHP_t LPV_P; invalidate LPV_P;
+{ LPV_P = LPV_ptrh.MS5607P(LPV_Pa, LPV_Pb) * 760./1013.; Validate LPV_P; }
+
+PTRHT_t DPV_T1C; invalidate DPV_T1C;
+{ DPV_T1C = DPV_ptrh.SHT21T(DPV_T1); Validate DPV_T1C; }
+PTRHT_t DPV_T2C; invalidate DPV_T2C;
+{ DPV_T2C = DPV_ptrh.MS5607T(DPV_T2a, DPV_T2b); Validate DPV_T2C; }
+SHT21RH_t DPV_RHC; invalidate DPV_RHC;
+{ DPV_RHC = DPV_ptrh.SHT21RH(DPV_RH); Validate DPV_RHC; }
+PTRHP_t DPV_P; invalidate DPV_P;
+{ DPV_P = DPV_ptrh.MS5607P(DPV_Pa, DPV_Pb) * 760./1013.; Validate DPV_P; }
