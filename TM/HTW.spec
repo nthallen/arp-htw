@@ -29,7 +29,9 @@ TGTDIR = $(TGTNODE)/home/htw
 
 HTWcol : HTWcol.tmc sspcol.tmc -lsubbus
 HTWsrvr : -lsubbus
-HTWdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc HTW.tbl
+hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl
+gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
+datadisp : qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
 %%
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g

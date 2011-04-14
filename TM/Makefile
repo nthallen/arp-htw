@@ -1,21 +1,30 @@
-# Makefile Generated Wed Apr 13 09:51:26 CDT 2011
+# Makefile Generated Fri Apr 15 03:28:09 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
 SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
 SRC+=waves.tmc HTWcol.tmc sspcol.tmc swstat.cmd idxdrv.cmd qcli.cmd
-SRC+=ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
+SRC+=ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
+SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
 OBJ+=HTWcol.cc HTW.pcm tm.dac HTWcoloui.c HTWcoloui.o HTWcol.o ptrh.o
 OBJ+=HTWcmd.cc HTWcmd.dat HTWsrvr.o HTWsrvroui.c HTWsrvroui.o
+OBJ+=hktbl.tmc hkdisp.cc hkdispoui.c hkdispoui.o hkdisp.o hktblnc.tmc
+OBJ+=hkdispnc.cc hkdispncoui.c hkdispncoui.o hkdispnc.o gastbl.tmc
+OBJ+=gddisp.cc gddispoui.c gddispoui.o gddisp.o gastblnc.tmc
+OBJ+=gddispnc.cc gddispncoui.c gddispncoui.o gddispnc.o datatbl.tmc
+OBJ+=datadisp.cc datadispoui.c datadispoui.o datadisp.o datatblnc.tmc
+OBJ+=datadispnc.cc datadispncoui.c datadispncoui.o datadispnc.o
 OBJ+=HTWclt.o HTWcltoui.c HTWcltoui.o HTWcltnc.o HTWcltncoui.c
 OBJ+=HTWcltncoui.o
-TGT=HTWcol HTWsrvr HTWclt HTWcltnc
+TGT=HTWcol HTWsrvr hkdisp hkdispnc gddisp gddispnc datadisp
+TGT+=datadispnc HTWclt HTWcltnc
 DISTRIB=HTW.pcm tm.dac
 IDISTRIB=Experiment.config VERSION
-SRCDIST=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
+SRCDIST=hk.tbl gas.tbl data.tbl base.tmc idx.tmc qcli.tmc ssp.tmc
+SRCDIST+=ptrh.cc waves.tmc
 NONRCS=
 TMCBASE=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
 CMDBASE=/usr/local/share/huarp/root.cmd
@@ -51,6 +60,24 @@ HTWsrvr : HTWsrvr.o HTWsrvroui.o
 	$(LINK.privCXX) HTWsrvr.o HTWsrvroui.o -lsubbus -ltmpp -ltm -lnort
 	$(OUIUSE) HTWsrvroui.c
 	$(PROMOTE) HTWsrvr
+hkdisp : hkdisp.o ptrh.o hkdispoui.o
+	$(LINK.normCXX) hkdisp.o ptrh.o hkdispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+	$(OUIUSE) hkdispoui.c
+hkdispnc : hkdispnc.o ptrh.o hkdispncoui.o
+	$(LINK.normCXX) hkdispnc.o ptrh.o hkdispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+	$(OUIUSE) hkdispncoui.c
+gddisp : gddisp.o ptrh.o gddispoui.o
+	$(LINK.normCXX) gddisp.o ptrh.o gddispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+	$(OUIUSE) gddispoui.c
+gddispnc : gddispnc.o ptrh.o gddispncoui.o
+	$(LINK.normCXX) gddispnc.o ptrh.o gddispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+	$(OUIUSE) gddispncoui.c
+datadisp : datadisp.o ptrh.o datadispoui.o
+	$(LINK.normCXX) datadisp.o ptrh.o datadispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+	$(OUIUSE) datadispoui.c
+datadispnc : datadispnc.o ptrh.o datadispncoui.o
+	$(LINK.normCXX) datadispnc.o ptrh.o datadispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+	$(OUIUSE) datadispncoui.c
 HTWclt : HTWclt.o HTWcltoui.o
 	$(LINK.normCXX) HTWclt.o HTWcltoui.o -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltoui.c
@@ -71,6 +98,54 @@ HTWsrvr.o : HTWcmd.cc
 HTWsrvroui.c : $(OUIDIR)/cis.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/cis.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 HTWsrvroui.o : HTWsrvroui.c
+hktbl.tmc : hk.tbl
+	$(TABLE) hk.tbl
+hkdisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktbl.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktbl.tmc
+hkdispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+hkdispoui.o : hkdispoui.c
+hkdisp.o : hkdisp.cc
+hktblnc.tmc : hk.tbl
+	$(NCTABLE) hk.tbl
+hkdispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktblnc.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktblnc.tmc
+hkdispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+hkdispncoui.o : hkdispncoui.c
+hkdispnc.o : hkdispnc.cc
+gastbl.tmc : gas.tbl
+	$(TABLE) gas.tbl
+gddisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastbl.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastbl.tmc
+gddispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+gddispoui.o : gddispoui.c
+gddisp.o : gddisp.cc
+gastblnc.tmc : gas.tbl
+	$(NCTABLE) gas.tbl
+gddispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastblnc.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastblnc.tmc
+gddispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+gddispncoui.o : gddispncoui.c
+gddispnc.o : gddispnc.cc
+datatbl.tmc : data.tbl
+	$(TABLE) data.tbl
+datadisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
+datadispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+datadispoui.o : datadispoui.c
+datadisp.o : datadisp.cc
+datatblnc.tmc : data.tbl
+	$(NCTABLE) data.tbl
+datadispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
+datadispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+datadispncoui.o : datadispncoui.c
+datadispnc.o : datadispnc.cc
 HTWclt.o : HTWcmd.cc
 	$(COMPILE.clt) HTWcmd.cc
 HTWcltoui.c : $(OUIDIR)/kbdclt.oui $(OUIDIR)/msg.oui

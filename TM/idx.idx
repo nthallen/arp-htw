@@ -2,7 +2,7 @@ indexer status 4 Hz IXStt
 
 channel 0 Pinch Valve
   position 1 Hz PVStep
-  status   1 Hz PVStat Diagram PVStatFlag
+  status   1 Hz PVStat Diagram PVStatFlag KillStat PVKill
   scanstat PVScan
   scan
   invert direction
@@ -18,7 +18,7 @@ channel 0 Pinch Valve
 
 channel 1 Throttle Valve
    position 1 Hz TVStep
-   status   1 Hz TVStat Diagram TVStatFlag
+   status   1 Hz TVStat Diagram TVStatFlag KillStat TVKill
    scanstat TVScan
    scan
    invert direction

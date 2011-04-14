@@ -22,6 +22,29 @@ TM typedef unsigned char IxDriveStat { text "%5d" IxDrive_text[]; }
 IxDriveStat PVStatFlag; invalidate PVStatFlag; { PVStatFlag = PVStat & 0xF; Validate PVStatFlag; }
 IxDriveStat TVStatFlag; invalidate TVStatFlag; { TVStatFlag = TVStat & 0xF; Validate TVStatFlag; }
 %{
+  const char *IxKillStat_text[] = {
+    "----",
+    "---A",
+    "--B-",
+    "--BA",
+    "-Z--",
+    "-Z-A",
+    "-ZB-",
+    "-ZBA",
+    "C---",
+    "C--A",
+    "C-B-",
+    "C-BA",
+    "CZ--",
+    "CZ-A",
+    "CZB-",
+    "CZBA"
+  };
+%}
+TM typedef unsigned char IxKillStat { text "%4d" IxKillStat_text[]; }
+IxKillStat PVKill; invalidate PVKill; { PVKill = (PVStat >> 4) & 0xF; Validate PVKill; }
+IxKillStat TVKill; invalidate TVKill; { TVKill = (TVStat >> 4) & 0xF; Validate TVKill; }
+%{
   const char *IdxFlgTxt[8] = {
 	"    ",
 	"Scan",

@@ -1,0 +1,104 @@
+Idx {
+  HBox { +-; Title: Indexers; -+ };
+  PV: (PVStep,5) (PVStatFlag,5) (PVKill,4) (PVScan,4) (PVPos,7) V;
+  TV: (TVStep,5) (TVStatFlag,5) (TVKill,4) (TVScan,4) (TVPos,7) V;
+}
+
+Cell {
+  HBox { +-; Title: Cell; -+ };
+  T1: (Cel1T,7) V;
+  T2: (Cel2T,7) V;
+  HP: (Cel2P,7) V;
+  LP: (CellP,7) V;
+}
+
+Valves {
+  +-+;
+  Edwards: (Edw_Vlv_DS,3)      (Edw_Vlv_S,6)      (Cmd12_I,7) "I/V";
+  Pump:    (Scroll_Pump_DS,3) (Scroll_Pump_S,3) (Cmd0_I,7) "I/V";
+}
+
+GD {
+  HBox { +-; Title: "Gas Deck"; -+ };
+  "Gas HP:"   (GasHP,7) V;
+  "Main LP:"  (GasLP,7) V;
+  "Bub LP:"   (BubLP,7) V;
+}
+
+MF {
+  HBox { +|+; (Gas_Flw_Closed_DS,1); +|+ };
+}
+
+BF {
+  HBox { +|+; (Bub_Gas_Flw_Closed_DS,1); +|+ };
+}
+
+Bub {
+  HBox { |; {
+      # HBox { +-; Bubbler; -+ };
+      +-+;
+      { P: (Bub_P,5) Torr;
+	T: (Bub_T,6) C
+      };
+      +-+
+    }; |
+  }
+}
+
+Diagram {
+  "";
+  HBox { -; -; -; -; -+; [MF]; +-; -; (Gas_Vlv_D_DS,1); - };
+  HBox { "  "; +|;
+    {
+      " ";
+      HBox { +-;
+	{
+	  "";
+	  (Bub_Gas_Vlv_D_DS,1);
+	  "";
+	}; -+; [Bub];
+	{
+	  "";
+	  HBox{ +-+; [BF]; +-; (Bub_Vlv_Flw_D_DS,1); -+ };
+	  "" 
+	}; -+
+      }
+    }; +|; HGlue 7
+  };
+  "";
+}
+
+Flows {
+  HBox { +-; Title: "Flows"; -+ };
+  ""      SetPt     Read;
+  Main: (GsFl1St,6) (GasFl,7) V;
+  Bub:  (GsFl2St,6) (BubFl,7) V;
+}
+
+GDT {
+  HBox { +-; Title: "Gas Deck Temps"; -+ };
+  T1: (GD_1T,6) V;
+  T2: (GD_2T,6) V;
+  T3: (GD_3T,6) V;
+}
+
+SW {
+  Time: (flttime,8)
+  MFCtr: (MFCtr,5);
+}
+
+{ HBox {
+    |;
+    { [Idx];
+      [Valves];
+      HBox { [Cell]; |; [Flows] };
+      +-+;
+      HBox { " "; [Diagram]; " " };
+      HBox { [GD]; |+; [GDT] };
+      +-+;
+      >[SW]<;
+      +-+;
+    };
+    |;
+  }
+}

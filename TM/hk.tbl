@@ -16,15 +16,23 @@ Diag_T {
     SGs1T:       (SGs1T,7) V;
     SGs2T:       (SGs2T,7) V;
   };
+}
+Skin_Rvr {
+  +-+;
   ""   >Skin      >Rover;
   "1:" (Skn1T,7)  (Rov1T,7) V;
   "2:" (Skn2T,7)  (Rov2T,7) V;
   "3:" (Skn3T,7)  (Rov3T,7) V;
   "4:" (Skn4T,7)  (Rov4T,7) V;
   "5:" (Skn5T,7)  (Rov5T,7) V;
-  { "PumpT:" (PumpT,7) V;
-    "PMotT:" (PMotT,7) V;
-  }
+}
+
+Pump {
+  HBox { +-; Title: "Scroll Pump"; -+ };
+  {Status: (Scroll_Pump_DS,3) (Scroll_Pump_S,3) };
+  PumpI: (Cmd0_I,7) V;
+  PumpT: (PumpT,7) V;
+  PMotT: (PMotT,7) V;
 }
 
 PTRH {
@@ -60,12 +68,22 @@ SW {
 }
 
 { HBox { |+;
-    { [Cont_T];
-      [Diag_T];
-    }; |+; {
+    {
       [PTRH];
-      [Inlet_T];
-      [Inlet_P];
+      HBox {
+	{
+	  [Inlet_T];
+	  [Inlet_P];
+	}; |; {
+	  [Diag_T];
+	  VGlue 0+1;
+	  [Pump]
+	}
+      };
+    }; |+; {
+      [Cont_T];
+      [Skin_Rvr];
+      VGlue 0+1;
       +-+;
       >[SW];
     }; |+;

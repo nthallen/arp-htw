@@ -158,22 +158,22 @@ TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; /* AI15_2_4 Power Board Command Cu
 TM 1 Hz AI_X1 Cmd13_I; Address Cmd13_I 0xD3A; /* AI15_2_5 Power Board Command Current */
 
 /* AO */
-TM 1 Hz AO LTETSt; Address LTETSt 0x400; /* AO0, J5.1, J60CB-8 */
-TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; /* AO1, J5.2, J20CB-26 */
-TM 1 Hz AO GsFl2St; Address GsFl2St 0x404; /* AO2, J5.5, J20CB-28 */
-TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; /* AO3, J5.6, J59CB-5 */
-TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; /* AO4, J5.9, J59CB-17 */
-TM 1 Hz AO CelTSt; Address CelTSt 0x40A; /* AO5, J5.10, J59CB-11 */
-TM 1 Hz AO TE1TSt; Address TE1TSt 0x40C; /* AO6, J5.13, J59CB-24 */
-TM 1 Hz AO Cal1FSt; Address Cal1FSt 0x40E; /* AO7, J5.14, J22CB-9 */
-TM 1 Hz AO Cal2FSt; Address Cal2FSt 0x410; /* AO8, J5.17, J22CB-11 */
-TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; /* AO9, J5.18, J22CB-14 */
-TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; /* AO10, J5.21, J59CB-30 */
-/* TM 0 Hz AO SpA01St; Address SpA01St 0x416; */ /* AO11, J5.22, J130CB-28 */
-/* TM 0 Hz AO SpA02St; Address SpA02St 0x418; */ /* AO12, J5.25, J130CB-33 */
-/* TM 0 Hz AO SpAO3St; Address SpAO3St 0x41A; */ /* AO13, J5.26,  */
-/* TM 0 Hz AO SpAO4St; Address SpAO4St 0x41C; */ /* AO14, J5.29,  */
-/* TM 0 Hz AO SpAO5St; Address SpAO5St 0x41E; */ /* AO15, J5.30,  */
+TM 1 Hz AO LTETSt; Address LTETSt 0x400; /* AO0, J3.1, J60CB-8 */
+TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; /* AO1, J3.2, J20CB-26 */
+TM 1 Hz AO GsFl2St; Address GsFl2St 0x404; /* AO2, J3.5, J20CB-28 */
+TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; /* AO3, J3.6, J59CB-5 */
+TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; /* AO4, J3.9, J59CB-17 */
+TM 1 Hz AO CelTSt; Address CelTSt 0x40A; /* AO5, J3.10, J59CB-11 */
+TM 1 Hz AO TE1TSt; Address TE1TSt 0x40C; /* AO6, J3.13, J59CB-24 */
+TM 1 Hz AO Cal1FSt; Address Cal1FSt 0x40E; /* AO7, J3.14, J22CB-9 */
+TM 1 Hz AO Cal2FSt; Address Cal2FSt 0x410; /* AO8, J3.17, J22CB-11 */
+TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; /* AO9, J3.18, J22CB-14 */
+TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; /* AO10, J3.21, J59CB-30 */
+/* TM 0 Hz AO SpA01St; Address SpA01St 0x416; */ /* AO11, J3.22, J130CB-28 */
+/* TM 0 Hz AO SpA02St; Address SpA02St 0x418; */ /* AO12, J3.25, J130CB-33 */
+/* TM 0 Hz AO SpAO3St; Address SpAO3St 0x41A; */ /* AO13, J3.26,  */
+/* TM 0 Hz AO SpAO4St; Address SpAO4St 0x41C; */ /* AO14, J3.29,  */
+/* TM 0 Hz AO SpAO5St; Address SpAO5St 0x41E; */ /* AO15, J3.30,  */
 
 /* Status */
 TM 1 Hz DSWord AIStat; Address AIStat 0xE00;

@@ -4,90 +4,99 @@
     "Off",
     "On "
   };
+  static const char *open_closed_status_text[] = {
+    "Closed",
+    "Open  "
+  };
+  static const char *OX_text[] = { "X", " " };
+  static const char *XO_text[] = { " ", "X" };
 %}
 TM typedef unsigned char On_Off_t { text "%3d" on_off_status_text[]; }
+TM typedef unsigned char Open_Closed_t { text "%6d" open_closed_status_text[]; }
+TM typedef unsigned char OX_t { text "%1d" OX_text[]; }
+TM typedef unsigned char XO_t { text "%1d" XO_text[]; }
 
 On_Off_t Scroll_Pump_DS; Invalidate Scroll_Pump_DS;
-  { Scroll_Pump_DS = (DS822>>0)&1; Validate Scroll_Pump_DS; }
+  { Scroll_Pump_DS = (DS822>>0x0)&1; Validate Scroll_Pump_DS; }
 On_Off_t Cal_Bub1_Vlv_DS; Invalidate Cal_Bub1_Vlv_DS;
-  { Cal_Bub1_Vlv_DS = (DS822>>1)&1; Validate Cal_Bub1_Vlv_DS; }
+  { Cal_Bub1_Vlv_DS = (DS822>>0x1)&1; Validate Cal_Bub1_Vlv_DS; }
 On_Off_t Cal_Bub2_Vlv_DS; Invalidate Cal_Bub2_Vlv_DS;
-  { Cal_Bub2_Vlv_DS = (DS822>>2)&1; Validate Cal_Bub2_Vlv_DS; }
+  { Cal_Bub2_Vlv_DS = (DS822>>0x2)&1; Validate Cal_Bub2_Vlv_DS; }
 On_Off_t TE_HC1_DS; Invalidate TE_HC1_DS;
-  { TE_HC1_DS = (DS822>>3)&1; Validate TE_HC1_DS; }
+  { TE_HC1_DS = (DS822>>0x3)&1; Validate TE_HC1_DS; }
 On_Off_t LPV_HC_DS; Invalidate LPV_HC_DS;
-  { LPV_HC_DS = (DS822>>4)&1; Validate LPV_HC_DS; }
+  { LPV_HC_DS = (DS822>>0x4)&1; Validate LPV_HC_DS; }
 On_Off_t Cell_HC_DS; Invalidate Cell_HC_DS;
-  { Cell_HC_DS = (DS822>>5)&1; Validate Cell_HC_DS; }
+  { Cell_HC_DS = (DS822>>0x5)&1; Validate Cell_HC_DS; }
 On_Off_t DPV_HC_DS; Invalidate DPV_HC_DS;
-  { DPV_HC_DS = (DS822>>6)&1; Validate DPV_HC_DS; }
+  { DPV_HC_DS = (DS822>>0x6)&1; Validate DPV_HC_DS; }
 On_Off_t SpCmd1_DS; Invalidate SpCmd1_DS;
-  { SpCmd1_DS = (DS822>>7)&1; Validate SpCmd1_DS; }
+  { SpCmd1_DS = (DS822>>0x7)&1; Validate SpCmd1_DS; }
 On_Off_t SpCmd2_DS; Invalidate SpCmd2_DS;
-  { SpCmd2_DS = (DS822>>8)&1; Validate SpCmd2_DS; }
+  { SpCmd2_DS = (DS822>>0x8)&1; Validate SpCmd2_DS; }
 On_Off_t L1Cmd_DS; Invalidate L1Cmd_DS;
-  { L1Cmd_DS = (DS822>>9)&1; Validate L1Cmd_DS; }
+  { L1Cmd_DS = (DS822>>0x9)&1; Validate L1Cmd_DS; }
 On_Off_t TE_HC2_DS; Invalidate TE_HC2_DS;
-  { TE_HC2_DS = (DS822>>A)&1; Validate TE_HC2_DS; }
-On_Off_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
-  { Gas_Vlv_DS = (DS822>>B)&1; Validate Gas_Vlv_DS; }
+  { TE_HC2_DS = (DS822>>0xA)&1; Validate TE_HC2_DS; }
+XO_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
+  { Gas_Vlv_DS = (DS822>>0xB)&1; Validate Gas_Vlv_DS; }
 On_Off_t Edw_Vlv_DS; Invalidate Edw_Vlv_DS;
-  { Edw_Vlv_DS = (DS822>>C)&1; Validate Edw_Vlv_DS; }
-On_Off_t Bub_Gas_Vlv_DS; Invalidate Bub_Gas_Vlv_DS;
-  { Bub_Gas_Vlv_DS = (DS822>>D)&1; Validate Bub_Gas_Vlv_DS; }
+  { Edw_Vlv_DS = (DS822>>0xC)&1; Validate Edw_Vlv_DS; }
+XO_t Bub_Gas_Vlv_DS; Invalidate Bub_Gas_Vlv_DS;
+  { Bub_Gas_Vlv_DS = (DS822>>0xD)&1; Validate Bub_Gas_Vlv_DS; }
 On_Off_t Gas_Flw_Open_DS; Invalidate Gas_Flw_Open_DS;
-  { Gas_Flw_Open_DS = (DS834>>0)&1; Validate Gas_Flw_Open_DS; }
-On_Off_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
-  { Gas_Flw_Closed_DS = (DS834>>1)&1; Validate Gas_Flw_Closed_DS; }
+  { Gas_Flw_Open_DS = (DS834>>0x0)&1; Validate Gas_Flw_Open_DS; }
+OX_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
+  { Gas_Flw_Closed_DS = (DS834>>0x1)&1; Validate Gas_Flw_Closed_DS; }
 On_Off_t Bub_Gas_Flw_Open_DS; Invalidate Bub_Gas_Flw_Open_DS;
-  { Bub_Gas_Flw_Open_DS = (DS834>>2)&1; Validate Bub_Gas_Flw_Open_DS; }
-On_Off_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
-  { Bub_Gas_Flw_Closed_DS = (DS834>>3)&1; Validate Bub_Gas_Flw_Closed_DS; }
+  { Bub_Gas_Flw_Open_DS = (DS834>>0x2)&1; Validate Bub_Gas_Flw_Open_DS; }
+OX_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
+  { Bub_Gas_Flw_Closed_DS = (DS834>>0x3)&1; Validate Bub_Gas_Flw_Closed_DS; }
 On_Off_t Cal_Gas_Flw_Open_DS; Invalidate Cal_Gas_Flw_Open_DS;
-  { Cal_Gas_Flw_Open_DS = (DS834>>4)&1; Validate Cal_Gas_Flw_Open_DS; }
+  { Cal_Gas_Flw_Open_DS = (DS834>>0x4)&1; Validate Cal_Gas_Flw_Open_DS; }
 On_Off_t Cal_Gas_Flw_Closed_DS; Invalidate Cal_Gas_Flw_Closed_DS;
-  { Cal_Gas_Flw_Closed_DS = (DS834>>5)&1; Validate Cal_Gas_Flw_Closed_DS; }
+  { Cal_Gas_Flw_Closed_DS = (DS834>>0x5)&1; Validate Cal_Gas_Flw_Closed_DS; }
 On_Off_t Cal_Bub1_Flw_Open_DS; Invalidate Cal_Bub1_Flw_Open_DS;
-  { Cal_Bub1_Flw_Open_DS = (DS834>>6)&1; Validate Cal_Bub1_Flw_Open_DS; }
+  { Cal_Bub1_Flw_Open_DS = (DS834>>0x6)&1; Validate Cal_Bub1_Flw_Open_DS; }
 On_Off_t Cal_Bub1_Flw_Closed_DS; Invalidate Cal_Bub1_Flw_Closed_DS;
-  { Cal_Bub1_Flw_Closed_DS = (DS834>>7)&1; Validate Cal_Bub1_Flw_Closed_DS; }
+  { Cal_Bub1_Flw_Closed_DS = (DS834>>0x7)&1; Validate Cal_Bub1_Flw_Closed_DS; }
 On_Off_t Cal_Bub2_Flw_Open_DS; Invalidate Cal_Bub2_Flw_Open_DS;
-  { Cal_Bub2_Flw_Open_DS = (DS84A>>0)&1; Validate Cal_Bub2_Flw_Open_DS; }
+  { Cal_Bub2_Flw_Open_DS = (DS84A>>0x0)&1; Validate Cal_Bub2_Flw_Open_DS; }
 On_Off_t Cal_Bub2_Flw_Closed_DS; Invalidate Cal_Bub2_Flw_Closed_DS;
-  { Cal_Bub2_Flw_Closed_DS = (DS84A>>1)&1; Validate Cal_Bub2_Flw_Closed_DS; }
+  { Cal_Bub2_Flw_Closed_DS = (DS84A>>0x1)&1; Validate Cal_Bub2_Flw_Closed_DS; }
 On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
-  { QCLI_Reset_DS = (DS84A>>2)&1; Validate QCLI_Reset_DS; }
-On_Off_t Gas_Vlv_D_DS; Invalidate Gas_Vlv_D_DS;
-  { Gas_Vlv_D_DS = (DS84A>>3)&1; Validate Gas_Vlv_D_DS; }
-On_Off_t Bub_Gas_Vlv_D_DS; Invalidate Bub_Gas_Vlv_D_DS;
-  { Bub_Gas_Vlv_D_DS = (DS84A>>4)&1; Validate Bub_Gas_Vlv_D_DS; }
-On_Off_t Bub_Gas_Vlv_Flw_DS; Invalidate Bub_Gas_Vlv_Flw_DS;
-  { Bub_Gas_Vlv_Flw_DS = (DS84A>>5)&1; Validate Bub_Gas_Vlv_Flw_DS; }
+  { QCLI_Reset_DS = (DS84A>>0x2)&1; Validate QCLI_Reset_DS; }
+XO_t Gas_Vlv_D_DS; Invalidate Gas_Vlv_D_DS;
+  { Gas_Vlv_D_DS = (DS84A>>0x3)&1; Validate Gas_Vlv_D_DS; }
+XO_t Bub_Gas_Vlv_D_DS; Invalidate Bub_Gas_Vlv_D_DS;
+  { Bub_Gas_Vlv_D_DS = (DS84A>>0x4)&1; Validate Bub_Gas_Vlv_D_DS; }
+On_Off_t Bub_Vlv_Flw_D_DS; Invalidate Bub_Vlv_Flw_D_DS;
+  { Bub_Vlv_Flw_D_DS = (DS84A>>0x5)&1; Validate Bub_Vlv_Flw_D_DS; }
 On_Off_t Scroll_Pump_S; Invalidate Scroll_Pump_S;
-  { Scroll_Pump_S = (DS844>>0)&1; Validate Scroll_Pump_S; }
+  { Scroll_Pump_S = (DS844>>0x0)&1; Validate Scroll_Pump_S; }
 On_Off_t Cal_Bub1_Vlv_S; Invalidate Cal_Bub1_Vlv_S;
-  { Cal_Bub1_Vlv_S = (DS844>>1)&1; Validate Cal_Bub1_Vlv_S; }
+  { Cal_Bub1_Vlv_S = (DS844>>0x1)&1; Validate Cal_Bub1_Vlv_S; }
 On_Off_t Cal_Bub2_Vlv_S; Invalidate Cal_Bub2_Vlv_S;
-  { Cal_Bub2_Vlv_S = (DS844>>2)&1; Validate Cal_Bub2_Vlv_S; }
+  { Cal_Bub2_Vlv_S = (DS844>>0x2)&1; Validate Cal_Bub2_Vlv_S; }
 On_Off_t TE_HC1_S; Invalidate TE_HC1_S;
-  { TE_HC1_S = (DS844>>3)&1; Validate TE_HC1_S; }
+  { TE_HC1_S = (DS844>>0x3)&1; Validate TE_HC1_S; }
 On_Off_t LPV_HC_S; Invalidate LPV_HC_S;
-  { LPV_HC_S = (DS844>>4)&1; Validate LPV_HC_S; }
+  { LPV_HC_S = (DS844>>0x4)&1; Validate LPV_HC_S; }
 On_Off_t Cell_HC_S; Invalidate Cell_HC_S;
-  { Cell_HC_S = (DS844>>5)&1; Validate Cell_HC_S; }
+  { Cell_HC_S = (DS844>>0x5)&1; Validate Cell_HC_S; }
 On_Off_t DPV_HC_S; Invalidate DPV_HC_S;
-  { DPV_HC_S = (DS844>>6)&1; Validate DPV_HC_S; }
+  { DPV_HC_S = (DS844>>0x6)&1; Validate DPV_HC_S; }
 On_Off_t SpCmd1_S; Invalidate SpCmd1_S;
-  { SpCmd1_S = (DS844>>7)&1; Validate SpCmd1_S; }
+  { SpCmd1_S = (DS844>>0x7)&1; Validate SpCmd1_S; }
 On_Off_t SpCmd2_S; Invalidate SpCmd2_S;
-  { SpCmd2_S = (DS844>>8)&1; Validate SpCmd2_S; }
+  { SpCmd2_S = (DS844>>0x8)&1; Validate SpCmd2_S; }
 On_Off_t L1Cmd_S; Invalidate L1Cmd_S;
-  { L1Cmd_S = (DS844>>9)&1; Validate L1Cmd_S; }
+  { L1Cmd_S = (DS844>>0x9)&1; Validate L1Cmd_S; }
 On_Off_t TE_HC2_S; Invalidate TE_HC2_S;
-  { TE_HC2_S = (DS844>>A)&1; Validate TE_HC2_S; }
+  { TE_HC2_S = (DS844>>0xA)&1; Validate TE_HC2_S; }
 On_Off_t Gas_Vlv_S; Invalidate Gas_Vlv_S;
-  { Gas_Vlv_S = (DS844>>B)&1; Validate Gas_Vlv_S; }
-On_Off_t Edw_Vlv_S; Invalidate Edw_Vlv_S;
-  { Edw_Vlv_S = (DS844>>C)&1; Validate Edw_Vlv_S; }
+  { Gas_Vlv_S = (DS844>>0xB)&1; Validate Gas_Vlv_S; }
+Open_Closed_t Edw_Vlv_S; Invalidate Edw_Vlv_S;
+  { Edw_Vlv_S = (DS844>>0xC)&1; Validate Edw_Vlv_S; }
 On_Off_t Bub_Gas_Vlv_S; Invalidate Bub_Gas_Vlv_S;
-  { Bub_Gas_Vlv_S = (DS844>>D)&1; Validate Bub_Gas_Vlv_S; }
+  { Bub_Gas_Vlv_S = (DS844>>0xD)&1; Validate Bub_Gas_Vlv_S; }

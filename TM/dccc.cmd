@@ -18,9 +18,9 @@
   : SpCmd2 { $0 = 8; }
   : L1Cmd { $0 = 9; }
   : TE_HC2 { $0 = 10; }
-  : Gas_Vlv { $0 = 11; }
+# : Gas_Vlv { $0 = 11; }
   : Edw_Vlv { $0 = 12; }
-  : Bub_Gas_Vlv { $0 = 13; }
+# : Bub_Gas_Vlv { $0 = 13; }
   : Gas_Flw_Open { $0 = 24; }
   : Gas_Flw_Closed { $0 = 25; }
   : Bub_Gas_Flw_Open { $0 = 26; }
@@ -34,7 +34,7 @@
   : QCLI_Reset { $0 = 34; }
   : Gas_Vlv_D { $0 = 35; }
   : Bub_Gas_Vlv_D { $0 = 36; }
-  : Bub_Gas_Vlv_Flw { $0 = 37; }
+  : Bub_Vlv_Flw_D { $0 = 37; }
   ;
 
 &cmd_on_off <int>
