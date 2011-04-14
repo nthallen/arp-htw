@@ -140,6 +140,8 @@ TM 1 Hz AI_X1 LFB_T; Address LFB_T 0xCF0; /* AI08_7, J2.22, J130CB-13 Lab Flow B
 TM 1 Hz AI_X1 LFT_P; Address LFT_P 0xC12; /* AI09_0, J2.25, J130CB-15 Lab Flow Tube Pressure */
 TM 1 Hz AI_X1 Sp2AI; Address Sp2AI 0xC32; /* AI09_1, J2.26, J130CB-17 Spare Ana Channel 2 */
 TM 1 Hz AI_X1 Sp3AI; Address Sp3AI 0xC52; /* AI09_2, J2.29, J130CB-19 Spare Ana Channel 3 */
+TM 1 Hz AI_X1 PC__T; Address PC__T 0xC3E; /* AI15_1_HI, J5.63 PDACS ambient temperature */
+TM 1 Hz AI_X1 PS__T; Address PS__T 0xC7E; /* AI15_3_HI, J5.67 PS__T 5V Vicor Heat Sink */
 TM 1 Hz AI_X1 Cmd0_I; Address Cmd0_I 0xD10; /* AI15_0_0 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd1_I; Address Cmd1_I 0xD12; /* AI15_0_1 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd2_I; Address Cmd2_I 0xD14; /* AI15_0_2 Power Board Command Current */
