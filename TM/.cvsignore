@@ -46,6 +46,7 @@ datadispnc.cc
 datadispncoui.c
 datadispncoui.o
 datadispnc.o
+doit.dep
 HTWclt.o
 HTWcltoui.c
 HTWcltoui.o
@@ -61,5 +62,6 @@ gddisp
 gddispnc
 datadisp
 datadispnc
+doit
 HTWclt
 HTWcltnc
