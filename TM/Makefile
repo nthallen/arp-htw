@@ -1,4 +1,4 @@
-# Makefile Generated Sat Apr 16 06:46:45 CDT 2011
+# Makefile Generated Fri Apr 15 18:51:00 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
@@ -38,7 +38,7 @@ SOURCE=$(RCS) $(NONRCS)
 OBJECT=$(OBJ) *.err
 TARGET=$(TGT)
 DSTRB=$(TGT) $(DISTRIB) $(SCRIPT)
-TGTDIR= $(TGTNODE)/home/htw
+TGTDIR= $(TGTNODE)/home/HTW
 include /usr/local/share/huarp/appgen.mk
 
 all : Makefile $(TGT)

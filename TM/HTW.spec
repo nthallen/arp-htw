@@ -25,7 +25,7 @@ OBJ = waves.cmd waves.out waves.tmc waves.m waves.log
 OBJ = address.h
 SRC = swstat.h ptrh.h
 
-TGTDIR = $(TGTNODE)/home/htw
+TGTDIR = $(TGTNODE)/home/HTW
 
 HTWcol : HTWcol.tmc sspcol.tmc -lsubbus
 HTWsrvr : -lsubbus
