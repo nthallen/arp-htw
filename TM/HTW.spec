@@ -32,6 +32,7 @@ HTWsrvr : -lsubbus
 hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
 datadisp : qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
+doit : HTW.doit
 %%
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g

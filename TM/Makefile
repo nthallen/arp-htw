@@ -1,4 +1,4 @@
-# Makefile Generated Fri Apr 15 03:28:09 CDT 2011
+# Makefile Generated Sat Apr 16 06:46:45 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
@@ -6,6 +6,7 @@ SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
 SRC+=waves.tmc HTWcol.tmc sspcol.tmc swstat.cmd idxdrv.cmd qcli.cmd
 SRC+=ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
 SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
+SRC+=HTW.doit
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -17,12 +18,12 @@ OBJ+=gddisp.cc gddispoui.c gddispoui.o gddisp.o gastblnc.tmc
 OBJ+=gddispnc.cc gddispncoui.c gddispncoui.o gddispnc.o datatbl.tmc
 OBJ+=datadisp.cc datadispoui.c datadispoui.o datadisp.o datatblnc.tmc
 OBJ+=datadispnc.cc datadispncoui.c datadispncoui.o datadispnc.o
-OBJ+=HTWclt.o HTWcltoui.c HTWcltoui.o HTWcltnc.o HTWcltncoui.c
-OBJ+=HTWcltncoui.o
+OBJ+=doit.dep HTWclt.o HTWcltoui.c HTWcltoui.o HTWcltnc.o
+OBJ+=HTWcltncoui.c HTWcltncoui.o
 TGT=HTWcol HTWsrvr hkdisp hkdispnc gddisp gddispnc datadisp
-TGT+=datadispnc HTWclt HTWcltnc
+TGT+=datadispnc doit HTWclt HTWcltnc
 DISTRIB=HTW.pcm tm.dac
-IDISTRIB=Experiment.config VERSION
+IDISTRIB=Experiment.config VERSION doit
 SRCDIST=hk.tbl gas.tbl data.tbl base.tmc idx.tmc qcli.tmc ssp.tmc
 SRCDIST+=ptrh.cc waves.tmc
 NONRCS=
@@ -78,6 +79,8 @@ datadisp : datadisp.o ptrh.o datadispoui.o
 datadispnc : datadispnc.o ptrh.o datadispncoui.o
 	$(LINK.normCXX) datadispnc.o ptrh.o datadispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) datadispncoui.c
+doit : HTW.doit
+	mkdoit3 -o doit  HTW.doit
 HTWclt : HTWclt.o HTWcltoui.o
 	$(LINK.normCXX) HTWclt.o HTWcltoui.o -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltoui.c
@@ -146,6 +149,9 @@ datadispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 datadispncoui.o : datadispncoui.c
 datadispnc.o : datadispnc.cc
+doit.dep : HTW.doit
+	mkdoit3 -M -o doit  HTW.doit
+-include doit.dep
 HTWclt.o : HTWcmd.cc
 	$(COMPILE.clt) HTWcmd.cc
 HTWcltoui.c : $(OUIDIR)/kbdclt.oui $(OUIDIR)/msg.oui

@@ -1,0 +1,6 @@
+display datadisp
+display gddisp
+display hkdisp
+client HTWclt
+memo
+batchfile interact
