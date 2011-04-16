@@ -1,4 +1,4 @@
-# Makefile Generated Sun Apr 17 01:51:52 CDT 2011
+# Makefile Generated Sat Apr 16 14:13:43 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec

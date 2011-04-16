@@ -37,8 +37,8 @@ Bub {
   HBox { |; {
       # HBox { +-; Bubbler; -+ };
       +-+;
-      { P: (Bub_P,5) Torr;
-	T: (Bub_T,6) C
+      { P: (Bub_P,7) V;
+	T: (Bub_T,7) C
       };
       +-+
     }; |
@@ -77,13 +77,13 @@ Flows {
 
 GDT {
   HBox { +-; Title: "Gas Deck Temps"; -+ };
-  T1: (GD_1T,6) V;
-  T2: (GD_2T,6) V;
-  T3: (GD_3T,6) V;
+  T1: (GD_1T,7) V;
+  T2: (GD_2T,7) V;
+  T3: (GD_3T,7) V;
 }
 
 SW {
-  Time: (flttime,8)
+  Time: (flttime,9)
   MFCtr: (MFCtr,5);
 }
 

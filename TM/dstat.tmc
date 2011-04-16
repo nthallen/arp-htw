@@ -2,11 +2,11 @@
   /* dstat.tmc */
   static const char *on_off_status_text[] = {
     "Off",
-    "On "
+    " On"
   };
   static const char *open_closed_status_text[] = {
     "Closed",
-    "Open  "
+    "  Open"
   };
   static const char *OX_text[] = { "X", " " };
   static const char *XO_text[] = { " ", "X" };
@@ -38,19 +38,19 @@ On_Off_t L1Cmd_DS; Invalidate L1Cmd_DS;
   { L1Cmd_DS = (DS822>>0x9)&1; Validate L1Cmd_DS; }
 On_Off_t TE_HC2_DS; Invalidate TE_HC2_DS;
   { TE_HC2_DS = (DS822>>0xA)&1; Validate TE_HC2_DS; }
-XO_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
+OX_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
   { Gas_Vlv_DS = (DS822>>0xB)&1; Validate Gas_Vlv_DS; }
 On_Off_t Edw_Vlv_DS; Invalidate Edw_Vlv_DS;
   { Edw_Vlv_DS = (DS822>>0xC)&1; Validate Edw_Vlv_DS; }
-XO_t Bub_Gas_Vlv_DS; Invalidate Bub_Gas_Vlv_DS;
+OX_t Bub_Gas_Vlv_DS; Invalidate Bub_Gas_Vlv_DS;
   { Bub_Gas_Vlv_DS = (DS822>>0xD)&1; Validate Bub_Gas_Vlv_DS; }
 On_Off_t Gas_Flw_Open_DS; Invalidate Gas_Flw_Open_DS;
   { Gas_Flw_Open_DS = (DS834>>0x0)&1; Validate Gas_Flw_Open_DS; }
-OX_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
+XO_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
   { Gas_Flw_Closed_DS = (DS834>>0x1)&1; Validate Gas_Flw_Closed_DS; }
 On_Off_t Bub_Gas_Flw_Open_DS; Invalidate Bub_Gas_Flw_Open_DS;
   { Bub_Gas_Flw_Open_DS = (DS834>>0x2)&1; Validate Bub_Gas_Flw_Open_DS; }
-OX_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
+XO_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
   { Bub_Gas_Flw_Closed_DS = (DS834>>0x3)&1; Validate Bub_Gas_Flw_Closed_DS; }
 On_Off_t Cal_Gas_Flw_Open_DS; Invalidate Cal_Gas_Flw_Open_DS;
   { Cal_Gas_Flw_Open_DS = (DS834>>0x4)&1; Validate Cal_Gas_Flw_Open_DS; }
@@ -66,11 +66,11 @@ On_Off_t Cal_Bub2_Flw_Closed_DS; Invalidate Cal_Bub2_Flw_Closed_DS;
   { Cal_Bub2_Flw_Closed_DS = (DS84A>>0x1)&1; Validate Cal_Bub2_Flw_Closed_DS; }
 On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
   { QCLI_Reset_DS = (DS84A>>0x2)&1; Validate QCLI_Reset_DS; }
-XO_t Gas_Vlv_D_DS; Invalidate Gas_Vlv_D_DS;
+OX_t Gas_Vlv_D_DS; Invalidate Gas_Vlv_D_DS;
   { Gas_Vlv_D_DS = (DS84A>>0x3)&1; Validate Gas_Vlv_D_DS; }
-XO_t Bub_Gas_Vlv_D_DS; Invalidate Bub_Gas_Vlv_D_DS;
+OX_t Bub_Gas_Vlv_D_DS; Invalidate Bub_Gas_Vlv_D_DS;
   { Bub_Gas_Vlv_D_DS = (DS84A>>0x4)&1; Validate Bub_Gas_Vlv_D_DS; }
-On_Off_t Bub_Vlv_Flw_D_DS; Invalidate Bub_Vlv_Flw_D_DS;
+OX_t Bub_Vlv_Flw_D_DS; Invalidate Bub_Vlv_Flw_D_DS;
   { Bub_Vlv_Flw_D_DS = (DS84A>>0x5)&1; Validate Bub_Vlv_Flw_D_DS; }
 On_Off_t Scroll_Pump_S; Invalidate Scroll_Pump_S;
   { Scroll_Pump_S = (DS844>>0x0)&1; Validate Scroll_Pump_S; }

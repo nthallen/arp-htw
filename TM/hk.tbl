@@ -1,7 +1,7 @@
 Cont_T {
   HBox { +-; Title: "Controlled Temps"; -+ };
   ""       >SetPt      >Read;
-  "TE 1:"  (TE2TSt,6) (TE1CT,7) V;
+  "TE 1:"  (TE1TSt,6) (TE1CT,7) V;
   "TE 2:"  (TE2TSt,6) (TE2CT,7) V;
   LPV:     (LPVTSt,6) (LPVCT,7) V;
   DPV:     (DPVTSt,6) (DPVCT,7) V;
@@ -63,7 +63,7 @@ Inlet_P {
 }
 
 SW {
-  Time: (flttime,8);
+  Time: (flttime,9);
   MFCtr: (MFCtr,5);
 }
 
