@@ -1,25 +1,25 @@
-# Makefile Generated Fri Apr 15 18:51:00 CDT 2011
+# Makefile Generated Sat Apr 16 07:14:28 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
 SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
-SRC+=waves.tmc HTWcol.tmc sspcol.tmc swstat.cmd idxdrv.cmd qcli.cmd
-SRC+=ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
-SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
-SRC+=HTW.doit
+SRC+=waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
+SRC+=ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd
+SRC+=ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc ptrh_conv.tmc
+SRC+=hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl HTW.doit
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
 OBJ+=HTWcol.cc HTW.pcm tm.dac HTWcoloui.c HTWcoloui.o HTWcol.o ptrh.o
-OBJ+=HTWcmd.cc HTWcmd.dat HTWsrvr.o HTWsrvroui.c HTWsrvroui.o
-OBJ+=hktbl.tmc hkdisp.cc hkdispoui.c hkdispoui.o hkdisp.o hktblnc.tmc
-OBJ+=hkdispnc.cc hkdispncoui.c hkdispncoui.o hkdispnc.o gastbl.tmc
-OBJ+=gddisp.cc gddispoui.c gddispoui.o gddisp.o gastblnc.tmc
-OBJ+=gddispnc.cc gddispncoui.c gddispncoui.o gddispnc.o datatbl.tmc
-OBJ+=datadisp.cc datadispoui.c datadispoui.o datadisp.o datatblnc.tmc
-OBJ+=datadispnc.cc datadispncoui.c datadispncoui.o datadispnc.o
-OBJ+=doit.dep HTWclt.o HTWcltoui.c HTWcltoui.o HTWcltnc.o
-OBJ+=HTWcltncoui.c HTWcltncoui.o
+OBJ+=ptrh_col.o HTWcmd.cc HTWcmd.dat HTWsrvr.o HTWsrvroui.c
+OBJ+=HTWsrvroui.o hktbl.tmc hkdisp.cc hkdispoui.c hkdispoui.o
+OBJ+=hkdisp.o hktblnc.tmc hkdispnc.cc hkdispncoui.c hkdispncoui.o
+OBJ+=hkdispnc.o gastbl.tmc gddisp.cc gddispoui.c gddispoui.o gddisp.o
+OBJ+=gastblnc.tmc gddispnc.cc gddispncoui.c gddispncoui.o gddispnc.o
+OBJ+=datatbl.tmc datadisp.cc datadispoui.c datadispoui.o datadisp.o
+OBJ+=datatblnc.tmc datadispnc.cc datadispncoui.c datadispncoui.o
+OBJ+=datadispnc.o doit.dep HTWclt.o HTWcltoui.c HTWcltoui.o
+OBJ+=HTWcltnc.o HTWcltncoui.c HTWcltncoui.o
 TGT=HTWcol HTWsrvr hkdisp hkdispnc gddisp gddispnc datadisp
 TGT+=datadispnc doit HTWclt HTWcltnc
 DISTRIB=HTW.pcm tm.dac
@@ -53,8 +53,8 @@ extdistribution : $(DSTRB) $(SRCDIST)
 	@distribute $(FORCE) $(TGTDIR)/bin/$(VERSION)/Base $(SRCDIST)
 distribution : extdistribution
 	@distribute $(FORCE) $(TGTDIR) $(IDISTRIB)
-HTWcol : HTWcol.o ptrh.o HTWcoloui.o
-	$(LINK.privCXX) HTWcol.o ptrh.o HTWcoloui.o -lsubbus -ltmpp -ltm -lnort
+HTWcol : HTWcol.o ptrh.o ptrh_col.o HTWcoloui.o
+	$(LINK.privCXX) HTWcol.o ptrh.o ptrh_col.o HTWcoloui.o -lsubbus -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcoloui.c
 	$(PROMOTE) HTWcol
 HTWsrvr : HTWsrvr.o HTWsrvroui.o
@@ -87,13 +87,14 @@ HTWclt : HTWclt.o HTWcltoui.o
 HTWcltnc : HTWcltnc.o HTWcltncoui.o
 	$(LINK.normCXX) HTWcltnc.o HTWcltncoui.o -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltncoui.c
-HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc
-	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc
+HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
+	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
 HTWcoloui.c : $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 HTWcoloui.o : HTWcoloui.c
 HTWcol.o : HTWcol.cc
 ptrh.o : ptrh.cc
+ptrh_col.o : ptrh_col.cc
 HTWcmd.cc : /usr/local/share/huarp/root.cmd /usr/local/share/huarp/getcon.cmd /usr/local/share/huarp/idx64.cmd /usr/local/share/huarp/phrtg.cmd swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
 	$(CMDGEN) -d HTWcmd.dat /usr/local/share/huarp/root.cmd /usr/local/share/huarp/getcon.cmd /usr/local/share/huarp/idx64.cmd /usr/local/share/huarp/phrtg.cmd swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
 HTWsrvr.o : HTWcmd.cc
