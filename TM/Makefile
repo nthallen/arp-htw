@@ -1,12 +1,13 @@
-# Makefile Generated Sat Apr 16 07:14:28 CDT 2011
+# Makefile Generated Sun Apr 17 01:51:52 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
 SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
-SRC+=waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
-SRC+=ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd
-SRC+=ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc ptrh_conv.tmc
-SRC+=hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl HTW.doit
+SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
+SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
+SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
+SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
+SRC+=HTW.doit
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -87,8 +88,8 @@ HTWclt : HTWclt.o HTWcltoui.o
 HTWcltnc : HTWcltnc.o HTWcltncoui.o
 	$(LINK.normCXX) HTWcltnc.o HTWcltncoui.o -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltncoui.c
-HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
-	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
+HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
+	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
 HTWcoloui.c : $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 HTWcoloui.o : HTWcoloui.c

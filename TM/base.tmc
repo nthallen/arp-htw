@@ -178,8 +178,9 @@ TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; /* AO10, J3.21, J59CB-30 */
 /* Status */
 TM 1 Hz DSWord AIStat; Address AIStat 0xE00;
 TM 1 Hz DSWord DS822; Address DS822 0x822;
-TM 1 Hz DStat DS834; Address DS834 0x834;
+TM 1 Hz DStat DS834; Address DS834 0x835;
 TM 1 Hz DSWord DS844; Address DS844 0x844;
+  Collect DS844 = sbrwa(DS844.Address) ^ 0xFFFF;
 TM 1 Hz DStat DS84A; Address DS84A 0x84A;
 TM 1 Hz DStat IOSwS; Collect IOSwS = read_switches();
 

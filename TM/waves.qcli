@@ -2,7 +2,7 @@
 # Source code for test ICOS waveforms
 QCLIConfig FastRampx10;
 Digitizer SSP;
-Prefix QCLI2;
+Prefix QCLI;
 
 ICOS Waveform Nano800Hz {
   SampleRate = 50 MHz/50; 
