@@ -1,59 +1,41 @@
-# waves.qcli
-# HHH Waveforms
-QCLIConfig FastRampx25;
-#QCLIConfig Standard;
+# icoswave.qcli
+# Source code for test ICOS waveforms
+QCLIConfig FastRampx10;
 Digitizer SSP;
-Prefix QCLI;
+Prefix QCLI2;
 
-ICOS Waveform HHH_slow {
-  SampleRate = 1 MHz;
-  Ncoadd = 900;
-  Tz = 10%;
-  Ramp from 60 mA to 90 mA in 1 msec;
-}
-
-ICOS Waveform HHH {
-  # Nsample = 900;
-  Ncoadd = 900;
-  SampleRate = 50 MHz/50;
+ICOS Waveform Nano800Hz {
+  SampleRate = 50 MHz/50; 
+  Ncoadd = 841;
   Tz = 5%;
-#  Ramp from 45 mA to 75 mA in 1 msec;
-  Ramp from 60 mA to 90 mA in 1 msec;
+  Ramp from 100 mA to 197 mA in 1 msec;
 }
 
-ICOS Waveform HHH_full {
-  # Nsample = 900;
-  Ncoadd = 450;
-  SampleRate = 50 MHz/50;
+ICOS Waveform Nano600Hz {
+  SampleRate = 50 MHz/60; 
+  Ncoadd = 645;
   Tz = 5%;
-  Ramp from 10 mA to 90 mA in 2 msec;
+  Ramp from 100 mA to 197 mA in 1.25 msec;
 }
 
-ICOS Waveform HHH_10MHz {
-  # Nsample = 900;
-  Ncoadd = 450;
-  SampleRate = 10 MHz/10;
+ICOS Waveform Nano400Hz {
+  SampleRate = 50 MHz/100;
+  Ncoadd = 455;
   Tz = 5%;
-  Ramp from 10 mA to 90 mA in 2 msec;
+  Ramp from 100 mA to 197 mA in 1.9 msec;
 }
 
-ICOS Waveform HHH_ConstantI {
-  Tz = 10 msec;
-  Iz = 70 mA;
-  SampleRate = 10 MHz;
-  dI/dt = 0 A/sec;
+ICOS Waveform Nano300Hz {
+  SampleRate = 50 MHz/80;
+  Ncoadd = 295;
+  Tz = 5%;
+  Ramp from 100 mA to 197 mA in 3 msec;
 }
 
-#ICOS Waveform CO2_short {
-#  Ncoadd = 800;
-#  SampleRate = 50 MHz/25;
-#  Tz = 5%;
-#  Ramp from 765 mA to 825 mA in 10 msec;
-#}
- 
-#ICOS Waveform CO2_long {
-#  Ncoadd = 800;
-#  SampleRate = 50 MHz/25;
-#  Tz = 5%;
-#  Ramp from 700 mA to 825 mA in 10 msec;
-#}
+Ringdown Waveform Ring1 {
+  SampleRate = 50 MHz;
+  Toff = 80 usec;
+  Ton = 800 usec;
+  Tpre= 2 usec;
+  I = 180 mA;
+}
