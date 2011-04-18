@@ -1,6 +1,7 @@
 display datadisp
 display gddisp
 display hkdisp
+display labdisp
 client HTWclt
 memo
 batchfile interact

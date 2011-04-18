@@ -42,6 +42,7 @@ QCLIS {
       Select:        (QCLI_waveerr,4);
       Flash:         (QCLI_flash,2);
       Cksum:         (QCLI_cksum,1);
+      Reset:         (QCLI_Reset_DS,3);
     }; |; {
       "QCLI T:"      (QCLI_dot,4);
       "Laser T:"     (QCLI_lot,4);

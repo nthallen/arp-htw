@@ -27,11 +27,12 @@ SRC = swstat.h ptrh.h
 
 TGTDIR = $(TGTNODE)/home/HTW
 
-HTWcol : HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc ptrh_col.cc -lsubbus
+HTWcol : HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc ptrh_col.cc -lsubbus
 HTWsrvr : -lsubbus
 hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
-datadisp : qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
+datadisp : dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
+labdisp : dstat.tmc /usr/local/share/huarp/flttime.tmc lab.tbl
 doit : HTW.doit
 %%
 CFLAGS=-Wall -g

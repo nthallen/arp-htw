@@ -10,11 +10,13 @@
   };
   static const char *OX_text[] = { "X", " " };
   static const char *XO_text[] = { " ", "X" };
+  static const char *OC_text[] = { "-", "O", "X", "Z" };
 %}
 TM typedef unsigned char On_Off_t { text "%3d" on_off_status_text[]; }
 TM typedef unsigned char Open_Closed_t { text "%6d" open_closed_status_text[]; }
 TM typedef unsigned char OX_t { text "%1d" OX_text[]; }
 TM typedef unsigned char XO_t { text "%1d" XO_text[]; }
+TM typedef unsigned char OC_t { text "%2d" OC_text[]; }
 
 On_Off_t Scroll_Pump_DS; Invalidate Scroll_Pump_DS;
   { Scroll_Pump_DS = (DS822>>0x0)&1; Validate Scroll_Pump_DS; }
@@ -48,10 +50,14 @@ On_Off_t Gas_Flw_Open_DS; Invalidate Gas_Flw_Open_DS;
   { Gas_Flw_Open_DS = (DS834>>0x0)&1; Validate Gas_Flw_Open_DS; }
 XO_t Gas_Flw_Closed_DS; Invalidate Gas_Flw_Closed_DS;
   { Gas_Flw_Closed_DS = (DS834>>0x1)&1; Validate Gas_Flw_Closed_DS; }
+OC_t Gas_Flw_OC_DS; Invalidate Gas_Flw_OC_DS;
+  { Gas_Flw_OC_DS = (DS834&3); Validate Gas_Flw_OC_DS; }
 On_Off_t Bub_Gas_Flw_Open_DS; Invalidate Bub_Gas_Flw_Open_DS;
   { Bub_Gas_Flw_Open_DS = (DS834>>0x2)&1; Validate Bub_Gas_Flw_Open_DS; }
 XO_t Bub_Gas_Flw_Closed_DS; Invalidate Bub_Gas_Flw_Closed_DS;
   { Bub_Gas_Flw_Closed_DS = (DS834>>0x3)&1; Validate Bub_Gas_Flw_Closed_DS; }
+OC_t Bub_Gas_Flw_OC_DS; Invalidate Bub_Gas_Flw_OC_DS;
+  { Bub_Gas_Flw_OC_DS = (DS834>>2)&3; Validate Bub_Gas_Flw_OC_DS; }
 On_Off_t Cal_Gas_Flw_Open_DS; Invalidate Cal_Gas_Flw_Open_DS;
   { Cal_Gas_Flw_Open_DS = (DS834>>0x4)&1; Validate Cal_Gas_Flw_Open_DS; }
 On_Off_t Cal_Gas_Flw_Closed_DS; Invalidate Cal_Gas_Flw_Closed_DS;

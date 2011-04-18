@@ -1,12 +1,12 @@
 Cont_T {
   HBox { +-; Title: "Controlled Temps"; -+ };
-  ""       >SetPt      >Read;
-  "TE 1:"  (TE1TSt,6) (TE1CT,7) V;
-  "TE 2:"  (TE2TSt,6) (TE2CT,7) V;
-  LPV:     (LPVTSt,6) (LPVCT,7) V;
-  DPV:     (DPVTSt,6) (DPVCT,7) V;
-  Cell:    (CelTSt,6) (CelCT,7) V;
-  Las:     (LTETSt,6) (LTE2R7T,7) V;
+  ""   "" ""  >I  >SetPt      >Read;
+  "TE 1:"  (TE_HC1_DS,3) (TE_HC1_S,3) (Cmd3_I,7) (TE1TSt,6) (TE1CT,7) V;
+  "TE 2:"  (TE_HC2_DS,3) (TE_HC2_S,3) (Cmd10_I,7) (TE2TSt,6) (TE2CT,7) V;
+  LPV:     (LPV_HC_DS,3) (LPV_HC_S,3) (Cmd4_I,7) (LPVTSt,6) (LPVCT,7) V;
+  DPV:     (DPV_HC_DS,3) (DPV_HC_S,3) (Cmd6_I,7) (DPVTSt,6) (DPVCT,7) V;
+  Cell:    (Cell_HC_DS,3) (Cell_HC_S,3) (Cmd5_I,7) (CelTSt,6) (CelCT,7) V;
+  Las:     ""          ""         (LTETSt,6) (LTE2R7T,7) V;
 }
 
 Diag_T {
@@ -15,6 +15,8 @@ Diag_T {
     "Det Mnt T:" (Det_T,7) V;
     SGs1T:       (SGs1T,7) V;
     SGs2T:       (SGs2T,7) V;
+    PC__T:       (PC__T,7) V;
+    PS__T:       (PS__T,7) V;
   };
 }
 Skin_Rvr {
@@ -63,6 +65,9 @@ Inlet_P {
 }
 
 SW {
+  AI: (AIStat,12);
+  IOSwS: (IOSwS,2);
+  SW_St: (SW_St,3);
   Time: (flttime,9);
   MFCtr: (MFCtr,5);
 }

@@ -1,15 +1,17 @@
 Idx {
   HBox { +-; Title: Indexers; -+ };
-  PV: (PVStep,5) (PVStatFlag,5) (PVKill,4) (PVScan,4) (PVPos,7) V;
   TV: (TVStep,5) (TVStatFlag,5) (TVKill,4) (TVScan,4) (TVPos,7) V;
+  PV: (PVStep,5) (PVStatFlag,5) (PVKill,4) (PVScan,4) (PVPos,7) V;
+  >{ PV_Gi: (PV_Gi,5)  PV_Gp: (PV_Gp,5) }<
 }
 
 Cell {
   HBox { +-; Title: Cell; -+ };
-  T1: (Cel1T,7) V;
-  T2: (Cel2T,7) V;
-  HP: (Cel2P,7) V;
-  LP: (CellP,7) V;
+  T1:  (Cel1T,7) V;
+  T2:  (Cel2T,7) V;
+  HP:  (Cel2P,7) V;
+  LP:  (CellP,7) V;
+  Set: (PV_SetP,5);
 }
 
 Valves {
@@ -26,11 +28,11 @@ GD {
 }
 
 MF {
-  HBox { +|+; (Gas_Flw_Closed_DS,1); +|+ };
+  HBox { +|+; (Gas_Flw_OC_DS,1); +|+ };
 }
 
 BF {
-  HBox { +|+; (Bub_Gas_Flw_Closed_DS,1); +|+ };
+  HBox { +|+; (Bub_Gas_Flw_OC_DS,1); +|+ };
 }
 
 Bub {
@@ -72,7 +74,7 @@ Flows {
   HBox { +-; Title: "Flows"; -+ };
   ""      SetPt     Read;
   Main: (GsFl1St,6) (GasFl,7) V;
-  Bub:  (GsFl2St,6) (BubFl,7) V;
+  Bub:  (BGsFlSt,6) (BubFl,7) V;
 }
 
 GDT {

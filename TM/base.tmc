@@ -157,10 +157,18 @@ TM 1 Hz AI_X1 Cmd11_I; Address Cmd11_I 0xD36; /* AI15_2_3 Power Board Command Cu
 TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; /* AI15_2_4 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd13_I; Address Cmd13_I 0xD3A; /* AI15_2_5 Power Board Command Current */
 
+
+TM typedef unsigned short AIStat_i {
+  text "%012b";
+  Collect x = sbrw(x.address);
+}
+
+TM 1 Hz AIStat_i AIStat; Address AIStat 0xE00;
+
 /* AO */
 TM 1 Hz AO LTETSt; Address LTETSt 0x400; /* AO0, J3.1, J60CB-8 */
 TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; /* AO1, J3.2, J20CB-26 */
-TM 1 Hz AO GsFl2St; Address GsFl2St 0x404; /* AO2, J3.5, J20CB-28 */
+TM 1 Hz AO BGsFlSt; Address BGsFlSt 0x404; /* AO2, J3.5, J20CB-28 */
 TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; /* AO3, J3.6, J59CB-5 */
 TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; /* AO4, J3.9, J59CB-17 */
 TM 1 Hz AO CelTSt; Address CelTSt 0x40A; /* AO5, J3.10, J59CB-11 */
@@ -176,13 +184,13 @@ TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; /* AO10, J3.21, J59CB-30 */
 /* TM 0 Hz AO SpAO5St; Address SpAO5St 0x41E; */ /* AO15, J3.30,  */
 
 /* Status */
-TM 1 Hz DSWord AIStat; Address AIStat 0xE00;
 TM 1 Hz DSWord DS822; Address DS822 0x822;
 TM 1 Hz DStat DS834; Address DS834 0x835;
 TM 1 Hz DSWord DS844; Address DS844 0x844;
   Collect DS844 = sbrwa(DS844.Address) ^ 0xFFFF;
 TM 1 Hz DStat DS84A; Address DS84A 0x84A;
-TM 1 Hz DStat IOSwS; Collect IOSwS = read_switches();
+TM typedef unsigned char IOSwS_t { text "%02X"; }
+TM 1 Hz IOSwS_t IOSwS; Collect IOSwS = read_switches();
 
 %{
   #include "swstat.h"

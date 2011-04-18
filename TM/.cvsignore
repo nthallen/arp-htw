@@ -11,6 +11,7 @@ HTWcoloui.c
 HTWcoloui.o
 HTWcol.o
 ptrh.o
+ptrh_col.o
 HTWcmd.cc
 HTWcmd.dat
 HTWsrvr.o
@@ -46,6 +47,16 @@ datadispnc.cc
 datadispncoui.c
 datadispncoui.o
 datadispnc.o
+labtbl.tmc
+labdisp.cc
+labdispoui.c
+labdispoui.o
+labdisp.o
+labtblnc.tmc
+labdispnc.cc
+labdispncoui.c
+labdispncoui.o
+labdispnc.o
 doit.dep
 HTWclt.o
 HTWcltoui.c
@@ -62,6 +73,8 @@ gddisp
 gddispnc
 datadisp
 datadispnc
+labdisp
+labdispnc
 doit
 HTWclt
 HTWcltnc
