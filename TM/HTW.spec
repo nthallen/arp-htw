@@ -21,6 +21,7 @@ cmdbase = dccc.cmd
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
 SCRIPT = interact
+DISTRIB = waves.out
 OBJ = waves.cmd waves.out waves.tmc waves.m waves.log
 OBJ = address.h
 SRC = swstat.h ptrh.h
@@ -34,6 +35,8 @@ gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
 datadisp : dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
 labdisp : dstat.tmc /usr/local/share/huarp/flttime.tmc lab.tbl
 doit : HTW.doit
+
+row1ext : row1.edf
 %%
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g

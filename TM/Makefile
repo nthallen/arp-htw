@@ -1,4 +1,4 @@
-# Makefile Generated Tue Apr 19 02:19:59 CDT 2011
+# Makefile Generated Wed Apr 20 14:21:49 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
@@ -7,7 +7,7 @@ SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
 SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
 SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
 SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
-SRC+=lab.tbl HTW.doit
+SRC+=lab.tbl HTW.doit row1.edf
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -21,11 +21,12 @@ OBJ+=datatbl.tmc datadisp.cc datadispoui.c datadispoui.o datadisp.o
 OBJ+=datatblnc.tmc datadispnc.cc datadispncoui.c datadispncoui.o
 OBJ+=datadispnc.o labtbl.tmc labdisp.cc labdispoui.c labdispoui.o
 OBJ+=labdisp.o labtblnc.tmc labdispnc.cc labdispncoui.c
-OBJ+=labdispncoui.o labdispnc.o doit.dep HTWclt.o HTWcltoui.c
-OBJ+=HTWcltoui.o HTWcltnc.o HTWcltncoui.c HTWcltncoui.o
+OBJ+=labdispncoui.o labdispnc.o doit.dep row1extedf.oui row1ext.tmc
+OBJ+=row1ext.cc row1extoui.c row1extoui.o row1ext.o HTWclt.o
+OBJ+=HTWcltoui.c HTWcltoui.o HTWcltnc.o HTWcltncoui.c HTWcltncoui.o
 TGT=HTWcol HTWsrvr hkdisp hkdispnc gddisp gddispnc datadisp
-TGT+=datadispnc labdisp labdispnc doit HTWclt HTWcltnc
-DISTRIB=HTW.pcm tm.dac
+TGT+=datadispnc labdisp labdispnc doit row1ext HTWclt HTWcltnc
+DISTRIB=waves.out HTW.pcm tm.dac
 IDISTRIB=Experiment.config VERSION doit
 SRCDIST=hk.tbl gas.tbl data.tbl lab.tbl base.tmc idx.tmc qcli.tmc
 SRCDIST+=ssp.tmc ptrh.cc waves.tmc
@@ -90,6 +91,9 @@ labdispnc : labdispnc.o ptrh.o labdispncoui.o
 	$(OUIUSE) labdispncoui.c
 doit : HTW.doit
 	mkdoit3 -o doit  HTW.doit
+row1ext : row1ext.o ptrh.o row1extoui.o
+	$(LINK.normCXX) row1ext.o ptrh.o row1extoui.o -ltmpp -ltm -lssp -lmem -lm -lnort
+	$(OUIUSE) row1extoui.c
 HTWclt : HTWclt.o HTWcltoui.o
 	$(LINK.normCXX) HTWclt.o HTWcltoui.o -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltoui.c
@@ -178,6 +182,16 @@ labdispnc.o : labdispnc.cc
 doit.dep : HTW.doit
 	mkdoit3 -M -o doit  HTW.doit
 -include doit.dep
+row1extedf.oui : row1.edf
+	$(EDF2OUI) row1.edf
+row1ext.tmc : row1.edf
+	$(EDF2EXT) row1.edf
+row1ext.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc row1ext.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc row1ext.tmc
+row1extoui.c : row1extedf.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) row1extedf.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+row1extoui.o : row1extoui.c
+row1ext.o : row1ext.cc
 HTWclt.o : HTWcmd.cc
 	$(COMPILE.clt) HTWcmd.cc
 HTWcltoui.c : $(OUIDIR)/kbdclt.oui $(OUIDIR)/msg.oui
