@@ -2,11 +2,11 @@ CalFlows {
   HBox { +-; Title: "Cal Flows"; -+ };
   ""   "Ope" "Clo" "Set"       "Flow";
   "Gas:"  (Cal_Gas_Flw_Open_DS,3) (Cal_Gas_Flw_Closed_DS,3)
-	  (Cal1Fst,6) (Cal1F,7) V;
+	  (Cal1FSt,6) (Cal1F,7) V;
   "Bub1:" (Cal_Bub1_Flw_Open_DS,3) (Cal_Bub1_Flw_Closed_DS,3)
-	  (Cal2Fst,6) (Cal2F,7) V;
+	  (Cal2FSt,6) (Cal2F,7) V;
   "Bub2:" (Cal_Bub2_Flw_Open_DS,3) (Cal_Bub2_Flw_Closed_DS,3)
-	  (Cal3Fst,6) (Cal3F,7) V;
+	  (Cal3FSt,6) (Cal3F,7) V;
 }
 
 CalCmd {
@@ -52,9 +52,9 @@ Unused {
   HBox {
     {
       Eta_T: (Eta_T,7) V;
-      Sp1AI: (SP1AI,7) V;
-      Sp2AI: (SP2AI,7) V;
-      Sp3AI: (SP3AI,7) V;
+      Sp1AI: (Sp1AI,7) V;
+      Sp2AI: (Sp2AI,7) V;
+      Sp3AI: (Sp3AI,7) V;
     }; |; {
       Gas_Vlv: (Gas_Vlv_DS,3) (Gas_Vlv_S,3) (Cmd11_I,7) V;
       Bub_Gas_Vlv: (Bub_Gas_Vlv_DS,3) (Bub_Gas_Vlv_S,3) (Cmd13_I,7) V;

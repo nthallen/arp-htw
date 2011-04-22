@@ -51,8 +51,6 @@ State Record {
 
 # SHUTDOWN
 State Shutdown {
-  +1  > Soldrv A select mode 0
-      # Hold until valid (h2o2shutOffA,h2o2heatOffA,Nano_Shutdown) or 55;
  +10  > Fail Light On
       > quit
 }
@@ -76,16 +74,16 @@ Partition
 State SW_Stat_Wait NoLog {
   { int reset_it;
     reset_it = 1;
-    switch (SWStat) {
+    switch (SW_St) {
       default:
       case 0:   reset_it = 0; break;
       case SWS_TAKEOFF: depending on (ON_GROUND) using_swp = 1; break;
-      case SWS_CLIMB: depending on (OFF_GROUND) using_swp = SWStat; break;
-      case SWS_DESCEND: depending on (IN_AIR) using_swp = SWStat; break; 
-      case SWS_LAND: depending on (OFF_GROUND) using_swp = SWStat; break;
+      case SWS_CLIMB: depending on (OFF_GROUND) using_swp = SW_St; break;
+      case SWS_DESCEND: depending on (IN_AIR) using_swp = SW_St; break; 
+      case SWS_LAND: depending on (OFF_GROUND) using_swp = SW_St; break;
 
 
-      case SWS_TIME_WARP: break;
+      case SWS_TIMEWARP: break;
       case SWS_READFILE: Validate ReadFile; break;
       case SWS_SHUTDOWN: Validate Shutdown; break;
     }
@@ -95,7 +93,7 @@ State SW_Stat_Wait NoLog {
 
 State SW_Stat_Reset NoLog {
 	> _SW Status Set 0
-	Hold until (SWStat == 0) or 10;
+	Hold until (SW_St == 0) or 10;
 	Validate SW_Stat_Wait;
 }
 
@@ -172,7 +170,7 @@ State IN_AIR {
 #         depending on (ON_GROUND) { Validate Throttle_shut; }
 #         depending on (Shutdown) { Validate Throttle_shut; }
 #         > drive Throttle Valve to 47000
-#         Hold until (SWStat == SWS_TIME_WARP) or 34:00;
+#         Hold until (SW_St == SWS_TIMEWARP) or 34:00;
 #         > drive Throttle Valve to 40000
 #   +2:00 > drive Throttle Valve to 32500
 #   +2:00 > drive Throttle Valve to 25000
@@ -199,7 +197,7 @@ State HTW_Startup {
      Depending on (Shutdown) { Validate HTW_Shutdown; }
      Depending on (Nano_Shutdown) { Validate HTW_Shutdown; }
      Depending on (ON_GROUND) { Validate HTW_Shutdown; }
-     Validate Nano_HTW;
+     Validate Nano_Nano800;
 }
 
 State HTW_Shutdown {}
@@ -218,24 +216,28 @@ Partition
 # Nano1 Starting and Stopping
 
 State Nano_Init {
-  +1 > SSP Stop
-  +1 > QCLI Stop
-     Validate Nano_Idle;
+  +1  > SSP Stop
+  +1  > QCLI Stop
+      Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+      else > QCLI clear errors
+      Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+      else Validate Nano_Stop_Reset;
+      Validate Nano_Idle;
 }
 
 State Nano_Idle {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
 }
 
 State Nano_Start {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     Hold until ( SSP_Status == SSP_STATUS_READY )
     or 2 else {
       nl_error( 2, "SSP Not Ready in Nano_Start" );
       Validate Nano_SSP_Recover;
     }
-    Hold until ( Nano_TEMP_OK(convert(LTE1R4T)) );
-    Hold until ( ((QCLI_s & 0x3938)^0x1000) == 0 ) or 5
+    Hold until ( Nano_TEMP_OK(convert(LTE2R7T)) );
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 5
     else Validate Nano_QCLI_Recover;
  +1 > SSP Start
     Hold until ( SSP_Status == SSP_STATUS_ARMED )
@@ -252,7 +254,7 @@ State Nano_Start {
 }
 
 State Nano_Watch NoLog {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     { if ( SSP_Status == SSP_STATUS_READY ) {
         nl_error( 2, "SSP Went Ready Spontaneously" );
         Validate Nano_SSP_Recover;
@@ -260,10 +262,10 @@ State Nano_Watch NoLog {
     }
          # convert(HNano_I) < LOW_CURRENT ||
     hold until ( SSP_Status != SSP_STATUS_TRIG ||
-         !Nano_TEMP_OK(convert(LTE1R4T)) );
-    # hold until ( Nano_TEMP_OK(convert(LTE1R4T)) && 
+         !Nano_TEMP_OK(convert(LTE2R7T)) );
+    # hold until ( Nano_TEMP_OK(convert(LTE2R7T)) && 
     #     convert(HNano_I) >= LOW_CURRENT) or 1
-    hold until ( Nano_TEMP_OK(convert(LTE1R4T)) ) or 2
+    hold until ( Nano_TEMP_OK(convert(LTE2R7T)) ) or 2
     else Validate Nano_Out_Spec;
     hold until ( SSP_Status == SSP_STATUS_TRIG ) or 5
     else Validate Nano_SSP_Recover;
@@ -271,7 +273,7 @@ State Nano_Watch NoLog {
 }
 
 State Nano_SSP_Recover NoLog {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     > SSP Stop
     { if ( ++num_Nano_recovers > 20 ) {
         nl_error( 2, "Exceeded num_Nano_recovers. Trying reset" );
@@ -282,11 +284,15 @@ State Nano_SSP_Recover NoLog {
     Hold until ( SSP_Status == SSP_STATUS_READY ) or 10
     else Validate Nano_SSP_Not_Talking;
  +2 > QCLI Stop
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+    else > QCLI clear errors
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+    else Validate Nano_QCLI_Reset;
     Validate Nano_Start;
 }
 
 State Nano_SSP_Not_Talking {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     > SSP Stop
     { if ( ++num_Nano_recovers > 20 ) Validate Nano_Fail; }
     Hold until ( SSP_Status == SSP_STATUS_READY ) or 10
@@ -302,20 +308,28 @@ State Nano_Fail {
 State Nano_Shutdown {
     > SSP Stop
  +1 > QCLI Stop
+    Hold until ( !(QCLI_s & 0x1000) ) or 2
+    else Validate Nano_Shutdown_Reset;
     > Log Laser System 1 Has Shutdown
 }
 
+State Nano_Shutdown_Reset {
+    > Command QCLI_Reset On
+ +1 > Command QCLI_Reset Off
+    Validate Nano_Shutdown;
+}
+
 State Nano_Out_Spec {
-   > QCLI Stop
+    > QCLI Stop
  +1 Validate Nano_QCLI_Recover;
 }
 
 State Nano_QCLI_Recover {
-   Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+   Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
 
  +1  { nl_error( 2, "QCLI reporting error status 0x%04X", QCLI_s ); }
  +1  > QCLI Clear Errors
-     Hold until ( ((QCLI_s & 0x3938) ^0x1000) == 0 ) or 5
+     Hold until ( (QCLI_s & 0x3938) == 0 ) or 5
      else {
        nl_error( 2, "QCLI error did not clear: Resetting" );
        Validate Nano_QCLI_Reset;
@@ -324,17 +338,17 @@ State Nano_QCLI_Recover {
 }
 
 State Nano_QCLI_Reset {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     { if ( ++num_Nano_recovers > 20 ) {
         nl_error( 2,"Exceeded num_Nano_recovers in QCLI_Reset: Invoking shutdown" );
         Validate Nano_Fail;
       }
     }
- +1 > Command QCLI Reset On
-    > Command QCLI Reset Off
-    Hold until ( ((QCLI_s & 0x3938) ^ 0x1000) == 0 ) or 2
+ +1 > Command QCLI_Reset On
+    > Command QCLI_Reset Off
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
     else > QCLI clear errors
-    Hold until ( ((QCLI_s & 0x3938) ^ 0x1000) == 0 ) or 2
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
     else Validate Nano_QCLI_Reset;
     { ci_sendfcmd( 0, "Select QCLI Waveform Number %d\n", QCLI_Wave );
       Validate Nano_Start;
@@ -342,24 +356,48 @@ State Nano_QCLI_Reset {
 }
 
 State Nano_Stop {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     > SSP Stop
  +1 > QCLI Stop
+    Hold until ( !(QCLI_s & 0x1000)) or 2
+    else Validate Nano_Stop_Reset;
     Hold until ( SSP_Status == SSP_STATUS_READY ) or 5
     else { nl_error( 2, "Not Ready in Nano_Stop" ); }
     Validate Nano_Idle;
 }
 
+State Nano_Stop_Reset {
+    > Command QCLI_Reset On
+ +1 > Command QCLI_Reset Off
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+    else > QCLI clear errors
+    Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
+    else Validate Nano_Stop_Reset;
+    { ci_sendfcmd( 0, "Select QCLI Waveform Number %d\n", QCLI_Wave );
+      Validate Nano_Idle;
+    }
+}
+
 #Running Waveforms
 
 State Nano_Nano800 {
-    Depending on (HHH_Shutdown) { Validate Nano_Shutdown; }
+    Depending on (Nano_Shutdown) { Validate Nano_Shutdown; }
     > SSP Stop
     Hold until ( SSP_Status == SSP_STATUS_READY ) or 5
     else { nl_error( 2, "Not Ready in Nano_Nano800" ); }
     > QCLI Stop
+    Hold until ( !(QCLI_s & 0x1000) ) or 2
+    else Validate Nano_Nano800_Reset;
  +2 > Select QCLI Waveform Nano800Hz
  +2 Validate Nano_Start;
+}
+
+State Nano_Nano800_Reset {
+    > Command QCLI_Reset On
+ +1 > Command QCLI_Reset Off
+    Hold until ( !(QCLI_s & 0x1000) ) or 2
+    else Validate Nano_Nano800_Reset;
+    Validate Nano_Nano800;
 }
 
 Partition
@@ -385,7 +423,7 @@ Partition
 State RFCond_Idle {}
 
 State RFCond_TimeWarp {
-  Hold until ( SWStat == SWS_TIME_WARP );
+  Hold until ( SW_St == SWS_TIMEWARP );
   Resume ReadFile;
   Validate RFCond_Idle;
 }
@@ -399,11 +437,12 @@ Partition
   static int PC__T_static_count = 0;
   static int PC__T_delta_count = 0;
   static int AI_Reset_count = 0;
+  static int AI_Reset_limit = 0;
 %}
 State AI_Watch {
     { if ( PC__T == Last_PC__T ) {
-	if ( ++PC__T_static_count >= 15 ) {
-	  msg(2, "PC__T has not changed in 15 seconds");
+	if ( ++PC__T_static_count >= 5 ) {
+	  msg(2, "PC__T has not changed in 5 seconds");
 	  PC__T_delta_count = 0;
 	  Validate AI_Reset;
 	}
@@ -420,13 +459,14 @@ State AI_Watch {
 
 State AI_Reset {
       > AI Reset
-  +1  > AI Cycle Engine
-      { if ( ++AI_Reset_count >= 10 ) {
+  +1  > AI Double Convert Row Zero
+      { if ( AI_Reset_limit > 0 &&
+	     ++AI_Reset_count >= AI_Reset_limit ) {
 	  msg(2,"AI Max Reset Count Reached");
 	  Validate AI_Fail;
 	}
       }
-      Hold until ( PC__T != Last_PC__T ) OR 15
+      Hold until ( PC__T != Last_PC__T ) OR 5
       else Validate AI_Reset;
       Validate AI_Watch;
 }
