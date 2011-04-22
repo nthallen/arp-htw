@@ -239,3 +239,12 @@ TM 1 Hz MS5607Db LPV_T2b; Collect LPV_T2b = LPV_ptrh.MS5607Tb();
 TM 1 Hz UINT LPV_Pa; Collect LPV_Pa = LPV_ptrh.MS5607Pa();
 TM 1 Hz MS5607Db LPV_Pb; Collect LPV_Pb = LPV_ptrh.MS5607Pb();
 TM 1 Hz PTRH_S LPV_PTRHS; Collect LPV_PTRHS = LPV_ptrh.Status();
+
+TM typedef unsigned short V28V_t { text "%5u"; collect x = sbrwa(x.address); }
+TM typedef V28V_t V28I_t;
+
+TM 1 Hz V28V_t V28V1; Address V28V1 0x03A4;
+TM 1 Hz V28I_t V28I1; Address V28I1 0x03A2;
+TM 1 Hz V28V_t V28V2; Address V28V2 0x03A8;
+TM 1 Hz V28I_t V28I2; Address V28I2 0x03A6;
+TM 1 Hz DStat VM__S; Address VM__S 0x03A0;

@@ -64,7 +64,18 @@ Inlet_P {
   TVPos: (TVPos,7) V;
 }
 
+VM {
+  HBox { +-; Title: "Power Monitors"; -+ };
+  V28V1: (V28V1,5) raw;
+  V28V2: (V28V2,5) raw;
+  V28I1: (V28I1,5) raw;
+  V28I2: (V28I2,5) raw;
+  VM__S: (VM__S,3);
+}
+
+
 SW {
+  HBox { +-; Title: "Status"; -+ };
   AI: (AIStat,12);
   IOSwS: (IOSwS,2);
   SW_St: (SW_St,3);
@@ -89,8 +100,7 @@ SW {
       [Cont_T];
       [Skin_Rvr];
       VGlue 0+1;
-      +-+;
-      >[SW];
+      HBox { [VM]; |; [SW] };
     }; |+;
   };
   -;

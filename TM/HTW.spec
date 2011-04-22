@@ -32,7 +32,7 @@ HTWcol : HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_
 HTWsrvr : -lsubbus
 hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
-datadisp : dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc data.tbl
+datadisp : dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc data.tbl /usr/local/share/oui/cic.oui
 labdisp : dstat.tmc /usr/local/share/huarp/flttime.tmc lab.tbl
 doit : HTW.doit
 

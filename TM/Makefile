@@ -1,4 +1,4 @@
-# Makefile Generated Wed Apr 20 14:21:49 CDT 2011
+# Makefile Generated Fri Apr 22 16:17:28 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
@@ -6,8 +6,8 @@ SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
 SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
 SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
 SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd dstat.tmc qclibits.tmc
-SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc data.tbl
-SRC+=lab.tbl HTW.doit row1.edf
+SRC+=ptrh_conv.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc SSPrtg.tmc
+SRC+=data.tbl lab.tbl HTW.doit row1.edf
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -149,18 +149,18 @@ gddispncoui.o : gddispncoui.c
 gddispnc.o : gddispnc.cc
 datatbl.tmc : data.tbl
 	$(TABLE) data.tbl
-datadisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
-	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
-datadispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
-	$(OUI) $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+datadisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
+datadispoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) /usr/local/share/oui/cic.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 datadispoui.o : datadispoui.c
 datadisp.o : datadisp.cc
 datatblnc.tmc : data.tbl
 	$(NCTABLE) data.tbl
-datadispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
-	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
-datadispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
-	$(OUI) $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+datadispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
+datadispncoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
+	$(OUI) /usr/local/share/oui/cic.oui $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 datadispncoui.o : datadispncoui.c
 datadispnc.o : datadispnc.cc
 labtbl.tmc : lab.tbl
