@@ -1,0 +1,320 @@
+HEADER Harvard Total Water
+MNEMONIC htw
+HOMEDIR HTW_Data_Dir
+ROWS 18
+
+1 GD_1T GasDeck T
+1 GD_2T GasDeck T
+1 GD_3T GasDeck T
+1 GasFl GasDeck Flow
+1 GasHP GasDeck HP
+1 GasLP GasDeck LP
+1 GsFl1St GasDeck Flow
+
+1 BGsFlSt Bubbler Flow
+1 BubFl   Bubbler Flow
+1 BubLP   Bubbler P
+1 Bub_P   Bubbler P
+1 Bub_T   Bubbler T
+
+# 4 IXStt
+
+1 InlDP Inlet DP
+1 Inl_T Inlet T
+1 WingT Inlet T
+1 Elb_T Inlet T
+
+#1 L1Flw
+#1 L2Flw
+#1 L3Flw
+#1 L4Flw
+#1 LFB1P
+#1 LFB2P
+#1 LFB_T
+#1 LFT_P
+
+1 DPV_P   DPV_PTRH P
+1 DPV_T1C DPV_PTRH T 1
+1 DPV_T2C DPV_PTRH T 2
+1 DPV_RHC DPV_PTRH RH RH
+1 0:DPV_PTRHS:0 DPV_PTRH Status
+1 1:DPV_PTRHS:1 DPV_PTRH Status
+1 2:DPV_PTRHS:2 DPV_PTRH Status
+1 3:DPV_PTRHS:3 DPV_PTRH Status
+1 4:DPV_PTRHS:4 DPV_PTRH Status
+1 5:DPV_PTRHS:5 DPV_PTRH Status
+1 6:DPV_PTRHS:6 DPV_PTRH Status
+1 7:DPV_PTRHS:7 DPV_PTRH Status
+1 8:DPV_PTRHS:8 DPV_PTRH Status
+1 9:DPV_PTRHS:9 DPV_PTRH Status
+1 10:DPV_PTRHS:10 DPV_PTRH Status
+1 11:DPV_PTRHS:11 DPV_PTRH Status
+
+1 Det_T  DPV T
+1 DPVCT  DPV CT
+1 DPVTSt DPV CT
+
+1 LPV_P   LPV_PTRH P
+1 LPV_T1C LPV_PTRH T 1
+1 LPV_T2C LPV_PTRH T 2
+1 LPV_RHC LPV_PTRH RH RH
+1 0:LPV_PTRHS:0 LPV_PTRH Status
+1 1:LPV_PTRHS:1 LPV_PTRH Status
+1 2:LPV_PTRHS:2 LPV_PTRH Status
+1 3:LPV_PTRHS:3 LPV_PTRH Status
+1 4:LPV_PTRHS:4 LPV_PTRH Status
+1 5:LPV_PTRHS:5 LPV_PTRH Status
+1 6:LPV_PTRHS:6 LPV_PTRH Status
+1 7:LPV_PTRHS:7 LPV_PTRH Status
+1 8:LPV_PTRHS:8 LPV_PTRH Status
+1 9:LPV_PTRHS:9 LPV_PTRH Status
+1 10:LPV_PTRHS:10 LPV_PTRH Status
+1 11:LPV_PTRHS:11 LPV_PTRH Status
+
+1 LH__T  LPV T
+1 LPVCT  LPV CT
+1 LPVTSt LPV CT
+1 LTE2R7T LPV LaserT
+1 Las_I   LPV LaserI
+
+1 PDSkT   PD    T
+1 PD_DP   PD    DP
+1 PD__P   PD    P
+1 PD__T   PD    T
+
+1 TVStep TV Step
+1 TVPos TV Pot
+# 1 TVStat
+1 C:TVStat:7 TV Bits
+1 Z:TVStat:6 TV Bits
+1 B:TVStat:5 TV Bits
+1 A:TVStat:4 TV Bits
+1 R:TVStat:3 TV Bits
+1 D:TVStat:2 TV Bits
+1 O:TVStat:1 TV Bits
+1 I:TVStat:0 TV Bits
+4 TVScan:IXStt:1 TV Bits
+
+1 PVStep  PV  Step
+1 PVPos   PV  Pot
+1 C:PVStat:7 PV Bits
+1 Z:PVStat:6 PV Bits
+1 B:PVStat:5 PV Bits
+1 A:PVStat:4 PV Bits
+1 R:PVStat:3 PV Bits
+1 D:PVStat:2 PV Bits
+1 O:PVStat:1 PV Bits
+1 I:PVStat:0 PV Bits
+1 PV_Gi PV Gains
+1 PV_Gp PV Gains
+1 PV_SetP PV P
+1 Cel2P  PV P
+
+1 Rov1T TE Rovers 1
+1 Rov2T TE Rovers 2
+1 Rov3T TE Rovers 3
+1 Rov4T TE Rovers 4
+1 Rov5T TE Rovers 5
+1 Skn1T TE Skin 1
+1 Skn2T TE Skin 2
+1 Skn3T TE Skin 3
+1 Skn4T TE Skin 4
+1 Skn5T TE Skin 5
+
+1 CellP  Cell P
+1 Cel2P  Cell P
+1 Cel1T  Cell T
+1 Cel2T  Cell T
+1 SGs1T  Cell T
+1 SGs2T  Cell T
+1 CelCT  Cell TS
+1 CelTSt Cell TS
+
+1 QCLI_Stale QCLI Stale
+1 QCLI_Wave  QCLI Wave
+# 1 QCLI_s
+1 QCLI_loc:QCLI_s:3 QCLI Status
+1 QCLI_lot:QCLI_s:4 QCLI Status
+1 QCLI_dot:QCLI_s:5 QCLI Status
+1 QCLI_waveerr:QCLI_s:8 QCLI Status
+1 QCLI_ready:QCLI_s:9 QCLI Status
+1 QCLI_cordte:QCLI_s:11 QCLI Status
+1 QCLI_laser:QCLI_s:12 QCLI Status
+1 QCLI_cmderr:QCLI_s:13 QCLI Status
+1 QCLI_cksum:QCLI_s:14 QCLI Status
+1 QCLI_busy:QCLI_s:15 QCLI Status
+1 QCLI_Reset_DS:DS84A:2 QCLI Status
+
+#1 SSP_Flags
+1 SSP_Num SSP Num
+1 SSP_SN SSP SN
+1 SSP_Stale SSP Stale
+1 SSP_Status SSP Status
+1 SSP_TS SSP TSkip
+1 SSP_T_FPGA SSP T
+1 SSP_T_HtSink SSP T
+1 SSP_T SSP T
+1 VtoIT SSP T
+1 QCLIT SSP T
+1 CAOVF1:SSP_Flags:0 SSP OVF
+1 CAOVF2:SSP_Flags:1 SSP OVF
+1 CAOVF3:SSP_Flags:2 SSP OVF
+1 PAOVF1:SSP_Flags:3 SSP OVF
+1 PAOVF2:SSP_Flags:4 SSP OVF
+1 PAOVF3:SSP_Flags:5 SSP OVF
+1 ADOVF1:SSP_Flags:6 SSP OVF
+1 ADOVF2:SSP_Flags:7 SSP OVF
+1 ADOVF3:SSP_Flags:8 SSP OVF
+
+1 PMotT   Pump  T
+1 PumpT   Pump  T
+1 Scroll_Pump_DS:DS822:0 Pump Status
+1 Scroll_Pump_S:DS844:0  Pump Status
+
+1 TE1CT  TEC TE1
+1 TE1TSt TEC TE1
+1 TE2CT  TEC TE2
+1 TE2TSt TEC TE2
+
+1 TE_HC1_DS:DS822:3 Commands HC
+1 TE_HC1_S:DS844:3 Commands HC
+1 LPV_HC_DS:DS822:4 Commands HC
+1 LPV_HC_S:DS844:4 Commands HC
+1 Cell_HC_DS:DS822:5 Commands HC
+1 Cell_HC_S:DS844:5 Commands HC
+1 DPV_HC_DS:DS822:6 Commands HC
+1 DPV_HC_S:DS844:6 Commands HC
+1 TE_HC2_DS:DS822:10 Commands HC
+1 TE_HC2_S:DS844:10 Commands HC
+
+1 Cmd0_I  Commands I 0
+1 Cmd1_I  Commands I 1
+1 Cmd2_I  Commands I 2
+1 Cmd3_I  Commands I 3
+1 Cmd4_I  Commands I 4
+1 Cmd5_I  Commands I 5
+1 Cmd6_I  Commands I 6
+1 Cmd7_I  Commands I 7
+1 Cmd8_I  Commands I 8
+1 Cmd9_I  Commands I 9
+1 Cmd10_I Commands I 10
+1 Cmd11_I Commands I 11
+1 Cmd12_I Commands I 12
+1 Cmd13_I Commands I 13
+
+
+1 Edw_Vlv_DS:DS822:12 GasDeck Commands
+1 Edw_Vlv_S:DS844:12 GasDeck Commands
+1 Gas_Flw_Open_DS:DS834:0 GasDeck Commands
+1 Gas_Flw_Closed_DS:DS834:1 GasDeck Commands
+1 Bub_Gas_Flw_Open_DS:DS834:2 GasDeck Commands
+1 Bub_Gas_Flw_Closed_DS:DS834:3 GasDeck Commands
+1 Gas_Vlv_D_DS:DS84A:3 GasDeck Commands
+1 Bub_Gas_Vlv_D_DS:DS84A:4 GasDeck Commands
+1 Bub_Vlv_Flw_D_DS:DS84A:5 GasDeck Commands
+
+1 PC__T   PDACS T
+1 PS__T   PDACS T
+1 IOSwS   PDACS IOSwS
+1 V28V1   PDACS V
+1 V28V2   PDACS V
+1 V28I1   PDACS I
+1 V28I2   PDACS I
+1 0:AIStat:0 PDACS AIStat
+1 1:AIStat:1 PDACS AIStat
+1 2:AIStat:2 PDACS AIStat
+1 3:AIStat:3 PDACS AIStat
+1 4:AIStat:4 PDACS AIStat
+1 5:AIStat:5 PDACS AIStat
+1 6:AIStat:6 PDACS AIStat
+1 7:AIStat:7 PDACS AIStat
+1 8:AIStat:8 PDACS AIStat
+1 9:AIStat:9 PDACS AIStat
+1 10:AIStat:10 PDACS AIStat
+1 11:AIStat:11 PDACS AIStat
+
+1 DACS_P   DACS_PTRH P
+1 DACS_T1C DACS_PTRH T 1
+1 DACS_T2C DACS_PTRH T 2
+1 DACS_RHC DACS_PTRH RH RH
+1 0:DACS_PTRHS:0 DACS_PTRH Status
+1 1:DACS_PTRHS:1 DACS_PTRH Status
+1 2:DACS_PTRHS:2 DACS_PTRH Status
+1 3:DACS_PTRHS:3 DACS_PTRH Status
+1 4:DACS_PTRHS:4 DACS_PTRH Status
+1 5:DACS_PTRHS:5 DACS_PTRH Status
+1 6:DACS_PTRHS:6 DACS_PTRH Status
+1 7:DACS_PTRHS:7 DACS_PTRH Status
+1 8:DACS_PTRHS:8 DACS_PTRH Status
+1 9:DACS_PTRHS:9 DACS_PTRH Status
+1 10:DACS_PTRHS:10 DACS_PTRH Status
+1 11:DACS_PTRHS:11 DACS_PTRH Status
+
+1 SW_St  Misc SW_St
+1 PampT  Misc PampT
+
+
+### Cal system
+#1 CBB1P
+#1 CBB1T
+#1 CBB2P
+#1 CBB2T
+#1 Cal1F
+#1 Cal1FSt
+#1 Cal1T
+#1 Cal2F
+#1 Cal2FSt
+#1 Cal2T
+#1 Cal3F
+#1 Cal3FSt
+#1 Cal3T
+#1 Cal4T
+
+
+### Cal system
+#1 Cal_Bub1_Vlv_DS:DS822:1
+#1 Cal_Bub2_Vlv_DS:DS822:2
+#1 SpCmd1_DS:DS822:7
+#1 SpCmd2_DS:DS822:8
+#1 L1Cmd_DS:DS822:9
+#1 Cal_Gas_Flw_Open_DS:DS834:4
+#1 Cal_Gas_Flw_Closed_DS:DS834:5
+#1 Cal_Bub1_Flw_Open_DS:DS834:6
+#1 Cal_Bub1_Flw_Closed_DS:DS834:7
+#1 Cal_Bub1_Vlv_S:DS844:1
+#1 Cal_Bub2_Vlv_S:DS844:2
+#1 SpCmd1_S:DS844:7
+#1 SpCmd2_S:DS844:8
+#1 L1Cmd_S:DS844:9
+#1 Cal_Bub2_Flw_Open_DS:DS84A:0
+#1 Cal_Bub2_Flw_Closed_DS:DS84A:1
+
+
+
+#0 Bub_Gas_Flw_OC_DS dstat.tmc
+#0 Gas_Flw_OC_DS dstat.tmc
+#0 PVKill idxflag.tmc
+#0 PVScan idxflag.tmc
+#0 PVStatFlag idxflag.tmc
+#0 QCLI_flash qclibits.tmc
+#0 QCLI_mode qclibits.tmc
+#0 SSP_AD sspflags.tmc
+#0 SSP_CA sspflags.tmc
+#0 SSP_PA sspflags.tmc
+#0 TVKill idxflag.tmc
+#0 TVStatFlag idxflag.tmc
+
+### Unused channels
+#1 Eta_T
+#1 LTETSt
+#1 Sp1AI
+#1 Sp2AI
+#1 Sp3AI
+#8 Synch
+#8 MFCtr
+
+### Unused
+#1 Gas_Vlv_DS:DS822:11
+#1 Gas_Vlv_S:DS844:11
+#1 Bub_Gas_Vlv_DS:DS822:13
+#1 Bub_Gas_Vlv_S:DS844:13
