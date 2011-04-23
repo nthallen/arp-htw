@@ -49,7 +49,7 @@ Ringdown Waveform Ring1 {
 
 ICOS Waveform Nano800Hz185 {
   SampleRate = 50 MHz/50; 
-  Ncoadd = 841;
+  Ncoadd = 210;
   Tz = 5%;
   Ramp from 185 mA to 185 mA in 1 msec;
 }
