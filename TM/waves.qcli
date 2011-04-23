@@ -11,6 +11,13 @@ ICOS Waveform Nano800Hz {
   Ramp from 100 mA to 197 mA in 1 msec;
 }
 
+ICOS Waveform Nano800Hzfast {
+  SampleRate = 50 MHz/50; 
+  Ncoadd = 210;
+  Tz = 5%;
+  Ramp from 100 mA to 197 mA in 1 msec;
+}
+
 ICOS Waveform Nano600Hz {
   SampleRate = 50 MHz/60; 
   Ncoadd = 645;
@@ -38,4 +45,11 @@ Ringdown Waveform Ring1 {
   Ton = 800 usec;
   Tpre= 2 usec;
   I = 180 mA;
+}
+
+ICOS Waveform Nano800Hz185 {
+  SampleRate = 50 MHz/50; 
+  Ncoadd = 841;
+  Tz = 5%;
+  Ramp from 185 mA to 185 mA in 1 msec;
 }
