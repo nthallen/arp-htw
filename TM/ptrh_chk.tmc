@@ -1,3 +1,0 @@
-TM INITFUNC DACS_ptrh.check_coeffs();
-TM INITFUNC DPV_ptrh.check_coeffs();
-TM INITFUNC LPV_ptrh.check_coeffs();

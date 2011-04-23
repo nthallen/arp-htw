@@ -1,8 +1,0 @@
-display datadisp -C $FlightNode
-display gddisp
-display hkdisp
-display labdisp
-client HTWclt
-memo
-batchfile interact
-phrtg
