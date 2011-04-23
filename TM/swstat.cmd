@@ -32,10 +32,10 @@
   : Laser Stop { $0 = SWS_LASER_STOP; }
   : Laser Select Waveform and Start { $0 = SWS_LASER_WAVE; }
 	
-	: Pinch Valve Close { $0 = SWS_PV_CLOSE; }
-	: Pinch Valve Steps { $0 = SWS_PV_STEPS; }
-	: Pinch Valve PI { $0 = SWS_PV_PI; }
-	: Pinch Valve Scan { $0 = SWS_PV_SCAN; }
+  : Pinch Valve Close { $0 = SWS_PV_CLOSE; }
+  : Pinch Valve Steps { $0 = SWS_PV_STEPS; }
+  : Pinch Valve PI { $0 = SWS_PV_PI; }
+  : Pinch Valve Scan { $0 = SWS_PV_SCAN; }
 
   : Time Warp { $0 = SWS_TIMEWARP; }
   : ReadFile { $0 = SWS_READFILE; }

@@ -82,6 +82,10 @@ State SW_Stat_Wait NoLog {
       case SWS_DESCEND: depending on (IN_AIR) using_swp = SW_St; break; 
       case SWS_LAND: depending on (OFF_GROUND) using_swp = SW_St; break;
 
+      case SWS_LASER_START: Validate Nano_Start; break;
+      case SWS_LASER_STOP: Validate Nano_Stop; break;
+      case SWS_LASER_WAVE: Validate Nano_Nano800; break;
+
 
       case SWS_TIMEWARP: break;
       case SWS_READFILE: Validate ReadFile; break;
