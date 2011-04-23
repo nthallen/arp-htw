@@ -1,4 +1,4 @@
-spreadsheet htweng_1 119
+spreadsheet htweng_1 111
   1 AIStat %5.1lf
   2 BGsFlSt %5.1lf
   3 BubFl %5.1lf
@@ -89,33 +89,33 @@ spreadsheet htweng_1 119
   88 Rov5T %5.1lf
   89 SGs1T %5.1lf
   90 SGs2T %5.1lf
-  91 SSP_Flags %5.1lf
-  92 SSP_Num %5.1lf
-  93 SSP_SN %5.1lf
-  94 SSP_Stale %5.1lf
-  95 SSP_Status %5.1lf
-  96 SSP_T %5.1lf
-  97 SSP_TS %5.1lf
-  98 SSP_T_FPGA %5.1lf
-  99 SSP_T_HtSink %5.1lf
-  100 SW_St %5.1lf
-  101 Skn1T %5.1lf
-  102 Skn2T %5.1lf
-  103 Skn3T %5.1lf
-  104 Skn4T %5.1lf
-  105 Skn5T %5.1lf
-  106 TE1CT %5.1lf
-  107 TE1TSt %5.1lf
-  108 TE2CT %5.1lf
-  109 TE2TSt %5.1lf
-  110 TVPos %5.1lf
-  111 TVStat %5.1lf
-  112 TVStep %5.1lf
-  113 V28I1 %5.1lf
-  114 V28I2 %5.1lf
-  115 V28V1 %5.1lf
-  116 V28V2 %5.1lf
-  117 VtoIT %5.1lf
-  118 WingT %5.1lf
-spreadsheet htweng_4 2
+  91 SSP_T %5.1lf
+  92 SW_St %5.1lf
+  93 Skn1T %5.1lf
+  94 Skn2T %5.1lf
+  95 Skn3T %5.1lf
+  96 Skn4T %5.1lf
+  97 Skn5T %5.1lf
+  98 TE1CT %5.1lf
+  99 TE1TSt %5.1lf
+  100 TE2CT %5.1lf
+  101 TE2TSt %5.1lf
+  102 TVPos %5.1lf
+  103 TVStat %5.1lf
+  104 TVStep %5.1lf
+  105 V28I1 %5.1lf
+  106 V28I2 %5.1lf
+  107 V28V1 %5.1lf
+  108 V28V2 %5.1lf
+  109 VtoIT %5.1lf
+  110 WingT %5.1lf
+spreadsheet htweng_4 10
   1 IXStt %5.1lf
+  2 SSP_Flags %5.1lf
+  3 SSP_Num %5.1lf
+  4 SSP_SN %5.1lf
+  5 SSP_Stale %5.1lf
+  6 SSP_Status %5.1lf
+  7 SSP_TS %5.1lf
+  8 SSP_T_FPGA %5.1lf
+  9 SSP_T_HtSink %5.1lf
