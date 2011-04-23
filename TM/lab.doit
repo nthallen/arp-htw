@@ -1,4 +1,5 @@
 display gddisp
+display labdisp
 display hkdisp
 display datadisp -C $FlightNode
 client HTWclt

@@ -63,6 +63,7 @@ labdispncoui.c
 labdispncoui.o
 labdispnc.o
 doit.dep
+labdoit.dep
 htwengextedf.oui
 htwengext.tmc
 htwengext.cc
@@ -88,6 +89,7 @@ datadispnc
 labdisp
 labdispnc
 doit
+labdoit
 htwengext
 HTWclt
 HTWcltnc

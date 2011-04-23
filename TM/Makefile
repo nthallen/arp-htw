@@ -1,4 +1,4 @@
-# Makefile Generated Sat Apr 23 06:52:51 CDT 2011
+# Makefile Generated Sat Apr 23 10:13:37 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
@@ -7,7 +7,7 @@ SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
 SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
 SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd ptrh_conv.tmc HTW.tma dstat.tmc
 SRC+=qclibits.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc SSPrtg.tmc
-SRC+=data.tbl lab.tbl HTW.doit htweng.edf
+SRC+=data.tbl lab.tbl HTW.doit lab.doit htweng.edf
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -22,14 +22,15 @@ OBJ+=datatbl.tmc datadisp.cc datadispoui.c datadispoui.o datadisp.o
 OBJ+=datatblnc.tmc datadispnc.cc datadispncoui.c datadispncoui.o
 OBJ+=datadispnc.o labtbl.tmc labdisp.cc labdispoui.c labdispoui.o
 OBJ+=labdisp.o labtblnc.tmc labdispnc.cc labdispncoui.c
-OBJ+=labdispncoui.o labdispnc.o doit.dep htwengextedf.oui
+OBJ+=labdispncoui.o labdispnc.o doit.dep labdoit.dep htwengextedf.oui
 OBJ+=htwengext.tmc htwengext.cc htwengextoui.c htwengextoui.o
 OBJ+=htwengext.o HTWclt.o HTWcltoui.c HTWcltoui.o HTWcltnc.o
 OBJ+=HTWcltncoui.c HTWcltncoui.o
 TGT=HTWcol HTWsrvr HTWalgo hkdisp hkdispnc gddisp gddispnc datadisp
-TGT+=datadispnc labdisp labdispnc doit htwengext HTWclt HTWcltnc
+TGT+=datadispnc labdisp labdispnc doit labdoit htwengext HTWclt
+TGT+=HTWcltnc
 DISTRIB=waves.out HTW.pcm tm.dac
-IDISTRIB=Experiment.config VERSION doit
+IDISTRIB=Experiment.config VERSION doit labdoit
 SRCDIST=HTW.tma hk.tbl gas.tbl data.tbl lab.tbl base.tmc idx.tmc
 SRCDIST+=qcli.tmc ssp.tmc ptrh.cc waves.tmc
 NONRCS=
@@ -96,6 +97,8 @@ labdispnc : labdispnc.o ptrh.o labdispncoui.o
 	$(OUIUSE) labdispncoui.c
 doit : HTW.doit
 	mkdoit3 -o doit  HTW.doit
+labdoit : lab.doit
+	mkdoit3 -o labdoit  lab.doit
 htwengext : htwengext.o ptrh.o htwengextoui.o
 	$(LINK.normCXX) htwengext.o ptrh.o htwengextoui.o -ltmpp -ltm -lssp -lmem -lm -lnort
 	$(OUIUSE) htwengextoui.c
@@ -196,6 +199,9 @@ labdispnc.o : labdispnc.cc
 doit.dep : HTW.doit
 	mkdoit3 -M -o doit  HTW.doit
 -include doit.dep
+labdoit.dep : lab.doit
+	mkdoit3 -M -o labdoit  lab.doit
+-include labdoit.dep
 htwengextedf.oui : htweng.edf
 	$(EDF2OUI) htweng.edf
 htwengext.tmc : htweng.edf

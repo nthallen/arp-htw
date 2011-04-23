@@ -36,6 +36,7 @@ gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
 datadisp : dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc data.tbl /usr/local/share/oui/cic.oui
 labdisp : dstat.tmc /usr/local/share/huarp/flttime.tmc lab.tbl
 doit : HTW.doit
+labdoit : lab.doit
 
 htwengext : ptrh_conv.tmc htweng.edf
 %%
