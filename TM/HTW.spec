@@ -30,7 +30,7 @@ TGTDIR = $(TGTNODE)/home/HTW
 
 HTWcol : HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc ptrh_col.cc -lsubbus
 HTWsrvr : -lsubbus
-HTWalgo : ptrh_conv.tmc HTW.tma
+HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc HTW.tma TV.tma PV.tma
 hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gas.tbl
 datadisp : dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc data.tbl /usr/local/share/oui/cic.oui

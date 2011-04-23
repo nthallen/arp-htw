@@ -37,7 +37,7 @@ State PD_Valve_Init {
   +3 > Drive Throttle Valve in 8000
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100
-  depending on (ABOVE_CLOUDS) { Validate PD_Valve_PI_Init; }
+  depending on (IN_AIR) { Validate PD_Valve_PI_Init; }
 }
 
 State PD_Valve_Close {
@@ -54,7 +54,7 @@ State PD_Valve_Close {
 
 State PD_Valve_Closed {
   depending on (shutdown) { Validate PD_Valve_Shutdown; }
-  depending on (ABOVE_CLOUDS) {
+  depending on (IN_AIR) {
     Validate PD_Valve_PI_Init;
   }
 }
@@ -75,14 +75,14 @@ State PD_Valve_PI_Init {
 }
 
 State PD_Valve_PI NoLog {
-  # depending on (BELOW_CLOUDS) { Validate PD_Valve_Close; }
-  depending on (scanning) {
-	if ( !scan_done ) {
-	  scan_done = 1;
-	  Validate PD_Valve_Scan;
-	}
-  }
-  depending on (record) { scan_done = 0; }
+  # depending on (OFF_GROUND) { Validate PD_Valve_Close; }
+# depending on (scanning) {
+#	if ( !scan_done ) {
+#	  scan_done = 1;
+#	  Validate PD_Valve_Scan;
+#	}
+# }
+# depending on (record) { scan_done = 0; }
   # depending on (ON_GROUND) { Validate PD_Valve_Close; }
   { double DP, Gp, Gi, DP_diff, DP_set, dstep;
     unsigned short ustep;
@@ -113,7 +113,7 @@ State PD_Valve_PI NoLog {
 }
 
 State PD_Valve_Scan {
-    # depending on (BELOW_CLOUDS) { Validate PD_Valve_Close; }
+    # depending on (OFF_GROUND) { Validate PD_Valve_Close; }
     # depending on (ON_GROUND) { Validate PD_Valve_Close; }
 
     > Drive Throttle Valve In 8000

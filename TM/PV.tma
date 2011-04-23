@@ -29,9 +29,12 @@ PARTITION
 #---------------------------------------------------------------
 State Pinch_Valve_Init {
   +1 > Set Pinch Valve Speed 1067 Hz
-  +1 > Pinch Valve Set Gain Gp 8.0
-  +1 > Pinch Valve Set Gain Gi 2.0
-  +1 > Pinch Valve Set Pressure SetPoint 13.9
+# +1 > Pinch Valve Set Gain Gp 8.0
+  +1 > Set Gain Gp for Pinch Valve 8.0
+# +1 > Pinch Valve Set Gain Gi 2.0
+  +1 > Set Gain Gi for Pinch Valve 2.0
+# +1 > Pinch Valve Set Pressure SetPoint 13.9
+  +1 > Set Cell Pressure SetPoint 13.9
 }
 
 State Pinch_Valve_Close {
@@ -50,8 +53,8 @@ State Pinch_Valve_Close2 {
      { if ( Scroll_Pump_S ) Validate Pinch_Valve_Closed; }
  +1  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 );
  +2  > Command Scroll_Pump On
- +60 depending on (BELOW_CLOUDS) { Validate Pinch_Valve_Closed; }
-     depending on (ABOVE_CLOUDS) { Validate Pinch_Valve_Closed; }
+ +60 depending on (OFF_GROUND) { Validate Pinch_Valve_Closed; }
+     depending on (IN_AIR) { Validate Pinch_Valve_Closed; }
 }
 
 State Pinch_Valve_Closed {
@@ -59,7 +62,7 @@ State Pinch_Valve_Closed {
   { if ( convert(PumpT) > 75 || convert(PMotT) > 75 )
       Validate Pinch_Valve_Pump_Overtemp;
   }
-  depending on (ABOVE_CLOUDS) {
+  depending on (IN_AIR) {
     if ( convert(CellP) < 20 )
       Validate Pinch_Valve_PI_Init;
   }
@@ -84,7 +87,7 @@ State Pinch_Valve_PI_Init {
 }
 
 State Pinch_Valve_PI NoLog {
-  # depending on (BELOW_CLOUDS) { Validate Pinch_Valve_Close; }
+  # depending on (OFF_GROUND) { Validate Pinch_Valve_Close; }
   depending on (ON_GROUND) { Validate Pinch_Valve_Close; }
   { if ( convert(PumpT) > 75 || convert(PMotT) > 75 )
       Validate Pinch_Valve_Pump_Overtemp;
@@ -118,7 +121,7 @@ State Pinch_Valve_PI NoLog {
 }
 
 State Pinch_Valve_Scan {
-    # depending on (BELOW_CLOUDS) { Validate Pinch_Valve_Close; }
+    # depending on (OFF_GROUND) { Validate Pinch_Valve_Close; }
     depending on (ON_GROUND) { Validate Pinch_Valve_Close; }
     { if ( convert(PumpT) > 75 || convert(PMotT) > 75 )
         Validate Pinch_Valve_Pump_Overtemp;
@@ -143,8 +146,6 @@ State Pinch_Valve_Scan {
 
 State Pinch_Valve_Pump_Overtemp {
     { msg( 2, "Pump Over Temperature Shutoff" ); }
- +1 > Enable HV1 Off
- +1 > Enable HV2 Off
  +1 > Drive Pinch Valve in 8000
  +1 > Command Scroll_Pump Off
     Validate Pinch_Valve_Close2;

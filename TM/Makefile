@@ -1,13 +1,14 @@
-# Makefile Generated Sat Apr 23 10:13:37 CDT 2011
+# Makefile Generated Sun Apr 24 03:43:25 CDT 2011
 MNC=HTW
 HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
 SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
 SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
 SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
-SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd ptrh_conv.tmc HTW.tma dstat.tmc
-SRC+=qclibits.tmc hk.tbl idxflag.tmc gas.tbl sspflags.tmc SSPrtg.tmc
-SRC+=data.tbl lab.tbl HTW.doit lab.doit htweng.edf
+SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd ptrh_conv.tmc idxflag.tmc
+SRC+=dstat.tmc HTW.tma TV.tma PV.tma qclibits.tmc hk.tbl gas.tbl
+SRC+=sspflags.tmc SSPrtg.tmc data.tbl lab.tbl HTW.doit lab.doit
+SRC+=htweng.edf
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
@@ -31,8 +32,8 @@ TGT+=datadispnc labdisp labdispnc doit labdoit htwengext HTWclt
 TGT+=HTWcltnc
 DISTRIB=waves.out HTW.pcm tm.dac
 IDISTRIB=Experiment.config VERSION doit labdoit
-SRCDIST=HTW.tma hk.tbl gas.tbl data.tbl lab.tbl base.tmc idx.tmc
-SRCDIST+=qcli.tmc ssp.tmc ptrh.cc waves.tmc
+SRCDIST=HTW.tma TV.tma PV.tma hk.tbl gas.tbl data.tbl lab.tbl
+SRCDIST+=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
 NONRCS=
 TMCBASE=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
 CMDBASE=/usr/local/share/huarp/root.cmd
@@ -123,11 +124,11 @@ HTWsrvr.o : HTWcmd.cc
 HTWsrvroui.c : $(OUIDIR)/cis.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/cis.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 HTWsrvroui.o : HTWsrvroui.c
-HTWalgoa.tmc : HTW.tma HTWsrvr
+HTWalgoa.tmc : HTW.tma TV.tma PV.tma HTWsrvr
 	$(SERVER) ./HTWsrvr
-	$(TMCALGO) -V "`./HTWsrvr -R`" HTW.tma
-HTWalgo.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc ptrh_conv.tmc HTWalgoa.tmc
-	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc ptrh_conv.tmc HTWalgoa.tmc
+	$(TMCALGO) -V "`./HTWsrvr -R`" HTW.tma TV.tma PV.tma
+HTWalgo.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc ptrh_conv.tmc idxflag.tmc dstat.tmc HTWalgoa.tmc
+	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc ptrh_conv.tmc idxflag.tmc dstat.tmc HTWalgoa.tmc
 HTWalgooui.c : $(OUIDIR)/tma.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/tma.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 HTWalgooui.o : HTWalgooui.c
