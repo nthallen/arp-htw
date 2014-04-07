@@ -9,8 +9,8 @@ Cell {
   HBox { +-; Title: Cell; -+ };
   T1:  (Cel1T,7) V;
   T2:  (Cel2T,7) V;
-  HP:  (Cel2P,7) V;
-  LP:  (CellP,7) V;
+  HP:  (Cel2P,5) Torr;
+  LP:  (CellP,5) Torr;
   Set: (PV_SetP,5);
 }
 

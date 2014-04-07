@@ -88,6 +88,9 @@ State SW_Stat_Wait NoLog {
       case SWS_LASER_STOP: Validate Nano_Stop; break;
       case SWS_LASER_WAVE: Validate Nano_Nano800; break;
 
+      case SWS_PV_CLOSE: Validate Pinch_Valve_Close; break;
+      case SWS_PV_PI: Validate Pinch_Valve_PI_Init; break;
+      case SWS_PV_SCAN: Validate Pinch_Valve_Scan; break;
 
       case SWS_TIMEWARP: break;
       case SWS_READFILE: Validate ReadFile; break;
@@ -397,7 +400,8 @@ State Nano_Nano800 {
     > QCLI Stop
     Hold until ( !(QCLI_s & 0x1000) ) or 2
     else Validate Nano_Nano800_Reset;
- +2 > Select QCLI Waveform Nano800Hz
+#+2 > Select QCLI Waveform Nano800Hz
+ +2 > Select QCLI Waveform JPL53
  +2 Validate Nano_Start;
 }
 

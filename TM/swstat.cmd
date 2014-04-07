@@ -33,7 +33,6 @@
   : Laser Select Waveform and Start { $0 = SWS_LASER_WAVE; }
 	
   : Pinch Valve Close { $0 = SWS_PV_CLOSE; }
-  : Pinch Valve Steps { $0 = SWS_PV_STEPS; }
   : Pinch Valve PI { $0 = SWS_PV_PI; }
   : Pinch Valve Scan { $0 = SWS_PV_SCAN; }
 
