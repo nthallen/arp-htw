@@ -2,8 +2,16 @@ tmcbase = base.tmc
 tmcbase = idx.tmc
 tmcbase = qcli.tmc
 tmcbase = ssp.tmc
-tmcbase = ptrh.cc
+tmcbase = /usr/local/share/huarp/ptrhm.cc
 tmcbase = waves.tmc
+
+colbase = HTWcol.tmc
+colbase = idxcol.tmc
+colbase = /usr/local/share/huarp/DACS_ID.tmc
+colbase = sspcol.tmc
+colbase = ai_init.tmc
+# colbase = ptrh_chk.tmc
+colbase = /usr/local/share/huarp/ptrhm_col.cc
 
 cmdbase = /usr/local/share/huarp/root.cmd
 cmdbase = /usr/local/share/huarp/getcon.cmd
@@ -24,11 +32,11 @@ SCRIPT = interact
 DISTRIB = waves.out
 OBJ = waves.cmd waves.out waves.tmc waves.m waves.log
 OBJ = address.h
-SRC = swstat.h ptrh.h
+SRC = swstat.h
 
 TGTDIR = $(TGTNODE)/home/HTW
 
-HTWcol : HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc ptrh_col.cc -lsubbus
+HTWcol : -lsubbus
 HTWsrvr : -lsubbus
 HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc HTW.tma TV.tma PV.tma
 hkdisp : dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hk.tbl

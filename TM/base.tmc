@@ -205,40 +205,76 @@ TM 1 Hz PV_Gain_t PV_Gp; Collect PV_Gp = SWStat.PV_Gp;
 
 /* PTRH */
 %{
-  #include "ptrh.h"
-  ptrh DACS_ptrh =
-    ptrh("DACS",0x300,0xB06E,0x9A5D,0x6D38,0x64EA,0x81FB,0x6C80);
-  ptrh DPV_ptrh =
-    ptrh("DPV", 0x320,0xB927,0xA63B,0x76BB,0x6E67,0x756A,0x6C80);
-  ptrh LPV_ptrh =
-    ptrh("LPV", 0x340,0xB85E,0x9B3F,0x76F1,0x688A,0x7A81,0x6C80);
+  #include "ptrhm.h"
+  ptrhm DACS_ptrh =
+    ptrhm("DACS",0x200,0xB06E,0x9A5D,0x6D38,0x64EA,0x81FB,0x6C80);
+  ptrhm DPV_ptrh =
+    ptrhm("DPV", 0x220,0xB927,0xA63B,0x76BB,0x6E67,0x756A,0x6C80);
+  ptrhm LPV_ptrh =
+    ptrhm("LPV", 0x240,0xB85E,0x9B3F,0x76F1,0x688A,0x7A81,0x6C80);
 %}
 TM typedef unsigned char MS5607Db { text "%3d"; }
 TM typedef UINT PTRH_S { text " %03x"; }
 
-TM 1 Hz UINT DACS_T1; Collect DACS_T1 = DACS_ptrh.SHT21T();
-TM 1 Hz UINT DACS_RH; Collect DACS_RH = DACS_ptrh.SHT21RH();
-TM 1 Hz UINT DACS_T2a; Collect DACS_T2a = DACS_ptrh.MS5607Ta();
-TM 1 Hz MS5607Db DACS_T2b; Collect DACS_T2b = DACS_ptrh.MS5607Tb();
-TM 1 Hz UINT DACS_Pa; Collect DACS_Pa = DACS_ptrh.MS5607Pa();
-TM 1 Hz MS5607Db DACS_Pb; Collect DACS_Pb = DACS_ptrh.MS5607Pb();
-TM 1 Hz PTRH_S DACS_PTRHS; Collect DACS_PTRHS = DACS_ptrh.Status();
+TM 1 Hz UINT DACS_T1;
+TM 1 Hz UINT DACS_RH;
+TM 1 Hz UINT DACS_T2a;
+TM 1 Hz MS5607Db DACS_T2b;
+TM 1 Hz UINT DACS_Pa;
+TM 1 Hz MS5607Db DACS_Pb;
+TM 1 Hz PTRH_S DACS_PTRHS;
 
-TM 1 Hz UINT DPV_T1; Collect DPV_T1 = DPV_ptrh.SHT21T();
-TM 1 Hz UINT DPV_RH; Collect DPV_RH = DPV_ptrh.SHT21RH();
-TM 1 Hz UINT DPV_T2a; Collect DPV_T2a = DPV_ptrh.MS5607Ta();
-TM 1 Hz MS5607Db DPV_T2b; Collect DPV_T2b = DPV_ptrh.MS5607Tb();
-TM 1 Hz UINT DPV_Pa; Collect DPV_Pa = DPV_ptrh.MS5607Pa();
-TM 1 Hz MS5607Db DPV_Pb; Collect DPV_Pb = DPV_ptrh.MS5607Pb();
-TM 1 Hz PTRH_S DPV_PTRHS; Collect DPV_PTRHS = DPV_ptrh.Status();
+Group DACS ( DACS_T1, DACS_RH, DACS_T2a,
+    DACS_T2b, DACS_Pa, DACS_Pb, DACS_PTRHS ) {
+  DACS_ptrh.acquire();
+  DACS_T1 = DACS_ptrh.SHT21T();
+  DACS_RH = DACS_ptrh.SHT21RH();
+  DACS_T2a = DACS_ptrh.MS5607Ta();
+  DACS_T2b = DACS_ptrh.MS5607Tb();
+  DACS_Pa = DACS_ptrh.MS5607Pa();
+  DACS_Pb = DACS_ptrh.MS5607Pb();
+  DACS_PTRHS = DACS_ptrh.Status();
+}
 
-TM 1 Hz UINT LPV_T1; Collect LPV_T1 = LPV_ptrh.SHT21T();
-TM 1 Hz UINT LPV_RH; Collect LPV_RH = LPV_ptrh.SHT21RH();
-TM 1 Hz UINT LPV_T2a; Collect LPV_T2a = LPV_ptrh.MS5607Ta();
-TM 1 Hz MS5607Db LPV_T2b; Collect LPV_T2b = LPV_ptrh.MS5607Tb();
-TM 1 Hz UINT LPV_Pa; Collect LPV_Pa = LPV_ptrh.MS5607Pa();
-TM 1 Hz MS5607Db LPV_Pb; Collect LPV_Pb = LPV_ptrh.MS5607Pb();
-TM 1 Hz PTRH_S LPV_PTRHS; Collect LPV_PTRHS = LPV_ptrh.Status();
+TM 1 Hz UINT DPV_T1;
+TM 1 Hz UINT DPV_RH;
+TM 1 Hz UINT DPV_T2a;
+TM 1 Hz MS5607Db DPV_T2b;
+TM 1 Hz UINT DPV_Pa;
+TM 1 Hz MS5607Db DPV_Pb;
+TM 1 Hz PTRH_S DPV_PTRHS;
+
+Group DPV ( DPV_T1, DPV_RH, DPV_T2a,
+    DPV_T2b, DPV_Pa, DPV_Pb, DPV_PTRHS ) {
+  DPV_ptrh.acquire();
+  DPV_T1 = DPV_ptrh.SHT21T();
+  DPV_RH = DPV_ptrh.SHT21RH();
+  DPV_T2a = DPV_ptrh.MS5607Ta();
+  DPV_T2b = DPV_ptrh.MS5607Tb();
+  DPV_Pa = DPV_ptrh.MS5607Pa();
+  DPV_Pb = DPV_ptrh.MS5607Pb();
+  DPV_PTRHS = DPV_ptrh.Status();
+}
+
+TM 1 Hz UINT LPV_T1;
+TM 1 Hz UINT LPV_RH;
+TM 1 Hz UINT LPV_T2a;
+TM 1 Hz MS5607Db LPV_T2b;
+TM 1 Hz UINT LPV_Pa;
+TM 1 Hz MS5607Db LPV_Pb;
+TM 1 Hz PTRH_S LPV_PTRHS;
+
+Group LPV ( LPV_T1, LPV_RH, LPV_T2a,
+    LPV_T2b, LPV_Pa, LPV_Pb, LPV_PTRHS ) {
+  LPV_ptrh.acquire();
+  LPV_T1 = LPV_ptrh.SHT21T();
+  LPV_RH = LPV_ptrh.SHT21RH();
+  LPV_T2a = LPV_ptrh.MS5607Ta();
+  LPV_T2b = LPV_ptrh.MS5607Tb();
+  LPV_Pa = LPV_ptrh.MS5607Pa();
+  LPV_Pb = LPV_ptrh.MS5607Pb();
+  LPV_PTRHS = LPV_ptrh.Status();
+}
 
 TM typedef unsigned short V28V_t { text "%5u"; collect x = sbrwa(x.address); }
 TM typedef V28V_t V28I_t;

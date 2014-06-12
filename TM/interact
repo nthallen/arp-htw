@@ -19,5 +19,6 @@
   Launch - lgr -N `mlf_find LOG`
   Launch - idx64 `cat $TMBINDIR/idx.idx64`
   Launch - sspdrv -b2 -hSSP -N `mlf_find SSP`
-  Launch - qclisd -h QCLI -d /dev/ser2
+# Launch - qclisd -h QCLI -d /dev/ser2
+  Launch - qclidacsd -h QCLI -d 1
   Launch - HTWalgo -v

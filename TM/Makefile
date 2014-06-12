@@ -1,19 +1,18 @@
-# Makefile Generated Sun Apr 24 03:43:25 CDT 2011
+# Makefile Generated Thu Jun 12 15:11:25 EDT 2014
 MNC=HTW
-HOMEDIR=/home/HTW/src/TM
 SPECFILE=HTW.spec
-SRC=swstat.h ptrh.h base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc
-SRC+=waves.tmc HTWcol.tmc idxcol.tmc sspcol.tmc ai_init.tmc
-SRC+=ptrh_chk.tmc ptrh_col.cc swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd
-SRC+=waves.cmd ai.cmd ao.cmd dccc.cmd ptrh_conv.tmc idxflag.tmc
-SRC+=dstat.tmc HTW.tma TV.tma PV.tma qclibits.tmc hk.tbl gas.tbl
-SRC+=sspflags.tmc SSPrtg.tmc data.tbl lab.tbl HTW.doit lab.doit
-SRC+=htweng.edf
+PCMFILE=HTW.pcm
+SRC=swstat.h base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc
+SRC+=idxcol.tmc sspcol.tmc ai_init.tmc swstat.cmd idxdrv.cmd qcli.cmd
+SRC+=ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd ptrh_conv.tmc
+SRC+=idxflag.tmc dstat.tmc HTW.tma TV.tma PV.tma qclibits.tmc hk.tbl
+SRC+=gas.tbl sspflags.tmc SSPrtg.tmc data.tbl lab.tbl HTW.doit
+SRC+=lab.doit htweng.edf
 TOOL=HTW.spec Makefile
 SCRIPT=idx.idx64 dccc.dccc interact
 OBJ=waves.cmd waves.out waves.tmc waves.m waves.log address.h
-OBJ+=HTWcol.cc HTW.pcm tm.dac HTWcoloui.c HTWcoloui.o HTWcol.o ptrh.o
-OBJ+=ptrh_col.o HTWcmd.cc HTWcmd.dat HTWsrvr.o HTWsrvroui.c
+OBJ+=HTWcol.cc HTW.pcm tm.dac HTWcoloui.c HTWcoloui.o HTWcol.o
+OBJ+=ptrhm.o ptrhm_col.o HTWcmd.cc HTWcmd.dat HTWsrvr.o HTWsrvroui.c
 OBJ+=HTWsrvroui.o HTWalgoa.tmc HTWalgo.cc HTWalgooui.c HTWalgooui.o
 OBJ+=HTWalgo.o hktbl.tmc hkdisp.cc hkdispoui.c hkdispoui.o hkdisp.o
 OBJ+=hktblnc.tmc hkdispnc.cc hkdispncoui.c hkdispncoui.o hkdispnc.o
@@ -33,14 +32,20 @@ TGT+=HTWcltnc
 DISTRIB=waves.out HTW.pcm tm.dac
 IDISTRIB=Experiment.config VERSION doit labdoit
 SRCDIST=HTW.tma TV.tma PV.tma hk.tbl gas.tbl data.tbl lab.tbl
-SRCDIST+=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
-NONRCS=
-TMCBASE=base.tmc idx.tmc qcli.tmc ssp.tmc ptrh.cc waves.tmc
+SRCDIST+=base.tmc idx.tmc qcli.tmc ssp.tmc
+SRCDIST+=/usr/local/share/huarp/ptrhm.cc waves.tmc
+TMCBASE=base.tmc idx.tmc qcli.tmc ssp.tmc
+TMCBASE+=/usr/local/share/huarp/ptrhm.cc waves.tmc
 CMDBASE=/usr/local/share/huarp/root.cmd
 CMDBASE+=/usr/local/share/huarp/getcon.cmd
 CMDBASE+=/usr/local/share/huarp/idx64.cmd
 CMDBASE+=/usr/local/share/huarp/phrtg.cmd swstat.cmd idxdrv.cmd
 CMDBASE+=qcli.cmd ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
+COLBASE=HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc
+COLBASE+=sspcol.tmc ai_init.tmc /usr/local/share/huarp/ptrhm_col.cc
+SWSBASE=
+QCLIBASE=
+PHTGT=hktbl.tmc gastbl.tmc datatbl.tmc labtbl.tmc
 RCS=$(SRC) $(TOOL) $(SCRIPT)
 SOURCE=$(RCS) $(NONRCS)
 OBJECT=$(OBJ) *.err
@@ -49,59 +54,70 @@ DSTRB=$(TGT) $(DISTRIB) $(SCRIPT)
 TGTDIR= $(TGTNODE)/home/HTW
 include /usr/local/share/huarp/appgen.mk
 
-all : Makefile $(TGT)
+.PHONY : all extdistribution distribution clean check_photon
+
+all : Makefile check_photon $(TGT) .cvsignore
 Makefile : HTW.spec
 	appgen HTW.spec
 VERSION=`cat VERSION`
-extdistribution : $(DSTRB) $(SRCDIST)
+extdistribution : $(DSTRB) $(SRCDIST) VERSION
 	@[ -d $(TGTDIR)/bin ] || mkdir $(TGTDIR)/bin
 	@[ -d $(TGTDIR)/bin/$(VERSION) ] || mkdir $(TGTDIR)/bin/$(VERSION)
-	@[ -d  $(TGTDIR)/bin/$(VERSION)/Base ] || mkdir $(TGTDIR)/bin/$(VERSION)/Base
+	@[ -d $(TGTDIR)/bin/$(VERSION)/Base ] || mkdir $(TGTDIR)/bin/$(VERSION)/Base
+	@[ ! -f $(TGTDIR)/bin/$(VERSION)/$(PCMFILE) ] || \
+	  cmp -s $(TGTDIR)/bin/$(VERSION)/$(PCMFILE) $(PCMFILE) || \
+	  ( echo "$(PCMFILE) changed without VERSION update"; false )
 	@distribute $(FORCE) $(TGTDIR)/bin/$(VERSION) $(DSTRB)
 	@distribute $(FORCE) $(TGTDIR)/bin/$(VERSION)/Base $(SRCDIST)
 distribution : extdistribution
 	@distribute $(FORCE) $(TGTDIR) $(IDISTRIB)
-HTWcol : HTWcol.o ptrh.o ptrh_col.o HTWcoloui.o
-	$(LINK.privCXX) HTWcol.o ptrh.o ptrh_col.o HTWcoloui.o -lsubbus -ltmpp -ltm -lnort
+check_photon :
+ifeq ($(WPHOTON),YES)
+	@for tgt in $(PHTGT); do \
+	  cmp -s $$tgt /usr/local/share/huarp/nulltbl.tmc && echo Remaking $$tgt && rm -f $$tgt; \
+	done; true
+endif
+HTWcol : HTWcol.o ptrhm.o ptrhm_col.o HTWcoloui.o
+	$(LINK.privCXX) HTWcol.o ptrhm.o ptrhm_col.o HTWcoloui.o -lsubbus -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcoloui.c
 	$(PROMOTE) HTWcol
 HTWsrvr : HTWsrvr.o HTWsrvroui.o
 	$(LINK.privCXX) HTWsrvr.o HTWsrvroui.o -lsubbus -ltmpp -ltm -lnort
 	$(OUIUSE) HTWsrvroui.c
 	$(PROMOTE) HTWsrvr
-HTWalgo : HTWalgo.o ptrh.o HTWalgooui.o
-	$(LINK.normCXX) HTWalgo.o ptrh.o HTWalgooui.o -ltmpp -ltm -lnort
+HTWalgo : HTWalgo.o ptrhm.o HTWalgooui.o
+	$(LINK.normCXX) HTWalgo.o ptrhm.o HTWalgooui.o -ltmpp -ltm -lnort
 	$(OUIUSE) HTWalgooui.c
-hkdisp : hkdisp.o ptrh.o hkdispoui.o
-	$(LINK.normCXX) hkdisp.o ptrh.o hkdispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+hkdisp : hkdisp.o ptrhm.o hkdispoui.o
+	$(LINK.normCXX) hkdisp.o ptrhm.o hkdispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) hkdispoui.c
-hkdispnc : hkdispnc.o ptrh.o hkdispncoui.o
-	$(LINK.normCXX) hkdispnc.o ptrh.o hkdispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+hkdispnc : hkdispnc.o ptrhm.o hkdispncoui.o
+	$(LINK.normCXX) hkdispnc.o ptrhm.o hkdispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) hkdispncoui.c
-gddisp : gddisp.o ptrh.o gddispoui.o
-	$(LINK.normCXX) gddisp.o ptrh.o gddispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+gddisp : gddisp.o ptrhm.o gddispoui.o
+	$(LINK.normCXX) gddisp.o ptrhm.o gddispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) gddispoui.c
-gddispnc : gddispnc.o ptrh.o gddispncoui.o
-	$(LINK.normCXX) gddispnc.o ptrh.o gddispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+gddispnc : gddispnc.o ptrhm.o gddispncoui.o
+	$(LINK.normCXX) gddispnc.o ptrhm.o gddispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) gddispncoui.c
-datadisp : datadisp.o ptrh.o datadispoui.o
-	$(LINK.normCXX) datadisp.o ptrh.o datadispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+datadisp : datadisp.o ptrhm.o datadispoui.o
+	$(LINK.normCXX) datadisp.o ptrhm.o datadispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) datadispoui.c
-datadispnc : datadispnc.o ptrh.o datadispncoui.o
-	$(LINK.normCXX) datadispnc.o ptrh.o datadispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+datadispnc : datadispnc.o ptrhm.o datadispncoui.o
+	$(LINK.normCXX) datadispnc.o ptrhm.o datadispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) datadispncoui.c
-labdisp : labdisp.o ptrh.o labdispoui.o
-	$(LINK.normCXX) labdisp.o ptrh.o labdispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
+labdisp : labdisp.o ptrhm.o labdispoui.o
+	$(LINK.normCXX) labdisp.o ptrhm.o labdispoui.o -ldisp -ltmph -lph -ltmpp -ltm -lnort
 	$(OUIUSE) labdispoui.c
-labdispnc : labdispnc.o ptrh.o labdispncoui.o
-	$(LINK.normCXX) labdispnc.o ptrh.o labdispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
+labdispnc : labdispnc.o ptrhm.o labdispncoui.o
+	$(LINK.normCXX) labdispnc.o ptrhm.o labdispncoui.o -ldispnc -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) labdispncoui.c
 doit : HTW.doit
 	mkdoit3 -o doit  HTW.doit
 labdoit : lab.doit
 	mkdoit3 -o labdoit  lab.doit
-htwengext : htwengext.o ptrh.o htwengextoui.o
-	$(LINK.normCXX) htwengext.o ptrh.o htwengextoui.o -ltmpp -ltm -lssp -lmem -lm -lnort
+htwengext : htwengext.o ptrhm.o htwengextoui.o
+	$(LINK.normCXX) htwengext.o ptrhm.o htwengextoui.o -ltmpp -ltm -lssp -lmem -lm -lnort
 	$(OUIUSE) htwengextoui.c
 HTWclt : HTWclt.o HTWcltoui.o
 	$(LINK.normCXX) HTWclt.o HTWcltoui.o -ltmph -lph -ltmpp -ltm -lnort
@@ -109,14 +125,16 @@ HTWclt : HTWclt.o HTWcltoui.o
 HTWcltnc : HTWcltnc.o HTWcltncoui.o
 	$(LINK.normCXX) HTWcltnc.o HTWcltncoui.o -ltmnc -lncurses -ltmpp -ltm -lnort
 	$(OUIUSE) HTWcltncoui.c
-HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
-	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc ptrh_chk.tmc
+HTWcol.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc
+	$(TMC.col) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc HTWcol.tmc idxcol.tmc /usr/local/share/huarp/DACS_ID.tmc sspcol.tmc ai_init.tmc
 HTWcoloui.c : $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 	$(OUI) $(OUIDIR)/collect.oui $(OUIDIR)/seteuid.oui $(OUIDIR)/subbus.oui $(OUIDIR)/msg.oui
 HTWcoloui.o : HTWcoloui.c
 HTWcol.o : HTWcol.cc
-ptrh.o : ptrh.cc
-ptrh_col.o : ptrh_col.cc
+ptrhm.o : /usr/local/share/huarp/ptrhm.cc
+	$(COMPILE.cc) /usr/local/share/huarp/ptrhm.cc
+ptrhm_col.o : /usr/local/share/huarp/ptrhm_col.cc
+	$(COMPILE.cc) /usr/local/share/huarp/ptrhm_col.cc
 HTWcmd.cc : /usr/local/share/huarp/root.cmd /usr/local/share/huarp/getcon.cmd /usr/local/share/huarp/idx64.cmd /usr/local/share/huarp/phrtg.cmd swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
 	$(CMDGEN) -d HTWcmd.dat /usr/local/share/huarp/root.cmd /usr/local/share/huarp/getcon.cmd /usr/local/share/huarp/idx64.cmd /usr/local/share/huarp/phrtg.cmd swstat.cmd idxdrv.cmd qcli.cmd ssp.cmd waves.cmd ai.cmd ao.cmd dccc.cmd
 HTWsrvr.o : HTWcmd.cc
@@ -134,7 +152,6 @@ HTWalgooui.c : $(OUIDIR)/tma.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 HTWalgooui.o : HTWalgooui.c
 HTWalgo.o : HTWalgo.cc
 hktbl.tmc : hk.tbl
-	$(TABLE) hk.tbl
 hkdisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktbl.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktbl.tmc
 hkdispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -142,7 +159,6 @@ hkdispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 hkdispoui.o : hkdispoui.c
 hkdisp.o : hkdisp.cc
 hktblnc.tmc : hk.tbl
-	$(NCTABLE) hk.tbl
 hkdispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktblnc.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc ptrh_conv.tmc /usr/local/share/huarp/flttime.tmc hktblnc.tmc
 hkdispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -150,7 +166,6 @@ hkdispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 hkdispncoui.o : hkdispncoui.c
 hkdispnc.o : hkdispnc.cc
 gastbl.tmc : gas.tbl
-	$(TABLE) gas.tbl
 gddisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastbl.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastbl.tmc
 gddispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -158,7 +173,6 @@ gddispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 gddispoui.o : gddispoui.c
 gddisp.o : gddisp.cc
 gastblnc.tmc : gas.tbl
-	$(NCTABLE) gas.tbl
 gddispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastblnc.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc idxflag.tmc /usr/local/share/huarp/flttime.tmc gastblnc.tmc
 gddispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -166,7 +180,6 @@ gddispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 gddispncoui.o : gddispncoui.c
 gddispnc.o : gddispnc.cc
 datatbl.tmc : data.tbl
-	$(TABLE) data.tbl
 datadisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatbl.tmc
 datadispoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -174,7 +187,6 @@ datadispoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 datadispoui.o : datadispoui.c
 datadisp.o : datadisp.cc
 datatblnc.tmc : data.tbl
-	$(NCTABLE) data.tbl
 datadispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc qclibits.tmc sspflags.tmc SSPrtg.tmc /usr/local/share/huarp/flttime.tmc datatblnc.tmc
 datadispncoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -182,7 +194,6 @@ datadispncoui.c : /usr/local/share/oui/cic.oui $(OUIDIR)/nctable.oui $(OUIDIR)/d
 datadispncoui.o : datadispncoui.c
 datadispnc.o : datadispnc.cc
 labtbl.tmc : lab.tbl
-	$(TABLE) lab.tbl
 labdisp.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc /usr/local/share/huarp/flttime.tmc labtbl.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc /usr/local/share/huarp/flttime.tmc labtbl.tmc
 labdispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -190,7 +201,6 @@ labdispoui.c : $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
 labdispoui.o : labdispoui.c
 labdisp.o : labdisp.cc
 labtblnc.tmc : lab.tbl
-	$(NCTABLE) lab.tbl
 labdispnc.cc : base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc /usr/local/share/huarp/flttime.tmc labtblnc.tmc
 	$(TMC) base.tmc idx.tmc qcli.tmc ssp.tmc waves.tmc dstat.tmc /usr/local/share/huarp/flttime.tmc labtblnc.tmc
 labdispncoui.c : $(OUIDIR)/nctable.oui $(OUIDIR)/dc.oui $(OUIDIR)/msg.oui
@@ -228,8 +238,8 @@ tidy :
 	rm -f $(OBJECT)
 clean : tidy
 	rm -f $(TARGET)
-.cvsignore :
-	@for i in Makefile '.B4*' $(OBJECT) $(TARGET); do echo "$$i"; done >.cvsignore
+.cvsignore : Makefile
+	@for i in $(OBJECT) $(TARGET); do echo "$$i"; done >.cvsignore
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g
 COLFLAGS=-Haddress.h

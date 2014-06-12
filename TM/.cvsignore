@@ -10,8 +10,8 @@ tm.dac
 HTWcoloui.c
 HTWcoloui.o
 HTWcol.o
-ptrh.o
-ptrh_col.o
+ptrhm.o
+ptrhm_col.o
 HTWcmd.cc
 HTWcmd.dat
 HTWsrvr.o

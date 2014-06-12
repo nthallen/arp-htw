@@ -16,7 +16,7 @@ ICOS Waveform JPL53 {
    Toff = 80 usec;
    Ton = 800 usec;
    Tpre = 2 usec;
-   I = 200 mA to 550 mA in 1000 steps;
+   I = 200 mA to 249 mA in 1000 Steps;
    }
 
 # ICOS Waveform Nano800Hz {
