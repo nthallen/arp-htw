@@ -1,9 +1,13 @@
 QCLI {
   HBox { +-; Title: "QCLI"; -+ };
-  Wave: (QCLI_Wave,10);
-  Mode: { (QCLI_mode,7) (QCLI_laser,3); };
-  Stale: (QCLI_Stale,5);
-  SSP { (SSP_Num,8) (SSP_Status,7); }
+  { Wave: (QCLI_Wave,10)  (QCLI_mode,7) (QCLI_laser,3) };
+  HBox {
+    { SSP (SSP_Status,7) (SSP_Num,8) };
+    HGlue 0+1; |; HGlue 0+1;
+    { Reset: (QCLI_Reset_DS,3);
+      Stale: (QCLI_Stale,5);
+    };
+  }
 }
 
 SSP {
@@ -12,7 +16,6 @@ SSP {
     { File: (SSP_Num,8);
       Scan: (SSP_SN,8);
       Skip: (SSP_TS,8);
-      Status: (SSP_Status,7);
       Stale: (SSP_Stale,5);
     }; +|; {
       ""  >"1|2|3 ";
@@ -37,18 +40,22 @@ QCLIS {
   HBox { +-; Title: "QCLI Status"; -+ };
   HBox {
     {
-      Ready:         (QCLI_ready,3);
+      Rdy:           (QCLI_ready,3);
       Busy:          (QCLI_busy,3);
-      Select:        (QCLI_waveerr,4);
-      Flash:         (QCLI_flash,2);
-      Cksum:         (QCLI_cksum,1);
-      Reset:         (QCLI_Reset_DS,3);
+      Sel:           (QCLI_waveerr,4);
+      Flsh:          (QCLI_flash,2);
+      Cksm:          (QCLI_cksum,1);
     }; |; {
-      "QCLI T:"      (QCLI_dot,4);
-      "Laser T:"     (QCLI_lot,4);
-      "Laser I:"     (QCLI_loc,4);
-      "Inv Cmd:"     (QCLI_cordte,4);
-      "Cmd Err:"     (QCLI_cmderr,4);
+      "DOT:"         (QCLI_dot,4);
+      "LOT:"         (QCLI_lot,4);
+      "LOC:"         (QCLI_loc,4);
+      "COR:"         (QCLI_cordte,4);
+      "Err:"         (QCLI_cmderr,4);
+    }; |; {
+      Com:   (QCLI_present,4);
+      Act:   (QCLI_rw,2);
+      FIFO:  (QCLI_fifodep,3);
+      Err:   (QCLI_err,2);
     }
   }
 }
@@ -68,8 +75,8 @@ SW {
   HBox {
     |+;
     { [QCLI];
-      [QCLIS];
       [SSP];
+      [QCLIS];
     }; |+; {
       [SSPT];
       [Laser];
