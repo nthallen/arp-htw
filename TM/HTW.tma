@@ -401,7 +401,7 @@ State Nano_Nano800 {
     Hold until ( !(QCLI_s & 0x1000) ) or 2
     else Validate Nano_Nano800_Reset;
 #+2 > Select QCLI Waveform Nano800Hz
- +2 > Select QCLI Waveform JPL53
+ +2 > Select QCLI Waveform JPL53_800Hz
  +2 Validate Nano_Start;
 }
 

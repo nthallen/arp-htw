@@ -64,7 +64,7 @@ labdispncoui.o
 labdispnc.o
 doit.dep
 labdoit.dep
-htwengextedf.oui
+htwengextcdf.oui
 htwengext.tmc
 htwengext.cc
 htwengextoui.c

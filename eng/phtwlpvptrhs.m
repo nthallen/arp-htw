@@ -1,6 +1,6 @@
 function phtwlpvptrhs(varargin);
 % phtwlpvptrhs( [...] );
-% LPV_PTRH Status
+% LPV PTRH Status
 h = ne_dstat({
   '0', 'LPV_PTRHS', 0; ...
 	'1', 'LPV_PTRHS', 1; ...

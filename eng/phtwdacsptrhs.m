@@ -1,6 +1,6 @@
 function phtwdacsptrhs(varargin);
 % phtwdacsptrhs( [...] );
-% DACS_PTRH Status
+% DACS PTRH Status
 h = ne_dstat({
   '0', 'DACS_PTRHS', 0; ...
 	'1', 'DACS_PTRHS', 1; ...
