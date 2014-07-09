@@ -16,7 +16,7 @@ PT.TPT = T4;
 PT.CellP = interp1(T1,E1.CellP,T4); % cell pressure (in Torr)
 PT.Tavg = (273.15 + 20).*T4./T4; % cell temperature (in K)
 PT.ScanNum = E4.SSP_Num;
-PT.QCLI_Wave = T4./T4;
+PT.QCLI_Wave = interp1(T1,E1.QCLI_Wave,T4,'nearest','extrap');
 
 save PT.mat -STRUCT PT
 
