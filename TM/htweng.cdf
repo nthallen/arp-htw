@@ -34,7 +34,7 @@ csv htweng_1 111
   32 DPVCT 
   33 DPVTSt 
   34 DPV_P 
-  35 DPV_PTRHS 
+  35 DPV_PTRHS %.0lf
   36 DPV_RHC 
   37 DPV_T1C 
   38 DPV_T2C 
@@ -58,7 +58,7 @@ csv htweng_1 111
   56 LPVCT 
   57 LPVTSt 
   58 LPV_P 
-  59 LPV_PTRHS 
+  59 LPV_PTRHS %.0lf
   60 LPV_RHC 
   61 LPV_T1C 
   62 LPV_T2C 
