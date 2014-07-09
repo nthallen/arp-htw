@@ -148,14 +148,15 @@ ROWS 18
 #1 SSP_Flags
 4 SSP_Num SSP Num
 4 SSP_SN SSP SN
-4 SSP_Stale SSP Stale
-4 SSP_Status SSP Status %.0lf
 4 SSP_TS SSP TSkip
-4 SSP_T_FPGA SSP T
-4 SSP_T_HtSink SSP T
-1 SSP_T SSP T
-1 VtoIT SSP T
-1 QCLIT SSP T
+4 SSP_Stale QCLI Stale
+1 QCLI_Wave  SSP Wave %.0lf
+4 SSP_Status SSP Status %.0lf
+4 SSP_T_FPGA Misc SSP_T
+4 SSP_T_HtSink Misc SSP_T
+1 SSP_T Misc SSP_T
+1 VtoIT Misc SSP_T
+1 QCLIT Misc SSP_T
 4 CAOVF1:SSP_Flags:0 SSP OVF
 4 CAOVF2:SSP_Flags:1 SSP OVF
 4 CAOVF3:SSP_Flags:2 SSP OVF
