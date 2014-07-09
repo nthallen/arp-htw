@@ -27,7 +27,7 @@ csv htweng_1 111
   25 Cmd8_I 
   26 Cmd9_I 
   27 DACS_P 
-  28 DACS_PTRHS 
+  28 DACS_PTRHS %.0lf
   29 DACS_RHC 
   30 DACS_T1C 
   31 DACS_T2C 
@@ -51,7 +51,7 @@ csv htweng_1 111
   49 GasHP 
   50 GasLP 
   51 GsFl1St 
-  52 IOSwS 
+  52 IOSwS %.0lf
   53 InlDP 
   54 Inl_T 
   55 LH__T 
@@ -81,7 +81,7 @@ csv htweng_1 111
   79 PumpT 
   80 QCLIT 
   81 QCLI_Stale 
-  82 QCLI_Wave 
+  82 QCLI_Wave %.0lf
   83 QCLI_s 
   84 Rov1T 
   85 Rov2T 
@@ -117,7 +117,7 @@ csv htweng_4 10
   3 SSP_Num 
   4 SSP_SN 
   5 SSP_Stale 
-  6 SSP_Status 
+  6 SSP_Status %.0lf
   7 SSP_TS 
   8 SSP_T_FPGA 
   9 SSP_T_HtSink 
