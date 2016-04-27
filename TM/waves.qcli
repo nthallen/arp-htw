@@ -1,6 +1,19 @@
 # icoswave.qcli
 # Source code for test ICOS waveforms
 # QCLIConfig FastRampx10;
+#
+# 4/27/2016: Note: The QCLI/VtoI currently connected to the 
+# HTW system has a non-standard gain. In order to get a desired
+# current, the waveform current must be scaled up in this file
+# by a factor of 2.46. Hence, to achieve a peak current of 570 mA,
+# the peak current should be set to 570*2.46 = ~1400 mA.
+# This was verified with a dummy load on 4/26/2016 by NTA and
+# Kairn Brannon. Waveform JPL53_800Hz (1150-1400 mA) was run
+# through a dummy load measured at 6.4 Ohms, and the peak voltage
+# difference was measured at 3.64V. That implies a peak current
+# of 570 mA. This is a safe and appropriate maximum current for
+# JPL53, as the data sheet tops out at 600 mA
+
 QCLIConfig Standard;
 Digitizer SSP;
 Prefix QCLI;
