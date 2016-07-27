@@ -29,7 +29,7 @@ if ~isempty(waves)
     ydata = map(ydata+1);
     set(h,'ydata',ydata);
     set(ax,'ylim', [ 0.9 length(wvnos)+0.1 ], 'ytick', 1:length(wvnos), ...
-        'yticklabel', {waves(wvnos).Name});
+        'yticklabel', strrep({waves(wvnos).Name},'_','\_'));
 else
     set(ax,'ylim', [ min(ydata)-0.1 max(ydata)+0.1]);
 end
