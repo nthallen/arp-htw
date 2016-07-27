@@ -46,7 +46,7 @@ ICOS Waveform Triangle {
    Toff = 5 msec;
    Ton =  5 msec;
    Tpre = 2 usec;
-   I = 1150 mA to 1400 mA in 1000 Steps;
+   I = 1150 mA to 1350 mA in 1000 Steps;
    }
 
  Ringdown Waveform RingRamp {
@@ -55,7 +55,7 @@ ICOS Waveform Triangle {
    Toff = 50 msec;
    Ton =  50 msec;
    Tpre = 2 usec;
-   I = 1150 mA to 1400 mA in 100 Steps;
+   I = 1150 mA to 1300 mA in 100 Steps;
    }
 
 # ICOS Waveform Nano800Hz {
