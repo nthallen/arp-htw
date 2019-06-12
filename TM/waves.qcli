@@ -19,35 +19,18 @@ Digitizer SSP;
 Prefix QCLI;
 
 ICOS Waveform JPL53_long {
-  SampleRate = 50 MHz/100;
-  Ncoadd = 800;
+  SampleRate = 100 MHz/200;
+  Ncoadd = 227;
   Tz = 5%;
   Ramp from 530 mA to 1400 mA in 4 msec;
 }
 
 ICOS Waveform JPL53_800Hz {
   SampleRate = 100 MHz/100;
-  Ncoadd = 800;
+  Ncoadd = 799;
   Tz = 5%;
   Ramp from 1150 mA to 1400 mA in 1 msec;
 }
-
-ICOS Waveform Triangle {
-  SampleRate = 50 MHz/100;
-  Ncoadd = 800;
-  Tz = 5%;
-  Ramp from 0 mA to 500 mA in 4 msec;
-}
-
- Ringdown Waveform RingRamp_NC10 {
-   SampleRate = 50 MHz/20;
-   Nsample = 350;
-   Ncoadd = 10;
-   Toff = 5 msec;
-   Ton =  5 msec;
-   Tpre = 2 usec;
-   I = 1150 mA to 1350 mA in 1000 Steps;
-   }
 
  Ringdown Waveform RingRamp {
    SampleRate = 50 MHz/20;

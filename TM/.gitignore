@@ -5,7 +5,6 @@ waves.m
 waves.log
 address.h
 HTWcol.cc
-HTW.pcm
 tm.dac
 HTWcoloui.c
 HTWcoloui.o
@@ -65,7 +64,7 @@ labdispnc.o
 doit.dep
 labdoit.dep
 htwengextcdf.oui
-htwengext.tmc
+htwengextcdf.tmc
 htwengext.cc
 htwengextoui.c
 htwengextoui.o
@@ -76,7 +75,16 @@ HTWcltoui.o
 HTWcltnc.o
 HTWcltncoui.c
 HTWcltncoui.o
+hktbl.tmc.dep
+hktblnc.tmc.dep
+gastbl.tmc.dep
+gastblnc.tmc.dep
+datatbl.tmc.dep
+datatblnc.tmc.dep
+labtbl.tmc.dep
+labtblnc.tmc.dep
 *.err
+Makefile
 HTWcol
 HTWsrvr
 HTWalgo

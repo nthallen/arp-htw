@@ -414,6 +414,25 @@ State Nano_Nano800_Reset {
 }
 
 Partition
+#-----------------------------------------------------------------------------
+# Partition 9: Gas Deck Control
+#-----------------------------------------------------------------------------
+
+State GasDeck_Init {
+ +1 > Command Gas_Flw_Open Off
+    > Command Gas_Flw_Closed Off
+    > Command Bub_Gas_Flw_Open Off
+    > Command Bub_Gas_Flw_Closed Off
+    > Command Gas_Vlv_D Off
+    > Command Bub_Gas_Vlv_D Off
+    > Command Bub_Vlv_Flw_D Off
+ +5 Validate GasDeck_Idle;
+}
+
+State GasDeck_Idle {}
+
+
+Partition
 # -----------------------------------------------------------------------------
 # Partition 9: Realtime File Input
 # -----------------------------------------------------------------------------

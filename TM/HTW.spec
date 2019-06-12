@@ -35,6 +35,7 @@ SCRIPT = interact
 # OBJ = waves.cmd waves.out waves.tmc waves.m waves.log
 OBJ = address.h
 SRC = swstat.h
+IGNORE = Makefile
 
 TGTDIR = $(TGTNODE)/home/HTW
 
