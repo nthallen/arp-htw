@@ -1,0 +1,34 @@
+%{
+  /* Meerstetter driver interface */
+  #include "meerstetter.h"
+  const char *Me_DevStatus_text(unsigned char stat) {
+    switch (stat) {
+      case 0:  return "Init   ";
+      case 1:  return "Ready  ";
+      case 2:  return "Run    ";
+      case 3:  return "Error  ";
+      case 4:  return "BootLdr";
+      case 5:  return "Reset  ";
+      default: return "*******";
+    }
+  }
+%}
+TM typedef unsigned char Me_DevStatus_t { text "%7u" Me_DevStatus_text(); }
+TM typedef unsigned char Me_Stale_t { text "%3u"; }
+TM typedef float Me_Temp_t { text "%7.2f"; }
+
+TM 1 Hz Me_DevStatus_t LTE_DevStatus;
+TM 1 Hz Me_Temp_t LTE_T;
+TM 1 Hz Me_Temp_t LTE_Sink_T;
+TM 1 Hz Me_Temp_t LTE_Set_T;
+TM 1 Hz Me_Stale_t LTE_Stale;
+TM "Receive" meerstetter 1;
+
+Group Me (LTE_DevStatus, LTE_T, LTE_Sink_T, LTE_Set_T, LTE_Stale) {
+  LTE_DevStatus = meerstetter.DeviceStatus;
+  LTE_T = meerstetter.ObjectTemp;
+  LTE_Sink_T = meerstetter.SinkTemp;
+  LTE_Set_T = meerstetter.TargetObjectTemp;
+  LTE_Stale = meerstetter_obj->stale(255);
+  meerstetter_obj->synch();
+}

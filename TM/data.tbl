@@ -1,3 +1,5 @@
+Input "me.tbl";
+
 QCLI {
   HBox { +-; Title: "QCLI"; -+ };
   { Wave: (QCLI_Wave,10)  (QCLI_mode,7) (QCLI_laser,3) };
@@ -80,6 +82,7 @@ SW {
     }; |+; {
       [SSPT];
       [Laser];
+      [Meerstetter];
       VGlue 0+1;
       +-;
       >[SW]

@@ -3,6 +3,7 @@ tmcbase = idx.tmc
 tmcbase = qcli.tmc
 tmcbase = ssp.tmc
 tmcbase = /usr/local/share/huarp/ptrhm.cc
+tmcbase = me.tmc
 # tmcbase = waves.tmc
 
 colbase = HTWcol.tmc
@@ -11,6 +12,7 @@ colbase = /usr/local/share/huarp/DACS_ID.tmc
 colbase = sspcol.tmc
 colbase = ai_init.tmc
 colbase = ptrh_chk.tmc
+colbase = me_col.tmc
 colbase = /usr/local/share/huarp/ptrhm_col.cc
 
 cmdbase = /usr/local/share/huarp/root.cmd
@@ -27,6 +29,11 @@ cmdbase = ao.cmd
 cmdbase = dccc.cmd
 
 qclibase = waves.qcli
+
+extbase = ptrh_conv.tmc
+
+genuibase = HTW.genui
+genuibase = me.genui
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
@@ -49,16 +56,9 @@ labdisp : dstat.tmc /usr/local/share/huarp/flttime.tmc lab.tbl
 doit : HTW.doit
 labdoit : lab.doit
 
-htwengext : ptrh_conv.tmc htweng.cdf
 %%
 CFLAGS=-Wall -g
 CXXFLAGS=-Wall -g
 COLFLAGS=-Haddress.h
 address.h : HTWcol.cc
 HTWsrvr.o : address.h
-htweng.cdf : genui.txt
-	genui -d ../eng -c genui.txt
-# waves.cmd waves.out waves.tmc waves.m : waves.qcli
-# 	qclicomp -o waves.out -c waves.cmd -d waves.tmc \
-# 	  -v waves.log -m waves.m waves.qcli || \
-# 	  ( rm -f waves.out waves.cmd waves.tmc waves.log waves.m; false )

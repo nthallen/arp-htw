@@ -1,0 +1,9 @@
+Meerstetter {
+  HBox { +-; Title: "Meerstetter"; -+ };
+  Status:  (LTE_DevStatus,7);
+  LTE_T:           (LTE_T,7) C;
+  LTE_Set_T:   (LTE_Set_T,7) C;
+  LTE_Sink_T: (LTE_Sink_T,7) C;
+  LTE_Stale:   (LTE_Stale,3);
+}
+

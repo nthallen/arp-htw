@@ -1,0 +1,4 @@
+%{
+  #include "meerstetter.h"
+  meerstetter_t meerstetter;
+%}
