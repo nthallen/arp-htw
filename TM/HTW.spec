@@ -27,6 +27,7 @@ cmdbase = ssp.cmd
 cmdbase = ai.cmd
 cmdbase = ao.cmd
 cmdbase = dccc.cmd
+cmdbase = me.cmd
 
 qclibase = waves.qcli
 
