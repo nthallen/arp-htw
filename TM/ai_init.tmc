@@ -24,3 +24,10 @@
 TM INITFUNC ai_cfg_init();
 
 /* Now the custom configurations for this experiment: */
+TM INITFUNC sbwr(Cal1F.address, AI_CFG_XP768);
+TM INITFUNC sbwr(Cal2F.address, AI_CFG_XP768);
+TM INITFUNC sbwr(Cal3F.address, AI_CFG_XP768);
+TM INITFUNC sbwr(L1Flw.address, AI_CFG_XP768);
+TM INITFUNC sbwr(L2Flw.address, AI_CFG_XP768);
+TM INITFUNC sbwr(L3Flw.address, AI_CFG_XP768);
+TM INITFUNC sbwr(L4Flw.address, AI_CFG_XP768);

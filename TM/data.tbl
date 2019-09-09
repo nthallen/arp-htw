@@ -32,10 +32,10 @@ SSPT {
   HBox { +-; Title: "SSP Temps"; -+ };
   FPGA: (SSP_T_FPGA,6) C;
   HtSink: (SSP_T_HtSink,6) C;
-  PampT:  (PampT,7) C;
-  SSP_T:  (SSP_T,7) C;
-  QCLIT:  (QCLIT,7) C;
-  VtoIT:  (VtoIT,7) C;
+  PampT:  (PampT,6) C;
+  SSP_T:  (SSP_T,6) C;
+  QCLIT:  (QCLIT,6) C;
+  VtoIT:  (VtoIT,6) C;
 }
 
 QCLIS {

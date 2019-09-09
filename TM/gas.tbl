@@ -7,8 +7,8 @@ Idx {
 
 Cell {
   HBox { +-; Title: Cell; -+ };
-  T1:  (Cel1T,7) V;
-  T2:  (Cel2T,7) V;
+  T1:  (Cel1T,6) C;
+  T2:  (Cel2T,6) C;
   HP:  (Cel2P,5) Torr;
   LP:  (CellP,5) Torr;
   Set: (PV_SetP,5);
@@ -40,7 +40,7 @@ Bub {
       # HBox { +-; Bubbler; -+ };
       +-+;
       { P: (Bub_P,7) V;
-	T: (Bub_T,7) C
+	T: (Bub_T,6) C
       };
       +-+
     }; |
@@ -79,9 +79,9 @@ Flows {
 
 GDT {
   HBox { +-; Title: "Gas Deck Temps"; -+ };
-  T1: (GD_1T,7) V;
-  T2: (GD_2T,7) V;
-  T3: (GD_3T,7) V;
+  T1: (GD_1T,6) C;
+  T2: (GD_2T,6) C;
+  T3: (GD_3T,6) C;
 }
 
 SW {

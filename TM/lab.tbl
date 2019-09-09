@@ -17,17 +17,17 @@ CalCmd {
 
 CalTemps {
   HBox { +-; Title: "Cal Temps"; -+ };
-  "1:" (Cal1T,7) V;
-  "2:" (Cal2T,7) V;
-  "3:" (Cal3T,7) V;
-  "4:" (Cal4T,7) V;
+  "1:" (Cal1T,6) C;
+  "2:" (Cal2T,6) C;
+  "3:" (Cal3T,6) C;
+  "4:" (Cal4T,6) C;
 }
 
 CBB {
   HBox { +-; Title: "Cal Bench Bubbler"; -+ };
   "" >"1"<  >"2"<;
   P: (CBB1P,7) (CBB2P,7) V;
-  T: (CBB1T,7) (CBB2T,7) V;
+  T: (CBB1T,6) (CBB2T,6) C;
 }
 
 LFB {
@@ -36,7 +36,7 @@ LFB {
     {
       LFB1P: (LFB1P,7) V;
       LFB2P: (LFB2P,7) V;
-      LFB_T: (LFB_T,7) V;
+      LFB_T: (LFB_T,6) C;
       LFT_P: (LFT_P,7) V;
     }; |+; {
       L1Flw: (L1Flw,7) V;
@@ -51,7 +51,7 @@ Unused {
   HBox { +-; Title: "Unused"; -+ };
   HBox {
     {
-      Eta_T: (Eta_T,7) V;
+      Eta_T: (Eta_T,6) C;
       Sp1AI: (Sp1AI,7) V;
       Sp2AI: (Sp2AI,7) V;
       Sp3AI: (Sp3AI,7) V;

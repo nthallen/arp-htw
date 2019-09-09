@@ -11,30 +11,30 @@ Cont_T {
 
 Diag_T {
   HBox { +-; Title: "Diagnostic Temps"; -+ };
-  { "Las Mnt T:" (LH__T,7) V;
-    "Det Mnt T:" (Det_T,7) V;
-    SGs1T:       (SGs1T,7) V;
-    SGs2T:       (SGs2T,7) V;
-    PC__T:       (PC__T,7) V;
-    PS__T:       (PS__T,7) V;
+  { "Las Mnt T:" (LH__T,6) C;
+    "Det Mnt T:" (Det_T,6) C;
+    SGs1T:       (SGs1T,6) C;
+    SGs2T:       (SGs2T,6) C;
+    PC__T:       (PC__T,6) C;
+    PS__T:       (PS__T,6) C;
   };
 }
 Skin_Rvr {
   +-+;
   ""   >Skin      >Rover;
-  "1:" (Skn1T,7)  (Rov1T,7) V;
-  "2:" (Skn2T,7)  (Rov2T,7) V;
-  "3:" (Skn3T,7)  (Rov3T,7) V;
-  "4:" (Skn4T,7)  (Rov4T,7) V;
-  "5:" (Skn5T,7)  (Rov5T,7) V;
+  "1:" (Skn1T,6)  (Rov1T,6) C;
+  "2:" (Skn2T,6)  (Rov2T,6) C;
+  "3:" (Skn3T,6)  (Rov3T,6) C;
+  "4:" (Skn4T,6)  (Rov4T,6) C;
+  "5:" (Skn5T,6)  (Rov5T,6) C;
 }
 
 Pump {
   HBox { +-; Title: "Scroll Pump"; -+ };
   {Status: (Scroll_Pump_DS,3) (Scroll_Pump_S,3) };
   PumpI: (Cmd0_I,7) V;
-  PumpT: (PumpT,7) V;
-  PMotT: (PMotT,7) V;
+  PumpT: (PumpT,6) C;
+  PMotT: (PMotT,6) C;
 }
 
 PTRH {
@@ -49,11 +49,11 @@ PTRH {
 
 Inlet_T {
   HBox { +-; Title: "Inlet Temps"; -+ };
-  Inlet:    (Inl_T,7) V;
-  Elbow:    (Elb_T,7) V;
-  Winglet:  (WingT,7) V;
-  "Duct Skin:" (PDSkT,7) V;
-  Duct:     (PD__T,7) V;
+  Inlet:    (Inl_T,6) C;
+  Elbow:    (Elb_T,6) C;
+  Winglet:  (WingT,6) C;
+  "Duct Skin:" (PDSkT,6) C;
+  Duct:     (PD__T,6) C;
 }
 
 Inlet_P {
