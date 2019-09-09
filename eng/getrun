@@ -89,11 +89,11 @@ for run in $*; do
   esac
 done
 
-[ -f runs.dat ] && matlab
+[ -f runs.dat ] && [ "$Matlab" = "yes" ] && matlab
 for run in $*; do
   case $run in
     -f) :;;
-    [Hh][Hh][Hh]) :;;
+    [Ss][Ss][Ss]) :;;
     gse=*) :;;
     nocsv) :;;
     decimate) :;;
