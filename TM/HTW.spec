@@ -4,6 +4,7 @@ tmcbase = qcli.tmc
 tmcbase = ssp.tmc
 tmcbase = /usr/local/share/huarp/ptrhm.cc
 tmcbase = me.tmc
+tmcbase = T30K75KU.tmc
 # tmcbase = waves.tmc
 
 colbase = HTWcol.tmc
