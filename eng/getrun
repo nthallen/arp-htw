@@ -93,7 +93,7 @@ done
 for run in $*; do
   case $run in
     -f) :;;
-    [Ss][Ss][Ss]) :;;
+    [Ss][Ss][Pp]) :;;
     gse=*) :;;
     nocsv) :;;
     decimate) :;;
