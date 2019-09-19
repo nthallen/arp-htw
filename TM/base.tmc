@@ -91,8 +91,8 @@ TM 1 Hz AI_X1 TE1CT; Address TE1CT 0xCC4; /* AI02_6, J1CB.45, J59CB-22 Thermal E
 TM 1 Hz AI_X1 GasHP; Address GasHP 0xCE4; /* AI02_7, J1CB.46, J20CB-5 Gas  High Pressure (Main Line) */
 TM 1 Hz AI_X1 GasLP; Address GasLP 0xC06; /* AI03_0, J1CB.49, J20CB-7 Gas Low Pressure (Main Line) */
 TM 1 Hz AI_X1 BubLP; Address BubLP 0xC26; /* AI03_1, J1CB.50, J20CB-9 Bubbler Low Pressure */
-TM 1 Hz AI_X1 GasFl; Address GasFl 0xC46; /* AI03_2, J1CB.53, J20CB-11 Gas Flow (Main Line) */
-TM 1 Hz AI_X1 BubFl; Address BubFl 0xC66; /* AI03_3, J1CB.54, J20CB-13 Bubbler Flow */
+TM 1 Hz AI_XP768 GasFl; Address GasFl 0xC46; /* AI03_2, J1CB.53, J20CB-11 Gas Flow (Main Line) */
+TM 1 Hz AI_XP768 BubFl; Address BubFl 0xC66; /* AI03_3, J1CB.54, J20CB-13 Bubbler Flow */
 TM 1 Hz AI_X1 Bub_P; Address Bub_P 0xC86; /* AI03_4, J1CB.57, J20CB-15 Bubbler High Pressure (1000 Torr) */
 TM 1 Hz AI_T30K Bub_T; Address Bub_T 0xCA6; /* AI03_5, J1CB.58, J20CB-17 Bubbler Temp */
 TM 1 Hz AI_T30K GD_1T; Address GD_1T 0xCC6; /* AI03_6, J1CB.61, J20CB-20 Gas Deck Temp 1 */

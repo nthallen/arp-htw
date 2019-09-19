@@ -73,8 +73,8 @@ Diagram {
 Flows {
   HBox { +-; Title: "Flows"; -+ };
   ""      SetPt     Read;
-  Main: (GsFl1St,6) (GasFl,7) V;
-  Bub:  (BGsFlSt,6) (BubFl,7) V;
+  Main: (GsFl1St,6) (GasFl,6) V;
+  Bub:  (BGsFlSt,6) (BubFl,6) V;
 }
 
 GDT {

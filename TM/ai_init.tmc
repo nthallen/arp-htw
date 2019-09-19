@@ -31,3 +31,5 @@ TM INITFUNC sbwr(L1Flw.address, AI_CFG_XP768);
 TM INITFUNC sbwr(L2Flw.address, AI_CFG_XP768);
 TM INITFUNC sbwr(L3Flw.address, AI_CFG_XP768);
 TM INITFUNC sbwr(L4Flw.address, AI_CFG_XP768);
+TM INITFUNC sbwr(GasFl.address, AI_CFG_XP768);
+TM INITFUNC sbwr(BubFl.address, AI_CFG_XP768);
