@@ -1,0 +1,33 @@
+LTE {
+  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7) C;
+}
+
+LTE_v {
+  HBox { +-; Title: LTE; -+ };
+  Status: (LTE_DevStatus,7);
+  Stale:  (LTE_Stale,3);
+  Sink_T: (LTE_Sink_T,7) C;
+  Set_T:  (LTE_Set_T,7) C;
+  T:      (LTE_T,7) C;
+}
+
+Cell {
+  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
+}
+
+Cell_v {
+  HBox { +-; Title: Cell; -+ };
+  Status: (Cell_DevStatus,7);
+  Stale:  (Cell_Stale,3);
+  Sink_T: (Cell_Sink_T,7) C;
+  Set_T:  (Cell_Set_T,7) C;
+  T:      (Cell_T,7) C;
+}
+
+ME {
+  HBox { +-; Title: ME; -+ };
+  "" >Status< >Sink< >Set< >T<;
+  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7) C;
+  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
+  { HGlue 0+1 Stale: (ME_Stale,3) }
+}

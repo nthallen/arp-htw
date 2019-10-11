@@ -1,0 +1,49 @@
+%{
+  /* Meerstetter driver interface */
+  #define ME_MAX_DRIVES 2
+  #include "meerstetter.h"
+  const char *ME_DevStatus_text(unsigned char stat) {
+    switch (stat) {
+      case 0:  return "Init   ";
+      case 1:  return "Ready  ";
+      case 2:  return "Run    ";
+      case 3:  return "Error  ";
+      case 4:  return "BootLdr";
+      case 5:  return "Reset  ";
+      default: return "*******";
+    }
+  }
+  #define ME_drive(x,y) ME.drive[x].y
+%}
+TM typedef unsigned char ME_DevStatus_t { text "%7u" ME_DevStatus_text(); }
+TM typedef unsigned char ME_Stale_t { text "%3u"; }
+TM typedef float ME_Temp_t { text "%7.2f"; }
+
+TM 1 Hz ME_Stale_t ME_Stale;
+TM 1 Hz ME_DevStatus_t LTE_DevStatus;
+TM 1 Hz ME_Temp_t LTE_Set_T;
+TM 1 Hz ME_Temp_t LTE_T;
+TM 1 Hz ME_Temp_t LTE_Sink_T;
+TM 1 Hz ME_Stale_t LTE_Stale;
+TM 1 Hz ME_DevStatus_t Cell_DevStatus;
+TM 1 Hz ME_Temp_t Cell_Set_T;
+TM 1 Hz ME_Temp_t Cell_T;
+TM 1 Hz ME_Temp_t Cell_Sink_T;
+TM 1 Hz ME_Stale_t Cell_Stale;
+TM "Receive" ME 1;
+
+Group ME (ME_Stale, LTE_DevStatus, LTE_T, LTE_Sink_T, LTE_Set_T,
+    Cell_DevStatus, Cell_T, Cell_Sink_T, Cell_Set_T) {
+  ME_Stale = ME_obj->stale(255);
+  LTE_DevStatus = ME_drive(0,DeviceStatus);
+  LTE_T = ME_drive(0,ObjectTemp);
+  LTE_Sink_T = ME_drive(0,SinkTemp);
+  LTE_Set_T = ME_drive(0,TargetObjectTemp);
+  LTE_Stale = ME_drive(0,Stale);
+  Cell_DevStatus = ME_drive(1,DeviceStatus);
+  Cell_T = ME_drive(1,ObjectTemp);
+  Cell_Sink_T = ME_drive(1,SinkTemp);
+  Cell_Set_T = ME_drive(1,TargetObjectTemp);
+  Cell_Stale = ME_drive(1,Stale);
+  ME_obj->synch();
+}

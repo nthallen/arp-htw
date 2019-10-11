@@ -1,0 +1,12 @@
+  1 ME_Stale ME Stale
+  1 LTE_DevStatus ME LTE_Status
+  1 LTE_Stale ME Stale
+  1 LTE_T ME LTE_Temp
+  1 LTE_Set_T ME LTE_Temp
+  1 LTE_Sink_T ME LTE_Temp
+  1 Cell_DevStatus ME Cell_Status
+  1 Cell_Stale ME Stale
+  1 Cell_T ME Cell_Temp
+  1 Cell_Set_T ME Cell_Temp
+  1 Cell_Sink_T ME Cell_Temp
+  1 ME_Stale ME Stale
