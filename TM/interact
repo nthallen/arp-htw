@@ -20,5 +20,5 @@
   Launch - idx64 `cat $TMBINDIR/idx.idx64`
   Launch - sspdrv -b2 -hSSP -N `mlf_find SSP`
   Launch - qclidacsd -h QCLI -d 0
-  Launch - meerstetter -p /dev/ser3 -e
+  Launch - meerstetter_V1.0 -p /dev/ser3 -e
   Launch - HTWalgo -v
