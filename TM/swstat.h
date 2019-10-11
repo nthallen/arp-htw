@@ -21,6 +21,9 @@ typedef struct {
 #define SWS_LASER_STOP 11
 #define SWS_LASER_WAVE 12
 
+#define SWS_CALIBRATE_START 20
+#define SWS_CALIBRATE_STOP 21
+
 #define SWS_PV_CLOSE 30
 #define SWS_PV_STEPS 31
 #define SWS_PV_PI 32
