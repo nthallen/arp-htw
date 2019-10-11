@@ -82,7 +82,7 @@ SW {
     }; |+; {
       [SSPT];
       [Laser];
-      [Meerstetter];
+      # [Meerstetter];
       VGlue 0+1;
       +-;
       >[SW]
