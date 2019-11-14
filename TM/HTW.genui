@@ -130,20 +130,20 @@ ROWS 18
 1 CelCT  Cell TS
 1 CelTSt Cell TS
 
-1 QCLI_Stale QCLI Stale
-1 QCLI_Wave  QCLI Wave %.0lf
-# 1 QCLI_s
-1 QCLI_loc:QCLI_s:3 QCLI Status
-1 QCLI_lot:QCLI_s:4 QCLI Status
-1 QCLI_dot:QCLI_s:5 QCLI Status
-1 QCLI_waveerr:QCLI_s:8 QCLI Status
-1 QCLI_ready:QCLI_s:9 QCLI Status
-1 QCLI_cordte:QCLI_s:11 QCLI Status
-1 QCLI_laser:QCLI_s:12 QCLI Status
-1 QCLI_cmderr:QCLI_s:13 QCLI Status
-1 QCLI_cksum:QCLI_s:14 QCLI Status
-1 QCLI_busy:QCLI_s:15 QCLI Status
-1 QCLI_Reset_DS:DS84A:2 QCLI Status
+# 1 QCLI_Stale QCLI Stale
+# 1 QCLI_Wave  QCLI Wave %.0lf
+# # 1 QCLI_s
+# 1 QCLI_loc:QCLI_s:3 QCLI Status
+# 1 QCLI_lot:QCLI_s:4 QCLI Status
+# 1 QCLI_dot:QCLI_s:5 QCLI Status
+# 1 QCLI_waveerr:QCLI_s:8 QCLI Status
+# 1 QCLI_ready:QCLI_s:9 QCLI Status
+# 1 QCLI_cordte:QCLI_s:11 QCLI Status
+# 1 QCLI_laser:QCLI_s:12 QCLI Status
+# 1 QCLI_cmderr:QCLI_s:13 QCLI Status
+# 1 QCLI_cksum:QCLI_s:14 QCLI Status
+# 1 QCLI_busy:QCLI_s:15 QCLI Status
+# 1 QCLI_Reset_DS:DS84A:2 QCLI Status
 
 #1 SSP_Flags
 # 4 SSP_Num SSP Num

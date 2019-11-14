@@ -1,5 +1,5 @@
 # =============================================================================
-# WB57 flights, April 2011; Houston, TX, MACPEX mission.
+# ER-2 Flights, April 2019; Palmdale, CA, DCOTSS Mission
 # Flight HTW.tma.
 # =============================================================================
 
@@ -14,17 +14,9 @@
 # If either switch in On (1, raised), most algo processing is suspended.
 # If both switches are On (1, raised) Shutdown begins immediately.
 
-# { tma_hold( ( (IOSwS & 3) == 1) || ( (IOSwS & 3) == 2) ); }
-#{ depending on (Shutdown) {} 
-#   else {
-#      if ( (IOSwS & 3) == 3)
-#          Validate Shutdown;
-#   }
-#}
-
 %{
   #include "msg.h"
-  #include "swstat.h"
+  #include "SWData.h"
 %}
 
 # INITIALIZE
@@ -56,59 +48,6 @@ State Shutdown {
  +5   > Fail Light On
       > quit
 }
-
-
-# -----------------------------------------------------------------------------
-# Partition 2: Software Status
-# -----------------------------------------------------------------------------
-
-Partition
-
-#     _____________________________________  Above Clouds
-#        ^                |
-#   swp= | 2 = high       v 3 = low
-#     _____________________________________  Below Clouds
-#        ^                |
-#        | 1 = takeoff    v 4 = landing
-#     _____________________________________  Ground   
-#
-
-State SW_Stat_Wait NoLog {
-  { int reset_it;
-    reset_it = 1;
-    switch (SW_St) {
-      default:
-      case 0:   reset_it = 0; break;
-      case SWS_TAKEOFF: depending on (ON_GROUND) using_swp = 1; break;
-      case SWS_CLIMB: depending on (OFF_GROUND) using_swp = SW_St; break;
-      case SWS_DESCEND: depending on (IN_AIR) using_swp = SW_St; break; 
-      case SWS_LAND: depending on (OFF_GROUND) using_swp = SW_St; break;
-
-      case SWS_LASER_START: Validate Nano_Start; break;
-      case SWS_LASER_STOP: Validate Nano_Stop; break;
-      case SWS_LASER_WAVE: Validate Nano_Nano800; break;
-
-      case SWS_PV_CLOSE: Validate Pinch_Valve_Close; break;
-      case SWS_PV_PI: Validate Pinch_Valve_PI_Init; break;
-      case SWS_PV_SCAN: Validate Pinch_Valve_Scan; break;
-
-      case SWS_CALIBRATE_START: Validate Calibrate_Start; break;
-      case SWS_CALIBRATE_STOP: Validate Calibrate_Idle; break;
-
-      case SWS_TIMEWARP: break;
-      case SWS_READFILE: Validate ReadFile; break;
-      case SWS_SHUTDOWN: Validate Shutdown; break;
-    }
-    if (reset_it) Validate SW_Stat_Reset;
-  }
-}
-
-State SW_Stat_Reset NoLog {
-	> _SW Status Set 0
-	Hold until (SW_St == 0) or 10;
-	Validate SW_Stat_Wait;
-}
-
 
 # -----------------------------------------------------------------------------
 # Partition 3: Altitude
@@ -520,3 +459,4 @@ State Calibrate_Start {
 }
 
 State Calibrate_Idle {}
+

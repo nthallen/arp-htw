@@ -1,0 +1,40 @@
+SW_Variable: <unsigned char,DStat> SW_St SW Status
+  SWS_TAKEOFF 1 Altitude Takeoff:
+    depending on (ON_GROUND) using_swp = SW_St; break;
+  SWS_CLIMB   2 Altitude Climb:
+    depending on (OFF_GROUND) using_swp = SW_St; break;
+  SWS_DESCEND 3 Altitude Descend:
+    depending on (IN_AIR) using_swp = SW_St; break;
+  SWS_LAND    4 Altitude Land:
+    depending on (OFF_GROUND) using_swp = SW_St; break;
+
+  SWS_LASER_START 10 Laser Start:
+    Validate Nano_Start; break;
+  SWS_LASER_STOP  11 Laser Stop:
+    Validate Nano_Stop; break;
+  SWS_LASER_WAVE  12 Laser Select Waveform and Start:
+    Validate Nano_Nano800; break;
+
+  SWS_CALIBRATE_START 20 Calibrate Start:
+    Validate Calibrate_Start; break;
+  SWS_CALIBRATE_STOP  21 Calibrate Stop:
+    Validate Calibrate_Stop; break;
+
+  SWS_PV_CLOSE  30  Pinch Valve Close:
+    Validate Pinch_Valve_Close; break;
+  SWS_PV_PI     32  Pinch Valve PI:
+    Validate Pinch_Valve_PI_Init; break;
+  SWS_PV_SCAN   33  Pinch Valve Scan:
+    Validate Pinch_Valve_Scan; break;
+
+  SWS_READFILE  253 ReadFile: Validate ReadFile; break;
+  SWS_TIMEWARP  254 Time Warp: break;
+  SWS_SHUTDOWN  255 Shutdown: Validate Shutdown; break;
+
+SW_Variable: <unsigned short,PV_Gain_t> PV_SetP Set Cell Pressure Setpoint
+  : &gain { $0 = $1; }
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Gain Gi for Pinch Valve
+  : &gain { $0 = $1; }
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Gain Gp for Pinch Valve
+  : &gain { $0 = $1; }
+

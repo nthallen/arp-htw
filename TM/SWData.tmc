@@ -1,0 +1,6 @@
+TM "Receive" SWData 0;
+
+TM 1 Hz DStat SW_St; collect SW_St = SWData.SW_St;
+TM 1 Hz PV_Gain_t PV_SetP; collect PV_SetP = SWData.PV_SetP;
+TM 1 Hz PV_Gain_t PV_Gi; collect PV_Gi = SWData.PV_Gi;
+TM 1 Hz PV_Gain_t PV_Gp; collect PV_Gp = SWData.PV_Gp;

@@ -1,15 +1,10 @@
 tmcbase = base.tmc
 tmcbase = idx.tmc
-# tmcbase = qcli.tmc
-# tmcbase = ssp.tmc
 tmcbase = /usr/local/share/huarp/ptrhm.cc
 tmcbase = T30K75KU.tmc
-# tmcbase = waves.tmc
 
-colbase = HTWcol.tmc
 colbase = idxcol.tmc
 colbase = /usr/local/share/huarp/DACS_ID.tmc
-# colbase = sspcol.tmc
 colbase = ai_init.tmc
 colbase = ptrh_chk.tmc
 colbase = /usr/local/share/huarp/ptrhm_col.cc
@@ -20,15 +15,12 @@ cmdbase = /usr/local/share/huarp/idx64.cmd
 cmdbase = /usr/local/share/huarp/phrtg.cmd
 cmdbase = swstat.cmd
 cmdbase = idxdrv.cmd
-# cmdbase = qcli.cmd
-# cmdbase = ssp.cmd
-# cmdbase = waves.cmd
 cmdbase = ai.cmd
 cmdbase = ao.cmd
 cmdbase = dccc.cmd
 
 extbase = ptrh_conv.tmc
-
+swsbase = HTW.sws
 genuibase = HTW.genui
 
 Module TMbase
@@ -38,10 +30,7 @@ Module QCLI mode=noise
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
 SCRIPT = interact
-# DISTRIB = waves.out
-# OBJ = waves.cmd waves.out waves.tmc waves.m waves.log
 OBJ = address.h
-SRC = swstat.h
 IGNORE = Makefile
 
 TGTDIR = $(TGTNODE)/home/HTW
