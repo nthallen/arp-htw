@@ -65,11 +65,11 @@ TM typedef unsigned short DSWord { text "%5u"; Collect x = sbrwa(x.address); }
 TM 8 Hz UINT MFCtr, Synch;
 
 /* AI */
-TM 1 Hz AI_X1 TE2CT; Address TE2CT 0xC00; /* AI00_0, J1CB.1, J59CB-28 Thermal Enclosure Control Temp #2 */
+/* TM 1 Hz AI_X1 TE2CT; Address TE2CT 0xC00; */ /* AI00_0, J1CB.1, J59CB-28 Thermal Enclosure Control Temp #2 */
 TM 1 Hz AI_T30K LH__T; Address LH__T 0xC20; /* AI00_1, J1CB.2, J60CB-10 2.7 laser Housing (Mount) Temp */
-TM 1 Hz AI_X1 LPVCT; Address LPVCT 0xC40; /* AI00_2, J1CB.5, J59CB-3 Laser Pressure Vessel Control Temp */
+/* TM 1 Hz AI_X1 LPVCT; Address LPVCT 0xC40; */ /* AI00_2, J1CB.5, J59CB-3 Laser Pressure Vessel Control Temp */
 TM 1 Hz AI_T30K Det_T; Address Det_T 0xC60; /* AI00_3, J1CB.6, J25CB-8 Detector Temp (on Mount) */
-TM 1 Hz AI_X1 DPVCT; Address DPVCT 0xC80; /* AI00_4, J1CB.9, J59CB-15 Detector Pressure Vessel Control Temp */
+/* TM 1 Hz AI_X1 DPVCT; Address DPVCT 0xC80; */ /* AI00_4, J1CB.9, J59CB-15 Detector Pressure Vessel Control Temp */
 TM 1 Hz AI_T30K SGs1T; Address SGs1T 0xCA0; /* AI00_5, J1CB.10, J40CB-22 Sample Gas Temp 1 */
 TM 1 Hz AI_T30K SGs2T; Address SGs2T 0xCC0; /* AI00_6, J1CB.13, J40CB-24 Sample Gas Temp 2 */
 TM 1 Hz AI_T30K Cel1T; Address Cel1T 0xCE0; /* AI00_7, J1CB.14, J40CB-26 Cell Temp 1 */
@@ -81,13 +81,13 @@ TM 1 Hz AI_T30K Skn4T; Address Skn4T 0xC82; /* AI01_4, J1CB.25, J40CB-17 Skin Te
 TM 1 Hz AI_T30K Skn5T; Address Skn5T 0xCA2; /* AI01_5, J1CB.26, J40CB-20 Skin Temp 5 */
 TM 1 Hz AI_P100Torr CellP; Address CellP 0xCC2; /* AI01_6, J1CB.29, J40CB-30 Cell Pressure (100 Torr) */
 TM 1 Hz AI_P1000Torr Cel2P; Address Cel2P 0xCE2; /* AI01_7, J1CB.30, J40CB-32 Cell Pressure (1000 Torr) */
-TM 1 Hz AI_X1 CelCT; Address CelCT 0xC04; /* AI02_0, J1CB.33, J59CB-9 Cell Control Temp */
+/* TM 1 Hz AI_X1 CelCT; Address CelCT 0xC04; */ /* AI02_0, J1CB.33, J59CB-9 Cell Control Temp */
 TM 1 Hz AI_T30K Rov1T; Address Rov1T 0xC24; /* AI02_1, J1CB.34, J40CB-1 Roving Temp 1 */
 TM 1 Hz AI_T30K Rov2T; Address Rov2T 0xC44; /* AI02_2, J1CB.37, J40CB-3 Roving Temp 2 */
 TM 1 Hz AI_T30K Rov3T; Address Rov3T 0xC64; /* AI02_3, J1CB.38, J40CB-5 Roving Temp 3 */
 TM 1 Hz AI_T30K Rov4T; Address Rov4T 0xC84; /* AI02_4, J1CB.41, J40CB-7 Roving Temp 4 */
 TM 1 Hz AI_T30K Rov5T; Address Rov5T 0xCA4; /* AI02_5, J1CB.42, J40CB-9 Roving Temp 5 */
-TM 1 Hz AI_X1 TE1CT; Address TE1CT 0xCC4; /* AI02_6, J1CB.45, J59CB-22 Thermal Enclosure Control Temp #1 */
+/* TM 1 Hz AI_X1 TE1CT; Address TE1CT 0xCC4; */ /* AI02_6, J1CB.45, J59CB-22 Thermal Enclosure Control Temp #1 */
 TM 1 Hz AI_X1 GasHP; Address GasHP 0xCE4; /* AI02_7, J1CB.46, J20CB-5 Gas  High Pressure (Main Line) */
 TM 1 Hz AI_X1 GasLP; Address GasLP 0xC06; /* AI03_0, J1CB.49, J20CB-7 Gas Low Pressure (Main Line) */
 TM 1 Hz AI_X1 BubLP; Address BubLP 0xC26; /* AI03_1, J1CB.50, J20CB-9 Bubbler Low Pressure */
@@ -119,7 +119,7 @@ TM 1 Hz AI_T30K CBB1T; Address CBB1T 0xC4C; /* AI06_2, J1CB.101, J21CB-17 Calibr
 TM 1 Hz AI_X1 CBB1P; Address CBB1P 0xC6C; /* AI06_3, J1CB.102, J21CB-20 Calibration Bench Bubbler 1 Pressure */
 TM 1 Hz AI_T30K CBB2T; Address CBB2T 0xC8C; /* AI06_4, J1CB.105, J21CB-22 Calibration Bench Bubbler 2 Temp */
 TM 1 Hz AI_X1 CBB2P; Address CBB2P 0xCAC; /* AI06_5, J1CB.106, J21CB-24 Calibration Bench Bubbler 2 Pressure */
-TM 1 Hz AI_X1 LTE2R7T; Address LTE2R7T 0xCCC; /* AI06_6, J1CB.109, J345CB-3 Laser TEC Temp Readout */
+/* TM 1 Hz AI_X1 LTE2R7T; Address LTE2R7T 0xCCC; */ /* AI06_6, J1CB.109, J345CB-3 Laser TEC Temp Readout */
 TM 1 Hz AI_X1 Las_I; Address Las_I 0xCEC; /* AI06_7, J1CB.110, J345CB-4 Laser Current */
 TM 1 Hz AI_T30K PampT; Address PampT 0xC0E; /* AI07_0, J1CB.113, J345CB-20 Preamp Temp */
 TM 1 Hz AI_T30K Eta_T; Address Eta_T 0xC2E; /* AI07_1, J1CB.114, J345CB-10 Etalon Temp(qcli bd out placehold) */
@@ -145,14 +145,14 @@ TM 1 Hz AI_T30K PS__T; Address PS__T 0xC7E; /* AI15_3_HI, J5.67 PS__T 5V Vicor H
 TM 1 Hz AI_X1 Cmd0_I; Address Cmd0_I 0xD10; /* AI15_0_0 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd1_I; Address Cmd1_I 0xD12; /* AI15_0_1 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd2_I; Address Cmd2_I 0xD14; /* AI15_0_2 Power Board Command Current */
-TM 1 Hz AI_X1 Cmd3_I; Address Cmd3_I 0xD16; /* AI15_0_3 Power Board Command Current */
-TM 1 Hz AI_X1 Cmd4_I; Address Cmd4_I 0xD18; /* AI15_0_4 Power Board Command Current */
-TM 1 Hz AI_X1 Cmd5_I; Address Cmd5_I 0xD1A; /* AI15_0_5 Power Board Command Current */
-TM 1 Hz AI_X1 Cmd6_I; Address Cmd6_I 0xD1C; /* AI15_0_6 Power Board Command Current */
+/* TM 1 Hz AI_X1 Cmd3_I; Address Cmd3_I 0xD16; */ /* AI15_0_3 Power Board Command Current */
+/* TM 1 Hz AI_X1 Cmd4_I; Address Cmd4_I 0xD18; */ /* AI15_0_4 Power Board Command Current */
+/* TM 1 Hz AI_X1 Cmd5_I; Address Cmd5_I 0xD1A; */ /* AI15_0_5 Power Board Command Current */
+/* TM 1 Hz AI_X1 Cmd6_I; Address Cmd6_I 0xD1C; */ /* AI15_0_6 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd7_I; Address Cmd7_I 0xD1E; /* AI15_0_7 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd8_I; Address Cmd8_I 0xD30; /* AI15_2_0 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd9_I; Address Cmd9_I 0xD32; /* AI15_2_1 Power Board Command Current */
-TM 1 Hz AI_X1 Cmd10_I; Address Cmd10_I 0xD34; /* AI15_2_2 Power Board Command Current */
+/* TM 1 Hz AI_X1 Cmd10_I; Address Cmd10_I 0xD34; */ /* AI15_2_2 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd11_I; Address Cmd11_I 0xD36; /* AI15_2_3 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; /* AI15_2_4 Power Board Command Current */
 TM 1 Hz AI_X1 Cmd13_I; Address Cmd13_I 0xD3A; /* AI15_2_5 Power Board Command Current */
@@ -166,17 +166,17 @@ TM typedef unsigned short AIStat_i {
 TM 1 Hz AIStat_i AIStat; Address AIStat 0xE00;
 
 /* AO */
-TM 1 Hz AO LTETSt; Address LTETSt 0x400; /* AO0, J3.1, J60CB-8 */
+/* TM 1 Hz AO LTETSt; Address LTETSt 0x400; */ /* AO0, J3.1, J60CB-8 */
 TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; /* AO1, J3.2, J20CB-26 */
 TM 1 Hz AO BGsFlSt; Address BGsFlSt 0x404; /* AO2, J3.5, J20CB-28 */
-TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; /* AO3, J3.6, J59CB-5 */
-TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; /* AO4, J3.9, J59CB-17 */
-TM 1 Hz AO CelTSt; Address CelTSt 0x40A; /* AO5, J3.10, J59CB-11 */
-TM 1 Hz AO TE1TSt; Address TE1TSt 0x40C; /* AO6, J3.13, J59CB-24 */
+/* TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; */ /* AO3, J3.6, J59CB-5 */
+/* TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; */ /* AO4, J3.9, J59CB-17 */
+/* TM 1 Hz AO CelTSt; Address CelTSt 0x40A; */ /* AO5, J3.10, J59CB-11 */
+/* TM 1 Hz AO TE1TSt; Address TE1TSt 0x40C; */ /* AO6, J3.13, J59CB-24 */
 TM 1 Hz AO Cal1FSt; Address Cal1FSt 0x40E; /* AO7, J3.14, J22CB-9 */
 TM 1 Hz AO Cal2FSt; Address Cal2FSt 0x410; /* AO8, J3.17, J22CB-11 */
 TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; /* AO9, J3.18, J22CB-14 */
-TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; /* AO10, J3.21, J59CB-30 */
+/* TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; */ /* AO10, J3.21, J59CB-30 */
 /* TM 0 Hz AO SpA01St; Address SpA01St 0x416; */ /* AO11, J3.22, J130CB-28 */
 /* TM 0 Hz AO SpA02St; Address SpA02St 0x418; */ /* AO12, J3.25, J130CB-33 */
 /* TM 0 Hz AO SpAO3St; Address SpAO3St 0x41A; */ /* AO13, J3.26,  */
@@ -200,7 +200,7 @@ TM typedef unsigned short PV_Gain_t { text "%5.1lf"; }
   ptrhm DACS_ptrh =
     ptrhm("DACS",0x200,0xB06E,0x9A5D,0x6D38,0x64EA,0x81FB,0x6D1D);
   ptrhm DPV_ptrh =
-    ptrhm("DPV", 0x220,0xB927,0xA63B,0x76BB,0x6E67,0x756A,0x6C80);
+    ptrhm("DPV", 0x220,0xBE59,0xB8C8,0x77A2,0x7557,0x78A0,0x6E2F);
   ptrhm LPV_ptrh =
     ptrhm("LPV", 0x240,0xB85E,0x9B3F,0x76F1,0x688A,0x7A81,0x719D);
 %}
@@ -270,8 +270,13 @@ Group LPV ( LPV_T1, LPV_RH, LPV_T2a,
 TM typedef unsigned short V28V_t { text "%5u"; collect x = sbrwa(x.address); }
 TM typedef V28V_t V28I_t;
 
-TM 1 Hz V28V_t V28V1; Address V28V1 0x03A4;
-TM 1 Hz V28I_t V28I1; Address V28I1 0x03A2;
-TM 1 Hz V28V_t V28V2; Address V28V2 0x03A8;
-TM 1 Hz V28I_t V28I2; Address V28I2 0x03A6;
-TM 1 Hz DStat VM__S; Address VM__S 0x03A0;
+TM 1 Hz V28V_t V28V1; Address V28V1 0x364;
+TM 1 Hz V28I_t V28I1; Address V28I1 0x362;
+TM 1 Hz V28V_t V28V2; Address V28V2 0x368;
+TM 1 Hz V28I_t V28I2; Address V28I2 0x366;
+TM 1 Hz DStat VM1_S; Address VM1_S 0x360;
+TM 1 Hz V28V_t V28V3; Address V28V3 0x374;
+TM 1 Hz V28I_t V28I3; Address V28I3 0x372;
+TM 1 Hz V28V_t V28V4; Address V28V4 0x378;
+TM 1 Hz V28I_t V28I4; Address V28I4 0x376;
+TM 1 Hz DStat VM2_S; Address VM2_S 0x370;

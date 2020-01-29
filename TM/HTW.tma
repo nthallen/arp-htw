@@ -187,7 +187,7 @@ State Nano_Start {
       nl_error( 2, "SSP Not Ready in Nano_Start" );
       Validate Nano_SSP_Recover;
     }
-    Hold until ( Nano_TEMP_OK(convert(LTE2R7T)) );
+#   Hold until ( Nano_TEMP_OK(convert(LTE2R7T)) );
     Hold until ( (QCLI_s & 0x3938) == 0 ) or 5
     else Validate Nano_QCLI_Recover;
  +1 > SSP Start
@@ -212,12 +212,12 @@ State Nano_Watch NoLog {
       }
     }
          # convert(HNano_I) < LOW_CURRENT ||
-    hold until ( SSP_Status != SSP_STATUS_TRIG ||
-         !Nano_TEMP_OK(convert(LTE2R7T)) );
+    hold until ( SSP_Status != SSP_STATUS_TRIG );
+#        || !Nano_TEMP_OK(convert(LTE2R7T)) );
     # hold until ( Nano_TEMP_OK(convert(LTE2R7T)) && 
     #     convert(HNano_I) >= LOW_CURRENT) or 1
-    hold until ( Nano_TEMP_OK(convert(LTE2R7T)) ) or 2
-    else Validate Nano_Out_Spec;
+    # hold until ( Nano_TEMP_OK(convert(LTE2R7T)) ) or 2
+    # else Validate Nano_Out_Spec;
     hold until ( SSP_Status == SSP_STATUS_TRIG ) or 5
     else Validate Nano_SSP_Recover;
     Validate Nano_Watch;

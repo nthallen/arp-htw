@@ -1,3 +1,6 @@
+Input "ME.tbl";
+Input "TMbase.tbl";
+
 Cont_T {
   HBox { +-; Title: "Controlled Temps"; -+ };
   ""   "" ""  >I  >SetPt      >Read;
@@ -13,20 +16,22 @@ Diag_T {
   HBox { +-; Title: "Diagnostic Temps"; -+ };
   { "Las Mnt T:" (LH__T,6) C;
     "Det Mnt T:" (Det_T,6) C;
-    SGs1T:       (SGs1T,6) C;
-    SGs2T:       (SGs2T,6) C;
+#   SGs1T:       (SGs1T,6) C;
+#   SGs2T:       (SGs2T,6) C;
     PC__T:       (PC__T,6) C;
     PS__T:       (PS__T,6) C;
   };
 }
 Skin_Rvr {
-  +-+;
+  HBox { +-; Title: "Rover Temps"; -+ };
   ""   >Skin      >Rover;
   "1:" (Skn1T,6)  (Rov1T,6) C;
   "2:" (Skn2T,6)  (Rov2T,6) C;
   "3:" (Skn3T,6)  (Rov3T,6) C;
   "4:" (Skn4T,6)  (Rov4T,6) C;
   "5:" (Skn5T,6)  (Rov5T,6) C;
+  "G:" (SGs1T,6)  (SGs2T,6) C;
+  "C:" (Cel1T,6)  (Cel2T,6) C;
 }
 
 Pump {
@@ -66,11 +71,10 @@ Inlet_P {
 
 VM {
   HBox { +-; Title: "Power Monitors"; -+ };
-  V28V1: (V28V1,5) raw;
-  V28V2: (V28V2,5) raw;
-  V28I1: (V28I1,5) raw;
-  V28I2: (V28I2,5) raw;
-  VM__S: (VM__S,3);
+  "1:"  (V28V1,5) V (V28I1,5) A (VM1_S,3);
+  "2:"  (V28V2,5) V (V28I2,5) A;
+  "3:"  (V28V3,5) V (V28I3,5) A (VM2_S,3);
+  "4:"  (V28V4,5) V (V28I4,5) A;
 }
 
 
@@ -79,8 +83,8 @@ SW {
   AI: (AIStat,12);
   IOSwS: (IOSwS,2);
   SW_St: (SW_St,3);
-  Time: (flttime,9);
-  MFCtr: (MFCtr,5);
+# Time: (flttime,9);
+# MFCtr: (MFCtr,5);
 }
 
 { HBox { |+;
@@ -93,14 +97,14 @@ SW {
 	}; |; {
 	  [Diag_T];
 	  VGlue 0+1;
-	  [Pump]
+	  [Skin_Rvr]
 	}
       };
     }; |+; {
-      [Cont_T];
-      [Skin_Rvr];
-      VGlue 0+1;
+      [ME];
       HBox { [VM]; |; [SW] };
+      VGlue 0+1;
+      HBox { [Pump]; |; [TMbaseB] };
     }; |+;
   };
   -;

@@ -51,8 +51,8 @@ ROWS 18
 1 11:DPV_PTRHS:11 DPV_PTRH Status %.0lf
 
 1 Det_T  DPV T
-1 DPVCT  DPV CT
-1 DPVTSt DPV CT
+# 1 DPVCT  DPV CT
+# 1 DPVTSt DPV CT
 
 1 LPV_P   LPV_PTRH P
 1 LPV_T1C LPV_PTRH T 1
@@ -72,9 +72,9 @@ ROWS 18
 1 11:LPV_PTRHS:11 LPV_PTRH Status %.0lf
 
 1 LH__T  LPV T
-1 LPVCT  LPV CT
-1 LPVTSt LPV CT
-1 LTE2R7T LPV LaserT
+# 1 LPVCT  LPV CT
+# 1 LPVTSt LPV CT
+# 1 LTE2R7T LPV LaserT
 1 Las_I   LPV LaserI
 
 1 PDSkT   PD    T
@@ -127,8 +127,8 @@ ROWS 18
 1 Cel2T  Cell T
 1 SGs1T  Cell T
 1 SGs2T  Cell T
-1 CelCT  Cell TS
-1 CelTSt Cell TS
+# 1 CelCT  Cell TS
+# 1 CelTSt Cell TS
 
 # 1 QCLI_Stale QCLI Stale
 # 1 QCLI_Wave  QCLI Wave %.0lf
@@ -163,33 +163,33 @@ ROWS 18
 1 Scroll_Pump_DS:DS822:0 Pump Status
 1 Scroll_Pump_S:DS844:0  Pump Status
 
-1 TE1CT  TEC TE1
-1 TE1TSt TEC TE1
-1 TE2CT  TEC TE2
-1 TE2TSt TEC TE2
+# 1 TE1CT  TEC TE1
+# 1 TE1TSt TEC TE1
+# 1 TE2CT  TEC TE2
+# 1 TE2TSt TEC TE2
 
-1 TE_HC1_DS:DS822:3 Commands HC
-1 TE_HC1_S:DS844:3 Commands HC
-1 LPV_HC_DS:DS822:4 Commands HC
-1 LPV_HC_S:DS844:4 Commands HC
-1 Cell_HC_DS:DS822:5 Commands HC
-1 Cell_HC_S:DS844:5 Commands HC
-1 DPV_HC_DS:DS822:6 Commands HC
-1 DPV_HC_S:DS844:6 Commands HC
-1 TE_HC2_DS:DS822:10 Commands HC
-1 TE_HC2_S:DS844:10 Commands HC
+# 1 TE_HC1_DS:DS822:3 Commands HC
+# 1 TE_HC1_S:DS844:3 Commands HC
+# 1 LPV_HC_DS:DS822:4 Commands HC
+# 1 LPV_HC_S:DS844:4 Commands HC
+# 1 Cell_HC_DS:DS822:5 Commands HC
+# 1 Cell_HC_S:DS844:5 Commands HC
+# 1 DPV_HC_DS:DS822:6 Commands HC
+# 1 DPV_HC_S:DS844:6 Commands HC
+# 1 TE_HC2_DS:DS822:10 Commands HC
+# 1 TE_HC2_S:DS844:10 Commands HC
 
 1 Cmd0_I  Commands I 0
 1 Cmd1_I  Commands I 1
 1 Cmd2_I  Commands I 2
-1 Cmd3_I  Commands I 3
-1 Cmd4_I  Commands I 4
-1 Cmd5_I  Commands I 5
-1 Cmd6_I  Commands I 6
+# 1 Cmd3_I  Commands I 3
+# 1 Cmd4_I  Commands I 4
+# 1 Cmd5_I  Commands I 5
+# 1 Cmd6_I  Commands I 6
 1 Cmd7_I  Commands I 7
 1 Cmd8_I  Commands I 8
 1 Cmd9_I  Commands I 9
-1 Cmd10_I Commands I 10
+# 1 Cmd10_I Commands I 10
 1 Cmd11_I Commands I 11
 1 Cmd12_I Commands I 12
 1 Cmd13_I Commands I 13
@@ -210,8 +210,14 @@ ROWS 18
 1 IOSwS   PDACS IOSwS %.0lf
 1 V28V1   PDACS V
 1 V28V2   PDACS V
+1 V28V3   PDACS V
+1 V28V4   PDACS V
 1 V28I1   PDACS I
 1 V28I2   PDACS I
+1 V28I3   PDACS I
+1 V28I4   PDACS I
+1 VM1_S   PDACS PMStat
+1 VM2_S   PDACS PMStat
 1 0:AIStat:0 PDACS AIStat
 1 1:AIStat:1 PDACS AIStat
 1 2:AIStat:2 PDACS AIStat

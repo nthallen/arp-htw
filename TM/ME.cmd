@@ -17,5 +17,10 @@
 
 &ME <int>
   : Laser TEC    { $0 = 1; }
-  : Cell Temp    { $0 = 2; }
+  : LPV TEC    { $0 = 2; }
+  : Plate TEC    { $0 = 3; }
+  : Cover TEC    { $0 = 4; }
+  : Cell Temp    { $0 = 5; }
+  : DPV TEC    { $0 = 6; }
+  : Bubbler TEC    { $0 = 7; }
 ;

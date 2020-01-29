@@ -2,5 +2,11 @@
 Name ME
 Rate 1 Hz
 Port /dev/ser3
-Data LTE  1 "Laser TEC"
-Data Cell 2 "Cell Temp"
+Data LTE   1 "Laser TEC"
+Data LPV   2 "LPV TEC"
+Data Plate 3 "Plate TEC"
+Data Cover 4 "Cover TEC"
+Data Cell  5 "Cell Temp"
+Data DPV   6 "DPV TEC"
+Data BubC  7 "Bubbler TEC"
+

@@ -62,7 +62,7 @@ QCLIS {
 
 Laser {
   HBox { +-; Title: Laser; -+ };
-  LTE2R7T: (LTE2R7T,7) V;
+  LTE2R7T: "-----" V;
   Las_I:   (Las_I,7) V;
 }
 

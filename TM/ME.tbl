@@ -11,6 +11,45 @@ LTE_v {
   T:      (LTE_T,7) C;
 }
 
+LPV {
+  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7) C;
+}
+
+LPV_v {
+  HBox { +-; Title: LPV; -+ };
+  Status: (LPV_DevStatus,7);
+  Stale:  (LPV_Stale,3);
+  Sink_T: (LPV_Sink_T,7) C;
+  Set_T:  (LPV_Set_T,7) C;
+  T:      (LPV_T,7) C;
+}
+
+Plate {
+  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7) C;
+}
+
+Plate_v {
+  HBox { +-; Title: Plate; -+ };
+  Status: (Plate_DevStatus,7);
+  Stale:  (Plate_Stale,3);
+  Sink_T: (Plate_Sink_T,7) C;
+  Set_T:  (Plate_Set_T,7) C;
+  T:      (Plate_T,7) C;
+}
+
+Cover {
+  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7) C;
+}
+
+Cover_v {
+  HBox { +-; Title: Cover; -+ };
+  Status: (Cover_DevStatus,7);
+  Stale:  (Cover_Stale,3);
+  Sink_T: (Cover_Sink_T,7) C;
+  Set_T:  (Cover_Set_T,7) C;
+  T:      (Cover_T,7) C;
+}
+
 Cell {
   Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
 }
@@ -24,10 +63,40 @@ Cell_v {
   T:      (Cell_T,7) C;
 }
 
+DPV {
+  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7) C;
+}
+
+DPV_v {
+  HBox { +-; Title: DPV; -+ };
+  Status: (DPV_DevStatus,7);
+  Stale:  (DPV_Stale,3);
+  Sink_T: (DPV_Sink_T,7) C;
+  Set_T:  (DPV_Set_T,7) C;
+  T:      (DPV_T,7) C;
+}
+
+BubC {
+  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7) C;
+}
+
+BubC_v {
+  HBox { +-; Title: BubC; -+ };
+  Status: (BubC_DevStatus,7);
+  Stale:  (BubC_Stale,3);
+  Sink_T: (BubC_Sink_T,7) C;
+  Set_T:  (BubC_Set_T,7) C;
+  T:      (BubC_T,7) C;
+}
+
 ME {
   HBox { +-; Title: ME; -+ };
-  "" >Status< >Sink< >Set< >T<;
+  (ME_Stale,3) >Status< >Stl< >Sink< >Set< >T<;
   LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7) C;
+  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7) C;
+  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7) C;
+  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7) C;
   Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
-  { HGlue 0+1 Stale: (ME_Stale,3) }
+  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7) C;
+  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7) C;
 }
