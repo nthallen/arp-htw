@@ -31,10 +31,10 @@ TM typedef AI_X1 AI_XP768 { text "%7.4lf"; }
  * 0-5V = 0-1000Torr
  * Assume reading at unity gain
  */
-TM typedef AI_X1 AI_P1000Torr { text "%5.2lf"; convert TORR; }
+TM typedef AI_X1 AI_P1000Torr { text "%5.1lf"; convert TORR; }
   Calibration ( AI_P1000Torr, TORR ) {
     0, 0,
-    40000, 1000
+    32000, 1000
   }
 /* fix gain and conversion
    0-10V = 0-100Torr
@@ -43,7 +43,7 @@ TM typedef AI_X1 AI_P1000Torr { text "%5.2lf"; convert TORR; }
 TM typedef AI_X1 AI_P100Torr { text "%5.1lf"; convert TORR; }
   Calibration ( AI_P100Torr, TORR ) {
     0, 0,
-    26273.5, 100
+    32000, 100
   }
 
 TM typedef AI_X1 AI_SDPDP { text "%5.2lf"; convert VOLTS; }
