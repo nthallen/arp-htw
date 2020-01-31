@@ -1,0 +1,15 @@
+%{
+  #include <stdint.h>
+  #include "subbus.h"
+
+  typedef struct __attribute__((__packed__)) {
+    uint16_t cnt;
+    int32_t raw;
+  } TS_rec_t;
+
+  TS_rec_t TS_buf[6];
+  subbus_mread_req *TS_req;
+%}
+/* TM INITFUNC TS_req = pack_mread_request(18, "480:2:4A2"); */
+/* We can move TS0 to the second string by changing the address list: */
+TM INITFUNC TS_req = pack_mread_request(18, "480:2:4A4");

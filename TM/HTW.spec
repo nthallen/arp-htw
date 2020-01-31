@@ -2,12 +2,14 @@ tmcbase = base.tmc
 tmcbase = idx.tmc
 tmcbase = /usr/local/share/huarp/ptrhm.cc
 tmcbase = T30K75KU.tmc
+tmcbase = TS.tmc
 
 colbase = idxcol.tmc
 colbase = /usr/local/share/huarp/DACS_ID.tmc
 colbase = ai_init.tmc
 colbase = ptrh_chk.tmc
 colbase = /usr/local/share/huarp/ptrhm_col.cc
+colbase = TS_col.tmc
 
 cmdbase = /usr/local/share/huarp/root.cmd
 cmdbase = /usr/local/share/huarp/getcon.cmd
@@ -20,8 +22,12 @@ cmdbase = ao.cmd
 cmdbase = dccc.cmd
 
 extbase = ptrh_conv.tmc
+extbase = TS_conv.tmc
+
 swsbase = HTW.sws
+
 genuibase = HTW.genui
+genuibase = TS.genui
 
 Module TMbase
 Module Meerstetter src=Meerstetter.txt
@@ -42,6 +48,7 @@ hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc gas.tbl
 datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc data.tbl /usr/local/share/oui/cic.oui
 labdisp : dstat.tmc lab.tbl
+TSdisp : TS_conv.tmc TS.tbl
 doit : HTW.doit
 labdoit : lab.doit
 
