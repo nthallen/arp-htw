@@ -1,37 +1,37 @@
   1 ME_Stale ME Stale
-  1 LTE_DevStatus ME LTE_Status
+  1 LTE_DevStatus ME LTE_Status %.0lf
   1 LTE_Stale ME Stale
-  1 LTE_T ME LTE_Temp
+  1 LTE_T ME LTE_Temp %.2lf
   1 LTE_Set_T ME LTE_Temp
   1 LTE_Sink_T ME LTE_Temp
-  1 LPV_DevStatus ME LPV_Status
+  1 LPV_DevStatus ME LPV_Status %.0lf
   1 LPV_Stale ME Stale
-  1 LPV_T ME LPV_Temp
+  1 LPV_T ME LPV_Temp %.2lf
   1 LPV_Set_T ME LPV_Temp
   1 LPV_Sink_T ME LPV_Temp
-  1 Plate_DevStatus ME Plate_Status
+  1 Plate_DevStatus ME Plate_Status %.0lf
   1 Plate_Stale ME Stale
-  1 Plate_T ME Plate_Temp
+  1 Plate_T ME Plate_Temp %.2lf
   1 Plate_Set_T ME Plate_Temp
   1 Plate_Sink_T ME Plate_Temp
-  1 Cover_DevStatus ME Cover_Status
+  1 Cover_DevStatus ME Cover_Status %.0lf
   1 Cover_Stale ME Stale
-  1 Cover_T ME Cover_Temp
+  1 Cover_T ME Cover_Temp %.2lf
   1 Cover_Set_T ME Cover_Temp
   1 Cover_Sink_T ME Cover_Temp
-  1 Cell_DevStatus ME Cell_Status
+  1 Cell_DevStatus ME Cell_Status %.0lf
   1 Cell_Stale ME Stale
-  1 Cell_T ME Cell_Temp
+  1 Cell_T ME Cell_Temp %.2lf
   1 Cell_Set_T ME Cell_Temp
   1 Cell_Sink_T ME Cell_Temp
-  1 DPV_DevStatus ME DPV_Status
+  1 DPV_DevStatus ME DPV_Status %.0lf
   1 DPV_Stale ME Stale
-  1 DPV_T ME DPV_Temp
+  1 DPV_T ME DPV_Temp %.2lf
   1 DPV_Set_T ME DPV_Temp
   1 DPV_Sink_T ME DPV_Temp
-  1 BubC_DevStatus ME BubC_Status
+  1 BubC_DevStatus ME BubC_Status %.0lf
   1 BubC_Stale ME Stale
-  1 BubC_T ME BubC_Temp
+  1 BubC_T ME BubC_Temp %.2lf
   1 BubC_Set_T ME BubC_Temp
   1 BubC_Sink_T ME BubC_Temp
   1 ME_Stale ME Stale
