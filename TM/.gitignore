@@ -61,6 +61,16 @@ labdispnc.cc
 labdispncoui.c
 labdispncoui.o
 labdispnc.o
+TStbl.tmc
+TSdisp.cc
+TSdispoui.c
+TSdispoui.o
+TSdisp.o
+TStblnc.tmc
+TSdispnc.cc
+TSdispncoui.c
+TSdispncoui.o
+TSdispnc.o
 doit.dep
 labdoit.dep
 HTWclt.o
@@ -84,6 +94,8 @@ datatbl.tmc.dep
 datatblnc.tmc.dep
 labtbl.tmc.dep
 labtblnc.tmc.dep
+TStbl.tmc.dep
+TStblnc.tmc.dep
 *.err
 Makefile
 HTWcol
@@ -97,6 +109,8 @@ datadisp
 datadispnc
 labdisp
 labdispnc
+TSdisp
+TSdispnc
 doit
 labdoit
 HTWclt

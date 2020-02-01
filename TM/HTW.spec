@@ -3,6 +3,7 @@ tmcbase = idx.tmc
 tmcbase = /usr/local/share/huarp/ptrhm.cc
 tmcbase = T30K75KU.tmc
 tmcbase = TS.tmc
+tmcbase = TS_T_t_cal.tmc
 
 colbase = idxcol.tmc
 colbase = /usr/local/share/huarp/DACS_ID.tmc

@@ -267,16 +267,26 @@ Group LPV ( LPV_T1, LPV_RH, LPV_T2a,
   LPV_PTRHS = LPV_ptrh.Status();
 }
 
-TM typedef unsigned short V28V_t { text "%5u"; collect x = sbrwa(x.address); }
-TM typedef V28V_t V28I_t;
+TM typedef double PM_VOLTS;
+TM typedef double PM_mVOLTS;
+TM typedef unsigned short V28V_t {
+  text "%7.3lf";
+  collect x = sbrwa(x.address);
+  convert PM_VOLTS; }
+Calibration (V28V_t, PM_VOLTS) { 0, 0, 16, 0.025 }
+
+TM typedef V28V_t V28I_t { text "%5.2lf"; convert PM_mVOLTS; }
+Calibration (V28I_t, PM_mVOLTS) { 0, 0, 16, 0.020 }
+
+TM typedef DStat VMstat { text "%1X"; }
 
 TM 1 Hz V28V_t V28V1; Address V28V1 0x364;
 TM 1 Hz V28I_t V28I1; Address V28I1 0x362;
 TM 1 Hz V28V_t V28V2; Address V28V2 0x368;
 TM 1 Hz V28I_t V28I2; Address V28I2 0x366;
-TM 1 Hz DStat VM1_S; Address VM1_S 0x360;
+TM 1 Hz VMstat VM1_S; Address VM1_S 0x360;
 TM 1 Hz V28V_t V28V3; Address V28V3 0x374;
 TM 1 Hz V28I_t V28I3; Address V28I3 0x372;
 TM 1 Hz V28V_t V28V4; Address V28V4 0x378;
 TM 1 Hz V28I_t V28I4; Address V28I4 0x376;
-TM 1 Hz DStat VM2_S; Address VM2_S 0x370;
+TM 1 Hz VMstat VM2_S; Address VM2_S 0x370;

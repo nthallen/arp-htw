@@ -71,10 +71,10 @@ Inlet_P {
 
 VM {
   HBox { +-; Title: "Power Monitors"; -+ };
-  "1:"  (V28V1,5) V (V28I1,5) A (VM1_S,3);
-  "2:"  (V28V2,5) V (V28I2,5) A;
-  "3:"  (V28V3,5) V (V28I3,5) A (VM2_S,3);
-  "4:"  (V28V4,5) V (V28I4,5) A;
+  "1:"  (V28V1,7) V (V28I1,5) mA (VM1_S,1);
+  "2:"  (V28V2,7) V (V28I2,5) mA;
+  "3:"  (V28V3,7) V (V28I3,5) mA (VM2_S,1);
+  "4:"  (V28V4,7) V (V28I4,5) mA;
 }
 
 
