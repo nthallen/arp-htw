@@ -167,15 +167,15 @@ TM 1 Hz AIStat_i AIStat; Address AIStat 0xE00;
 
 /* AO */
 /* TM 1 Hz AO LTETSt; Address LTETSt 0x400; */ /* AO0, J3.1, J60CB-8 */
-TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; /* AO1, J3.2, J20CB-26 */
-TM 1 Hz AO BGsFlSt; Address BGsFlSt 0x404; /* AO2, J3.5, J20CB-28 */
+/* TM 1 Hz AO GsFl1St; Address GsFl1St 0x402; */ /* AO1, J3.2, J20CB-26 */
+/* TM 1 Hz AO BGsFlSt; Address BGsFlSt 0x404; */ /* AO2, J3.5, J20CB-28 */
 /* TM 1 Hz AO LPVTSt; Address LPVTSt 0x406; */ /* AO3, J3.6, J59CB-5 */
 /* TM 1 Hz AO DPVTSt; Address DPVTSt 0x408; */ /* AO4, J3.9, J59CB-17 */
 /* TM 1 Hz AO CelTSt; Address CelTSt 0x40A; */ /* AO5, J3.10, J59CB-11 */
 /* TM 1 Hz AO TE1TSt; Address TE1TSt 0x40C; */ /* AO6, J3.13, J59CB-24 */
-TM 1 Hz AO Cal1FSt; Address Cal1FSt 0x40E; /* AO7, J3.14, J22CB-9 */
-TM 1 Hz AO Cal2FSt; Address Cal2FSt 0x410; /* AO8, J3.17, J22CB-11 */
-TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; /* AO9, J3.18, J22CB-14 */
+/* TM 1 Hz AO Cal1FSt; Address Cal1FSt 0x40E; */ /* AO7, J3.14, J22CB-9 */
+/* TM 1 Hz AO Cal2FSt; Address Cal2FSt 0x410; */ /* AO8, J3.17, J22CB-11 */
+/* TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; */ /* AO9, J3.18, J22CB-14 */
 /* TM 1 Hz AO TE2TSt; Address TE2TSt 0x414; */ /* AO10, J3.21, J59CB-30 */
 /* TM 0 Hz AO SpA01St; Address SpA01St 0x416; */ /* AO11, J3.22, J130CB-28 */
 /* TM 0 Hz AO SpA02St; Address SpA02St 0x418; */ /* AO12, J3.25, J130CB-33 */
@@ -184,11 +184,16 @@ TM 1 Hz AO Cal3FSt; Address Cal3FSt 0x412; /* AO9, J3.18, J22CB-14 */
 /* TM 0 Hz AO SpAO5St; Address SpAO5St 0x41E; */ /* AO15, J3.30,  */
 
 /* Status */
-TM 1 Hz DSWord DS822; Address DS822 0x822;
-TM 1 Hz DStat DS834; Address DS834 0x835;
-TM 1 Hz DSWord DS844; Address DS844 0x844;
-  Collect DS844 = sbrwa(DS844.Address) ^ 0xFFFF;
-TM 1 Hz DStat DS84A; Address DS84A 0x84A;
+TM 1 Hz DStat DS10; Address DS10 0x82C;
+TM 1 Hz DStat DS13; Address DS13 0x851;
+TM 1 Hz DStat DS14; Address DS14 0x84A;
+TM 1 Hz DStat DS18; Address DS18 0x868;
+
+/* TM 1 Hz DSWord DS822; Address DS822 0x822; */
+/* TM 1 Hz DStat DS834; Address DS834 0x835; */
+/* TM 1 Hz DSWord DS844; Address DS844 0x844; */
+/*   Collect DS844 = sbrwa(DS844.Address) ^ 0xFFFF; */
+/* TM 1 Hz DStat DS84A; Address DS84A 0x84A; */
 TM typedef unsigned char IOSwS_t { text "%02X"; }
 TM 1 Hz IOSwS_t IOSwS; Collect IOSwS = read_switches();
 

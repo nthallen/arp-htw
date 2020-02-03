@@ -13,34 +13,34 @@
 	0x0850, 0
 
 80
-  STRB,  0, 0x0001; /* 0: Cmd_0_On: Scroll_Pump */
-  STRB,  0, 0x0002; /* 1: Cmd_0_Off: Scroll_Pump */
-  STRB,  0, 0x0004; /* 2: Cmd_1_On: Cal_Bub1_Vlv */
-  STRB,  0, 0x0008; /* 3: Cmd_1_Off: Cal_Bub1_Vlv */
-  STRB,  0, 0x0010; /* 4: Cmd_2_On: Cal_Bub2_Vlv */
-  STRB,  0, 0x0020; /* 5: Cmd_2_Off: Cal_Bub2_Vlv */
-  STRB,  0, 0x0040; /* 6: Cmd_3_On: TE_HC1 */
-  STRB,  0, 0x0080; /* 7: Cmd_3_Off: TE_HC1 */
-  STRB,  1, 0x0100; /* 8: Cmd_4_On: LPV_HC */
-  STRB,  1, 0x0200; /* 9: Cmd_4_Off: LPV_HC */
-  STRB,  1, 0x0400; /* 10: Cmd_5_On: Cell_HC */
-  STRB,  1, 0x0800; /* 11: Cmd_5_Off: Cell_HC */
-  STRB,  1, 0x1000; /* 12: Cmd_6_On: DPV_HC */
-  STRB,  1, 0x2000; /* 13: Cmd_6_Off: DPV_HC */
-  STRB,  1, 0x4000; /* 14: Cmd_7_On: SpCmd1 */
-  STRB,  1, 0x8000; /* 15: Cmd_7_Off: SpCmd1 */
-  STRB,  2, 0x0001; /* 16: Cmd_8_On: SpCmd2 */
-  STRB,  2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 */
-  STRB,  2, 0x0004; /* 18: Cmd_9_On: L1Cmd */
-  STRB,  2, 0x0008; /* 19: Cmd_9_Off: L1Cmd */
-  STRB,  2, 0x0010; /* 20: Cmd_10_On: TE_HC2 */
-  STRB,  2, 0x0020; /* 21: Cmd_10_Off: TE_HC2 */
-  STRB,  2, 0x0080; /* 22: Cmd_11_On: Gas_Vlv */
-  STRB,  2, 0x0040; /* 23: Cmd_11_Off: Gas_Vlv */
-  STRB,  3, 0x0100; /* 24: Cmd_12_On: Edw_Vlv */
-  STRB,  3, 0x0200; /* 25: Cmd_12_Off: Edw_Vlv */
-  STRB,  3, 0x0800; /* 26: Cmd_13_On: Bub_Gas_Vlv */
-  STRB,  3, 0x0400; /* 27: Cmd_13_Off: Bub_Gas_Vlv */
+  SPARE, 0, 0x0001; /* 0: Cmd_0_On: Scroll_Pump */
+  SPARE, 0, 0x0002; /* 1: Cmd_0_Off: Scroll_Pump */
+  SPARE, 0, 0x0004; /* 2: Cmd_1_On: Cal_Bub1_Vlv */
+  SPARE, 0, 0x0008; /* 3: Cmd_1_Off: Cal_Bub1_Vlv */
+  SPARE, 0, 0x0010; /* 4: Cmd_2_On: Cal_Bub2_Vlv */
+  SPARE, 0, 0x0020; /* 5: Cmd_2_Off: Cal_Bub2_Vlv */
+  SPARE, 0, 0x0040; /* 6: Cmd_3_On: TE_HC1 */
+  SPARE, 0, 0x0080; /* 7: Cmd_3_Off: TE_HC1 */
+  SPARE, 1, 0x0100; /* 8: Cmd_4_On: LPV_HC */
+  SPARE, 1, 0x0200; /* 9: Cmd_4_Off: LPV_HC */
+  SPARE, 1, 0x0400; /* 10: Cmd_5_On: Cell_HC */
+  SPARE, 1, 0x0800; /* 11: Cmd_5_Off: Cell_HC */
+  SPARE, 1, 0x1000; /* 12: Cmd_6_On: DPV_HC */
+  SPARE, 1, 0x2000; /* 13: Cmd_6_Off: DPV_HC */
+  SPARE, 1, 0x4000; /* 14: Cmd_7_On: SpCmd1 */
+  SPARE, 1, 0x8000; /* 15: Cmd_7_Off: SpCmd1 */
+  SPARE, 2, 0x0001; /* 16: Cmd_8_On: SpCmd2 */
+  SPARE, 2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 */
+  SPARE, 2, 0x0004; /* 18: Cmd_9_On: L1Cmd */
+  SPARE, 2, 0x0008; /* 19: Cmd_9_Off: L1Cmd */
+  SPARE, 2, 0x0010; /* 20: Cmd_10_On: TE_HC2 */
+  SPARE, 2, 0x0020; /* 21: Cmd_10_Off: TE_HC2 */
+  SPARE, 2, 0x0080; /* 22: Cmd_11_On: Gas_Vlv */
+  SPARE, 2, 0x0040; /* 23: Cmd_11_Off: Gas_Vlv */
+  SPARE, 3, 0x0100; /* 24: Cmd_12_On: Edw_Vlv */
+  SPARE, 3, 0x0200; /* 25: Cmd_12_Off: Edw_Vlv */
+  SPARE, 3, 0x0800; /* 26: Cmd_13_On: Bub_Gas_Vlv */
+  SPARE, 3, 0x0400; /* 27: Cmd_13_Off: Bub_Gas_Vlv */
   SPARE, 3, 0x1000; /* 28: Cmd_14_On:  */
   SPARE, 3, 0x2000; /* 29: Cmd_14_Off:  */
   SPARE, 3, 0x4000; /* 30: Cmd_15_On:  */
@@ -53,42 +53,42 @@
   SPARE, 4, 0x0020; /* 37: Cmd_18_Off:  */
   SPARE, 4, 0x0040; /* 38: Cmd_19_On:  */
   SPARE, 4, 0x0080; /* 39: Cmd_19_Off:  */
-  SPARE, 5, 0x0100; /* 40: Cmd_20_On:  */
-  SPARE, 5, 0x0200; /* 41: Cmd_20_Off:  */
+  STRB,  5, 0x0100; /* 40: Cmd_20_On:  Exhaust Valve On */
+  STRB,  5, 0x0200; /* 41: Cmd_20_Off: Exhaust Valve Off */
   SPARE, 5, 0x0400; /* 42: Cmd_21_On:  */
   SPARE, 5, 0x0800; /* 43: Cmd_21_Off:  */
   SPARE, 5, 0x1000; /* 44: Cmd_22_On:  */
   SPARE, 5, 0x2000; /* 45: Cmd_22_Off:  */
-  SPARE, 5, 0x4000; /* 46: Cmd_23_On:  */
-  SPARE, 5, 0x8000; /* 47: Cmd_23_Off:  */
-  STRB,  6, 0x0002; /* 48: Cmd_24_On: Gas_Flw_Open */
-  STRB,  6, 0x0001; /* 49: Cmd_24_Off: Gas_Flw_Open */
-  STRB,  6, 0x0008; /* 50: Cmd_25_On: Gas_Flw_Closed */
-  STRB,  6, 0x0004; /* 51: Cmd_25_Off: Gas_Flw_Closed */
-  STRB,  6, 0x0020; /* 52: Cmd_26_On: Bub_Gas_Flw_Open */
-  STRB,  6, 0x0010; /* 53: Cmd_26_Off: Bub_Gas_Flw_Open */
-  STRB,  6, 0x0080; /* 54: Cmd_27_On: Bub_Gas_Flw_Closed */
-  STRB,  6, 0x0040; /* 55: Cmd_27_Off: Bub_Gas_Flw_Closed */
-  STRB,  7, 0x0200; /* 56: Cmd_28_On: Cal_Gas_Flw_Open */
-  STRB,  7, 0x0100; /* 57: Cmd_28_Off: Cal_Gas_Flw_Open */
-  STRB,  7, 0x0800; /* 58: Cmd_29_On: Cal_Gas_Flw_Closed */
-  STRB,  7, 0x0400; /* 59: Cmd_29_Off: Cal_Gas_Flw_Closed */
-  STRB,  7, 0x1000; /* 60: Cmd_30_On: Cal_Bub1_Flw_Open */
-  STRB,  7, 0x2000; /* 61: Cmd_30_Off: Cal_Bub1_Flw_Open */
-  STRB,  7, 0x4000; /* 62: Cmd_31_On: Cal_Bub1_Flw_Closed */
-  STRB,  7, 0x8000; /* 63: Cmd_31_Off: Cal_Bub1_Flw_Closed */
-  STRB,  8, 0x0001; /* 64: Cmd_32_On: Cal_Bub2_Flw_Open */
-  STRB,  8, 0x0002; /* 65: Cmd_32_Off: Cal_Bub2_Flw_Open */
-  STRB,  8, 0x0004; /* 66: Cmd_33_On: Cal_Bub2_Flw_Closed */
-  STRB,  8, 0x0008; /* 67: Cmd_33_Off: Cal_Bub2_Flw_Closed */
+  STRB,  5, 0x4000; /* 46: Cmd_23_On:  Gas Valve On */
+  STRB,  5, 0x8000; /* 47: Cmd_23_Off: Gas Valve Off */
+  SPARE, 6, 0x0002; /* 48: Cmd_24_On: Gas_Flw_Open */
+  SPARE, 6, 0x0001; /* 49: Cmd_24_Off: Gas_Flw_Open */
+  SPARE, 6, 0x0008; /* 50: Cmd_25_On: Gas_Flw_Closed */
+  SPARE, 6, 0x0004; /* 51: Cmd_25_Off: Gas_Flw_Closed */
+  SPARE, 6, 0x0020; /* 52: Cmd_26_On: Bub_Gas_Flw_Open */
+  SPARE, 6, 0x0010; /* 53: Cmd_26_Off: Bub_Gas_Flw_Open */
+  SPARE, 6, 0x0080; /* 54: Cmd_27_On: Bub_Gas_Flw_Closed */
+  SPARE, 6, 0x0040; /* 55: Cmd_27_Off: Bub_Gas_Flw_Closed */
+  SPARE, 7, 0x0200; /* 56: Cmd_28_On: Cal_Gas_Flw_Open */
+  SPARE, 7, 0x0100; /* 57: Cmd_28_Off: Cal_Gas_Flw_Open */
+  SPARE, 7, 0x0800; /* 58: Cmd_29_On: Cal_Gas_Flw_Closed */
+  SPARE, 7, 0x0400; /* 59: Cmd_29_Off: Cal_Gas_Flw_Closed */
+  SPARE, 7, 0x1000; /* 60: Cmd_30_On: Cal_Bub1_Flw_Open */
+  SPARE, 7, 0x2000; /* 61: Cmd_30_Off: Cal_Bub1_Flw_Open */
+  SPARE, 7, 0x4000; /* 62: Cmd_31_On: Cal_Bub1_Flw_Closed */
+  SPARE, 7, 0x8000; /* 63: Cmd_31_Off: Cal_Bub1_Flw_Closed */
+  SPARE, 8, 0x0001; /* 64: Cmd_32_On: Cal_Bub2_Flw_Open */
+  SPARE, 8, 0x0002; /* 65: Cmd_32_Off: Cal_Bub2_Flw_Open */
+  SPARE, 8, 0x0004; /* 66: Cmd_33_On: Cal_Bub2_Flw_Closed */
+  SPARE, 8, 0x0008; /* 67: Cmd_33_Off: Cal_Bub2_Flw_Closed */
   STRB,  8, 0x0010; /* 68: Cmd_34_On: QCLI_Reset */
   STRB,  8, 0x0020; /* 69: Cmd_34_Off: QCLI_Reset */
-  STRB,  8, 0x0040; /* 70: Cmd_35_On: Gas_Vlv_D */
-  STRB,  8, 0x0080; /* 71: Cmd_35_Off: Gas_Vlv_D */
-  STRB,  9, 0x0200; /* 72: Cmd_36_On: Bub_Gas_Vlv_D */
-  STRB,  9, 0x0100; /* 73: Cmd_36_Off: Bub_Gas_Vlv_D */
-  STRB,  9, 0x0800; /* 74: Cmd_37_On: Bub_Gas_Vlv_Flw */
-  STRB,  9, 0x0400; /* 75: Cmd_37_Off: Bub_Gas_Vlv_Flw */
+  SPARE, 8, 0x0040; /* 70: Cmd_35_On: Gas_Vlv_D */
+  SPARE, 8, 0x0080; /* 71: Cmd_35_Off: Gas_Vlv_D */
+  STRB,  9, 0x0200; /* 72: Cmd_36_On:  Bub_In_Vlv_D On */
+  STRB,  9, 0x0100; /* 73: Cmd_36_Off: Bub_In_Vlv_D Off */
+  STRB,  9, 0x0800; /* 74: Cmd_37_On:  Bub_Out_Vlv_D On */
+  STRB,  9, 0x0400; /* 75: Cmd_37_Off: Bub_Out_Vlv_D Off */
   SPARE, 9, 0x1000; /* 76: SPARE:  */
   SPARE, 9, 0x2000; /* 77: SPARE:  */
   SPARE, 9, 0x4000; /* 78: SPARE:  */
