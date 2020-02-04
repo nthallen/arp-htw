@@ -28,11 +28,11 @@ GD {
 }
 
 MF {
-  HBox { +|+; (Gas_Flw_OC_DS,1); +|+ };
+  HBox { +|+; "-"; +|+ };
 }
 
 BF {
-  HBox { +|+; (Bub_Gas_Flw_OC_DS,1); +|+ };
+  HBox { +|+; "-"; +|+ };
 }
 
 Bub {
@@ -73,8 +73,8 @@ Diagram {
 Flows {
   HBox { +-; Title: "Flows"; -+ };
   ""      SetPt     Read;
-  Main: (GsFl1St,6) (GasFl,6) V;
-  Bub:  (BGsFlSt,6) (BubFl,6) V;
+  Main: TBD         TBD   sccm; 
+  Bub:  TBD         TBD   sccm;
 }
 
 GDT {

@@ -36,8 +36,8 @@ Skin_Rvr {
 
 Pump {
   HBox { +-; Title: "Scroll Pump"; -+ };
-  {Status: (Scroll_Pump_DS,3) (Scroll_Pump_S,3) };
-  PumpI: (Cmd0_I,7) V;
+  Status: (Scroll_Pump_DS,3);
+# PumpI: (Cmd0_I,7) V;
   PumpT: (PumpT,6) C;
   PMotT: (PMotT,6) C;
 }

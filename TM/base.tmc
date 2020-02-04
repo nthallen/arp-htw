@@ -285,7 +285,7 @@ Calibration (V28V_t, PM_VOLTS) { 0, 0, 16, 0.025 }
 
 TM typedef V28V_t V28I_t { text "%6.3lf"; convert PM_AMPS; }
 /* Calibration (V28I_t, PM_mVOLTS) { 0, 0, 16, 0.020 } */
-Calibration (V28I_t, PM_mAMPS) { 0, 0, 48, 0.020 }
+Calibration (V28I_t, PM_AMPS) { 0, 0, 48, 0.020 }
 
 TM typedef DStat VMstat { text "%02X"; }
 

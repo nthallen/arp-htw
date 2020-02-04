@@ -47,7 +47,7 @@ State Pinch_Valve_Close2 {
      Hold Until ( PVStep == 0 ) or 2
      else { msg( 2, "Pinch Valve step did not reset" ); }
      > Preset Pinch Valve Position to 0
-     { if ( Scroll_Pump_S ) Validate Pinch_Valve_Closed; }
+     { if ( Scroll_Pump_DS ) Validate Pinch_Valve_Closed; }
  +1  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 );
  +2  > Command Scroll_Pump On
  +60 depending on (OFF_GROUND) { Validate Pinch_Valve_Closed; }

@@ -51,16 +51,6 @@ datadispnc.cc
 datadispncoui.c
 datadispncoui.o
 datadispnc.o
-labtbl.tmc
-labdisp.cc
-labdispoui.c
-labdispoui.o
-labdisp.o
-labtblnc.tmc
-labdispnc.cc
-labdispncoui.c
-labdispncoui.o
-labdispnc.o
 TStbl.tmc
 TSdisp.cc
 TSdispoui.c
@@ -72,7 +62,6 @@ TSdispncoui.c
 TSdispncoui.o
 TSdispnc.o
 doit.dep
-labdoit.dep
 HTWclt.o
 HTWcltoui.c
 HTWcltoui.o
@@ -92,8 +81,6 @@ gastbl.tmc.dep
 gastblnc.tmc.dep
 datatbl.tmc.dep
 datatblnc.tmc.dep
-labtbl.tmc.dep
-labtblnc.tmc.dep
 TStbl.tmc.dep
 TStblnc.tmc.dep
 *.err
@@ -107,12 +94,9 @@ gddisp
 gddispnc
 datadisp
 datadispnc
-labdisp
-labdispnc
 TSdisp
 TSdispnc
 doit
-labdoit
 HTWclt
 HTWcltnc
 HTWengext

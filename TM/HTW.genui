@@ -9,9 +9,9 @@ ROWS 18
 1 GasFl GasDeck Flow
 1 GasHP GasDeck HP
 1 GasLP GasDeck LP
-1 GsFl1St GasDeck Flow
+# 1 GsFl1St GasDeck Flow
 
-1 BGsFlSt Bubbler Flow
+# 1 BGsFlSt Bubbler Flow
 1 BubFl   Bubbler Flow
 1 BubLP   Bubbler P
 1 Bub_P   Bubbler P
