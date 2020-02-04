@@ -130,92 +130,46 @@ ROWS 18
 # 1 CelCT  Cell TS
 # 1 CelTSt Cell TS
 
-# 1 QCLI_Stale QCLI Stale
-# 1 QCLI_Wave  QCLI Wave %.0lf
-# # 1 QCLI_s
-# 1 QCLI_loc:QCLI_s:3 QCLI Status
-# 1 QCLI_lot:QCLI_s:4 QCLI Status
-# 1 QCLI_dot:QCLI_s:5 QCLI Status
-# 1 QCLI_waveerr:QCLI_s:8 QCLI Status
-# 1 QCLI_ready:QCLI_s:9 QCLI Status
-# 1 QCLI_cordte:QCLI_s:11 QCLI Status
-# 1 QCLI_laser:QCLI_s:12 QCLI Status
-# 1 QCLI_cmderr:QCLI_s:13 QCLI Status
-# 1 QCLI_cksum:QCLI_s:14 QCLI Status
-# 1 QCLI_busy:QCLI_s:15 QCLI Status
-# 1 QCLI_Reset_DS:DS84A:2 QCLI Status
-
-#1 SSP_Flags
-# 4 SSP_Num SSP Num
-# 4 SSP_SN SSP SN
-# 4 SSP_TS SSP TSkip
-# 4 SSP_Stale QCLI Stale
-# 1 QCLI_Wave  SSP Wave %.0lf
-# 4 SSP_Status SSP Status %.0lf
-# 4 SSP_T_FPGA Misc SSP_T
-# 4 SSP_T_HtSink Misc SSP_T
-# 1 SSP_T Misc SSP_T
-# 1 VtoIT Misc SSP_T
-# 1 QCLIT Misc SSP_T
-
 1 PMotT   Pump  T
 1 PumpT   Pump  T
-1 Scroll_Pump_DS:DS822:0 Pump Status
-1 Scroll_Pump_S:DS844:0  Pump Status
+1 Scroll_Pump_DS:DS10:4 Pump Status
 
-# 1 TE1CT  TEC TE1
-# 1 TE1TSt TEC TE1
-# 1 TE2CT  TEC TE2
-# 1 TE2TSt TEC TE2
-
-# 1 TE_HC1_DS:DS822:3 Commands HC
-# 1 TE_HC1_S:DS844:3 Commands HC
-# 1 LPV_HC_DS:DS822:4 Commands HC
-# 1 LPV_HC_S:DS844:4 Commands HC
-# 1 Cell_HC_DS:DS822:5 Commands HC
-# 1 Cell_HC_S:DS844:5 Commands HC
-# 1 DPV_HC_DS:DS822:6 Commands HC
-# 1 DPV_HC_S:DS844:6 Commands HC
-# 1 TE_HC2_DS:DS822:10 Commands HC
-# 1 TE_HC2_S:DS844:10 Commands HC
-
-1 Cmd0_I  Commands I 0
-1 Cmd1_I  Commands I 1
-1 Cmd2_I  Commands I 2
+# 1 Cmd0_I  Commands I 0
+# 1 Cmd1_I  Commands I 1
+# 1 Cmd2_I  Commands I 2
 # 1 Cmd3_I  Commands I 3
 # 1 Cmd4_I  Commands I 4
 # 1 Cmd5_I  Commands I 5
 # 1 Cmd6_I  Commands I 6
-1 Cmd7_I  Commands I 7
-1 Cmd8_I  Commands I 8
-1 Cmd9_I  Commands I 9
+# 1 Cmd7_I  Commands I 7
+# 1 Cmd8_I  Commands I 8
+# 1 Cmd9_I  Commands I 9
 # 1 Cmd10_I Commands I 10
-1 Cmd11_I Commands I 11
-1 Cmd12_I Commands I 12
-1 Cmd13_I Commands I 13
+# 1 Cmd11_I Commands I 11
+# 1 Cmd12_I Commands I 12
+# 1 Cmd13_I Commands I 13
+1 Cmd20_I Commands I 20
+1 Cmd23_I Commands I 23
 
 
-1 Edw_Vlv_DS:DS822:12 GasDeck Commands
-1 Edw_Vlv_S:DS844:12 GasDeck Commands
-1 Gas_Flw_Open_DS:DS834:0 GasDeck Commands
-1 Gas_Flw_Closed_DS:DS834:1 GasDeck Commands
-1 Bub_Gas_Flw_Open_DS:DS834:2 GasDeck Commands
-1 Bub_Gas_Flw_Closed_DS:DS834:3 GasDeck Commands
-1 Gas_Vlv_D_DS:DS84A:3 GasDeck Commands
-1 Bub_Gas_Vlv_D_DS:DS84A:4 GasDeck Commands
-1 Bub_Vlv_Flw_D_DS:DS84A:5 GasDeck Commands
+1 Exh_Vlv_DS:DS10:4 GasDeck Commands
+1 Exh_Vlv_S:DS13:4 GasDeck Commands
+1 Gas_Vlv_D_DS:DS10:7 GasDeck Commands
+1 Gas_Vlv_D_S:DS13:4 GasDeck Commands
+1 Bub_In_Vlv_DS:DS14:4 GasDeck Commands
+1 Bub_Out_Vlv_DS:DS14:5 GasDeck Commands
 
 1 PC__T   PDACS T
 1 PS__T   PDACS T
 1 IOSwS   PDACS IOSwS %.0lf
-1 V28V1   PDACS V %.3lf
-1 V28V2   PDACS V %.3lf
-1 V28V3   PDACS V %.3lf
-1 V28V4   PDACS V %.3lf
-1 V28I1   PDACS I %.3lf
-1 V28I2   PDACS I %.3lf
-1 V28I3   PDACS I %.3lf
-1 V28I4   PDACS I %.3lf
+1 V28V1   PDACS V
+1 V28V2   PDACS V
+1 V28V3   PDACS V
+1 V28V4   PDACS V
+1 V28I1   PDACS I
+1 V28I2   PDACS I
+1 V28I3   PDACS I
+1 V28I4   PDACS I
 1 VM1_S   PDACS PMStat %.0lf
 1 VM2_S   PDACS PMStat %.0lf
 1 0:AIStat:0 PDACS AIStat

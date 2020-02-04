@@ -16,8 +16,8 @@ Cell {
 
 Valves {
   +-+;
-  Edwards: (Edw_Vlv_DS,3)      (Edw_Vlv_S,6)      (Cmd12_I,7) "I/V";
-  Pump:    (Scroll_Pump_DS,3) (Scroll_Pump_S,3) (Cmd0_I,7) "I/V";
+  Exhaust: (Exh_Vlv_DS,3)      (Exh_Vlv_S,6)      (Cmd20_I,7) "I/V";
+  Gas:     (Gas_Vlv_DS,1)      (Gas_Vlv_S,3)      (Cmd23_I,7) "I/V";
 }
 
 GD {
@@ -49,19 +49,19 @@ Bub {
 
 Diagram {
   "";
-  HBox { -; -; -; -; -+; [MF]; +-; -; (Gas_Vlv_D_DS,1); - };
+  HBox { -; -; -; -; -+; [MF]; +-; -; (Gas_Vlv_DS,1); - };
   HBox { "  "; +|;
     {
       " ";
       HBox { +-;
 	{
 	  "";
-	  (Bub_Gas_Vlv_D_DS,1);
+	  (Bub_In_Vlv_DS,1);
 	  "";
 	}; -+; [Bub];
 	{
 	  "";
-	  HBox{ +-+; [BF]; +-; (Bub_Vlv_Flw_D_DS,1); -+ };
+	  HBox{ +-+; [BF]; +-; (Bub_Out_Vlv_DS,1); -+ };
 	  "" 
 	}; -+
       }
