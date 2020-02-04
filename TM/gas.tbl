@@ -36,13 +36,16 @@ BF {
 }
 
 Bub {
-  HBox { |; {
-      # HBox { +-; Bubbler; -+ };
-      +-+;
-      { P: (Bub_P,7) V;
-	T: (Bub_T,6) C
+  HBox {
+    {
+      -+;
+      HBox { +|+;
+        {
+          P: (Bub_P,7) V;
+          T: (Bub_T,6) C;
+        };
       };
-      +-+
+      -+;
     }; |
   }
 }
@@ -57,7 +60,7 @@ Diagram {
 	{
 	  "";
 	  (Bub_In_Vlv_DS,1);
-	  "";
+	  # "";
 	}; -+; [Bub];
 	{
 	  "";
