@@ -13,16 +13,16 @@
 	0x0850, 0
 
 80
-  SPARE, 0, 0x0001; /* 0: Cmd_0_On: Scroll_Pump */
-  SPARE, 0, 0x0002; /* 1: Cmd_0_Off: Scroll_Pump */
+  STRB,  0, 0x0001; /* 0: Cmd_0_On: Gas Valve On */
+  STRB,  0, 0x0002; /* 1: Cmd_0_Off: Gas Valve Off */
   SPARE, 0, 0x0004; /* 2: Cmd_1_On: Cal_Bub1_Vlv */
   SPARE, 0, 0x0008; /* 3: Cmd_1_Off: Cal_Bub1_Vlv */
   SPARE, 0, 0x0010; /* 4: Cmd_2_On: Cal_Bub2_Vlv */
   SPARE, 0, 0x0020; /* 5: Cmd_2_Off: Cal_Bub2_Vlv */
   SPARE, 0, 0x0040; /* 6: Cmd_3_On: TE_HC1 */
   SPARE, 0, 0x0080; /* 7: Cmd_3_Off: TE_HC1 */
-  SPARE, 1, 0x0100; /* 8: Cmd_4_On: LPV_HC */
-  SPARE, 1, 0x0200; /* 9: Cmd_4_Off: LPV_HC */
+  STRB,  1, 0x0100; /* 8: Cmd_4_On: Exhaust Valve On */
+  STRB,  1, 0x0200; /* 9: Cmd_4_Off: Exhaust Valve Off */
   SPARE, 1, 0x0400; /* 10: Cmd_5_On: Cell_HC */
   SPARE, 1, 0x0800; /* 11: Cmd_5_Off: Cell_HC */
   SPARE, 1, 0x1000; /* 12: Cmd_6_On: DPV_HC */
@@ -53,14 +53,14 @@
   SPARE, 4, 0x0020; /* 37: Cmd_18_Off:  */
   SPARE, 4, 0x0040; /* 38: Cmd_19_On:  */
   SPARE, 4, 0x0080; /* 39: Cmd_19_Off:  */
-  STRB,  5, 0x0100; /* 40: Cmd_20_On:  Exhaust Valve On */
-  STRB,  5, 0x0200; /* 41: Cmd_20_Off: Exhaust Valve Off */
+  SPARE, 5, 0x0100; /* 40: Cmd_20_On:  Exhaust Valve On */
+  SPARE, 5, 0x0200; /* 41: Cmd_20_Off: Exhaust Valve Off */
   SPARE, 5, 0x0400; /* 42: Cmd_21_On:  */
   SPARE, 5, 0x0800; /* 43: Cmd_21_Off:  */
   SPARE, 5, 0x1000; /* 44: Cmd_22_On:  */
   SPARE, 5, 0x2000; /* 45: Cmd_22_Off:  */
-  STRB,  5, 0x4000; /* 46: Cmd_23_On:  Gas Valve On */
-  STRB,  5, 0x8000; /* 47: Cmd_23_Off: Gas Valve Off */
+  SPARE, 5, 0x4000; /* 46: Cmd_23_On:  Gas Valve On */
+  SPARE, 5, 0x8000; /* 47: Cmd_23_Off: Gas Valve Off */
   SPARE, 6, 0x0002; /* 48: Cmd_24_On: Gas_Flw_Open */
   SPARE, 6, 0x0001; /* 49: Cmd_24_Off: Gas_Flw_Open */
   SPARE, 6, 0x0008; /* 50: Cmd_25_On: Gas_Flw_Closed */

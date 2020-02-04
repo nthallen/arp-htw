@@ -8,8 +8,8 @@
   ;
 &on_off_cmd <int>
   : Scroll_Pump { $0 = 0; } # Will be on mains board
-  : Exhaust_Vlv { $0 = 20; }
-  : Gas_Vlv_D { $0 = 23; }
+  : Exhaust_Vlv { $0 = 4; }
+  : Gas_Vlv_D { $0 = 0; }
   : QCLI_Reset { $0 = 34; }
   : Bub_In_Vlv_D { $0 = 36; }
   : Bub_Out_Vlv_D { $0 = 37; }
