@@ -132,13 +132,13 @@ ROWS 18
 
 1 PMotT   Pump  T
 1 PumpT   Pump  T
-1 Scroll_Pump_DS:DS10:4 Pump Status
+1 Scroll_Pump_DS:DS08:4 Pump Status
 
-# 1 Cmd0_I  Commands I 0
+  1 Cmd0_I  Commands I 0
 # 1 Cmd1_I  Commands I 1
 # 1 Cmd2_I  Commands I 2
 # 1 Cmd3_I  Commands I 3
-# 1 Cmd4_I  Commands I 4
+  1 Cmd4_I  Commands I 4
 # 1 Cmd5_I  Commands I 5
 # 1 Cmd6_I  Commands I 6
 # 1 Cmd7_I  Commands I 7
@@ -148,14 +148,14 @@ ROWS 18
 # 1 Cmd11_I Commands I 11
 # 1 Cmd12_I Commands I 12
 # 1 Cmd13_I Commands I 13
-1 Cmd20_I Commands I 20
-1 Cmd23_I Commands I 23
+# 1 Cmd20_I Commands I 20
+# 1 Cmd23_I Commands I 23
 
 
-1 Exh_Vlv_DS:DS10:4 GasDeck Commands
-1 Exh_Vlv_S:DS13:4 GasDeck Commands
-1 Gas_Vlv_D_DS:DS10:7 GasDeck Commands
-1 Gas_Vlv_D_S:DS13:4 GasDeck Commands
+1 Exh_Vlv_DS:DS08:4 GasDeck Commands
+1 Exh_Vlv_S:DS16:4 GasDeck Commands
+1 Gas_Vlv_D_DS:DS08:0 GasDeck Commands
+1 Gas_Vlv_D_S:DS16:0 GasDeck Commands
 1 Bub_In_Vlv_DS:DS14:4 GasDeck Commands
 1 Bub_Out_Vlv_DS:DS14:5 GasDeck Commands
 

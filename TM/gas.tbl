@@ -16,8 +16,8 @@ Cell {
 
 Valves {
   +-+;
-  Exhaust: (Exh_Vlv_DS,3)      (Exh_Vlv_S,6)      (Cmd20_I,7) "I/V";
-  Gas:     (Gas_Vlv_DS,1)      (Gas_Vlv_S,3)      (Cmd23_I,7) "I/V";
+  Exhaust: (Exh_Vlv_DS,3)      (Exh_Vlv_S,6)      (Cmd4_I,7) "I/V";
+  Gas:     (Gas_Vlv_DS,1)      (Gas_Vlv_S,3)      (Cmd0_I,7) "I/V";
 }
 
 GD {

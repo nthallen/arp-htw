@@ -6,9 +6,9 @@ Effective Frame Dimensions:
   8 Rows 57 Columns
   8 rows/sec
   3648 bits/sec
-  Data:  3384 bits/sec  93 %
+  Data:  3376 bits/sec  93 %
   Synch: 256 bits/sec  7 %
-  Empty: 8 bits/sec  0 %
+  Empty: 16 bits/sec  0 %
 -------End of Frame Statistics-----
 
 
@@ -123,9 +123,9 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Datum Cel2P (8,4,46,2)
 1/1 Hz 2 bytes Datum Cel2T (8,4,48,2)
 1/1 Hz 2 bytes Datum CellP (8,4,50,2)
-1/1 Hz 2 bytes Datum Cmd20_I (8,4,52,2)
+1/1 Hz 2 bytes Datum Cmd0_I (8,4,52,2)
 1/1 Hz 1 bytes Datum Cover_Stale (8,4,54,1)
-1/1 Hz 2 bytes Datum Cmd23_I (8,5,2,2)
+1/1 Hz 2 bytes Datum Cmd4_I (8,5,2,2)
 1/1 Hz 2 bytes Datum Det_T (8,5,4,2)
 1/1 Hz 2 bytes Datum Disk (8,5,6,2)
 1/1 Hz 2 bytes Datum Elb_T (8,5,8,2)
@@ -197,19 +197,18 @@ Effective Frame Dimensions:
 1/1 Hz 2 bytes Datum V28V4 (8,7,34,2)
 1/1 Hz 2 bytes Datum VtoIT (8,7,36,2)
 1/1 Hz 2 bytes Datum WingT (8,7,38,2)
-1/1 Hz 1 bytes Datum DS10 (8,7,40,1)
-1/1 Hz 1 bytes Datum DS13 (8,7,41,1)
-1/1 Hz 1 bytes Datum DS14 (8,7,42,1)
-1/1 Hz 1 bytes Datum DS18 (8,7,43,1)
-1/1 Hz 1 bytes Datum IOSwS (8,7,44,1)
-1/1 Hz 1 bytes Datum LPV_Stale (8,7,45,1)
-1/1 Hz 1 bytes Datum LTE_Stale (8,7,46,1)
-1/1 Hz 1 bytes Datum Plate_Stale (8,7,47,1)
-1/1 Hz 1 bytes Datum PVStat (8,7,48,1)
-1/1 Hz 1 bytes Datum SSP_Status (8,7,49,1)
-1/1 Hz 1 bytes Datum SW_St (8,7,50,1)
-1/1 Hz 1 bytes Datum TVStat (8,7,51,1)
-1/1 Hz 1 bytes Datum VM1_S (8,7,52,1)
-1/1 Hz 1 bytes Datum VM2_S (8,7,53,1)
+1/1 Hz 1 bytes Datum DS08 (8,7,40,1)
+1/1 Hz 1 bytes Datum DS14 (8,7,41,1)
+1/1 Hz 1 bytes Datum DS16 (8,7,42,1)
+1/1 Hz 1 bytes Datum IOSwS (8,7,43,1)
+1/1 Hz 1 bytes Datum LPV_Stale (8,7,44,1)
+1/1 Hz 1 bytes Datum LTE_Stale (8,7,45,1)
+1/1 Hz 1 bytes Datum Plate_Stale (8,7,46,1)
+1/1 Hz 1 bytes Datum PVStat (8,7,47,1)
+1/1 Hz 1 bytes Datum SSP_Status (8,7,48,1)
+1/1 Hz 1 bytes Datum SW_St (8,7,49,1)
+1/1 Hz 1 bytes Datum TVStat (8,7,50,1)
+1/1 Hz 1 bytes Datum VM1_S (8,7,51,1)
+1/1 Hz 1 bytes Datum VM2_S (8,7,52,1)
 -------End of PCM Definition-------
 
