@@ -33,6 +33,7 @@ genuibase = TS.genui
 Module TMbase
 Module Meerstetter src=Meerstetter.txt
 Module QCLI mode=noise
+Module mksflow src=mksflow.txt
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc

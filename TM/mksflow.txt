@@ -1,0 +1,4 @@
+Name MKS
+Port /dev/ser4
+Digital AirF 1 MFC 50 slm "Air"
+Digital BubF 2 MFC 50 sccm "Bubbler"

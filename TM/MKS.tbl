@@ -1,0 +1,36 @@
+AirF_v {
+  HBox { +-; Title: AirF; -+ };
+  Flow:   (AirF_Flow,7) slm;
+  Set_T:  (AirF_Set,7)  slm;
+  T:      (AirF_T,7)    C;
+  Status: (AirF_Status,4);
+  ACK:    (AirF_ACK,2);
+  ACK2:   (AirF_ACK2,2);
+  Stale:  (AirF_Stale,3);
+}
+
+BubF_v {
+  HBox { +-; Title: BubF; -+ };
+  Flow:   (BubF_Flow,7) sccm;
+  Set_T:  (BubF_Set,7)  sccm;
+  T:      (BubF_T,7)    C;
+  Status: (BubF_Status,4);
+  ACK:    (BubF_ACK,2);
+  ACK2:   (BubF_ACK2,2);
+  Stale:  (BubF_Stale,3);
+}
+
+MKS_flows {
+  HBox { +-; Title: MKS; -+ };
+  ""    >Set<        >Flow<;
+  AirF: (AirF_Set,7) (AirF_Flow,7) slm;
+  BubF: (BubF_Set,7) (BubF_Flow,7) sccm;
+  { HGlue 0+1 Stale: (MKS_Stale,3) }
+}
+
+MKS_hk {
+  HBox { +-; Title: "MKS HK"; -+ };
+  ""    >Temp<    "" >Status<        >ACK<   ""     >Stale<;
+  AirF: (AirF_T,7) C (AirF_Status,4) (AirF_ACK,2) (AirF_ACK2,2) (AirF_Stale,3);
+  BubF: (BubF_T,7) C (BubF_Status,4) (BubF_ACK,2) (BubF_ACK2,2) (BubF_Stale,3);
+}

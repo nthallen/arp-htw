@@ -1,0 +1,53 @@
+%{
+  /* mksflow driver interface */
+  #define MKS_MAX_DRIVES 2
+  #include "mksflow.h"
+  #define MKS_drive(x,y) MKS.drive[x].y
+%}
+TM typedef float MKS_Flow0_t { text "%7.0f"; }
+TM typedef float MKS_Flow1_t { text "%7.1f"; }
+TM typedef float MKS_Flow2_t { text "%7.2f"; }
+TM typedef float MKS_Flow3_t { text "%7.3f"; }
+TM typedef float MKS_Flow4_t { text "%7.4f"; }
+TM typedef uint16_t MKS_Status_t { text "%04X"; }
+TM typedef uint8_t MKS_ACK_t { text "%02X"; }
+TM typedef uint8_t MKS_Stale_t { text "%3u"; }
+TM typedef float MKS_Temp_t { text "%7.2f"; }
+
+TM 1 Hz MKS_Stale_t MKS_Stale;
+TM 1 Hz MKS_Flow3_t AirF_Set;
+TM 1 Hz MKS_Flow3_t AirF_Flow;
+TM 1 Hz MKS_Temp_t AirF_T;
+TM 1 Hz MKS_Status_t AirF_Status;
+TM 1 Hz MKS_ACK_t AirF_ACK;
+TM 1 Hz MKS_ACK_t AirF_ACK2;
+TM 1 Hz MKS_Stale_t AirF_Stale;
+TM 1 Hz MKS_Flow3_t BubF_Set;
+TM 1 Hz MKS_Flow3_t BubF_Flow;
+TM 1 Hz MKS_Temp_t BubF_T;
+TM 1 Hz MKS_Status_t BubF_Status;
+TM 1 Hz MKS_ACK_t BubF_ACK;
+TM 1 Hz MKS_ACK_t BubF_ACK2;
+TM 1 Hz MKS_Stale_t BubF_Stale;
+TM "Receive" MKS 1;
+
+Group MKS (MKS_Stale, AirF_Set, AirF_Flow, AirF_T, AirF_Status, AirF_ACK,
+    AirF_ACK2, AirF_Stale, BubF_Set, BubF_Flow, BubF_T, BubF_Status,
+    BubF_ACK, BubF_ACK2, BubF_Stale) {
+  MKS_Stale = MKS_obj->stale(255);
+  AirF_Set = MKS_drive(0,FlowSetPoint);
+  AirF_Flow = MKS_drive(0,Flow);
+  AirF_T = MKS_drive(0,DeviceTemp);
+  AirF_Status = MKS_drive(0,DeviceStatus);
+  AirF_ACK = MKS_drive(0,ACK);
+  AirF_ACK2 = MKS_drive(0,ACK2);
+  AirF_Stale = MKS_drive(0,Stale);
+  BubF_Set = MKS_drive(1,FlowSetPoint);
+  BubF_Flow = MKS_drive(1,Flow);
+  BubF_T = MKS_drive(1,DeviceTemp);
+  BubF_Status = MKS_drive(1,DeviceStatus);
+  BubF_ACK = MKS_drive(1,ACK);
+  BubF_ACK2 = MKS_drive(1,ACK2);
+  BubF_Stale = MKS_drive(1,Stale);
+  MKS_obj->synch();
+}

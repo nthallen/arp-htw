@@ -1,3 +1,5 @@
+Input "MKS.tbl";
+
 Idx {
   HBox { +-; Title: Indexers; -+ };
   TV: (TVStep,5) (TVStatFlag,5) (TVKill,4) (TVScan,4) (TVPos,7) V;
@@ -96,7 +98,7 @@ SW {
     |;
     { [Idx];
       [Valves];
-      HBox { [Cell]; |; [Flows] };
+      HBox { [Cell]; |; [MKS_flows] };
       +-+;
       HBox { " "; [Diagram]; " " };
       HBox { [GD]; |+; [GDT] };

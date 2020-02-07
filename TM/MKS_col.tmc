@@ -1,0 +1,4 @@
+%{
+  #include "mksflow.h"
+  mksflow_t MKS;
+%}

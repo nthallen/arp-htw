@@ -1,5 +1,6 @@
 Input "ME.tbl";
 Input "TMbase.tbl";
+Input "MKS.tbl";
 
 Cont_T {
   HBox { +-; Title: "Controlled Temps"; -+ };
@@ -101,6 +102,7 @@ SW {
       };
     }; |+; {
       [ME];
+      [MKS_hk];
       HBox { [VM]; |; [SW] };
       VGlue 0+1;
       HBox { [Pump]; |; [TMbaseB] };
