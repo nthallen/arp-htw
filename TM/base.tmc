@@ -2,6 +2,7 @@
 TM typedef double VOLTS;
 TM typedef double CELCIUS;
 TM typedef double TORR;
+TM typedef double PSI;
 TM typedef unsigned short UINT { text "%5u"; }
 TM typedef unsigned long ULONG { text "%8ld"; }
 TM typedef long L20 { text "%8ld"; }
@@ -52,6 +53,22 @@ TM typedef AI_X1 AI_SDPDP { text "%5.2lf"; convert VOLTS; }
     32768, 13.803311
   }
 
+TM typedef AI_XP768 P5000PSI_t { text "%6.1lf"; convert PSI; }
+  Calibration (AI_XP768, PSI) {
+    0, -10000,
+    6143, -10000,
+    6144, 0,
+    30720, 5000
+  }
+
+TM typedef AI_XP768 P100PSI_t { text "%6.2lf"; convert PSI; }
+  Calibration (AI_XP768, PSI) {
+    0, -1000,
+    6143, -1000,
+    6144, 0,
+    30720, 100
+  }
+
 TM typedef unsigned short AO
   { text "%6.4lf"; convert VOLTS; collect x = sbrwa(x.address); }
   Calibration ( AO, VOLTS ) {
@@ -88,9 +105,9 @@ TM 1 Hz AI_T30K Rov3T; Address Rov3T 0xC64; /* AI02_3, J1CB.38, J40CB-5 Roving T
 TM 1 Hz AI_T30K Rov4T; Address Rov4T 0xC84; /* AI02_4, J1CB.41, J40CB-7 Roving Temp 4 */
 TM 1 Hz AI_T30K Rov5T; Address Rov5T 0xCA4; /* AI02_5, J1CB.42, J40CB-9 Roving Temp 5 */
 /* TM 1 Hz AI_X1 TE1CT; Address TE1CT 0xCC4; */ /* AI02_6, J1CB.45, J59CB-22 Thermal Enclosure Control Temp #1 */
-TM 1 Hz AI_X1 GasHP; Address GasHP 0xCE4; /* AI02_7, J1CB.46, J20CB-5 Gas  High Pressure (Main Line) */
-TM 1 Hz AI_X1 GasLP; Address GasLP 0xC06; /* AI03_0, J1CB.49, J20CB-7 Gas Low Pressure (Main Line) */
-TM 1 Hz AI_X1 BubLP; Address BubLP 0xC26; /* AI03_1, J1CB.50, J20CB-9 Bubbler Low Pressure */
+TM 1 Hz P5000PSI_t GasHP; Address GasHP 0xCE4; /* AI02_7, J1CB.46, J20CB-5 Gas  High Pressure (Main Line) */
+TM 1 Hz P100PSI_t GasLP; Address GasLP 0xC06; /* AI03_0, J1CB.49, J20CB-7 Gas Low Pressure (Main Line) */
+TM 1 Hz P100PSI_t BubLP; Address BubLP 0xC26; /* AI03_1, J1CB.50, J20CB-9 Bubbler Low Pressure */
 TM 1 Hz AI_XP768 GasFl; Address GasFl 0xC46; /* AI03_2, J1CB.53, J20CB-11 Gas Flow (Main Line) */
 TM 1 Hz AI_XP768 BubFl; Address BubFl 0xC66; /* AI03_3, J1CB.54, J20CB-13 Bubbler Flow */
 TM 1 Hz AI_X1 Bub_P; Address Bub_P 0xC86; /* AI03_4, J1CB.57, J20CB-15 Bubbler High Pressure (1000 Torr) */

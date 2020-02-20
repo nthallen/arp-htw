@@ -24,9 +24,9 @@ Valves {
 
 GD {
   HBox { +-; Title: "Gas Deck"; -+ };
-  "Gas HP:"   (GasHP,7) V;
-  "Main LP:"  (GasLP,7) V;
-  "Bub LP:"   (BubLP,7) V;
+  "Gas HP:"   (GasHP,6) psi;
+  "Main LP:"  (GasLP,6) psi;
+  "Bub LP:"   (BubLP,6) psi;
 }
 
 MF {
