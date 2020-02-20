@@ -54,7 +54,7 @@ TM typedef AI_X1 AI_SDPDP { text "%5.2lf"; convert VOLTS; }
   }
 
 TM typedef AI_XP768 P5000PSI_t { text "%6.1lf"; convert PSI; }
-  Calibration (AI_XP768, PSI) {
+  Calibration (P5000PSI_t, PSI) {
     0, -10000,
     6143, -10000,
     6144, 0,
@@ -62,7 +62,7 @@ TM typedef AI_XP768 P5000PSI_t { text "%6.1lf"; convert PSI; }
   }
 
 TM typedef AI_XP768 P100PSI_t { text "%6.2lf"; convert PSI; }
-  Calibration (AI_XP768, PSI) {
+  Calibration (P100PSI_t, PSI) {
     0, -1000,
     6143, -1000,
     6144, 0,
