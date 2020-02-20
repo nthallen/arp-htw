@@ -85,10 +85,10 @@
   STRB,  8, 0x0020; /* 69: Cmd_34_Off: QCLI_Reset */
   SPARE, 8, 0x0040; /* 70: Cmd_35_On: Gas_Vlv_D */
   SPARE, 8, 0x0080; /* 71: Cmd_35_Off: Gas_Vlv_D */
-  STRB,  9, 0x0200; /* 72: Cmd_36_On:  Bub_In_Vlv_D On */
-  STRB,  9, 0x0100; /* 73: Cmd_36_Off: Bub_In_Vlv_D Off */
-  STRB,  9, 0x0800; /* 74: Cmd_37_On:  Bub_Out_Vlv_D On */
-  STRB,  9, 0x0400; /* 75: Cmd_37_Off: Bub_Out_Vlv_D Off */
+  STRB,  9, 0x0100; /* 72: Cmd_36_On:  Bub_In_Vlv_D On */
+  STRB,  9, 0x0200; /* 73: Cmd_36_Off: Bub_In_Vlv_D Off */
+  STRB,  9, 0x0400; /* 74: Cmd_37_On:  Bub_Out_Vlv_D On */
+  STRB,  9, 0x0800; /* 75: Cmd_37_Off: Bub_Out_Vlv_D Off */
   SPARE, 9, 0x1000; /* 76: SPARE:  */
   SPARE, 9, 0x2000; /* 77: SPARE:  */
   SPARE, 9, 0x4000; /* 78: SPARE:  */

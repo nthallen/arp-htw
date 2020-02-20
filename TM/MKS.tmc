@@ -15,8 +15,8 @@ TM typedef uint8_t MKS_Stale_t { text "%3u"; }
 TM typedef float MKS_Temp_t { text "%7.2f"; }
 
 TM 1 Hz MKS_Stale_t MKS_Stale;
-TM 1 Hz MKS_Flow3_t AirF_Set;
-TM 1 Hz MKS_Flow3_t AirF_Flow;
+TM 1 Hz MKS_Flow0_t AirF_Set;
+TM 1 Hz MKS_Flow0_t AirF_Flow;
 TM 1 Hz MKS_Temp_t AirF_T;
 TM 1 Hz MKS_Status_t AirF_Status;
 TM 1 Hz MKS_ACK_t AirF_ACK;

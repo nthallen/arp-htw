@@ -1,7 +1,7 @@
 AirF_v {
   HBox { +-; Title: AirF; -+ };
-  Flow:   (AirF_Flow,7) slm;
-  Set_T:  (AirF_Set,7)  slm;
+  Flow:   (AirF_Flow,7) sccm;
+  Set_T:  (AirF_Set,7)  sccm;
   T:      (AirF_T,7)    C;
   Status: (AirF_Status,4);
   ACK:    (AirF_ACK,2);
@@ -23,7 +23,7 @@ BubF_v {
 MKS_flows {
   HBox { +-; Title: MKS; -+ };
   ""    >Set<        >Flow<;
-  AirF: (AirF_Set,7) (AirF_Flow,7) slm;
+  AirF: (AirF_Set,7) (AirF_Flow,7) sccm;
   BubF: (BubF_Set,7) (BubF_Flow,7) sccm;
   { HGlue 0+1 Stale: (MKS_Stale,3) }
 }
