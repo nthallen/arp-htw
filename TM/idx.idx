@@ -21,13 +21,12 @@ channel 1 Throttle Valve
    status   1 Hz TVStat Diagram TVStatFlag KillStat TVKill
    scanstat TVScan
    scan
-   invert direction
    disable zeroref
    speed 1067 Hz
   # Swap Limits
   # Invert Step
   # Invert Direction
   # Invert Run
-  # Invert In Limit
-  # Invert Out Limit
+   Invert In Limit
+   Invert Out Limit
   # Chop

@@ -208,6 +208,7 @@ TM 1 Hz DStat DS08; Address DS08 0x82A;
 /* TM 1 Hz DStat DS13; Address DS13 0x851; */
 TM 1 Hz DStat DS14; Address DS14 0x84A;
 TM 1 Hz DStat DS16; Address DS16 0x84C;
+  Collect DS16 = sbrba(DS16.address) ^ 0x11;
 /* TM 1 Hz DStat DS18; Address DS18 0x868; */
 
 /* TM 1 Hz DSWord DS822; Address DS822 0x822; */
