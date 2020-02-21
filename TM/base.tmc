@@ -30,21 +30,20 @@ TM typedef AI_X1 AI_XP768 { text "%7.4lf"; }
   }
 /* fix gain and conversion
  * 0-5V = 0-1000Torr
- * Assume reading at unity gain
  */
-TM typedef AI_X1 AI_P1000Torr { text "%5.1lf"; convert TORR; }
+TM typedef AI_XP768 AI_P1000Torr { text "%5.1lf"; convert TORR; }
   Calibration ( AI_P1000Torr, TORR ) {
     0, 0,
-    32000, 1000
+    30720, 1000
   }
 /* fix gain and conversion
    0-10V = 0-100Torr
-   Then divide down to 3.2841933 0-3.284V = 0-1000Torr
+   Then divide down to 3.2841933 0-3.284V = 0-100Torr
  */
 TM typedef AI_X1 AI_P100Torr { text "%5.1lf"; convert TORR; }
   Calibration ( AI_P100Torr, TORR ) {
     0, 0,
-    32000, 100
+    26272, 100
   }
 
 TM typedef AI_X1 AI_SDPDP { text "%5.2lf"; convert VOLTS; }
@@ -110,7 +109,7 @@ TM 1 Hz P100PSI_t GasLP; Address GasLP 0xC06; /* AI03_0, J1CB.49, J20CB-7 Gas Lo
 TM 1 Hz P100PSI_t BubLP; Address BubLP 0xC26; /* AI03_1, J1CB.50, J20CB-9 Bubbler Low Pressure */
 TM 1 Hz AI_XP768 GasFl; Address GasFl 0xC46; /* AI03_2, J1CB.53, J20CB-11 Gas Flow (Main Line) */
 TM 1 Hz AI_XP768 BubFl; Address BubFl 0xC66; /* AI03_3, J1CB.54, J20CB-13 Bubbler Flow */
-TM 1 Hz AI_X1 Bub_P; Address Bub_P 0xC86; /* AI03_4, J1CB.57, J20CB-15 Bubbler High Pressure (1000 Torr) */
+TM 1 Hz AI_P1000Torr Bub_P; Address Bub_P 0xC86; /* AI03_4, J1CB.57, J20CB-15 Bubbler High Pressure (1000 Torr) */
 TM 1 Hz AI_T30K Bub_T; Address Bub_T 0xCA6; /* AI03_5, J1CB.58, J20CB-17 Bubbler Temp */
 TM 1 Hz AI_T30K GD_1T; Address GD_1T 0xCC6; /* AI03_6, J1CB.61, J20CB-20 Gas Deck Temp 1 */
 TM 1 Hz AI_T30K GD_2T; Address GD_2T 0xCE6; /* AI03_7, J1CB.62, J20CB-22 Gas Deck Temp 2 */
@@ -121,14 +120,14 @@ TM 1 Hz AI_X1 InlDP; Address InlDP 0xC68; /* AI04_3, J1CB.70, J126CB-1 Inlet Dif
 TM 1 Hz AI_X1 PD__P; Address PD__P 0xC88; /* AI04_4, J1CB.73, J126CB-3 Pallet Duct Pressure */
 TM 1 Hz AI_X1 PD_DP; Address PD_DP 0xCA8; /* AI04_5, J1CB.74, J126CB-5 Pallet Duct Differential Pressure */
 TM 1 Hz AI_T30K WingT; Address WingT 0xCC8; /* AI04_6, J1CB.77, J126CB-7 Winglet Temp */
-TM 1 Hz AI_X1 PDSkT; Address PDSkT 0xCE8; /* AI04_7, J1CB.78, J126CB-9 Pallet Duct Skin Temp */
+TM 1 Hz AI_T30K PDSkT; Address PDSkT 0xCE8; /* AI04_7, J1CB.78, J126CB-9 Pallet Duct Skin Temp */
 TM 1 Hz AI_T30K PD__T; Address PD__T 0xC0A; /* AI05_0, J1CB.81, J126CB-11 Pallet Duct Temp */
 TM 1 Hz AI_T30K Inl_T; Address Inl_T 0xC2A; /* AI05_1, J1CB.82, J177CB-3 Inlet Temp */
 TM 1 Hz AI_T30K Elb_T; Address Elb_T 0xC4A; /* AI05_2, J1CB.85, J177CB-1 Elbow Temp */
 TM 1 Hz AI_X1 PVPos; Address PVPos 0xC6A; /* AI05_3, J1CB.86, J126CB-13 Pinch Vlv Pot Position */
 TM 1 Hz AI_T30K SSP_T; Address SSP_T 0xC8A; /* AI05_4, J1CB.89, J345CB-11 SSP Bd Temp */
-TM 1 Hz AI_T30K QCLIT; Address QCLIT 0xCAA; /* AI05_5, J1CB.90, J346CB-3 QCLI Bd Temp */
-TM 1 Hz AI_T30K VtoIT; Address VtoIT 0xCCA; /* AI05_6, J1CB.93, J346CB-1 V to I Bd Temp */
+/* TM 1 Hz AI_T30K QCLIT; Address QCLIT 0xCAA; */ /* AI05_5, J1CB.90, J346CB-3 QCLI Bd Temp */
+/* TM 1 Hz AI_T30K VtoIT; Address VtoIT 0xCCA; */ /* AI05_6, J1CB.93, J346CB-1 V to I Bd Temp */
 TM 1 Hz AI_XP768 Cal1F; Address Cal1F 0xCEA; /* AI05_7, J1CB.94, J21CB-11 Calibration Bench Flow 1 (Main) */
 TM 1 Hz AI_XP768 Cal2F; Address Cal2F 0xC0C; /* AI06_0, J1CB.97, J21CB-13 Calibration Bench Flow 2 (Bubbler) */
 TM 1 Hz AI_XP768 Cal3F; Address Cal3F 0xC2C; /* AI06_1, J1CB.98, J21CB-15 Calibration Bench Flow 3 (Bubbler) */
@@ -138,7 +137,7 @@ TM 1 Hz AI_T30K CBB2T; Address CBB2T 0xC8C; /* AI06_4, J1CB.105, J21CB-22 Calibr
 TM 1 Hz AI_X1 CBB2P; Address CBB2P 0xCAC; /* AI06_5, J1CB.106, J21CB-24 Calibration Bench Bubbler 2 Pressure */
 /* TM 1 Hz AI_X1 LTE2R7T; Address LTE2R7T 0xCCC; */ /* AI06_6, J1CB.109, J345CB-3 Laser TEC Temp Readout */
 TM 1 Hz AI_X1 Las_I; Address Las_I 0xCEC; /* AI06_7, J1CB.110, J345CB-4 Laser Current */
-TM 1 Hz AI_T30K PampT; Address PampT 0xC0E; /* AI07_0, J1CB.113, J345CB-20 Preamp Temp */
+/* TM 1 Hz AI_T30K PampT; Address PampT 0xC0E; */ /* AI07_0, J1CB.113, J345CB-20 Preamp Temp */
 TM 1 Hz AI_T30K Eta_T; Address Eta_T 0xC2E; /* AI07_1, J1CB.114, J345CB-10 Etalon Temp(qcli bd out placehold) */
 TM 1 Hz AI_X1 TVPos; Address TVPos 0xC4E; /* AI07_2, J1CB.117, J90CB-3 Throttle Vlv Pot Position */
 TM 1 Hz AI_X1 Sp1AI; Address Sp1AI 0xC6E; /* AI07_3, J1CB.118, PAD Spare Ana Channel 1 */

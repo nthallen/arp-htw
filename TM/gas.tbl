@@ -43,7 +43,7 @@ Bub {
       -+;
       HBox { +|+;
         {
-          P: (Bub_P,7) V;
+          P: (Bub_P,5) Torr;
           T: (Bub_T,6) C;
         };
       };

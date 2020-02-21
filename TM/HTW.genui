@@ -203,7 +203,7 @@ ROWS 18
 1 11:DACS_PTRHS:11 DACS_PTRH Status %.0lf
 
 1 SW_St  Misc SW_St
-1 PampT  Misc PampT
+# 1 PampT  Misc PampT
 
 
 ### Cal system
