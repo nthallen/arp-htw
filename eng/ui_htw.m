@@ -70,7 +70,6 @@ f = ne_dialg(f, 'add', 1, 0, 'phtwdacsptrhrh', 'RH' );
 f = ne_dialg(f, 'add', 1, 0, 'phtwdacsptrhs', 'Status' );
 f = ne_dialg(f, 'add', 0, 1, 'ghtwm', 'Misc' );
 f = ne_dialg(f, 'add', 1, 0, 'phtwmsws', 'SW St' );
-f = ne_dialg(f, 'add', 1, 0, 'phtwmpt', 'Pamp T' );
 f = ne_dialg(f, 'add', 0, 1, 'ghtwts', 'Temp Sensors' );
 f = ne_dialg(f, 'add', 1, 0, 'phtwtst', 'Temp' );
 f = ne_dialg(f, 'add', 1, 0, 'phtwtsc', 'Count' );
