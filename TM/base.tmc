@@ -29,12 +29,28 @@ TM typedef AI_X1 AI_XP768 { text "%7.4lf"; }
     32768, 5.3333
   }
 /* fix gain and conversion
- * 0-5V = 0-1000Torr
+ * 0-4.986V = 0-1000Torr
  */
 TM typedef AI_XP768 AI_P1000Torr { text "%5.1lf"; convert TORR; }
   Calibration ( AI_P1000Torr, TORR ) {
     0, 0,
-    30720, 1000
+    30634, 1000
+  }
+/* CellP is 0-100 Torr in 0-10 V divided down in
+ * hardware to 0-4 V.
+ */
+TM typedef CellP_t { text "%5.1lf"; convert TORR; }
+  Calibration ( CellP_t, TORR ) {
+    0, 0,
+    32000, 100
+  }
+/* Cel2P is 0-1000 Torr in 0-10 V divided down in
+ * hardware to 0-4 V.
+ */
+TM typedef Cel2P_t { text "%5.1lf"; convert TORR; }
+  Calibration ( Cel2P_t, TORR ) {
+    0, 0,
+    32000, 1000
   }
 /* fix gain and conversion
    0-10V = 0-100Torr
@@ -95,7 +111,7 @@ TM 1 Hz AI_T30K Skn2T; Address Skn2T 0xC42; /* AI01_2, J1CB.21, J40CB-13 Skin Te
 TM 1 Hz AI_T30K Skn3T; Address Skn3T 0xC62; /* AI01_3, J1CB.22, J40CB-15 Skin Temp 3 */
 TM 1 Hz AI_T30K Skn4T; Address Skn4T 0xC82; /* AI01_4, J1CB.25, J40CB-17 Skin Temp 4 */
 TM 1 Hz AI_T30K Skn5T; Address Skn5T 0xCA2; /* AI01_5, J1CB.26, J40CB-20 Skin Temp 5 */
-TM 1 Hz AI_P100Torr CellP; Address CellP 0xCC2; /* AI01_6, J1CB.29, J40CB-30 Cell Pressure (100 Torr) */
+TM 1 Hz CellP_t CellP; Address CellP 0xCC2; /* AI01_6, J1CB.29, J40CB-30 Cell Pressure (100 Torr) */
 TM 1 Hz AI_P1000Torr Cel2P; Address Cel2P 0xCE2; /* AI01_7, J1CB.30, J40CB-32 Cell Pressure (1000 Torr) */
 /* TM 1 Hz AI_X1 CelCT; Address CelCT 0xC04; */ /* AI02_0, J1CB.33, J59CB-9 Cell Control Temp */
 TM 1 Hz AI_T30K Rov1T; Address Rov1T 0xC24; /* AI02_1, J1CB.34, J40CB-1 Roving Temp 1 */
