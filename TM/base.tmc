@@ -112,7 +112,7 @@ TM 1 Hz AI_T30K Skn3T; Address Skn3T 0xC62; /* AI01_3, J1CB.22, J40CB-15 Skin Te
 TM 1 Hz AI_T30K Skn4T; Address Skn4T 0xC82; /* AI01_4, J1CB.25, J40CB-17 Skin Temp 4 */
 TM 1 Hz AI_T30K Skn5T; Address Skn5T 0xCA2; /* AI01_5, J1CB.26, J40CB-20 Skin Temp 5 */
 TM 1 Hz CellP_t CellP; Address CellP 0xCC2; /* AI01_6, J1CB.29, J40CB-30 Cell Pressure (100 Torr) */
-TM 1 Hz AI_P1000Torr Cel2P; Address Cel2P 0xCE2; /* AI01_7, J1CB.30, J40CB-32 Cell Pressure (1000 Torr) */
+TM 1 Hz Cel2P_t Cel2P; Address Cel2P 0xCE2; /* AI01_7, J1CB.30, J40CB-32 Cell Pressure (1000 Torr) */
 /* TM 1 Hz AI_X1 CelCT; Address CelCT 0xC04; */ /* AI02_0, J1CB.33, J59CB-9 Cell Control Temp */
 TM 1 Hz AI_T30K Rov1T; Address Rov1T 0xC24; /* AI02_1, J1CB.34, J40CB-1 Roving Temp 1 */
 TM 1 Hz AI_T30K Rov2T; Address Rov2T 0xC44; /* AI02_2, J1CB.37, J40CB-3 Roving Temp 2 */
