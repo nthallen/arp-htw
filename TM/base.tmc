@@ -39,7 +39,7 @@ TM typedef AI_XP768 AI_P1000Torr { text "%5.1lf"; convert TORR; }
 /* CellP is 0-100 Torr in 0-10 V divided down in
  * hardware to 0-4 V.
  */
-TM typedef CellP_t { text "%5.1lf"; convert TORR; }
+TM typedef AI_X1 CellP_t { text "%5.1lf"; convert TORR; }
   Calibration ( CellP_t, TORR ) {
     0, 0,
     32000, 100
@@ -47,7 +47,7 @@ TM typedef CellP_t { text "%5.1lf"; convert TORR; }
 /* Cel2P is 0-1000 Torr in 0-10 V divided down in
  * hardware to 0-4 V.
  */
-TM typedef Cel2P_t { text "%5.1lf"; convert TORR; }
+TM typedef AI_X1 Cel2P_t { text "%5.1lf"; convert TORR; }
   Calibration ( Cel2P_t, TORR ) {
     0, 0,
     32000, 1000
