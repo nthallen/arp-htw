@@ -6,6 +6,9 @@ ModuleDef mains {
 }
 
 tmcbase = mains.tmc
+tmcbase = Mains_T30K75KU.tmc
 colbase = mains_col.tmc
 cmdbase = mains.cmd
 genuibase = mains.genui
+%%
+LDFLAGS+=-lsubbuspp

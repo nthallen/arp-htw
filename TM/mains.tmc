@@ -1,5 +1,5 @@
 %{
-  #include "subbuspp.h"
+  // #include "subbuspp.h"
   // #define disarm_sic()
   // #define tick_sic()
 %}
@@ -17,19 +17,20 @@ TM typedef int16_t Mains_V80I_t { text "%6.3lf"; Convert Mains_AMPS_t; }
   }
 
 TM typedef int16_t Mains_V80V_t { text "%7.3lf"; Convert Mains_VOLTS_t; }
-  Calibration (Mains_V80V_t, Mains_AMPS_t) {
+  Calibration (Mains_V80V_t, Mains_VOLTS_t) {
     0, 0,
     32768, 129.27
   }
 
 TM typedef int16_t Mains_V28V_t { text "%7.3lf"; Convert Mains_VOLTS_t; }
-  Calibration (Mains_V28V_t, Mains_AMPS_t) {
+  Calibration (Mains_V28V_t, Mains_VOLTS_t) {
     0, 0,
     32768, 45.056
   }
 
 TM typedef int16_t Mains_T30K75KU { text "%6.2lf"; Convert Mains_CELCIUS_t; }
-  /* Calibration TBD: Vref = 2.5V, full scale ADC is 4.096 */
+  /* Calibration in external file: Vref = 2.5V, full scale ADC is 4.096 */
+
 TM typedef uint16_t Mains_Status_t { text "%04X"; }
 
 TM 1 Hz Mains_T30K75KU Mains_Ch0T;

@@ -1,4 +1,5 @@
 Input "MKS.tbl";
+Input "mains.tbl";
 
 Idx {
   HBox { +-; Title: Indexers; -+ };
@@ -95,7 +96,7 @@ SW {
 }
 
 { HBox {
-    |;
+    |+;
     { [Idx];
       [Valves];
       HBox { [Cell]; |; [MKS_flows] };
@@ -104,8 +105,10 @@ SW {
       HBox { [GD]; |+; [GDT] };
       +-+;
       >[SW]<;
-      +-+;
     };
-    |;
-  }
+    |+;
+    [Mains];
+    |+;
+  };
+  -;
 }

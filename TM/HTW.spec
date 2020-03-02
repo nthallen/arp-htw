@@ -48,7 +48,7 @@ HTWcol : -lsubbus
 HTWsrvr : -lsubbus
 HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc HTW.tma TV.tma PV.tma
 hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
-gddisp : dstat.tmc idxflag.tmc gas.tbl
+gddisp : dstat.tmc idxflag.tmc mains_conv.tmc gas.tbl
 datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc data.tbl /usr/local/share/oui/cic.oui
 TSdisp : TS_conv.tmc TS.tbl
 doit : HTW.doit
