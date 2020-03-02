@@ -1,0 +1,122 @@
+%{
+  #include "msg.h"
+
+  subbuspp *CAN;
+  typedef struct {
+    subbus_mread_req *req;
+    uint16_t bdid;
+    uint16_t start;
+    uint16_t nwords;
+    bool saw_nack;
+    const char *reason;
+  } mains_mread_t;
+  mains_mread_t *Mains_mreq1;
+  uint16_t Mains_rvals[12];
+
+  subbus_mread_req *CAN_sequential_mread(subbuspp *P, uint16_t bdid, uint16_t start, uint16_t n_reads,
+            uint16_t cmd_stat_addr) {
+    uint16_t bdid_hi = bdid<<8;
+    char mreqstr[30];
+    if (cmd_stat_addr) {
+      snprintf(mreqstr, 30, "%X:1:%X,%X",
+          bdid_hi | start,
+          bdid_hi | (start+n_reads-1),
+          bdid_hi | cmd_stat_addr);
+      ++n_reads;
+    } else {
+      snprintf(mreqstr, 30, "%X:1:%X",
+          bdid_hi | start,
+          bdid_hi | (start+n_reads-1));
+    }
+    subbus_mread_req *mreq = P->pack_mread_request(n_reads, mreqstr);
+    return mreq;
+  }
+  
+  mains_mread_t *Mains_mread_init(uint16_t bdid, uint16_t start, uint16_t n_reads, uint16_t cmd_stat_addr) {
+    mains_mread_t *mains = (mains_mread_t*)new_memory(sizeof(mains_mread_t));
+    mains->req = CAN_sequential_mread(CAN, bdid, start, n_reads, cmd_stat_addr);
+    mains->bdid = bdid;
+    mains->start = start;
+    mains->nwords = n_reads;
+    mains->saw_nack = false;
+    mains->reason = "success";
+    return mains;
+  }
+  
+  bool mains_mread(mains_mread_t *mains) {
+    uint16_t nwords;
+    int rv = CAN->mread_subbus_nw(mains->req, &Mains_rvals[0], &nwords);
+    if (rv < 0) {
+      msg(2, "mread_subbus_nw(mains%d) returned error %d", mains->bdid, rv);
+      mains->saw_nack = true;
+      mains->reason = "error";
+      return false;
+    }
+    if (nwords != mains->nwords) {
+      msg(2, "mread_subbus_nw(mains%d) returned %d words, expected %d", mains->bdid, nwords, mains->nwords);
+      mains->saw_nack = true;
+      mains->reason = "invalid wordcount";
+      return false;
+    }
+    switch (rv) {
+      case SBS_ACK:
+        if (mains->saw_nack) {
+          msg(0, "Mains ID:%d recovered from %s", mains->bdid, mains->reason);
+          mains->saw_nack = false;
+        }
+        return true;
+      case SBS_NOACK:
+        if (!mains->saw_nack) {
+          msg(2, "Mains reported NACK on read from ID:%d %d-%d",
+              mains->bdid, mains->start, mains->start+mains->nwords-1);
+          mains->saw_nack = true;
+          mains->reason = "NACK";
+        }
+        return true;
+      default:
+        if (!mains->saw_nack) {
+          msg(2, "Mains ID:%d unexpected return code %d",
+              mains->bdid, rv);
+          mains->saw_nack = true;
+          mains->reason = "unexpected return";
+        }
+        return true;
+    }
+  }
+  
+  typedef struct {
+    uint16_t n_words;
+    char name[0x50];
+  } device_name_t;
+  
+  void identify_board(uint8_t bdid) {
+    uint16_t bdid_hi = bdid<<8;
+    // msg(0,"read_ack(0x%02X03)", bdid);
+    uint16_t values[4];
+    uint16_t nread;
+    subbus_mread_req *mreq = CAN_sequential_mread(CAN, bdid, 0x05, 4, 0);
+    CAN->mread_subbus_nw(mreq, values, &nread);
+    msg(0, "  Board ID:%d Build:%d S/N:%d Instrument:%d", values[0], values[1], values[2], values[3]);
+    free_memory(mreq);
+    
+    char mreqstr[30];
+    snprintf(mreqstr, 30, "%X|28@%X", bdid_hi|8, bdid_hi|9);
+    mreq = CAN->pack_mread_request(0x29, mreqstr);
+    device_name_t devname;
+    int rv = CAN->mread_subbus_nw(mreq, (uint16_t*)&devname, &nread);
+    if (rv < 0) {
+      msg(2, "Error %d from mread", rv);
+    } else {
+      msg(0, "nr:%u/%u '%s'", nread, devname.n_words, &devname.name[0]);
+    }
+    free_memory(mreq);
+  }
+  
+  void CAN_init() {
+    CAN = new subbuspp("CAN");
+    CAN->load();
+    identify_board(1);
+    Mains_mreq1 = Mains_mread_init(1, 0x10, 11, 0x20);
+  }
+%}
+TM INITFUNC CAN_init();

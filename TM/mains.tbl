@@ -1,0 +1,21 @@
+Mains {
+  HBox { +-; Title: "Mains"; -+ };
+  I2C: (Mains_I2C_Status,4);
+  ADC: (Mains_ADC_Status,4);
+  {Pump: (Pump_On_Off,3) (Pump_Speed,4) };
+  {LEDS: (StLED1,3) (StLED2,3) (StLED3,3) };
+  Ch0T: (Mains_Ch0T,6) C;
+  Ch1T: (Mains_Ch1T,6) C;
+  Ch2T: (Mains_Ch2T,6) C;
+  Ch3T: (Mains_Ch3T,6) C;
+  PMotT: (Mains_PMotT,6) C;
+  PumpT: (Mains_PumpT,6) C;
+  V80V: (Mains_V80V,6) V;
+  V80I: (Mains_V80I,6) A;
+  V28V: (Mains_V28V,6) V;
+}
+
+MainsB {
+  HBox { |; [Mains]; | };
+  -;
+}

@@ -1,0 +1,11 @@
+ModuleDef mains {
+  Convenience module to wrap up the mains source files
+  There are also mains.tbl and mains_conv.tmc, which should be
+  used together when included into a display program,
+  and mains.h, which defines the initialization routine.
+}
+
+tmcbase = mains.tmc
+colbase = mains_col.tmc
+cmdbase = mains.cmd
+genuibase = mains.genui

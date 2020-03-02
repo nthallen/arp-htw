@@ -1,0 +1,17 @@
+%{
+  #define MAINS_ON_OFF_text(x) ((x)?" On":"Off")
+  #define MAINS_PUMP_SPEED_text(x) ((x)?"Full":"Zero")
+%}
+TM typedef uint8_t MAINS_ON_OFF_t { text "%3u" MAINS_ON_OFF_text(); }
+TM typedef uint8_t MAINS_PUMP_SPEED_t { text "%4u" MAINS_PUMP_SPEED_text(); }
+
+MAINS_ON_OFF_t Pump_On_Off; Invalidate Pump_On_Off;
+{ Pump_On_Off = (MAINS_Cmd_Status>>0) & 1; Validate Pump_On_Off; }
+MAINS_PUMP_SPEED_t Pump_Speed; Invalidate Pump_Speed;
+{ Pump_Speed = (MAINS_Cmd_Status>>1) & 1; Validate Pump_Speed; }
+MAINS_ON_OFF_t StLED1; Invalidate StLED1;
+{ StLED1 = (MAINS_Cmd_Status>>3) & 1; Validate StLED1; }
+MAINS_ON_OFF_t StLED2; Invalidate StLED2;
+{ StLED2 = (MAINS_Cmd_Status>>4) & 1; Validate StLED2; }
+MAINS_ON_OFF_t StLED3; Invalidate StLED3;
+{ StLED3 = (MAINS_Cmd_Status>>5) & 1; Validate StLED3; }

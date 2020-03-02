@@ -1,0 +1,67 @@
+%{
+  #include "subbuspp.h"
+  // #define disarm_sic()
+  // #define tick_sic()
+%}
+TM typedef double Mains_VOLTS_t { text "%6.3lf"; }
+TM typedef double Mains_AMPS_t { text "%6.3lf"; }
+TM typedef double Mains_CELCIUS_t { text "%6.2lf"; }
+
+TM typedef int16_t Mains_V80I_t { text "%6.3lf"; Convert Mains_AMPS_t; }
+  /* Full scale is 0.125 V. The voltage is measured across a 7 mOhm resistor
+     So the current is V/.007 and the full scale current is
+     0.125/.007 = 17.857 A */
+  Calibration (Mains_V80I_t, Mains_AMPS_t) {
+    0, 0,
+    32768, 17.857
+  }
+
+TM typedef int16_t Mains_V80V_t { text "%7.3lf"; Convert Mains_VOLTS_t; }
+  Calibration (Mains_V80V_t, Mains_AMPS_t) {
+    0, 0,
+    32768, 129.27
+  }
+
+TM typedef int16_t Mains_V28V_t { text "%7.3lf"; Convert Mains_VOLTS_t; }
+  Calibration (Mains_V28V_t, Mains_AMPS_t) {
+    0, 0,
+    32768, 45.056
+  }
+
+TM typedef int16_t Mains_T30K75KU { text "%6.2lf"; Convert Mains_CELCIUS_t; }
+  /* Calibration TBD: Vref = 2.5V, full scale ADC is 4.096 */
+TM typedef uint16_t Mains_Status_t { text "%04X"; }
+
+TM 1 Hz Mains_T30K75KU Mains_Ch0T;
+TM 1 Hz Mains_T30K75KU Mains_Ch1T;
+TM 1 Hz Mains_T30K75KU Mains_Ch2T;
+TM 1 Hz Mains_T30K75KU Mains_Ch3T;
+TM 1 Hz Mains_T30K75KU Mains_PMotT;
+TM 1 Hz Mains_T30K75KU Mains_PumpT;
+TM 1 Hz Mains_V80V_t Mains_V80V;
+TM 1 Hz Mains_V80I_t Mains_V80I;
+TM 1 Hz Mains_V28V_t Mains_V28V;
+TM 1 Hz Mains_Status_t Mains_I2C_Status;
+TM 1 Hz Mains_Status_t Mains_ADC_Status;
+TM 1 Hz Mains_Status_t Mains_Cmd_Status;
+
+Group Mains1 (Mains_I2C_Status, Mains_ADC_Status, Mains_Ch0T,
+              Mains_Ch1T, Mains_Ch2T, Mains_Ch3T, Mains_PMotT,
+              Mains_PumpT, Mains_V80V, Mains_V80I, Mains_V28V,  
+              Mains_Cmd_Status) {
+  if (mains_mread(Mains_mreq1)) {
+    Mains_I2C_Status = Mains_rvals[0];
+    Mains_ADC_Status = Mains_rvals[1];
+    Mains_Ch0T = Mains_rvals[2];
+    Mains_Ch1T = Mains_rvals[3];
+    Mains_Ch2T = Mains_rvals[4];
+    Mains_Ch3T = Mains_rvals[5];
+    Mains_PMotT = Mains_rvals[6];
+    Mains_PumpT = Mains_rvals[7];
+    Mains_V80V = Mains_rvals[8];
+    Mains_V80I = Mains_rvals[9];
+    Mains_V28V = Mains_rvals[10];
+    Mains_Cmd_Status = Mains_rvals[11];
+  }
+}
+

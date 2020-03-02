@@ -1,0 +1,12 @@
+ 1 Mains_I2C_Status Mains Status %.0lf
+ 1 Mains_ADC_Status Mains Status %.0lf
+ 1 Mains_Ch0T Mains Temps
+ 1 Mains_Ch1T Mains Temps
+ 1 Mains_Ch2T Mains Temps
+ 1 Mains_Ch3T Mains Temps
+ 1 Mains_PMotT Mains Temps
+ 1 Mains_PumpT Mains Temps
+ 1 Mains_V80V Mains Volts
+ 1 Mains_V80I Mains Amps
+ 1 Mains_V28V Mains Volts
+ 1 Mains_Cmd_Status Mains Status %.0lf
