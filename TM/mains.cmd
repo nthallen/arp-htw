@@ -14,7 +14,8 @@
 &command
   : Mains Pump Enable * { CAN->write_ack((1<<8)+0x20, 0); }
   : Mains Pump Disable * { CAN->write_ack((1<<8)+0x20, 1); }
-  : Mains Pump Speed Zero * { CAN->write_ack((1<<8)+0x20, 2); }
+  : Mains Pump Stop * { CAN->write_ack((1<<8)+0x20, 2); }
+  : Mains Pump Start * { CAN->write_ack((1<<8)+0x20, 5); }
   : Mains &BMM_LED &BMM_Off_On * {
       CAN->write_ack((1<<8)+0x20, $2+$3);
     }
