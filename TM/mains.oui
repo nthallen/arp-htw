@@ -1,0 +1,5 @@
+<package> mains
+<include> "mains.h"
+<init>
+  CAN_init();
+

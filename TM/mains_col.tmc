@@ -38,7 +38,7 @@
     mains->req = CAN_sequential_mread(CAN, bdid, start, n_reads, cmd_stat_addr);
     mains->bdid = bdid;
     mains->start = start;
-    mains->nwords = n_reads;
+    mains->nwords = n_reads+1;
     mains->saw_nack = false;
     mains->reason = "success";
     return mains;
@@ -114,8 +114,11 @@
   }
   
   void CAN_init() {
+    msg(0, "CAN_init()");
     CAN = new subbuspp("CAN");
+    msg(0, "CAN->load()");
     CAN->load();
+    msg(0, "CAN->identify_board(1);");
     identify_board(1);
     Mains_mreq1 = Mains_mread_init(1, 0x10, 11, 0x20);
   }

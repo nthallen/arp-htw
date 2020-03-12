@@ -8,6 +8,8 @@
 # opts="baud=115200 -ihflow -echoe -onlcr -ohflow -echoke -echoctl -imaxbel"
 # stty $opts </dev/ser2
 
+  Launch CAN subbusd_slcan  -p /dev/serusb5 -N CAN
+
   echo "Programming QCLI Waveforms" >$memo
   rm -f qclisprog.log
   { qclidprog -vcwcwcw -d 0 $TMBINDIR/waves.out 2>&1
