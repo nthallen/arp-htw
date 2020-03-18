@@ -18,6 +18,7 @@
   Launch dccc dccc -f $TMBINDIR/dccc.dccc
   Launch DG/cmd HTWcol
   Launch cmd/server HTWsrvr
+  Launch - tmdf
   Launch - lgr -N `mlf_find LOG`
   Launch - idx64 `cat $TMBINDIR/idx.idx64`
   Launch - sspdrv -b2 -hSSP -N `mlf_find SSP`
