@@ -12,11 +12,17 @@ end
 T1 = E1.Thtweng_1;
 T4 = E4.Thtweng_4;
 
-PT.TPT = T4;
-PT.CellP = interp1(T1,E1.CellP,T4); % cell pressure (in Torr)
-PT.Tavg = (273.15 + 20).*T4./T4; % cell temperature (in K)
-PT.ScanNum = E4.SSP_Num;
-PT.QCLI_Wave = interp1(T1,E1.QCLI_Wave,T4,'nearest','extrap');
+% PT.TPT = T4;
+% PT.CellP = interp1(T1,E1.CellP,T4); % cell pressure (in Torr)
+% PT.Tavg = (273.15 + 20).*T4./T4; % cell temperature (in K)
+% PT.ScanNum = E4.SSP_Num;
+% PT.QCLI_Wave = interp1(T1,E1.QCLI_Wave,T4,'nearest','extrap');
+
+PT.TPT = T1;
+PT.CellP = E1.CellP; % cell pressure (in Torr)
+PT.Tavg = 273.15 + (E1.TS1_T + E1.TS2_T)/2; % cell temperature (in K)
+PT.ScanNum = E1.SSP_Num;
+PT.QCLI_Wave = E1.QCLI_Wave;
 
 save PT.mat -STRUCT PT
 
