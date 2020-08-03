@@ -13,8 +13,11 @@
 &SWTM
   : SW Status &SW_St { SWData.SW_St = $3; }
   : Set Cell Pressure Setpoint &PV_SetP { SWData.PV_SetP = $5; }
-  : Set Gain Gi for Pinch Valve &PV_Gi { SWData.PV_Gi = $7; }
-  : Set Gain Gp for Pinch Valve &PV_Gp { SWData.PV_Gp = $7; }
+  : Set Cell Pressure Gain Gi &PV_Gi { SWData.PV_Gi = $6; }
+  : Set Cell Pressure Gain Gp &PV_Gp { SWData.PV_Gp = $6; }
+  : Set Inlet DP Setpoint &TV_DP_Set { SWData.TV_DP_Set = $5; }
+  : Set Inlet DP Gain Gi &TV_Gi { SWData.TV_Gi = $6; }
+  : Set Inlet DP Gain Gp &TV_Gp { SWData.TV_Gp = $6; }
   ;
 &SW_St <unsigned char>
   : Altitude Takeoff { $0 = SWS_TAKEOFF; }
@@ -30,6 +33,9 @@
   : Pinch Valve Close { $0 = SWS_PV_CLOSE; }
   : Pinch Valve PI { $0 = SWS_PV_PI; }
   : Pinch Valve Scan { $0 = SWS_PV_SCAN; }
+  : Throttle Valve PI Init { $0 = SWS_TV_INIT; }
+  : Throttle Valve Close { $0 = SWS_TV_CLOSE; }
+  : Throttle Valve Scan { $0 = SWS_TV_SCAN; }
   : ReadFile { $0 = SWS_READFILE; }
   : Time Warp { $0 = SWS_TIMEWARP; }
   : Shutdown { $0 = SWS_SHUTDOWN; }
@@ -42,4 +48,13 @@
   ;
 &PV_Gp <unsigned short>
   : &gain { $0 = $1; }
+  ;
+&TV_DP_Set <int16_t>
+  : &tvgain { $0 = $1; }
+  ;
+&TV_Gi <int16_t>
+  : &tvgain { $0 = $1; }
+  ;
+&TV_Gp <int16_t>
+  : &tvgain { $0 = $1; }
   ;

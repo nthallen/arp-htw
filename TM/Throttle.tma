@@ -3,7 +3,7 @@ PARTITION
 #---------------------------------------------------------------
 # Summary:
 #   Throttle_Valve_Startup - Does nothing
-#   Throttle_Valve_Init - Initializes valve, waits for ABOVE_CLOUDS
+#   Throttle_Valve_Init - Initializes valve, waits for IN_AIR
 #   Throttle_Valve_Close - Drives to in limit or complains
 #   Throttle_Valve_Closed - Where we go after closing valve.
 #   Throttle_Valve_Failure - Reports in limit failure and sits
@@ -37,7 +37,7 @@ State Throttle_Valve_Init {
   +3 > Drive Throttle Valve in 8000
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100
-  depending on (ABOVE_CLOUDS) { Validate Throttle_Valve_PI_Init; }
+  depending on (IN_AIR) { Validate Throttle_Valve_PI_Init; }
 }
 
 State Throttle_Valve_Close {
@@ -54,7 +54,7 @@ State Throttle_Valve_Close {
 
 State Throttle_Valve_Closed {
   depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
-  depending on (ABOVE_CLOUDS) {
+  depending on (IN_AIR) {
     Validate Throttle_Valve_PI_Init;
   }
 }
@@ -76,13 +76,13 @@ State Throttle_Valve_PI_Init {
 
 State Throttle_Valve_PI NoLog {
   # depending on (BELOW_CLOUDS) { Validate Throttle_Valve_Close; }
-  depending on (scanning) {
-	if ( !scan_done ) {
-	  scan_done = 1;
-	  Validate Throttle_Valve_Scan;
-	}
-  }
-  depending on (record) { scan_done = 0; }
+  # depending on (scanning) {
+  #   if ( !scan_done ) {
+  #     scan_done = 1;
+  #     Validate Throttle_Valve_Scan;
+  #   }
+  # }
+  # depending on (record) { scan_done = 0; }
   # depending on (ON_GROUND) { Validate Throttle_Valve_Close; }
   { double DP, Gp, Gi, DP_diff, DP_set, dstep;
     unsigned short ustep;

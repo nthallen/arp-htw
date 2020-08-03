@@ -1,6 +1,8 @@
 1 TS0_T Temp_Sensors Temp %.2lf
 1 TS1_T Temp_Sensors Temp %.2lf
+1 TS1_T Cell T %.2lf
 1 TS2_T Temp_Sensors Temp %.2lf
+1 TS2_T Cell T %.2lf
 1 TS3_T Temp_Sensors Temp %.2lf
 1 TS4_T Temp_Sensors Temp %.2lf
 1 TS5_T Temp_Sensors Temp %.2lf

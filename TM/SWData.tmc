@@ -4,3 +4,6 @@ TM 1 Hz DStat SW_St; collect SW_St = SWData.SW_St;
 TM 1 Hz PV_Gain_t PV_SetP; collect PV_SetP = SWData.PV_SetP;
 TM 1 Hz PV_Gain_t PV_Gi; collect PV_Gi = SWData.PV_Gi;
 TM 1 Hz PV_Gain_t PV_Gp; collect PV_Gp = SWData.PV_Gp;
+TM 1 Hz TV_Gain_t TV_DP_Set; collect TV_DP_Set = SWData.TV_DP_Set;
+TM 1 Hz TV_Gain_t TV_Gi; collect TV_Gi = SWData.TV_Gi;
+TM 1 Hz TV_Gain_t TV_Gp; collect TV_Gp = SWData.TV_Gp;

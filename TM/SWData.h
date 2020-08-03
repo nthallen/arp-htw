@@ -7,6 +7,9 @@ typedef struct __attribute__((__packed__)) {
   unsigned short PV_SetP;
   unsigned short PV_Gi;
   unsigned short PV_Gp;
+  int16_t TV_DP_Set;
+  int16_t TV_Gi;
+  int16_t TV_Gp;
 } SWData_t;
 extern SWData_t SWData;
 
@@ -22,6 +25,9 @@ extern SWData_t SWData;
 #define SWS_PV_CLOSE 30
 #define SWS_PV_PI 32
 #define SWS_PV_SCAN 33
+#define SWS_TV_INIT 40
+#define SWS_TV_CLOSE 41
+#define SWS_TV_SCAN 42
 #define SWS_READFILE 253
 #define SWS_TIMEWARP 254
 #define SWS_SHUTDOWN 255
