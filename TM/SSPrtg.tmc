@@ -6,3 +6,20 @@ if (last_SSP != SSP_Num) {
   ci_sendfcmd(2, "PhRTG File SSP %u\n", SSP_Num );
   last_SSP = SSP_Num;
 }
+
+ci_sendfcmd(2, "PhRTG Datum InlDP %lu %s %.1lf\n", itime(),
+  text(InlDP), convert(TV_DP_Set));
+ci_sendfcmd(2, "PhRTG Datum LTE %lu %s %.2lf %.2lf\n", itime(),
+  text(LTE_T), convert(LTE_Set_T), convert(LTE_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum LPV %lu %s %.2lf %.2lf\n", itime(),
+  text(LPV_T), convert(LPV_Set_T), convert(LPV_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum Plate %lu %s %.2lf %.2lf\n", itime(),
+  text(Plate_T), convert(Plate_Set_T), convert(Plate_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum Cover %lu %s %.2lf %.2lf\n", itime(),
+  text(Cover_T), convert(Cover_Set_T), convert(Cover_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum Cell %lu %s %.2lf %.2lf\n", itime(),
+  text(Cell_T), convert(Cell_Set_T), convert(Cell_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum DPV %lu %s %.2lf %.2lf\n", itime(),
+  text(DPV_T), convert(DPV_Set_T), convert(DPV_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum BubC %lu %s %.2lf %.2lf\n", itime(),
+  text(BubC_T), convert(BubC_Set_T), convert(BubC_Sink_T));
