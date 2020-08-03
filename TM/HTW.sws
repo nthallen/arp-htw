@@ -40,14 +40,14 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
 
 SW_Variable: <unsigned short,PV_Gain_t> PV_SetP Set Cell Pressure Setpoint
   : &gain { $0 = $1; }
-SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Pinch Valve Gain Gi
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Cell Pressure Gain Gi
   : &gain { $0 = $1; }
-SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Pinch Valve Gain Gp
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Cell Pressure Gain Gp
   : &gain { $0 = $1; }
 
-SW_Variable: <int16_t,TV_Gain_t> TV_DP_Set Set Throttle Valve DP Setpoint
+SW_Variable: <int16_t,TV_Gain_t> TV_DP_Set Set Inlet DP Setpoint
   : &tvgain { $0 = $1; }
-SW_Variable: <int16_t,TV_Gain_t> TV_Gi Set Throttle Valve Gain Gi
+SW_Variable: <int16_t,TV_Gain_t> TV_Gi Set Inlet DP Gain Gi
   : &tvgain { $0 = $1; }
-SW_Variable: <int16_t,TV_Gain_t> TV_Gp Set Throttle Valve Gain Gp
+SW_Variable: <int16_t,TV_Gain_t> TV_Gp Set Inlet DP Gain Gp
   : &tvgain { $0 = $1; }

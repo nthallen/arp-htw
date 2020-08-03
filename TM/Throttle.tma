@@ -31,9 +31,9 @@ State Throttle_Valve_Startup {}
 #---------------------------------------------------------------
 State Throttle_Valve_Init {
 # +1 > Set Throttle Valve Speed 1067 Hz
-  +1 > Set Throttle Valve Gain Gp 16.0
-  +1 > Set Throttle Valve Gain Gi 4.0
-  +1 > Set Throttle Valve Dp SetPoint 0.
+  +1 > Set Inlet DP Gain Gp 16.0
+  +1 > Set Inlet DP Gain Gi 4.0
+  +1 > Set Inlet DP SetPoint 0.
   +3 > Drive Throttle Valve in 8000
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100
