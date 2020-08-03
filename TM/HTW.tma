@@ -24,7 +24,8 @@ State Init {
        > Telemetry Start
   +1   > Fail Light Off
   +1   > AI Double Convert Row Zero
-  +4   Validate Standby;
+  +10  Validate Throttle_Valve_Init;
+  +15  Validate Standby;
 }
 
 # WAIT 
@@ -93,45 +94,6 @@ State IN_AIR {
       Validate OFF_GROUND;
   }
 }
-
-
-# -----------------------------------------------------------------------------
-# Partition 4: Throttle Valve Control
-#### Replace this with HOxotope PD control
-# -----------------------------------------------------------------------------
-# 
-# Partition
-# 
-# State Throttle_Standby {
-#   +5
-#   depending on (OFF_GROUND) { Validate Throttle_init; }
-#   depending on (IN_AIR) { Validate Throttle_init; }
-# }
-# 
-# # INITIALIZE
-# State Throttle_init     {
-#        > drive Throttle Valve in 48000
-#   +2   > drive Throttle Valve out 10000
-#   +5   > drive Throttle Valve to 15000
-#   +5   Validate Throttle_scan;
-# }
-# 
-# # RUN & SCAN
-# State Throttle_scan {
-#         depending on (ON_GROUND) { Validate Throttle_shut; }
-#         depending on (Shutdown) { Validate Throttle_shut; }
-#         > drive Throttle Valve to 47000
-#         Hold until (SW_St == SWS_TIMEWARP) or 34:00;
-#         > drive Throttle Valve to 40000
-#   +2:00 > drive Throttle Valve to 32500
-#   +2:00 > drive Throttle Valve to 25000
-#   +2:00 Validate Throttle_scan;
-# }
-# 
-# State Throttle_shut {
-#   > drive Throttle Valve in 48000
-#   > drive Throttle Valve out 20
-# }
 
 Partition
 #----------------------------------------------------------------

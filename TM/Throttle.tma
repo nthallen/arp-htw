@@ -1,0 +1,130 @@
+PARTITION
+# PARTITION X: Throttle Valve
+#---------------------------------------------------------------
+# Summary:
+#   Throttle_Valve_Startup - Does nothing
+#   Throttle_Valve_Init - Initializes valve, waits for ABOVE_CLOUDS
+#   Throttle_Valve_Close - Drives to in limit or complains
+#   Throttle_Valve_Closed - Where we go after closing valve.
+#   Throttle_Valve_Failure - Reports in limit failure and sits
+#   Throttle_Valve_PI_Init - How we get to Throttle_Valve_PI
+#   Throttle_Valve_PI - Diff Pressure control algo
+#   Throttle_Valve_Scan - Perform a scan, then go back to PI
+#---------------------------------------------------------------
+
+%{
+  double DP_sum;
+  // double TV_Gp = 16.0;
+  // double TV_Gi = 4.0;
+  // double TV_DP_Set = 0.;
+  int scan_done = 0;
+
+  #define MAX_TV_STEPS 4000
+  #include <math.h> /* for fabs */
+%}
+
+State Throttle_Valve_Startup {}
+
+#---------------------------------------------------------------
+# Initialization is triggered by the mainline, since we may
+# want to wait for something.
+#---------------------------------------------------------------
+State Throttle_Valve_Init {
+# +1 > Set Throttle Valve Speed 1067 Hz
+  +1 > Set Throttle Valve Gain Gp 16.0
+  +1 > Set Throttle Valve Gain Gi 4.0
+  +1 > Set Throttle Valve Dp SetPoint 0.
+  +3 > Drive Throttle Valve in 8000
+  +2 > Drive Throttle Valve out 0
+  +2 > Drive Throttle Valve out 2100
+  depending on (ABOVE_CLOUDS) { Validate Throttle_Valve_PI_Init; }
+}
+
+State Throttle_Valve_Close {
+  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
+  +1 > Drive Throttle Valve in 8000
+     Hold Until ( TVStat & 1 ) or 5
+     else Validate Throttle_Valve_Failure;
+     > Drive Throttle Valve out 0
+     Hold Until ( TVStep == 0 ) or 2
+     else { msg( 2, "Throttle Valve step did not reset" ); }
+     > Preset Throttle Valve Position to 0
+     Validate Throttle_Valve_Closed;
+}
+
+State Throttle_Valve_Closed {
+  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
+  depending on (ABOVE_CLOUDS) {
+    Validate Throttle_Valve_PI_Init;
+  }
+}
+
+#---------------------------------------------------------------
+# In limit not observed: Retry periodically
+#---------------------------------------------------------------
+State Throttle_Valve_Failure {
+  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
+
+  { msg( 2, "Throttle Valve did not close" ); }
+  +1:00 Validate Throttle_Valve_Close;
+}
+
+State Throttle_Valve_PI_Init {
+    { DP_sum = 2100; }
+    Validate Throttle_Valve_PI;
+}
+
+State Throttle_Valve_PI NoLog {
+  # depending on (BELOW_CLOUDS) { Validate Throttle_Valve_Close; }
+  depending on (scanning) {
+	if ( !scan_done ) {
+	  scan_done = 1;
+	  Validate Throttle_Valve_Scan;
+	}
+  }
+  depending on (record) { scan_done = 0; }
+  # depending on (ON_GROUND) { Validate Throttle_Valve_Close; }
+  { double DP, Gp, Gi, DP_diff, DP_set, dstep;
+    unsigned short ustep;
+    DP = convert(InlDP);
+    DP_set = convert(TV_DP_Set);
+    Gp = convert(TV_Gp);
+    Gi = convert(TV_Gi);
+    DP_diff = DP - DP_set;
+    DP_sum += DP_diff * Gi;
+    if ( DP_sum > MAX_TV_STEPS )
+      DP_sum = MAX_TV_STEPS;
+    else if ( DP_sum < -MAX_TV_STEPS )
+      DP_sum = -MAX_PINCH_STEPS/Gi;
+
+    dstep = DP_diff * Gp + DP_sum;
+    if (dstep<0) dstep = 0;
+    else if (dstep > MAX_TV_STEPS) dstep = MAX_TV_STEPS;
+    ustep = US_CAST(dstep);
+    ci_sendfcmd(2, "Drive Throttle Valve To %u\n", ustep);
+  }
+
+  Hold Until ( TVStat & 1 );
+  { msg(0, "Saw TV in limit: Make sure it comes off"); }
+  Hold Until ( ! (TVStat & 1) ) or 30
+  else Validate Throttle_Valve_Close;
+  Validate Throttle_Valve_PI;
+}
+
+State Throttle_Valve_Scan {
+    # depending on (BELOW_CLOUDS) { Validate Throttle_Valve_Close; }
+    # depending on (ON_GROUND) { Validate Throttle_Valve_Close; }
+
+    > Drive Throttle Valve In 8000
+    Hold Until ( TVStat & 1 ) or 6;
+    # else Validate Throttle_Valve_Close;
+ +5 > Scan Throttle Valve Out 4000 By 40
+    Hold Until ( TVScan != 0 ) or 1;
+    Hold Until ( TVScan == 0 ) or 30;
+    > Stop Throttle Valve
+    Hold Until ( TVScan == 0 ) or 3; 
+    > Drive Throttle Valve To 2100
+ +2 Validate Throttle_Valve_PI_Init;
+}
+
+State Throttle_Valve_Shutdown {}

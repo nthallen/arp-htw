@@ -26,6 +26,13 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
     Validate Pinch_Valve_PI_Init; break;
   SWS_PV_SCAN   33  Pinch Valve Scan:
     Validate Pinch_Valve_Scan; break;
+    
+  SWS_TV_INIT   40  Throttle Valve PI Init:
+    Validate Throttle_Valve_PI_Init; break;
+  SWS_TV_CLOSE  41  Throttle Valve Close:
+    Validate Throttle_Valve_Close; break;
+  SWS_TV_SCAN   42  Throttle Valve Scan:
+    Validate Throttle_Valve_Scan; break;
 
   SWS_READFILE  253 ReadFile: Validate ReadFile; break;
   SWS_TIMEWARP  254 Time Warp: break;
@@ -33,8 +40,14 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
 
 SW_Variable: <unsigned short,PV_Gain_t> PV_SetP Set Cell Pressure Setpoint
   : &gain { $0 = $1; }
-SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Gain Gi for Pinch Valve
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Pinch Valve Gain Gi
   : &gain { $0 = $1; }
-SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Gain Gp for Pinch Valve
+SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Pinch Valve Gain Gp
   : &gain { $0 = $1; }
 
+SW_Variable: <int16_t,TV_Gain_t> TV_DP_Set Set Throttle Valve DP Setpoint
+  : &tvgain { $0 = $1; }
+SW_Variable: <int16_t,TV_Gain_t> TV_Gi Set Throttle Valve Gain Gi
+  : &tvgain { $0 = $1; }
+SW_Variable: <int16_t,TV_Gain_t> TV_Gp Set Throttle Valve Gain Gp
+  : &tvgain { $0 = $1; }
