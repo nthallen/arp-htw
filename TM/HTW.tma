@@ -44,7 +44,7 @@ State Record {
 
 # SHUTDOWN
 State Shutdown {
-      Hold until valid (Nano_Is_Shutdown) or 20;
+      Hold until valid (Laser_Ops_Is_Shutdown) or 20;
  +5   > Fail Light On
       > quit
 }
@@ -109,7 +109,7 @@ State HTW_Startup {
      Depending on (Shutdown) { Validate HTW_Shutdown; }
      Depending on (Shutdown) { Validate HTW_Shutdown; }
      Depending on (ON_GROUND) { Validate HTW_Shutdown; }
-     Validate Nano_Nano800;
+  #  Validate Nano_Nano800;
 }
 
 State HTW_Shutdown {}
@@ -142,20 +142,20 @@ State Laser_Ops_Sample {
        { if (!Pump_On_Off) Validate Laser_Ops_Fill_To_Ambient; }
     +1 Validate QCL_SelectRingandRun;
    +30 Validate QCL_SelectICOSandRun;
-      Depending on (1Hz) {
-      if ( CO2_Ready_To_Calibrate == 1 )
-        Validate Laser_Ops_Calibrate;
-    }
+  #   Depending on (1Hz) {
+  #     if ( CO2_Ready_To_Calibrate == 1 )
+  #       Validate Laser_Ops_Calibrate;
+  #   }
 }
 
 State Laser_Ops_Calibrate {
      Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
      { if (!Pump_On_Off) Validate Laser_Ops_Fill_To_Ambient; }
 
-     Depending on (1Hz) {
-       if (CO2_Ready_To_Calibrate == 0)
-         Validate Laser_Ops_End_Calibrate;
-     }
+  #  Depending on (1Hz) {
+  #    if (CO2_Ready_To_Calibrate == 0)
+  #      Validate Laser_Ops_End_Calibrate;
+  #  }
 }
 
 State Laser_Ops_End_Calibrate {
@@ -232,7 +232,7 @@ State QCL_Start {
     }
     Validate QCLI_Run;
     Hold until (SSP_Status == SSP_STATUS_TRIG &&
-                convert(MLasI) > LOW_CURRENT) or 20
+                convert(Las_I) > LOW_CURRENT) or 20
     else Validate QCL_SSP_Recover;
     { num_QCL_recovers = 0; }
     Validate QCL_Watch;
@@ -266,10 +266,10 @@ State QCL_Watch NoLog {
     }
     hold until ( SSP_Status != SSP_STATUS_TRIG ||
          !QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) ||
-         convert(MLasI) <= LOW_CURRENT );
+         convert(Las_I) <= LOW_CURRENT );
     hold until ( SSP_Status == SSP_STATUS_TRIG &&
          QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) &&
-         convert(MLasI) >= LOW_CURRENT) or 2
+         convert(Las_I) >= LOW_CURRENT) or 2
     else Validate QCL_Watch_Recover;
     Validate QCL_Watch;
 }
@@ -277,7 +277,7 @@ State QCL_Watch NoLog {
 State QCL_Watch_Recover NoLog {
   { if (!QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)))
       Validate QCL_Out_TSpec;
-    else if (convert(MLasI) <= LOW_CURRENT)
+    else if (convert(Las_I) <= LOW_CURRENT)
       Validate QCL_Out_Spec;
     else if (SSP_Status != SSP_STATUS_TRIG)
       Validate QCL_SSP_Recover;
@@ -365,7 +365,7 @@ State QCL_SelectICOSandRun {
    +1 > Laser TEC Setpoint 20 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
-  +10 > Select QCLI Waveform  JPL53_800Hz
+  +10 > Select QCLI Waveform JPL53_800Hz
    +3 Validate QCL_Start;
 }
 
@@ -416,8 +416,8 @@ State QCLI_Start_Reset {
         Validate QCLI_Fail;
       }
     }
-    > QCLI Reset On
- +1 > QCLI Reset Off
+    > Command QCLI_Reset On
+ +1 > Command QCLI_Reset Off
     Validate QCLI_Run;
 }
 
@@ -436,8 +436,8 @@ State QCLI_Stop_Reset {
         Validate QCLI_Fail;
       }
     }
-    > QCLI Reset On
- +1 > QCLI Reset Off
+    > Command QCLI_Reset On
+ +1 > Command QCLI_Reset Off
     Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
     else > QCLI clear errors
     Hold until ( (QCLI_s & 0x3938) == 0 ) or 2
@@ -456,7 +456,17 @@ State QCLI_Fail {
 State QCLI_Shutdown {}
 
 #---------------------------------------------------------------
-# Partition 7: Gas Deck Control
+# Partition 7: Pumpkin Troll
+#---------------------------------------------------------------
+Partition
+
+State Pump_Init {}
+State Pump_Start {}
+State Pump_Watch {}
+State Pump_Shutdown {}
+
+#---------------------------------------------------------------
+# Partition 8: Gas Deck Control
 #---------------------------------------------------------------
 Partition
 
@@ -475,7 +485,7 @@ State GasDeck_Idle {}
 
 
 #---------------------------------------------------------------
-# Partition 8: Realtime File Input
+# Partition 9: Realtime File Input
 #---------------------------------------------------------------
 Partition
 
@@ -486,7 +496,7 @@ State ReadFile "HTW.tmas" {
 }
 
 #---------------------------------------------------------------
-# Partition 9: ReadFile Conditions
+# Partition 10: ReadFile Conditions
 #---------------------------------------------------------------
 # Summary:
 #   RFCond_Idle: Nothing
@@ -503,7 +513,7 @@ State RFCond_TimeWarp {
 }
 
 #---------------------------------------------------------------
-# Partition 10: Analog Input Monitoring
+# Partition 11: Analog Input Monitoring
 #---------------------------------------------------------------
 Partition
 
@@ -549,7 +559,7 @@ State AI_Reset {
 State AI_Fail {}
 
 #--------------------------------------------------------------
-# Partition 11: Lab Calibration
+# Partition 12: Lab Calibration
 #--------------------------------------------------------------
 Partition
 

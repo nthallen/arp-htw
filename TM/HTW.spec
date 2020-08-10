@@ -47,7 +47,8 @@ TGTDIR = $(TGTNODE)/home/HTW
 
 HTWcol : -lsubbus
 HTWsrvr : -lsubbus mains.oui
-HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc HTW.tma PV.tma Throttle.tma
+HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc \
+          mains_conv.tmc HTW.tma PV.tma Throttle.tma
 hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc mains_conv.tmc gas.tbl
 datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc data.tbl /usr/local/share/oui/cic.oui
