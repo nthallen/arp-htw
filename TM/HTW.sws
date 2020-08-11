@@ -9,11 +9,11 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
     depending on (OFF_GROUND) using_swp = SW_St; break;
 
   SWS_LASER_START 10 Laser Start:
-    Validate Nano_Start; break;
+    Validate QCL_Start; break;
   SWS_LASER_STOP  11 Laser Stop:
-    Validate Nano_Stop; break;
+    Validate QCL_Stop; break;
   SWS_LASER_WAVE  12 Laser Select Waveform and Start:
-    Validate Nano_Nano800; break;
+    Validate QCL_SelectICOSandRun; break;
 
   SWS_CALIBRATE_START 20 Calibrate Start:
     Validate Calibrate_Start; break;

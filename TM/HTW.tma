@@ -358,7 +358,7 @@ State QCL_SelectICOSandRun {
    +1 > Laser TEC Setpoint 7.8 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
-  +10 > Select QCLI Waveform JPL53_800Hz
+  +10 > Select QCLI Waveform JPL53_400Hz
    +3 Validate QCL_Start;
 }
 
@@ -558,9 +558,9 @@ Partition
 
 State Calibrate_Init {}
 
-State Calibrate_Start {
+State Calibrate_Start {}
 
-}
+State Calibrate_Stop {}
 
 State Calibrate_Idle {}
 
