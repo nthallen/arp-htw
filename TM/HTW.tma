@@ -450,10 +450,14 @@ State QCLI_Shutdown {}
 
 #---------------------------------------------------------------
 # Partition 7: Pumpkin Troll
+# Needs to be written!
 #---------------------------------------------------------------
 Partition
 
-State Pump_Init {}
+State Pump_Init {
+  +10 Validate Pump_Watch;
+}
+
 State Pump_Start {}
 State Pump_Watch {}
 State Pump_Shutdown {}
