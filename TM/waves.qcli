@@ -29,14 +29,21 @@ ICOS Waveform JPL53_800Hz {
   SampleRate = 100 MHz/100;
   Ncoadd = 799;
   Tz = 5%;
-  Ramp from 500 mA to 570 mA in 1 msec;
+  Ramp from 450 mA to 550 mA in 1 msec;
 }
 
 ICOS Waveform JPL53_400Hz {
   SampleRate = 100 MHz/200;
   Ncoadd = 429;
   Tz = 5%;
-  Ramp from 470 mA to 570 mA in 2 msec;
+  Ramp from 450 mA to 550 mA in 2 msec;
+}
+
+ICOS Waveform I500 {
+   Tz = 10 msec;
+   Iz = 500 mA;
+   SampleRate = 10 MHz;
+   dI/dt = 0 A/sec;
 }
 
 Ringdown Waveform RingRamp {
@@ -46,5 +53,5 @@ Ringdown Waveform RingRamp {
    Ton =  50 msec;
    Tpre = 2 usec;
    I = 300 mA to 600 mA in 200 Steps;
-   }
+}
 
