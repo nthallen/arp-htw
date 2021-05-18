@@ -15,6 +15,9 @@
   : Set Cell Pressure Setpoint &PV_SetP { SWData.PV_SetP = $5; }
   : Set Cell Pressure Gain Gi &PV_Gi { SWData.PV_Gi = $6; }
   : Set Cell Pressure Gain Gp &PV_Gp { SWData.PV_Gp = $6; }
+  : Set GasDeck Pressure Setpoint &GD_SetP { SWData.GD_SetP = $5; }
+  : Set GasDeck Pressure Gain Gi &GD_Gi { SWData.GD_Gi = $6; }
+  : Set GasDeck Pressure Gain Gp &GD_Gp { SWData.GD_Gp = $6; }
   : Set Inlet DP Setpoint &TV_DP_Set { SWData.TV_DP_Set = $5; }
   : Set Inlet DP Gain Gi &TV_Gi { SWData.TV_Gi = $6; }
   : Set Inlet DP Gain Gp &TV_Gp { SWData.TV_Gp = $6; }
@@ -36,6 +39,10 @@
   : Throttle Valve PI Init { $0 = SWS_TV_INIT; }
   : Throttle Valve Close { $0 = SWS_TV_CLOSE; }
   : Throttle Valve Scan { $0 = SWS_TV_SCAN; }
+  : Gas Deck PI Init { $0 = SWS_GD_INIT; }
+  : Gas Deck Close { $0 = SWS_GD_CLOSE; }
+  : Gas Deck Fill Cell { $0 = SWS_GD_FILL; }
+  : Gas Deck Pump Purge { $0 = SWS_GD_PUMP_PURGE; }
   : ReadFile { $0 = SWS_READFILE; }
   : Time Warp { $0 = SWS_TIMEWARP; }
   : Shutdown { $0 = SWS_SHUTDOWN; }
@@ -47,6 +54,15 @@
   : &gain { $0 = $1; }
   ;
 &PV_Gp <unsigned short>
+  : &gain { $0 = $1; }
+  ;
+&GD_SetP <unsigned short>
+  : &gain { $0 = $1; }
+  ;
+&GD_Gi <unsigned short>
+  : &gain { $0 = $1; }
+  ;
+&GD_Gp <unsigned short>
   : &gain { $0 = $1; }
   ;
 &TV_DP_Set <int16_t>

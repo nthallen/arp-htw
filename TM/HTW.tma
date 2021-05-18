@@ -355,7 +355,7 @@ State QCL_SelectICOSandRun {
       Hold until valid (QCLI_Idle) or 2
       else Validate QCLI_Stop;
       Hold until valid (QCLI_Idle);
-   +1 > Laser TEC Setpoint 7.8 C
+   +1 > Laser TEC Setpoint 7.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
   +10 > Select QCLI Waveform JPL53_400Hz
@@ -464,22 +464,103 @@ State Pump_Shutdown {}
 
 #---------------------------------------------------------------
 # Partition 8: Gas Deck Control
+# Allows control of cell pressure from gas flow based on PV PI
+# Watches for low pressure in main bottle and turns of flows
+# Watches for low pressure in low pressure lines and turns off flows
+# Fills cell to 1 atm. pressure. 
 #---------------------------------------------------------------
 Partition
 
+%{
+  double GP_sum;
+  /* double GP_diff */
+  /* double GP_set */
+
+ #define US_CAST(x) ((unsigned short)(x))
+ #define MAX_FLOW 50000
+ #include <math.h>
+%}
+
 State GasDeck_Init {
-#+1 > Command Gas_Flw_Open Off
-#   > Command Gas_Flw_Closed Off
-#   > Command Bub_Gas_Flw_Open Off
-#   > Command Bub_Gas_Flw_Closed Off
-#   > Command Gas_Vlv_D Off
-#   > Command Bub_Gas_Vlv_D Off
-#   > Command Bub_Vlv_Flw_D Off
- +5 Validate GasDeck_Idle;
+  +1 > Set GasDeck Pressure Gain Gp 8.0
+  +1 > Set GasDeck Pressure Gain Gi 40.0
+  +1 > Set GasDeck Pressure SetPoint 40.0
+  +1 Validate GasDeck_Close;
+}
+
+State GasDeck_Close {
+     > Air Flow SetPoint 0 sccm
+     > Bubbler Flow SetPoint 0 sccm
+  +1 > Command Gas_Vlv_D Off
+  +1 > Command Bub_In_Vlv_D Off
+  +1 > Command Bub_Out_Vlv_D Off
+  +1 Validate GasDeck_Idle;
 }
 
 State GasDeck_Idle {}
 
+State GasDeck_PI_Init {
+  { GP_sum = 0; }
+    > Command Gas_Vlv_D On
+  +1 Validate GasDeck_PI;
+}
+
+State GasDeck_PI NoLog {
+#  depending on (ON_GROUND) { Validate GasDeck_Close; }
+  { if ( convert(GasHP) < 100 || convert(GasLP) < 10  || convert(BubLP) < 10 ) Validate GasDeck_Low_Pressure; }
+  { double P, Gp, Gi, P_diff, P_set, dstep;
+    unsigned short ustep;
+    P = convert(CellP);
+    P_set = convert(GD_SetP);
+    Gp = convert(GD_Gp);
+    Gi = convert(GD_Gi);
+    P_diff = P_set - P;
+    GP_sum += P_diff * Gi;
+    if ( GP_sum > MAX_FLOW )
+      GP_sum = MAX_FLOW;
+    else if ( P_sum < -MAX_FLOW )
+      GP_sum = -MAX_FLOW/Gi;
+
+    dstep = P_diff * Gp + GP_sum;
+    if (dstep < 0) dstep = 0;
+    else if (dstep > MAX_FLOW) dstep = MAX_FLOW;
+    ustep = US_CAST(dstep);
+    ci_sendfcmd(2, "Air Flow SetPoint %u sccm\n", ustep);
+  }
+
+ "Regulating";
+ # Probably need to add a Hold Until statement to see that the actual flow matches the setpoint
+ # otherwise put up some error
+ # Checks that flow controllers are responding?
+ +1 Validate GasDeck_PI;
+}
+
+State GasDeck_Low_Pressure {
+ # Most likely we're here because the gas bottle is running low on gas. At that point we probably want to stop doing cals and leave enough to fill the cell at the end of the flight. 
+  +1 Validate GasDeck_Close;
+}
+
+State GasDeck_FC_Not_Regulating {}
+
+State GasDeck_Fill_Cell {
+  > Command Exhaust_Vlv Off
+  > Command Gas_Vlv_D On 
+  > Air Flow SetPoint 10000 sccm
+ Hold Until ( convert(Cel2P) > convert(GD_SetP) - 200 ) or 1:00;
+  > Air Flow SetPoint 5000 sccm
+ Hold Until ( convert(Cel2P) > convert(GD_SetP) - 100 ) or 1:00;
+  > Air Flow SetPoint 1000 sccm
+ Hold Until ( convert(Cel2P) > convert(GD_SetP) ) or 30;
+  Validate GasDeck_Close;
+}
+
+State GasDeck_Pump_Purge {
+      > Air Flow Setpoint 5000 sccm
++1:00 > Air Flow Setpoint 1000 sccm
++1:00 > Air Flow Setpoint 5000 sccm
++1:00 > Air Flow Setpoint 1000 sccm
++1:00 Validate GasDeck_Pump_Purge;
+}
 
 #---------------------------------------------------------------
 # Partition 9: Realtime File Input
@@ -562,9 +643,34 @@ Partition
 
 State Calibrate_Init {}
 
-State Calibrate_Start {}
+State Calibrate_Start {
+  Validate GasDeck_PI_Init;
+  Hold Until ( convert(CellP) == convert(GD_SetP) ) or 30;
+  +1 > Command Bub_In_Vlv_D On
+  +1 > Command Bub_Out_Vlv_D On
+  +4:00 > Bubbler Flow SetPoint 5 sccm
+  +4:00 > Bubbler Flow SetPoint 10 sccm
+  +4:00 > Bubbler Flow SetPoint 15 sccm
+  +4:00 > Bubbler Flow SetPoint 20 sccm
+  +4:00 > Bubbler Flow SetPoint 30 sccm
+  +4:00 > Bubbler Flow SetPoint 40 sccm
+  +4:00 > Bubbler Flow SetPoint 50 sccm
+  +4:00 > Bubbler Flow SetPoint 40 sccm
+  +4:00 > Bubbler Flow SetPoint 30 sccm
+  +4:00 > Bubbler Flow SetPoint 20 sccm
+  +4:00 > Bubbler Flow SetPoint 15 sccm
+  +4:00 > Bubbler Flow SetPoint 10 sccm
+  +4:00 > Bubbler Flow SetPoint 5 sccm
+  +4:00 > Bubbler Flow SetPoint 0 sccm
+  +4:00 > Bubbler Flow SetPoint 10 sccm
+  +25:00 > Bubbler Flow SetPoint 0 sccm
+  +1    Validate Calibrate_Stop;
+}
 
-State Calibrate_Stop {}
+State Calibrate_Stop {
+     Validate GasDeck_Close;
+  +1 Validate Calibrate_Idle;
+}
 
 State Calibrate_Idle {}
 

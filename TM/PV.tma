@@ -85,7 +85,7 @@ State Pinch_Valve_PI_Init {
 
 State Pinch_Valve_PI NoLog {
   # depending on (OFF_GROUND) { Validate Pinch_Valve_Close; }
-  depending on (ON_GROUND) { Validate Pinch_Valve_Close; }
+#  depending on (ON_GROUND) { Validate Pinch_Valve_Close; }
   { if ( convert(PumpT) > 75 || convert(PMotT) > 75 )
       Validate Pinch_Valve_Pump_Overtemp;
   }

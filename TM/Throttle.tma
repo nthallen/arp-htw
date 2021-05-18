@@ -16,7 +16,7 @@ PARTITION
   double DP_sum;
   // double TV_Gp = 16.0;
   // double TV_Gi = 4.0;
-  // double TV_DP_Set = 0.;
+  // double TV_DP_Set = 2.25;
   int scan_done = 0;
 
   #define MAX_TV_STEPS 4000
@@ -33,7 +33,7 @@ State Throttle_Valve_Init {
 # +1 > Set Throttle Valve Speed 1067 Hz
   +1 > Set Inlet DP Gain Gp 16.0
   +1 > Set Inlet DP Gain Gi 4.0
-  +1 > Set Inlet DP SetPoint 0.
+  +1 > Set Inlet DP SetPoint 2.25
   +3 > Drive Throttle Valve in 8000
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100

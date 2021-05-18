@@ -235,6 +235,7 @@ TM typedef unsigned char IOSwS_t { text "%02X"; }
 TM 1 Hz IOSwS_t IOSwS; Collect IOSwS = read_switches();
 
 TM typedef uint16_t PV_Gain_t { text "%5.1lf"; }
+TM typedef uint16_t GD_Gain_t { text "%5.1lf"; }
 TM typedef int16_t TV_Gain_t { text "%5.1lf"; }
 
 /* PTRH */
