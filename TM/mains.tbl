@@ -2,7 +2,7 @@ Mains {
   HBox { +-; Title: "Mains"; -+ };
   I2C: (Mains_I2C_Status,4);
   ADC: (Mains_ADC_Status,4);
-  {Pump: (Pump_On_Off,3) (Pump_Speed,4) };
+  {Pump: (Pump_On,3) (Pump_Speed,4) };
   {LEDS: (StLED1,3) (StLED2,3) (StLED3,3) };
   Ch0T: (Mains_Ch0T,6) C;
   Ch1T: (Mains_Ch1T,6) C;

@@ -5,8 +5,8 @@
 TM typedef uint8_t MAINS_ON_OFF_t { text "%3u" MAINS_ON_OFF_text(); }
 TM typedef uint8_t MAINS_PUMP_SPEED_t { text "%4u" MAINS_PUMP_SPEED_text(); }
 
-MAINS_ON_OFF_t Pump_On_Off; Invalidate Pump_On_Off;
-{ Pump_On_Off = (MAINS_Cmd_Status>>0) & 1; Validate Pump_On_Off; }
+MAINS_ON_OFF_t Pump_On; Invalidate Pump_On;
+{ Pump_On = (MAINS_Cmd_Status>>0) & 1; Validate Pump_On; }
 MAINS_PUMP_SPEED_t Pump_Speed; Invalidate Pump_Speed;
 { Pump_Speed = (MAINS_Cmd_Status>>1) & 1; Validate Pump_Speed; }
 MAINS_ON_OFF_t StLED1; Invalidate StLED1;

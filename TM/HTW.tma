@@ -31,13 +31,12 @@ State Init {
 State Standby {
         depending on (OFF_GROUND) { Validate Record; }
         depending on (IN_AIR) { Validate Record; }
-        depending on (AI_Fail)   { Validate Shutdown; }
+        depending on (AI_Fail) { Validate Shutdown; }
 }
 
 # RECORD  
 State Record {
         depending on (ON_GROUND) { Validate Shutdown; }
-        # depending on (h2o2failA) { Validate Shutdown; }
         depending on (AI_Fail)   { Validate Shutdown; }
         "In Record";
 }
@@ -62,6 +61,8 @@ Partition
 # We are effectively using two switches: 
 # 	ON_GROUND and IN_AIR (BELOW CLOUDS = ABOVE CLOUDS)
 # REF: 650 torr ~5000 ft
+# Palmdale, CA is at elevation 2657'
+# Salina, KS is at elevation 1227'
 
 %{ /* Altitude definitions */
     double P_ground_up = 525.;
@@ -94,27 +95,6 @@ State IN_AIR {
 }
 
 #---------------------------------------------------------------
-# Partition 3: HTW
-#---------------------------------------------------------------
-Partition
-
-State HTW_Init {
-     Depending on (Shutdown) { Validate HTW_Shutdown; }
-     Depending on (Shutdown) { Validate HTW_Shutdown; }
-     Depending on (IN_AIR) { Validate HTW_Startup; }
-     Depending on (OFF_GROUND) { Validate HTW_Startup; }
-}
-
-State HTW_Startup {
-     Depending on (Shutdown) { Validate HTW_Shutdown; }
-     Depending on (Shutdown) { Validate HTW_Shutdown; }
-     Depending on (ON_GROUND) { Validate HTW_Shutdown; }
-  #  Validate Nano_Nano800;
-}
-
-State HTW_Shutdown {}
-
-#---------------------------------------------------------------
 # Partition 4: Laser Operations
 #---------------------------------------------------------------
 Partition
@@ -140,33 +120,15 @@ State Laser_Ops_Start {
 
 State Laser_Ops_Sample {
        Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-       { if (!Pump_On_Off) Validate Laser_Ops_Fill_To_Ambient; }
+#      { if (!Pump_On) Validate Laser_Ops_Fill_To_Ambient; }
     +1 Validate QCL_SelectRingandRun;
    +30 Validate QCL_SelectICOSandRun;
 }
 
-State Laser_Ops_Calibrate {
-     Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-     { if (!Pump_On_Off) Validate Laser_Ops_Fill_To_Ambient; }
-}
-
-State Laser_Ops_End_Calibrate {
-     Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-
-   +20 Validate QCL_NC_1;
-    +1 Hold until valid (QCL_Watch);
-   +10 Validate QCL_Stop;
-       Hold Until Valid (QCL_Idle);
-       { Laser_Ops_Ready_To_Calibrate = 3;
-         Validate Laser_Ops_Sample;
-       }
-}
-
-State Laser_Ops_Fill_to_Ambient {
-    { Laser_Ops_Ready_To_Calibrate = 0; }
-    { if (Pump_On_Off) Validate Laser_Ops_Sample; }
-    Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-}
+# State Laser_Ops_Calibrate {
+#      Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
+#      { if (!Pump_On) Validate Laser_Ops_Fill_To_Ambient; }
+# }
 
 State Laser_Ops_Shutdown {
  #   > Pressure Reg Off
@@ -374,7 +336,7 @@ State QCL_SelectRingandRun {
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
   +10 > Select QCLI Waveform RingRamp
-   +1 > SSP Set NSample 3500
+#  +1 > SSP Set NSample 3500
    +2 Validate QCL_Start;
 }
 
