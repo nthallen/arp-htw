@@ -23,6 +23,8 @@ class UDPbcast {
     int UDP_init();
     char *buf;
     int buflen;
+    const char *broadcast_ip;
+    const char *broadcast_port;
     int bcast_sock;
     bool ok_status;
     bool ov_status;

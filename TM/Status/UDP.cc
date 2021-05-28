@@ -8,9 +8,13 @@
 #include "nortlib.h"
 #include "nl_assert.h"
 
-UDPbcast::UDPbcast(const char *broadcast_ip, const char *broadcast_portm int buflen)
-    : buflen(buflen),
-      buf(0),
+UDPbcast::UDPbcast(const char *broadcast_ip,
+                   const char *broadcast_portm,
+                   int buflen)
+    : buf(0),
+      buflen(buflen),
+      broadcast_ip(broadcast_ip),
+      broadcast_port(broadcast_port),
       ok_status(false),
       ov_status(false) {
   buf = new char[buflen];

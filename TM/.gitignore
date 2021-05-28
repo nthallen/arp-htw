@@ -63,6 +63,11 @@ TSdispncoui.c
 TSdispncoui.o
 TSdispnc.o
 doit.dep
+udpext.cc
+udpextoui.c
+udpextoui.o
+udpext.o
+UDP.o
 HTWclt.o
 HTWcltoui.c
 HTWcltoui.o
@@ -98,6 +103,7 @@ datadispnc
 TSdisp
 TSdispnc
 doit
+udpext
 HTWclt
 HTWcltnc
 HTWengext
