@@ -56,6 +56,7 @@ TSdisp : TS_conv.tmc TS.tbl
 doit : HTW.doit
 # labdisp : dstat.tmc lab.tbl
 # labdoit : lab.doit
+udpext : /usr/local/share/huarp/flttime.tmc Status/UDP.cc UDP.tmc -lsocket
 
 %%
 CFLAGS=-Wall -g
