@@ -16,15 +16,15 @@
 #---------------------------------------------------------------
 Partition
 
-# State Flow_Init {}        # Goal State: F_idle
-# State Flow_Idle {}        # Goal State: F_Idle
-# State Flow_Zero {}        # Goal State: F_Zero
-# State Flow_PV_PI {}       # Goal State: F_PV_PI
-# State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
-# State Flow_GD_PI {}       # Goal State: F_GD_PI
-# State Flow_GD_PP {}       # Goal State: F_GD_Pump_Purge
-# State Flow_Fill_Cell {}   # Goal State: F_Shutdown
-# State Flow_Shutdown {}    # Goal State: F_Shutdown
+State Flow_Init {}        # Goal State: F_idle
+State Flow_Idle {}        # Goal State: F_Idle
+State Flow_Zero {}        # Goal State: F_Zero
+State Flow_PV_PI {}       # Goal State: F_PV_PI
+State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
+State Flow_GD_PI {}       # Goal State: F_GD_PI
+State Flow_GD_PP {}       # Goal State: F_GD_Pump_Purge
+State Flow_Fill_Cell {}   # Goal State: F_Shutdown
+State Flow_Shutdown {}    # Goal State: F_Shutdown
 
 #===============================================================
 #             Pump   ExV     GDV     PV      CellP
@@ -83,7 +83,7 @@ State F_Zero_Init {
 
 # F_Pump_On should only be reachable from F_Idle
 State F_Pump_On {
-      > Mains Pump On
+      > Mains Pump Start
    +5 > Command Exhaust_Vlv On
       Validate F_Zero_Init;
 }
