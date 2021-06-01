@@ -16,14 +16,15 @@
 #---------------------------------------------------------------
 Partition
 
-State Flow_Init {}        # Goal State: F_idle
-State Flow_Idle {}        # Goal State: F_Idle
-State Flow_Zero {}        # Goal State: F_Zero
-State Flow_PV_PI {}       # Goal State: F_PV_PI
-State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
-State Flow_GD_PI {}       # Goal State: F_GD_PI
-State Flow_Fill_Cell {}   # Goal State: F_Shutdown
-State Flow_Shutdown {}    # Goal State: F_Shutdown
+# State Flow_Init {}        # Goal State: F_idle
+# State Flow_Idle {}        # Goal State: F_Idle
+# State Flow_Zero {}        # Goal State: F_Zero
+# State Flow_PV_PI {}       # Goal State: F_PV_PI
+# State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
+# State Flow_GD_PI {}       # Goal State: F_GD_PI
+# State Flow_GD_PP {}       # Goal State: F_GD_Pump_Purge
+# State Flow_Fill_Cell {}   # Goal State: F_Shutdown
+# State Flow_Shutdown {}    # Goal State: F_Shutdown
 
 #===============================================================
 #             Pump   ExV     GDV     PV      CellP
@@ -54,6 +55,7 @@ State F_Idle {
   depending on (Flow_PV_PI) { Validate F_Pump_On; }
   depending on (Flow_PV_Scan) { Validate F_Pump_On; }
   depending on (Flow_GD_PI) { Validate F_Pump_On; }
+  depending on (Flow_GD_PP) { Validate F_Pump_On; }
   depending on (Flow_Fill_Cell) { Validate F_Pump_On; }
   depending on (Flow_Shutdown) { Validate F_Shutdown; }
 }
@@ -66,6 +68,7 @@ State F_Zero {
   depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
   depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
   depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_GD_PP) { Validate F_GD_Pump_Purge; }
   depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
   depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
@@ -123,6 +126,7 @@ State F_GD_Close {
       depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
       depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
       depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+      depending on (Flow_GD_PP) { Validate F_Zero_Init; }
       depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
       depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
@@ -167,6 +171,7 @@ State F_GD_PI NoLog {
   depending on (Flow_PV_PI) { Validate F_GD_Close; }
   depending on (Flow_PV_Scan) { Validate F_GD_Close; }
 # depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_GD_PP) { Validate F_GD_Close; }
   depending on (Flow_Fill_Cell) { Validate F_GD_Close; }
   depending on (Flow_Shutdown) { Validate F_GD_Close; }
 }
@@ -193,6 +198,14 @@ State F_GD_Fill_Cell {
 }
 
 State F_GD_Pump_Purge {
+        depending on (Flow_Idle) { Validate F_GD_Close; }
+        depending on (Flow_Zero) { Validate F_GD_Close; }
+        depending on (Flow_PV_PI) { Validate F_GD_Close; }
+        depending on (Flow_PV_Scan) { Validate F_GD_Close; }
+        depending on (Flow_GD_PI) { Validate F_GD_Close; }
+      # depending on (Flow_GD_PP) { Validate F_GD_Close; }
+        depending on (Flow_Fill_Cell) { Validate F_GD_Close; }
+        depending on (Flow_Shutdown) { Validate F_GD_Close; }
         > Air Flow Setpoint 5000 sccm
   +1:00 > Air Flow Setpoint 1000 sccm
   +1:00 > Air Flow Setpoint 5000 sccm
@@ -205,7 +218,6 @@ State F_GD_Pump_Purge {
 #   F_PV_Init - Startup. Sets gains
 #   F_PV_Close - Drives to in limit or complains
 #   F_PV_Closed - Where we go after closing valve.
-#   F_PV_Failure - Reports in limit failure and sits
 #   F_PV_Steps_Init - How we get to F_PV_Steps
 #   F_PV_Steps - Old Pressure-control algo
 #   F_PV_PI_Init - How we get to F_PV_PI
@@ -243,18 +255,31 @@ State F_PV_Close2 {
   Hold Until ( PVStep == 0 ) or 2
   else { msg( 2, "Pinch Valve step did not reset" ); }
   > Preset Pinch Valve Position to 0
-  Validate F_Idle;
+  depending on (Flow_Idle) { Validate F_Pump_Off; }
+  depending on (Flow_Zero) { Validate F_Zero_Init; }
+  depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+  depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+  depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_GD_PP) { Validate F_Zero_Init; }
+  depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+  depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
 #---------------------------------------------------------------
 # In limit not observed: Retry periodically
+#### Move this to a separate partition, then handle in Ops
 #---------------------------------------------------------------
 State F_PV_Failure {
-  depending on (Flow_Shutdown) { Validate F_GD_Fill_Cell; }
-# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
-
+  Validate PV_Failure;
   { msg( 2, "Pinch Valve did not close" ); }
-  +1:00 Validate F_PV_Close;
+  
+  depending on (Flow_Idle) { Validate F_Pump_Off; }
+# depending on (Flow_Zero) { Validate F_Zero_Init; }
+# depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+# depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+# depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_Fill_Cell) { Validate F_Pump_Off; }
+  depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
 State F_PV_PI_Init {
@@ -263,7 +288,13 @@ State F_PV_PI_Init {
 }
 
 State F_PV_PI NoLog {
-# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+  depending on (Flow_Idle) { Validate F_PV_Close; }
+  depending on (Flow_Zero) { Validate F_PV_Close; }
+# depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+  depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+  depending on (Flow_GD_PI) { Validate F_PV_Close; }
+  depending on (Flow_GD_PP) { Validate F_PV_Close; }
+  depending on (Flow_Fill_Cell) { Validate F_PV_Close; }
   depending on (Flow_Shutdown) { Validate F_PV_Close; }
   { double P, Gp, Gi, P_diff, P_set, dstep;
     unsigned short ustep;
@@ -294,7 +325,13 @@ State F_PV_PI NoLog {
 }
 
 State F_PV_Scan {
-#   depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+    depending on (Flow_Idle) { Validate F_PV_Close; }
+    depending on (Flow_Zero) { Validate F_PV_Close; }
+    depending on (Flow_PV_PI) { Validate F_PV_Close; }
+#   depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+    depending on (Flow_GD_PI) { Validate F_PV_Close; }
+    depending on (Flow_GD_PP) { Validate F_PV_Close; }
+    depending on (Flow_Fill_Cell) { Validate F_PV_Close; }
     depending on (Flow_Shutdown) { Validate F_PV_Close; }
 
     > Drive Pinch Valve In 8000
@@ -313,9 +350,4 @@ State F_PV_Scan {
  +1 { if ( PVStep != 0 ) Validate F_PV_Close; }
     Validate F_PV_PI_Init;
 }
-
-#State F_Pump_Over_Temp {
-# +1 > Mains Pump Stop
-#    depending on (Pump_Watch) { Validate F_Idle; }
-#}
 

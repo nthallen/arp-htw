@@ -20,12 +20,12 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
   SWS_CALIBRATE_STOP  21 Calibrate Stop:
     Validate Calibrate_Stop; break;
 
-  SWS_PV_CLOSE  30  Pinch Valve Close:
-    Validate Pinch_Valve_Close; break;
+  SWS_FLOW_ZERO 30  Flow Zero:
+    Validate Flow_Zero; break;
   SWS_PV_PI     32  Pinch Valve PI:
-    Validate Pinch_Valve_PI_Init; break;
+    Validate Flow_PV_PI; break;
   SWS_PV_SCAN   33  Pinch Valve Scan:
-    Validate Pinch_Valve_Scan; break;
+    Validate Flow_PV_Scan; break;
     
   SWS_TV_INIT   40  Throttle Valve PI Init:
     Validate Throttle_Valve_PI_Init; break;
@@ -34,12 +34,12 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
   SWS_TV_SCAN   42  Throttle Valve Scan:
     Validate Throttle_Valve_Scan; break;
 
-  SWS_GD_INIT   50  Gas Deck PI Init:
-    Validate GasDeck_PI_Init; break;
-  SWS_GD_CLOSE  51  Gas Deck Close:
-    Validate GasDeck_Close; break;
+  SWS_GD_PI     50  Gas Deck PI Init:
+    Validate Flow_GD_PI; break;
+# SWS_GD_CLOSE  51  Gas Deck Close:
+#   Validate GasDeck_Close; break;
   SWS_GD_FILL   52  Gas Deck Fill Cell:
-    Validate GasDeck_Fill_Cell; break;
+    Validate Flow_Fill_Cell; break;
   SWS_GD_PUMP_PURGE   53  Gas Deck Pump Purge:
     Validate GasDeck_Pump_Purge; break;
   

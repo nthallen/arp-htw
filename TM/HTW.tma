@@ -39,11 +39,13 @@ State Record {
         depending on (ON_GROUND) { Validate Shutdown; }
         depending on (AI_Fail)   { Validate Shutdown; }
         "In Record";
+        Hold until valid (IN_AIR);
+        depending on (OFF_GROUND) { Validate Shutdown; }
 }
 
 # SHUTDOWN
 State Shutdown {
-      Hold until valid (Ops_Is_Shutdown) or 20;
+      Hold until valid (Ops_Is_Shutdown) or 5:00;
  +5   > Fail Light On
       > quit
 }
@@ -111,31 +113,68 @@ State Ops_Init {
 
 State Ops_Start {
       Depending on (Shutdown) { Validate Ops_Shutdown; }
-   +5 Hold until valid (Pump_Watch);
+      Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
+      Validate Flow_Zero;
+      Hold until valid (F_Zero);
    +1 > Laser TEC Setpoint 7.6 C
    +1 > Laser TEC Enable
-  +30 Validate Ops_Sample;
+      Validate QCL_SelectRingandRun;
+  +30 Validate QCL_SelectICOSandRun;
+      Validate Ops_Calibrate;
+}
+
+State Ops_Calibrate {
+      Depending on (Shutdown) { Validate Ops_Shutdown; }
+      Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
+#     { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
+      Validate Flow_GD_PI;
+      Hold until valid (F_GD_PI);
+   +1 > Command Bub_In_Vlv_D On
+   +1 > Command Bub_Out_Vlv_D On
+      > Bubbler Flow SetPoint 5 sccm
+      Hold until (SW_St == SWS_TIMEWARP) or 4:00;
+      > Bubbler Flow SetPoint 10 sccm
+      Hold until (SW_St == SWS_TIMEWARP) or 4:00;
+      Validate Ops_Sample;
 }
 
 State Ops_Sample {
-       Depending on (Shutdown) { Validate Ops_Shutdown; }
-#      { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
-    +1 Validate QCL_SelectRingandRun;
-   +30 Validate QCL_SelectICOSandRun;
+          Depending on (Shutdown) { Validate Ops_Shutdown; }
+          Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
+#         { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
+          Validate Flow_PV_PI;
+          Hold until valid (F_PV_PI);
+   +30:00 Validate Ops_Calibrate;
 }
 
-# State Ops_Calibrate {
-#      Depending on (Shutdown) { Validate Ops_Shutdown; }
-#      { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
-# }
-
 State Ops_Shutdown {
- #   > Pressure Reg Off
-  +1 Hold until valid (QCL_Is_Shutdown);
+     Validate Flow_Zero;
+     Hold until valid (F_Zero) or 2:00;
+     Validate QCL_SelectRingandRun;
+ +30 Validate QCL_Stop;
      > Set Cell Pressure Setpoint 700
-     Validate Flow_Shutdown;
-     Hold until valid (F_Shutdown);
+     Validate Flow_Fill_Cell;
+     Hold until valid (F_Shutdown) or 3:00;
+  +1 Hold until valid (QCL_Is_Shutdown) or 5;
      Validate Ops_Is_Shutdown;
+}
+
+State Ops_Pump_Over_Temp {
+      { Validate Flow_Idle; }
+      { depending on (QCL_Idle) {}
+        else Validate QCL_Stop;
+      }
+      Depending on (Shutdown) { Validate Ops_Is_Shutdown; }
+      Hold until valid (F_Idle);
+      Depending on (Pump_Watch) { Validate Ops_Sample; }
+}
+
+State Ops_PV_Failure {
+      { depending on (QCL_Idle) {}
+        else Validate QCL_Stop;
+      }
+      Depending on (Shutdown) { Validate Ops_Is_Shutdown; }
+      Depending on (PV_Watch) { Validate Ops_Sample; }
 }
 
 State Ops_Is_Shutdown {}
@@ -417,6 +456,9 @@ State QCLI_Shutdown {}
 # Needs to be written!
 #---------------------------------------------------------------
 Partition
+%{
+  int pump_OT_simulated = 0;
+%}
 State Pump_Watch NoLog {
   { if ( convert(PumpT) > 75 || convert(PMotT) > 75 ) {
       msg(2, "Pump over temp: PumpT %.1lf C PMotT %.1lf C",
@@ -424,13 +466,34 @@ State Pump_Watch NoLog {
       Validate Pump_Over_Temp;
     }
   }
+  { if (SW_St == SWS_PUMP_OVER_TEMP) {
+      msg(0, "Pump over temp drill: PumpT %.1lf C PMotT %.1lf C",
+            convert(PumpT), convert(PMotT));
+      pump_OT_simulated = 1;
+    }
+  }
 }
 
 State Pump_Over_Temp NoLog {
-  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 );
-  Hold until ( convert(PumpT) > 75 || convert(PMotT) > 75 ) or 15
+  { if (SW_St == SWS_PUMP_OT_CLEAR) pump_OT_simulated = 0; }
+  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 && !pump_OT_simulated);
+  Hold until ( convert(PumpT) > 75 || convert(PMotT) > 75 && !pump_OT_simulated) or 15
   else Validate Pump_Over_Temp;
   Validate Pump_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 7: PV Failure State
+#---------------------------------------------------------------
+Partition
+
+State PV_Watch {}
+
+State PV_Failure NoLog {
+  Validate Flow_Idle;
+  +1:00 Validate F_PV_Close;
+     +1 Hold until valid (F_Idle);
+        Validate PV_Watch;
 }
 
 #---------------------------------------------------------------
