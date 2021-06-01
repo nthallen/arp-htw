@@ -9,7 +9,7 @@ Partition
 
 State TEC_LPV_Init {
   +1 > LPV TEC Enable
-  +5 Validate TEC_LPV_Watch
+  +5 Validate TEC_LPV_Watch;
 }
 
 # LPV_DevStatus values are defined in ME.tmc

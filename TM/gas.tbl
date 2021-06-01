@@ -14,7 +14,7 @@ Cell {
   T2:  (Cel2T,6) C;
   HP:  (Cel2P,5) Torr;
   LP:  (CellP,5) Torr;
-  Set: (PV_SetP,5);
+  Set: (Cell_SetP,5) Torr;
 }
 
 Valves {

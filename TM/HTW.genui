@@ -107,7 +107,6 @@ ROWS 18
 1 I:PVStat:0 PV Bits
 1 PV_Gi PV Gains
 1 PV_Gp PV Gains
-1 PV_SetP PV P
 1 Cel2P  PV P
 
 1 Rov1T TE Rovers 1

@@ -41,7 +41,10 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
   SWS_GD_FILL   52  Gas Deck Fill Cell:
     Validate Flow_Fill_Cell; break;
   SWS_GD_PUMP_PURGE   53  Gas Deck Pump Purge:
-    Validate GasDeck_Pump_Purge; break;
+    Validate Flow_GD_PP; break;
+
+  SWS_PUMP_OVER_TEMP 60 Pump Simulate Over Temp: break;
+  SWS_PUMP_OT_CLEAR  61 Pump Clear Simulated Over Temp: break;
   
   SWS_READFILE  253 ReadFile: Validate ReadFile; break;
   SWS_TIMEWARP  254 Time Warp: break;

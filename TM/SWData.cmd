@@ -12,10 +12,9 @@
   ;
 &SWTM
   : SW Status &SW_St { SWData.SW_St = $3; }
-  : Set Cell Pressure Setpoint &PV_SetP { SWData.PV_SetP = $5; }
+  : Set Cell Pressure Setpoint &Cell_SetP { SWData.Cell_SetP = $5; }
   : Set Cell Pressure Gain Gi &PV_Gi { SWData.PV_Gi = $6; }
   : Set Cell Pressure Gain Gp &PV_Gp { SWData.PV_Gp = $6; }
-  : Set GasDeck Pressure Setpoint &GD_SetP { SWData.GD_SetP = $5; }
   : Set GasDeck Pressure Gain Gi &GD_Gi { SWData.GD_Gi = $6; }
   : Set GasDeck Pressure Gain Gp &GD_Gp { SWData.GD_Gp = $6; }
   : Set Inlet DP Setpoint &TV_DP_Set { SWData.TV_DP_Set = $5; }
@@ -33,30 +32,28 @@
   : Laser Select Waveform and Start { $0 = SWS_LASER_WAVE; }
   : Calibrate Start { $0 = SWS_CALIBRATE_START; }
   : Calibrate Stop { $0 = SWS_CALIBRATE_STOP; }
-  : Pinch Valve Close { $0 = SWS_PV_CLOSE; }
+  : Flow Zero { $0 = SWS_FLOW_ZERO; }
   : Pinch Valve PI { $0 = SWS_PV_PI; }
   : Pinch Valve Scan { $0 = SWS_PV_SCAN; }
   : Throttle Valve PI Init { $0 = SWS_TV_INIT; }
   : Throttle Valve Close { $0 = SWS_TV_CLOSE; }
   : Throttle Valve Scan { $0 = SWS_TV_SCAN; }
-  : Gas Deck PI Init { $0 = SWS_GD_INIT; }
-  : Gas Deck Close { $0 = SWS_GD_CLOSE; }
+  : Gas Deck PI Init { $0 = SWS_GD_PI; }
   : Gas Deck Fill Cell { $0 = SWS_GD_FILL; }
   : Gas Deck Pump Purge { $0 = SWS_GD_PUMP_PURGE; }
+  : Pump Simulate Over Temp { $0 = SWS_PUMP_OVER_TEMP; }
+  : Pump Clear Simulated Over Temp { $0 = SWS_PUMP_OT_CLEAR; }
   : ReadFile { $0 = SWS_READFILE; }
   : Time Warp { $0 = SWS_TIMEWARP; }
   : Shutdown { $0 = SWS_SHUTDOWN; }
   ;
-&PV_SetP <unsigned short>
+&Cell_SetP <unsigned short>
   : &gain { $0 = $1; }
   ;
 &PV_Gi <unsigned short>
   : &gain { $0 = $1; }
   ;
 &PV_Gp <unsigned short>
-  : &gain { $0 = $1; }
-  ;
-&GD_SetP <unsigned short>
   : &gain { $0 = $1; }
   ;
 &GD_Gi <unsigned short>
