@@ -91,10 +91,16 @@ State F_Pump_On {
 State F_Pump_Off {
       > Command Exhaust_Vlv Off
    +5 > Mains Pump Stop
-      { depending on (Flow_Fill_Cell) { Validate F_Shutdown; } else
-        depending on (Flow_Shutdown) { Validate F_Shutdown; } else
-        Validate F_Idle;
-      }
+      depending on (Pump_Over_Temp) { Validate F_Idle; }
+      depending on (Flow_Init) { Validate F_Idle; }
+      depending on (Flow_Idle) { Validate F_Idle; }
+      depending on (Flow_Zero) { Validate F_Idle; }
+      depending on (Flow_PV_PI) { Validate F_Idle; }
+      depending on (Flow_PV_Scan) { Validate F_Idle; }
+      depending on (Flow_GD_PI) { Validate F_Idle; }
+      depending on (Flow_GD_PP) { Validate F_Idle; }
+      depending on (Flow_Fill_Cell) { Validate F_Shutdown; }
+      depending on (Flow_Shutdown) { Validate F_Shutdown; }
 }
 
 %{
