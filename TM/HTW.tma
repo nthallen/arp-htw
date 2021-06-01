@@ -578,7 +578,8 @@ Partition
 State Calibrate_Init {}
 
 State Calibrate_Start {
-  Validate GasDeck_PI_Init;
+  Validate Flow_GD_PI;
+  Hold Until Valid (F_GD_PI);
   Hold Until ( convert(CellP) == convert(GD_SetP) ) or 30;
   +1 > Command Bub_In_Vlv_D On
   +1 > Command Bub_Out_Vlv_D On
@@ -602,7 +603,7 @@ State Calibrate_Start {
 }
 
 State Calibrate_Stop {
-     Validate GasDeck_Close;
+     Validate Flow_Zero;
   +1 Validate Calibrate_Idle;
 }
 
