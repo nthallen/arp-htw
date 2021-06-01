@@ -1,0 +1,57 @@
+#===============================================================
+# TEC.tma
+#===============================================================
+
+#---------------------------------------------------------------
+# Partition 1: LPV TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_LPV_Init {
+  +1 > LPV TEC Enable
+  +5 Validate TEC_LPV_Watch
+}
+
+# LPV_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor LPV_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_LPV_Watch NoLog {
+  { if (LPV_DevStatus != 2) {
+      msg(2, "LPV TEC Unexpectedly disabled: Status %d: %s",
+        LPV_DevStatus, text(LPV_DevStatus));
+      Validate TEC_LPV_Disabled;
+    }
+  }
+  Hold until (LPV_T > LPV_Set_T + 5);
+  Hold until (LPV_T < LPV_Set_T + 5) or 15
+  else Validate TEC_LPV_OverTemp;
+  Validate TEC_LPV_Watch;
+}
+
+State TEC_LPV_OverTemp {
+    +1 { msg(2, "LPV TEC Over Temp: SP:%.1f C  T:%.1f C", LPV_Set_T, LPV_T); }
+    +1 > LPV TEC Disable
+   +30 > LPV TEC Enable
+ +3:00 Validate TEC_LPV_Watch;
+}
+
+State TEC_LPV_Disabled NoLog {
+  +1 > LPV TEC Enable
+     Hold until (LPV_DevStatus == 2) or 30
+     else Validate TEC_LPV_Disabled;
+     Validate TEC_LPV_Watch;
+}

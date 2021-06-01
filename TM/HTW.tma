@@ -1,5 +1,5 @@
 #===============================================================
-# ER-2 Flights, April 2020; Palmdale, CA, DCOTSS Mission
+# ER-2 Flights, May-June 2021; Palmdale, CA, DCOTSS Mission
 # Flight HTW.tma.
 #===============================================================
 
@@ -43,7 +43,7 @@ State Record {
 
 # SHUTDOWN
 State Shutdown {
-      Hold until valid (Laser_Ops_Is_Shutdown) or 20;
+      Hold until valid (Ops_Is_Shutdown) or 20;
  +5   > Fail Light On
       > quit
 }
@@ -95,48 +95,50 @@ State IN_AIR {
 }
 
 #---------------------------------------------------------------
-# Partition 4: Laser Operations
+# Partition 4: Operations
 #---------------------------------------------------------------
 Partition
 
 %{
-  int Laser_Ops_Ready_To_Calibrate;
+  int Ops_Ready_To_Calibrate;
 %}
 
-State Laser_Ops_Init {
- # +1 > Pressure Reg Off
+State Ops_Init {
       > Laser TEC Live SetPoints Enable
-      Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-      Depending on (Record) { Validate Laser_Ops_Start; }
+      Depending on (Shutdown) { Validate Ops_Shutdown; }
+      Depending on (Record) { Validate Ops_Start; }
 }
 
-State Laser_Ops_Start {
-      Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
+State Ops_Start {
+      Depending on (Shutdown) { Validate Ops_Shutdown; }
    +5 Hold until valid (Pump_Watch);
-   +1 > Laser TEC Setpoint 7.8 C
+   +1 > Laser TEC Setpoint 7.6 C
    +1 > Laser TEC Enable
-  +30 Validate Laser_Ops_Sample;
+  +30 Validate Ops_Sample;
 }
 
-State Laser_Ops_Sample {
-       Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-#      { if (!Pump_On) Validate Laser_Ops_Fill_To_Ambient; }
+State Ops_Sample {
+       Depending on (Shutdown) { Validate Ops_Shutdown; }
+#      { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
     +1 Validate QCL_SelectRingandRun;
    +30 Validate QCL_SelectICOSandRun;
 }
 
-# State Laser_Ops_Calibrate {
-#      Depending on (Shutdown) { Validate Laser_Ops_Shutdown; }
-#      { if (!Pump_On) Validate Laser_Ops_Fill_To_Ambient; }
+# State Ops_Calibrate {
+#      Depending on (Shutdown) { Validate Ops_Shutdown; }
+#      { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
 # }
 
-State Laser_Ops_Shutdown {
+State Ops_Shutdown {
  #   > Pressure Reg Off
   +1 Hold until valid (QCL_Is_Shutdown);
-     Validate Laser_Ops_Is_Shutdown;
+     > Set Cell Pressure Setpoint 700
+     Validate Flow_Shutdown;
+     Hold until valid (F_Shutdown);
+     Validate Ops_Is_Shutdown;
 }
 
-State Laser_Ops_Is_Shutdown {}
+State Ops_Is_Shutdown {}
 
 #---------------------------------------------------------------
 # Partition 5: Laser Control JPL 53
@@ -415,113 +417,20 @@ State QCLI_Shutdown {}
 # Needs to be written!
 #---------------------------------------------------------------
 Partition
-
-State Pump_Init {
-  +10 Validate Pump_Watch;
-}
-
-State Pump_Start {}
-State Pump_Watch {}
-State Pump_Shutdown {}
-
-#---------------------------------------------------------------
-# Partition 8: Gas Deck Control
-# Allows control of cell pressure from gas flow based on PV PI
-# Watches for low pressure in main bottle and turns of flows
-# Watches for low pressure in low pressure lines and turns off flows
-# Fills cell to 1 atm. pressure. 
-#---------------------------------------------------------------
-Partition
-
-%{
-  double GP_sum;
-  /* double GP_diff */
-  /* double GP_set */
-
- #define US_CAST(x) ((unsigned short)(x))
- #define MAX_FLOW 50000
- #include <math.h>
-%}
-
-State GasDeck_Init {
-  +1 > Set GasDeck Pressure Gain Gp 8.0
-  +1 > Set GasDeck Pressure Gain Gi 40.0
-  +1 > Set GasDeck Pressure SetPoint 40.0
-  +1 Validate GasDeck_Close;
-}
-
-State GasDeck_Close {
-     > Air Flow SetPoint 0 sccm
-     > Bubbler Flow SetPoint 0 sccm
-  +1 > Command Gas_Vlv_D Off
-  +1 > Command Bub_In_Vlv_D Off
-  +1 > Command Bub_Out_Vlv_D Off
-  +1 Validate GasDeck_Idle;
-}
-
-State GasDeck_Idle {}
-
-State GasDeck_PI_Init {
-  { GP_sum = 0; }
-    > Command Gas_Vlv_D On
-  +1 Validate GasDeck_PI;
-}
-
-State GasDeck_PI NoLog {
-#  depending on (ON_GROUND) { Validate GasDeck_Close; }
-  { if ( convert(GasHP) < 100 || convert(GasLP) < 10  || convert(BubLP) < 10 ) Validate GasDeck_Low_Pressure; }
-  { double P, Gp, Gi, P_diff, P_set, dstep;
-    unsigned short ustep;
-    P = convert(CellP);
-    P_set = convert(GD_SetP);
-    Gp = convert(GD_Gp);
-    Gi = convert(GD_Gi);
-    P_diff = P_set - P;
-    GP_sum += P_diff * Gi;
-    if ( GP_sum > MAX_FLOW )
-      GP_sum = MAX_FLOW;
-    else if ( P_sum < -MAX_FLOW )
-      GP_sum = -MAX_FLOW/Gi;
-
-    dstep = P_diff * Gp + GP_sum;
-    if (dstep < 0) dstep = 0;
-    else if (dstep > MAX_FLOW) dstep = MAX_FLOW;
-    ustep = US_CAST(dstep);
-    ci_sendfcmd(2, "Air Flow SetPoint %u sccm\n", ustep);
+State Pump_Watch NoLog {
+  { if ( convert(PumpT) > 75 || convert(PMotT) > 75 ) {
+      msg(2, "Pump over temp: PumpT %.1lf C PMotT %.1lf C",
+            convert(PumpT), convert(PMotT));
+      Validate Pump_Over_Temp;
+    }
   }
-
- "Regulating";
- # Probably need to add a Hold Until statement to see that the actual flow matches the setpoint
- # otherwise put up some error
- # Checks that flow controllers are responding?
- +1 Validate GasDeck_PI;
 }
 
-State GasDeck_Low_Pressure {
- # Most likely we're here because the gas bottle is running low on gas. At that point we probably want to stop doing cals and leave enough to fill the cell at the end of the flight. 
-  +1 Validate GasDeck_Close;
-}
-
-State GasDeck_FC_Not_Regulating {}
-
-State GasDeck_Fill_Cell {
-  > Command Exhaust_Vlv Off
-  > Command Gas_Vlv_D On 
-  > Air Flow SetPoint 10000 sccm
- Hold Until ( convert(Cel2P) > convert(GD_SetP) - 200 ) or 1:00;
-  > Air Flow SetPoint 5000 sccm
- Hold Until ( convert(Cel2P) > convert(GD_SetP) - 100 ) or 1:00;
-  > Air Flow SetPoint 1000 sccm
- Hold Until ( convert(Cel2P) > convert(GD_SetP) ) or 30;
-  Validate GasDeck_Close;
-}
-
-State GasDeck_Pump_Purge {
-      > Air Flow Setpoint 5000 sccm
-+1:00 > Air Flow Setpoint 1000 sccm
-+1:00 > Air Flow Setpoint 5000 sccm
-+1:00 > Air Flow Setpoint 1000 sccm
-+1:00 Validate GasDeck_Pump_Purge;
+State Pump_Over_Temp NoLog {
+  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 );
+  Hold until ( convert(PumpT) > 75 || convert(PMotT) > 75 ) or 15
+  else Validate Pump_Over_Temp;
+  Validate Pump_Watch;
 }
 
 #---------------------------------------------------------------

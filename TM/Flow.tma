@@ -1,0 +1,321 @@
+#===============================================================
+# Flow.tma
+# Strategy: Two partitions:
+#  Flow Partition consists of empty states that indicate the
+#    desired goal state. These can be validated by the Ops
+#    partition. Each of these request states is paired with
+#    a desired end state in the F Partition. The states are
+#    described below the Flow partition definitions.
+#
+#  F Partition combines the GasDeck and Pinch_Valve states,
+#    using the Flow_ states to direct state transitions.
+#===============================================================
+
+#---------------------------------------------------------------
+# Partition #F0: Flow Request States
+#---------------------------------------------------------------
+Partition
+
+State Flow_Init {}        # Goal State: F_idle
+State Flow_Idle {}        # Goal State: F_Idle
+State Flow_Zero {}        # Goal State: F_Zero
+State Flow_PV_PI {}       # Goal State: F_PV_PI
+State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
+State Flow_GD_PI {}       # Goal State: F_GD_PI
+State Flow_Fill_Cell {}   # Goal State: F_Shutdown
+State Flow_Shutdown {}    # Goal State: F_Shutdown
+
+#===============================================================
+#             Pump   ExV     GDV     PV      CellP
+# F_Idle:     Off    Closed  Closed  Closed  undetermined
+# F_Zero:     On     Open    Closed  Closed  < 1 Torr
+# F_PV_PI:    On     Open    Closed  Cntrl   Cell_SetP 
+# F_PV_Scan:  On     Open    Closed  Cntrl   varying
+# F_GD_PI:    On     Open    Cntrl   Closed  Cell_SetP
+# F_Shutdown: Off    Closed  Closed  Closed  ~1Atm (via Cell_SetP)
+#===============================================================
+
+#---------------------------------------------------------------
+# Partition #F1: Gas Deck, Pinch Valve and Pump work states
+#---------------------------------------------------------------
+Partition
+
+State F_Init {
+  +1 > Mains Pump Enable
+  +1 > Mains Pump Stop
+  +1 Validate F_GD_Init;
+}
+
+State F_Idle {
+# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+# depending on (Flow_Init) { Validate F_Idle; }
+# depending on (Flow_Idle) { Validate F_Idle; }
+  depending on (Flow_Zero) { Validate F_Pump_On; }
+  depending on (Flow_PV_PI) { Validate F_Pump_On; }
+  depending on (Flow_PV_Scan) { Validate F_Pump_On; }
+  depending on (Flow_GD_PI) { Validate F_Pump_On; }
+  depending on (Flow_Fill_Cell) { Validate F_Pump_On; }
+  depending on (Flow_Shutdown) { Validate F_Shutdown; }
+}
+
+State F_Zero {
+# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+# depending on (Flow_Init) { Validate F_Idle; }
+  depending on (Flow_Idle) { Validate F_Pump_Off; }
+# depending on (Flow_Zero) { Validate F_Zero_Init; }
+  depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+  depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+  depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+  depending on (Flow_Shutdown) { Validate F_Pump_Off; }
+}
+
+State F_Shutdown {}
+
+State F_Zero_Init {
+  depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+  Hold until (convert(CellP) < 1.0) or 30;
+  Validate F_Zero;
+}
+
+# F_Pump_On should only be reachable from F_Idle
+State F_Pump_On {
+      > Mains Pump On
+   +5 > Command Exhaust_Vlv On
+      Validate F_Zero_Init;
+}
+
+State F_Pump_Off {
+      > Command Exhaust_Vlv Off
+   +5 > Mains Pump Stop
+      { depending on (Flow_Fill_Cell) { Validate F_Shutdown; } else
+        depending on (Flow_Shutdown) { Validate F_Shutdown; } else
+        Validate F_Idle;
+      }
+}
+
+%{
+  double GP_sum;
+  /* double GP_diff */
+  /* double GP_set */
+
+ #define US_CAST(x) ((unsigned short)(x))
+ #define MAX_FLOW 50000
+ #include <math.h>
+%}
+
+State F_GD_Init {
+  +1 > Set GasDeck Pressure Gain Gp 8.0
+  +1 > Set GasDeck Pressure Gain Gi 40.0
+  +1 > Set Cell Pressure SetPoint 40.0
+  +1 Validate F_GD_Close;
+}
+
+State F_GD_Close {
+      > Air Flow SetPoint 0 sccm
+      > Bubbler Flow SetPoint 0 sccm
+   +1 > Command Gas_Vlv_D Off
+   +1 > Command Bub_In_Vlv_D Off
+   +1 > Command Bub_Out_Vlv_D Off
+   +1 depending on (Flow_Init) { Validate F_PV_Init; }
+      depending on (Flow_Idle) { Validate F_Pump_Off; }
+      depending on (Flow_Zero) { Validate F_Zero_Init; }
+      depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+      depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+      depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+      depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+      depending on (Flow_Shutdown) { Validate F_Pump_Off; }
+}
+
+State F_GD_PI_Init {
+  { GP_sum = 0; }
+    > Command Gas_Vlv_D On
+  +1 Validate F_GD_PI;
+}
+
+State F_GD_PI NoLog {
+#  depending on (ON_GROUND) { Validate F_GD_Close; }
+# { if ( convert(GasHP) < 100 || convert(GasLP) < 10  || convert(BubLP) < 10 ) Validate F_GD_Low_Pressure; }
+  { double P, Gp, Gi, P_diff, P_set, dstep;
+    unsigned short ustep;
+    P = convert(CellP);
+    P_set = convert(Cell_SetP);
+    Gp = convert(GD_Gp);
+    Gi = convert(GD_Gi);
+    P_diff = P_set - P;
+    GP_sum += P_diff * Gi;
+    if ( GP_sum > MAX_FLOW )
+      GP_sum = MAX_FLOW;
+    else if ( P_sum < -MAX_FLOW )
+      GP_sum = -MAX_FLOW/Gi;
+
+    dstep = P_diff * Gp + GP_sum;
+    if (dstep < 0) dstep = 0;
+    else if (dstep > MAX_FLOW) dstep = MAX_FLOW;
+    ustep = US_CAST(dstep);
+    ci_sendfcmd(2, "Air Flow SetPoint %u sccm\n", ustep);
+  }
+
+  "Regulating";
+  # Probably need to add a Hold Until statement to see that the actual flow matches the setpoint
+  # otherwise put up some error
+  # Checks that flow controllers are responding?
+  # +1 Validate F_GD_PI;
+  
+  depending on (Flow_Idle) { Validate F_GD_Close; }
+  depending on (Flow_Zero) { Validate F_GD_Close; }
+  depending on (Flow_PV_PI) { Validate F_GD_Close; }
+  depending on (Flow_PV_Scan) { Validate F_GD_Close; }
+# depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+  depending on (Flow_Fill_Cell) { Validate F_GD_Close; }
+  depending on (Flow_Shutdown) { Validate F_GD_Close; }
+}
+
+#State F_GD_Low_Pressure {
+  # Most likely we're here because the gas bottle is running low on gas.
+  # At that point we probably want to stop doing cals and leave enough
+  # to fill the cell at the end of the flight. 
+#  +1 Validate F_GD_Close;
+#}
+
+State F_GD_Fill_Cell {
+  > Command Exhaust_Vlv Off
+  > Command Gas_Vlv_D On 
+  > Air Flow SetPoint 10000 sccm
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 200 ) or 1:00;
+  > Air Flow SetPoint 5000 sccm
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 100 ) or 1:00;
+  > Air Flow SetPoint 1000 sccm
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) ) or 30;
+  > Air Flow SetPoint 0 sccm
+  > Command Gas_Vlv_D Off
+  Validate F_Pump_Off;
+}
+
+State F_GD_Pump_Purge {
+        > Air Flow Setpoint 5000 sccm
+  +1:00 > Air Flow Setpoint 1000 sccm
+  +1:00 > Air Flow Setpoint 5000 sccm
+  +1:00 > Air Flow Setpoint 1000 sccm
+  +1:00 Validate F_GD_Pump_Purge;
+}
+
+#---------------------------------------------------------------
+# Summary:
+#   F_PV_Init - Startup. Sets gains
+#   F_PV_Close - Drives to in limit or complains
+#   F_PV_Closed - Where we go after closing valve.
+#   F_PV_Failure - Reports in limit failure and sits
+#   F_PV_Steps_Init - How we get to F_PV_Steps
+#   F_PV_Steps - Old Pressure-control algo
+#   F_PV_PI_Init - How we get to F_PV_PI
+#   F_PV_PI - New Pressure-control algo
+#   F_PV_Scan - Perform a scan, then go back to PI
+#---------------------------------------------------------------
+
+%{
+  double P_sum;
+  /* double P_diff; */
+  /* double P_set; */
+
+  #define US_CAST(x) ((unsigned short)(x))
+  #define MAX_PINCH_STEPS 4000
+  #include <math.h> /* for fabs */
+%}
+
+State F_PV_Init {
+  +1 > Set Pinch Valve Speed 1067 Hz
+  +1 > Set Cell Pressure Gain Gp 8.0
+  +1 > Set Cell Pressure Gain Gi 2.0
+  +1 > Set Cell Pressure SetPoint 13.9
+  +1 Validate F_PV_Close;
+}
+
+State F_PV_Close {
+  +1 > Drive Pinch Valve in 8000
+     Validate F_PV_Close2;
+}
+
+State F_PV_Close2 {
+  Hold Until ( PVStat & 1 ) or 5
+  else Validate F_PV_Failure;
+  > Drive Pinch Valve out 0
+  Hold Until ( PVStep == 0 ) or 2
+  else { msg( 2, "Pinch Valve step did not reset" ); }
+  > Preset Pinch Valve Position to 0
+  Validate F_Idle;
+}
+
+#---------------------------------------------------------------
+# In limit not observed: Retry periodically
+#---------------------------------------------------------------
+State F_PV_Failure {
+  depending on (Flow_Shutdown) { Validate F_GD_Fill_Cell; }
+# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+
+  { msg( 2, "Pinch Valve did not close" ); }
+  +1:00 Validate F_PV_Close;
+}
+
+State F_PV_PI_Init {
+    { P_sum = 0; }
+    Validate F_PV_PI;
+}
+
+State F_PV_PI NoLog {
+# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+  depending on (Flow_Shutdown) { Validate F_PV_Close; }
+  { double P, Gp, Gi, P_diff, P_set, dstep;
+    unsigned short ustep;
+    P = convert(CellP);
+    P_set = convert(Cell_SetP);
+    Gp = convert(PV_Gp);
+    Gi = convert(PV_Gi);
+    P_diff = P_set - P;
+    P_sum += P_diff * Gi;
+    if ( P_sum > MAX_PINCH_STEPS )
+      P_sum = MAX_PINCH_STEPS;
+    else if ( P_sum < -MAX_PINCH_STEPS )
+      P_sum = -MAX_PINCH_STEPS/Gi;
+
+    dstep = P_diff * Gp + P_sum;
+    if (dstep<0) dstep = 0;
+    else if (dstep > MAX_PINCH_STEPS) dstep = MAX_PINCH_STEPS;
+    ustep = US_CAST(dstep);
+    ci_sendfcmd(2, "Drive Pinch Valve To %u\n", ustep);
+  }
+
+  "Regulating";
+  Hold Until ( PVStat & 1 );
+  "Saw Pinch in limit: Make sure it comes off";
+  Hold Until ( ! (PVStat & 1) ) or 30
+  else Validate F_PV_Close;
+  Validate F_PV_PI;  
+}
+
+State F_PV_Scan {
+#   depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+    depending on (Flow_Shutdown) { Validate F_PV_Close; }
+
+    > Drive Pinch Valve In 8000
+    Hold Until ( PVStat & 1 ) or 6
+    else Validate F_PV_Close;
+    Hold Until ( convert(CellP) < 2. ) or 10;
+    > Scan Pinch Valve Out 4000 By 10
+    Hold Until ( PVScan != 0 ) or 1;
+    Hold Until ( PVScan == 0 || convert(CellP) > 25. ) or 30;
+    > Stop Pinch Valve
+    Hold Until ( PVScan == 0 ) or 3; 
+    > Scan Pinch Valve In 4000 By 10
+    Hold Until ( PVScan != 0 ) or 2;
+    Hold Until ( PVScan == 0 ) or 100;
+    > Drive Pinch Valve Out 0
+ +1 { if ( PVStep != 0 ) Validate F_PV_Close; }
+    Validate F_PV_PI_Init;
+}
+
+#State F_Pump_Over_Temp {
+# +1 > Mains Pump Stop
+#    depending on (Pump_Watch) { Validate F_Idle; }
+#}
+

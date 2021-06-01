@@ -47,15 +47,15 @@ SW_Variable: <unsigned char,DStat> SW_St SW Status
   SWS_TIMEWARP  254 Time Warp: break;
   SWS_SHUTDOWN  255 Shutdown: Validate Shutdown; break;
 
-SW_Variable: <unsigned short,PV_Gain_t> PV_SetP Set Cell Pressure Setpoint
+SW_Variable: <unsigned short,PV_Gain_t> Cell_SetP Set Cell Pressure Setpoint
   : &gain { $0 = $1; }
 SW_Variable: <unsigned short,PV_Gain_t> PV_Gi Set Cell Pressure Gain Gi
   : &gain { $0 = $1; }
 SW_Variable: <unsigned short,PV_Gain_t> PV_Gp Set Cell Pressure Gain Gp
   : &gain { $0 = $1; }
 
-SW_Variable: <unsigned short,GD_Gain_t> GD_SetP Set GasDeck Pressure Setpoint
-  : &gain { $0 = $1; }
+# SW_Variable: <unsigned short,GD_Gain_t> GD_SetP Set GasDeck Pressure Setpoint
+#   : &gain { $0 = $1; }
 SW_Variable: <unsigned short,GD_Gain_t> GD_Gi Set GasDeck Pressure Gain Gi
   : &gain { $0 = $1; }
 SW_Variable: <unsigned short,GD_Gain_t> GD_Gp Set GasDeck Pressure Gain Gp
