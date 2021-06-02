@@ -1,0 +1,54 @@
+
+#---------------------------------------------------------------
+# Partition @PARTNO@: @DESC@
+#---------------------------------------------------------------
+Partition
+@IDLE@
+State TEC_@CHANNEL@_Init {
+  +1 > @CHANNEL@ TEC Enable
+  +5 Validate TEC_@CHANNEL@_Watch;
+}
+
+# @CHANNEL@_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor @CHANNEL@_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_@CHANNEL@_Watch NoLog {
+  { if (@CHANNEL@_DevStatus != 2) {
+      msg(2, "@CHANNEL@ TEC Unexpectedly disabled: Status %d: %s",
+        @CHANNEL@_DevStatus, text(@CHANNEL@_DevStatus));
+      Validate TEC_@CHANNEL@_Disabled;
+    }
+  }
+  Hold until (@CHANNEL@_T > @CHANNEL@_Set_T + 5);
+  Hold until (@CHANNEL@_T < @CHANNEL@_Set_T + 5) or 15
+  else Validate TEC_@CHANNEL@_OverTemp;
+  Validate TEC_@CHANNEL@_Watch;
+}
+
+State TEC_@CHANNEL@_OverTemp {
+    +1 { msg(2, "@CHANNEL@ TEC Over Temp: SP:%.1f C  T:%.1f C", @CHANNEL@_Set_T, @CHANNEL@_T); }
+    +1 > @CHANNEL@ TEC Disable
+   +30 > @CHANNEL@ TEC Enable
+ +3:00 Validate TEC_@CHANNEL@_Watch;
+}
+
+State TEC_@CHANNEL@_Disabled NoLog {
+  +1 > @CHANNEL@ TEC Enable
+     Hold until (@CHANNEL@_DevStatus == 2) or 30
+     else Validate TEC_@CHANNEL@_Disabled;
+     Validate TEC_@CHANNEL@_Watch;
+}

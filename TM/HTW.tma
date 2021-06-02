@@ -23,13 +23,12 @@ State Init {
        > Telemetry Start
   +1   > Fail Light Off
   +1   > AI Double Convert Row Zero
-  +10  Validate Throttle_Valve_Init;
   +15  Validate Standby;
 }
 
 # WAIT 
 State Standby {
-        depending on (OFF_GROUND) { Validate Record; }
+#       depending on (OFF_GROUND) { Validate Record; }
         depending on (IN_AIR) { Validate Record; }
         depending on (AI_Fail) { Validate Shutdown; }
 }
@@ -107,6 +106,9 @@ Partition
 
 State Ops_Init {
       > Laser TEC Live SetPoints Enable
+   +1 > Set Cell Pressure SetPoint 40.0
+  +10 Validate Throttle_Valve_Init;
+      Hold Until Valid (F_Idle);
       Depending on (Shutdown) { Validate Ops_Shutdown; }
       Depending on (Record) { Validate Ops_Start; }
 }
@@ -114,19 +116,20 @@ State Ops_Init {
 State Ops_Start {
       Depending on (Shutdown) { Validate Ops_Shutdown; }
       Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
+      Validate TEC_LTE_Init;
       Validate Flow_Zero;
       Hold until valid (F_Zero);
-   +1 > Laser TEC Setpoint 7.6 C
-   +1 > Laser TEC Enable
-      Validate QCL_SelectRingandRun;
+  +10 Validate Flow_GD_PI;
+      Hold until valid (F_GD_PI);
+   +5 Validate QCL_SelectRingandRun;
   +30 Validate QCL_SelectICOSandRun;
       Validate Ops_Calibrate;
 }
 
 State Ops_Calibrate {
       Depending on (Shutdown) { Validate Ops_Shutdown; }
+      Depending on (Gas_Pressure_Low) { Validate Ops_Sample; }
       Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
-#     { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
       Validate Flow_GD_PI;
       Hold until valid (F_GD_PI);
    +1 > Command Bub_In_Vlv_D On
@@ -139,23 +142,24 @@ State Ops_Calibrate {
 }
 
 State Ops_Sample {
-          Depending on (Shutdown) { Validate Ops_Shutdown; }
-          Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
-#         { if (!Pump_On) Validate Ops_Fill_To_Ambient; }
-          Validate Flow_PV_PI;
-          Hold until valid (F_PV_PI);
-   +30:00 Validate Ops_Calibrate;
+  Depending on (Shutdown) { Validate Ops_Shutdown; }
+  Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
+  Validate Flow_PV_PI;
+  Hold until valid (F_PV_PI);
+  Hold until (SW_St == SWS_TIMEWARP) or 30:00;
+  Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
 State Ops_Shutdown {
      Validate Flow_Zero;
      Hold until valid (F_Zero) or 2:00;
+ +10 Validate Flow_GD_PI;
+     Hold until valid (F_GD_PI) or 10;
      Validate QCL_SelectRingandRun;
  +30 Validate QCL_Stop;
      > Set Cell Pressure Setpoint 700
      Validate Flow_Fill_Cell;
-     Hold until valid (F_Shutdown) or 3:00;
-  +1 Hold until valid (QCL_Is_Shutdown) or 5;
+     Hold until valid (F_Shutdown) or 2:00;
      Validate Ops_Is_Shutdown;
 }
 
@@ -166,7 +170,10 @@ State Ops_Pump_Over_Temp {
       }
       Depending on (Shutdown) { Validate Ops_Is_Shutdown; }
       Hold until valid (F_Idle);
-      Depending on (Pump_Watch) { Validate Ops_Sample; }
+      Depending on (Pump_Watch) {
+        Validate Select_ICOSandRun;
+        Validate Ops_Sample;
+      }
 }
 
 State Ops_PV_Failure {
@@ -174,7 +181,7 @@ State Ops_PV_Failure {
         else Validate QCL_Stop;
       }
       Depending on (Shutdown) { Validate Ops_Is_Shutdown; }
-      Depending on (PV_Watch) { Validate Ops_Sample; }
+      Depending on (PV_Watch) { Validate Ops_Start; }
 }
 
 State Ops_Is_Shutdown {}
@@ -361,7 +368,7 @@ State QCL_SelectICOSandRun {
    +1 > Laser TEC Setpoint 7.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
-  +10 > Select QCLI Waveform JPL53_400Hz
+   +2 > Select QCLI Waveform JPL53_400Hz
    +3 Validate QCL_Start;
 }
 
@@ -373,10 +380,10 @@ State QCL_SelectRingandRun {
       Hold until valid (QCLI_Idle) or 2
       else Validate QCLI_Stop;
       Hold until valid (QCLI_Idle);
-   +1 > Laser TEC Setpoint 7.8 C
+   +1 > Laser TEC Setpoint 7.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
-  +10 > Select QCLI Waveform RingRamp
+   +2 > Select QCLI Waveform RingRamp
 #  +1 > SSP Set NSample 3500
    +2 Validate QCL_Start;
 }
@@ -494,6 +501,21 @@ State PV_Failure NoLog {
   +1:00 Validate F_PV_Close;
      +1 Hold until valid (F_Idle);
         Validate PV_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 7: Gas Bottle Watchdog
+#---------------------------------------------------------------
+Partition
+
+State Gas_Pressure_Watch NoLog {
+  Hold until (GasHP < 100);
+  Hold until (GasHP > 100) or 30
+  else Validate Gas_Pressure_Watch;
+  Validate Gas_Pressure_Low;
+}
+
+State Gas_Pressure_Low {
 }
 
 #---------------------------------------------------------------

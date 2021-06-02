@@ -3,7 +3,7 @@ PARTITION
 #---------------------------------------------------------------
 # Summary:
 #   Throttle_Valve_Startup - Does nothing
-#   Throttle_Valve_Init - Initializes valve, waits for IN_AIR
+#   Throttle_Valve_Init - Initializes valve, waits for RECORD
 #   Throttle_Valve_Close - Drives to in limit or complains
 #   Throttle_Valve_Closed - Where we go after closing valve.
 #   Throttle_Valve_Failure - Reports in limit failure and sits
@@ -37,11 +37,11 @@ State Throttle_Valve_Init {
   +3 > Drive Throttle Valve in 8000
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100
-  depending on (IN_AIR) { Validate Throttle_Valve_PI_Init; }
+  depending on (RECORD) { Validate Throttle_Valve_PI_Init; }
 }
 
 State Throttle_Valve_Close {
-  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
+  depending on (Ops_Shutdown) { Validate Throttle_Valve_Shutdown; }
   +1 > Drive Throttle Valve in 8000
      Hold Until ( TVStat & 1 ) or 5
      else Validate Throttle_Valve_Failure;
@@ -53,8 +53,8 @@ State Throttle_Valve_Close {
 }
 
 State Throttle_Valve_Closed {
-  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
-  depending on (IN_AIR) {
+  depending on (Ops_Shutdown) { Validate Throttle_Valve_Shutdown; }
+  depending on (RECORD) {
     Validate Throttle_Valve_PI_Init;
   }
 }
@@ -63,7 +63,7 @@ State Throttle_Valve_Closed {
 # In limit not observed: Retry periodically
 #---------------------------------------------------------------
 State Throttle_Valve_Failure {
-  depending on (shutdown) { Validate Throttle_Valve_Shutdown; }
+  depending on (Ops_Shutdown) { Validate Throttle_Valve_Shutdown; }
 
   { msg( 2, "Throttle Valve did not close" ); }
   +1:00 Validate Throttle_Valve_Close;
@@ -75,15 +75,7 @@ State Throttle_Valve_PI_Init {
 }
 
 State Throttle_Valve_PI NoLog {
-  # depending on (BELOW_CLOUDS) { Validate Throttle_Valve_Close; }
-  # depending on (scanning) {
-  #   if ( !scan_done ) {
-  #     scan_done = 1;
-  #     Validate Throttle_Valve_Scan;
-  #   }
-  # }
-  # depending on (record) { scan_done = 0; }
-  # depending on (ON_GROUND) { Validate Throttle_Valve_Close; }
+  depending on (Ops_Shutdown) { Validate Throttle_Valve_Shutdown; }
   { double DP, Gp, Gi, DP_diff, DP_set, dstep;
     unsigned short ustep;
     DP = convert(InlDP);
@@ -112,9 +104,6 @@ State Throttle_Valve_PI NoLog {
 }
 
 State Throttle_Valve_Scan {
-    # depending on (BELOW_CLOUDS) { Validate Throttle_Valve_Close; }
-    # depending on (ON_GROUND) { Validate Throttle_Valve_Close; }
-
     > Drive Throttle Valve In 8000
     Hold Until ( TVStat & 1 ) or 6;
     # else Validate Throttle_Valve_Close;

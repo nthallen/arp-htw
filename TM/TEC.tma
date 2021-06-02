@@ -3,7 +3,63 @@
 #===============================================================
 
 #---------------------------------------------------------------
-# Partition 1: LPV TEC
+# Partition 1: Laser TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_LTE_Idle {}
+
+State TEC_LTE_Init {
+  +1 > LTE TEC Enable
+  +5 Validate TEC_LTE_Watch;
+}
+
+# LTE_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor LTE_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_LTE_Watch NoLog {
+  { if (LTE_DevStatus != 2) {
+      msg(2, "LTE TEC Unexpectedly disabled: Status %d: %s",
+        LTE_DevStatus, text(LTE_DevStatus));
+      Validate TEC_LTE_Disabled;
+    }
+  }
+  Hold until (LTE_T > LTE_Set_T + 5);
+  Hold until (LTE_T < LTE_Set_T + 5) or 15
+  else Validate TEC_LTE_OverTemp;
+  Validate TEC_LTE_Watch;
+}
+
+State TEC_LTE_OverTemp {
+    +1 { msg(2, "LTE TEC Over Temp: SP:%.1f C  T:%.1f C", LTE_Set_T, LTE_T); }
+    +1 > LTE TEC Disable
+   +30 > LTE TEC Enable
+ +3:00 Validate TEC_LTE_Watch;
+}
+
+State TEC_LTE_Disabled NoLog {
+  +1 > LTE TEC Enable
+     Hold until (LTE_DevStatus == 2) or 30
+     else Validate TEC_LTE_Disabled;
+     Validate TEC_LTE_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 2: Laser Pressure Vessel TEC
 #---------------------------------------------------------------
 Partition
 
@@ -54,4 +110,274 @@ State TEC_LPV_Disabled NoLog {
      Hold until (LPV_DevStatus == 2) or 30
      else Validate TEC_LPV_Disabled;
      Validate TEC_LPV_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 3: Plate TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_Plate_Init {
+  +1 > Plate TEC Enable
+  +5 Validate TEC_Plate_Watch;
+}
+
+# Plate_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor Plate_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_Plate_Watch NoLog {
+  { if (Plate_DevStatus != 2) {
+      msg(2, "Plate TEC Unexpectedly disabled: Status %d: %s",
+        Plate_DevStatus, text(Plate_DevStatus));
+      Validate TEC_Plate_Disabled;
+    }
+  }
+  Hold until (Plate_T > Plate_Set_T + 5);
+  Hold until (Plate_T < Plate_Set_T + 5) or 15
+  else Validate TEC_Plate_OverTemp;
+  Validate TEC_Plate_Watch;
+}
+
+State TEC_Plate_OverTemp {
+    +1 { msg(2, "Plate TEC Over Temp: SP:%.1f C  T:%.1f C", Plate_Set_T, Plate_T); }
+    +1 > Plate TEC Disable
+   +30 > Plate TEC Enable
+ +3:00 Validate TEC_Plate_Watch;
+}
+
+State TEC_Plate_Disabled NoLog {
+  +1 > Plate TEC Enable
+     Hold until (Plate_DevStatus == 2) or 30
+     else Validate TEC_Plate_Disabled;
+     Validate TEC_Plate_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 4: Cover TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_Cover_Init {
+  +1 > Cover TEC Enable
+  +5 Validate TEC_Cover_Watch;
+}
+
+# Cover_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor Cover_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_Cover_Watch NoLog {
+  { if (Cover_DevStatus != 2) {
+      msg(2, "Cover TEC Unexpectedly disabled: Status %d: %s",
+        Cover_DevStatus, text(Cover_DevStatus));
+      Validate TEC_Cover_Disabled;
+    }
+  }
+  Hold until (Cover_T > Cover_Set_T + 5);
+  Hold until (Cover_T < Cover_Set_T + 5) or 15
+  else Validate TEC_Cover_OverTemp;
+  Validate TEC_Cover_Watch;
+}
+
+State TEC_Cover_OverTemp {
+    +1 { msg(2, "Cover TEC Over Temp: SP:%.1f C  T:%.1f C", Cover_Set_T, Cover_T); }
+    +1 > Cover TEC Disable
+   +30 > Cover TEC Enable
+ +3:00 Validate TEC_Cover_Watch;
+}
+
+State TEC_Cover_Disabled NoLog {
+  +1 > Cover TEC Enable
+     Hold until (Cover_DevStatus == 2) or 30
+     else Validate TEC_Cover_Disabled;
+     Validate TEC_Cover_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 5: Cell TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_Cell_Init {
+  +1 > Cell TEC Enable
+  +5 Validate TEC_Cell_Watch;
+}
+
+# Cell_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor Cell_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_Cell_Watch NoLog {
+  { if (Cell_DevStatus != 2) {
+      msg(2, "Cell TEC Unexpectedly disabled: Status %d: %s",
+        Cell_DevStatus, text(Cell_DevStatus));
+      Validate TEC_Cell_Disabled;
+    }
+  }
+  Hold until (Cell_T > Cell_Set_T + 5);
+  Hold until (Cell_T < Cell_Set_T + 5) or 15
+  else Validate TEC_Cell_OverTemp;
+  Validate TEC_Cell_Watch;
+}
+
+State TEC_Cell_OverTemp {
+    +1 { msg(2, "Cell TEC Over Temp: SP:%.1f C  T:%.1f C", Cell_Set_T, Cell_T); }
+    +1 > Cell TEC Disable
+   +30 > Cell TEC Enable
+ +3:00 Validate TEC_Cell_Watch;
+}
+
+State TEC_Cell_Disabled NoLog {
+  +1 > Cell TEC Enable
+     Hold until (Cell_DevStatus == 2) or 30
+     else Validate TEC_Cell_Disabled;
+     Validate TEC_Cell_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 6: Detector Pressure Vessel TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_DPV_Init {
+  +1 > DPV TEC Enable
+  +5 Validate TEC_DPV_Watch;
+}
+
+# DPV_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor DPV_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_DPV_Watch NoLog {
+  { if (DPV_DevStatus != 2) {
+      msg(2, "DPV TEC Unexpectedly disabled: Status %d: %s",
+        DPV_DevStatus, text(DPV_DevStatus));
+      Validate TEC_DPV_Disabled;
+    }
+  }
+  Hold until (DPV_T > DPV_Set_T + 5);
+  Hold until (DPV_T < DPV_Set_T + 5) or 15
+  else Validate TEC_DPV_OverTemp;
+  Validate TEC_DPV_Watch;
+}
+
+State TEC_DPV_OverTemp {
+    +1 { msg(2, "DPV TEC Over Temp: SP:%.1f C  T:%.1f C", DPV_Set_T, DPV_T); }
+    +1 > DPV TEC Disable
+   +30 > DPV TEC Enable
+ +3:00 Validate TEC_DPV_Watch;
+}
+
+State TEC_DPV_Disabled NoLog {
+  +1 > DPV TEC Enable
+     Hold until (DPV_DevStatus == 2) or 30
+     else Validate TEC_DPV_Disabled;
+     Validate TEC_DPV_Watch;
+}
+
+#---------------------------------------------------------------
+# Partition 7: Bubbler TEC
+#---------------------------------------------------------------
+Partition
+
+State TEC_BubC_Init {
+  +1 > BubC TEC Enable
+  +5 Validate TEC_BubC_Watch;
+}
+
+# BubC_DevStatus values are defined in ME.tmc
+#   0: Init
+#   1: Ready
+#   2: Run
+#   3: Error
+#   4: BootLdr
+#   5: Reset
+# 0 is reported before we have communicated with the device
+# 1 is reported before we issue an Enable command (although
+#   could be configured to auto-enable)
+# 2 is reported after we issue an Enable command
+# In a brief survey of instrument data, I have not found
+# any instances of values other than 0, 1 or 2.
+
+# We could also monitor BubC_Stale, which would indicate
+# that the device is not responding.
+
+State TEC_BubC_Watch NoLog {
+  { if (BubC_DevStatus != 2) {
+      msg(2, "BubC TEC Unexpectedly disabled: Status %d: %s",
+        BubC_DevStatus, text(BubC_DevStatus));
+      Validate TEC_BubC_Disabled;
+    }
+  }
+  Hold until (BubC_T > BubC_Set_T + 5);
+  Hold until (BubC_T < BubC_Set_T + 5) or 15
+  else Validate TEC_BubC_OverTemp;
+  Validate TEC_BubC_Watch;
+}
+
+State TEC_BubC_OverTemp {
+    +1 { msg(2, "BubC TEC Over Temp: SP:%.1f C  T:%.1f C", BubC_Set_T, BubC_T); }
+    +1 > BubC TEC Disable
+   +30 > BubC TEC Enable
+ +3:00 Validate TEC_BubC_Watch;
+}
+
+State TEC_BubC_Disabled NoLog {
+  +1 > BubC TEC Enable
+     Hold until (BubC_DevStatus == 2) or 30
+     else Validate TEC_BubC_Disabled;
+     Validate TEC_BubC_Watch;
 }

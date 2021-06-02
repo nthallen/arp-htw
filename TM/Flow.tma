@@ -91,7 +91,6 @@ State F_Pump_On {
 State F_Pump_Off {
       > Command Exhaust_Vlv Off
    +5 > Mains Pump Stop
-      depending on (Pump_Over_Temp) { Validate F_Idle; }
       depending on (Flow_Init) { Validate F_Idle; }
       depending on (Flow_Idle) { Validate F_Idle; }
       depending on (Flow_Zero) { Validate F_Idle; }
@@ -116,7 +115,6 @@ State F_Pump_Off {
 State F_GD_Init {
   +1 > Set GasDeck Pressure Gain Gp 8.0
   +1 > Set GasDeck Pressure Gain Gi 40.0
-  +1 > Set Cell Pressure SetPoint 40.0
   +1 Validate F_GD_Close;
 }
 
@@ -129,8 +127,8 @@ State F_GD_Close {
    +1 depending on (Flow_Init) { Validate F_PV_Init; }
       depending on (Flow_Idle) { Validate F_Pump_Off; }
       depending on (Flow_Zero) { Validate F_Zero_Init; }
-      depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
-      depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+      depending on (Flow_PV_PI) { Validate F_Zero_Init; }
+      depending on (Flow_PV_Scan) { Validate F_Zero_Init; }
       depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
       depending on (Flow_GD_PP) { Validate F_Zero_Init; }
       depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
@@ -144,8 +142,6 @@ State F_GD_PI_Init {
 }
 
 State F_GD_PI NoLog {
-#  depending on (ON_GROUND) { Validate F_GD_Close; }
-# { if ( convert(GasHP) < 100 || convert(GasLP) < 10  || convert(BubLP) < 10 ) Validate F_GD_Low_Pressure; }
   { double P, Gp, Gi, P_diff, P_set, dstep;
     unsigned short ustep;
     P = convert(CellP);
@@ -167,11 +163,7 @@ State F_GD_PI NoLog {
   }
 
   "Regulating";
-  # Probably need to add a Hold Until statement to see that the actual flow matches the setpoint
-  # otherwise put up some error
-  # Checks that flow controllers are responding?
-  # +1 Validate F_GD_PI;
-  
+
   depending on (Flow_Idle) { Validate F_GD_Close; }
   depending on (Flow_Zero) { Validate F_GD_Close; }
   depending on (Flow_PV_PI) { Validate F_GD_Close; }
@@ -182,20 +174,13 @@ State F_GD_PI NoLog {
   depending on (Flow_Shutdown) { Validate F_GD_Close; }
 }
 
-#State F_GD_Low_Pressure {
-  # Most likely we're here because the gas bottle is running low on gas.
-  # At that point we probably want to stop doing cals and leave enough
-  # to fill the cell at the end of the flight. 
-#  +1 Validate F_GD_Close;
-#}
-
 State F_GD_Fill_Cell {
   > Command Exhaust_Vlv Off
   > Command Gas_Vlv_D On 
   > Air Flow SetPoint 10000 sccm
-  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 200 ) or 1:00;
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 200 ) or 30;
   > Air Flow SetPoint 5000 sccm
-  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 100 ) or 1:00;
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 100 ) or 30;
   > Air Flow SetPoint 1000 sccm
   Hold Until ( convert(Cel2P) > convert(Cell_SetP) ) or 30;
   > Air Flow SetPoint 0 sccm
@@ -245,30 +230,26 @@ State F_PV_Init {
   +1 > Set Pinch Valve Speed 1067 Hz
   +1 > Set Cell Pressure Gain Gp 8.0
   +1 > Set Cell Pressure Gain Gi 2.0
-  +1 > Set Cell Pressure SetPoint 13.9
   +1 Validate F_PV_Close;
 }
 
 State F_PV_Close {
-  +1 > Drive Pinch Valve in 8000
-     Validate F_PV_Close2;
-}
-
-State F_PV_Close2 {
-  Hold Until ( PVStat & 1 ) or 5
-  else Validate F_PV_Failure;
-  > Drive Pinch Valve out 0
-  Hold Until ( PVStep == 0 ) or 2
-  else { msg( 2, "Pinch Valve step did not reset" ); }
-  > Preset Pinch Valve Position to 0
-  depending on (Flow_Idle) { Validate F_Pump_Off; }
-  depending on (Flow_Zero) { Validate F_Zero_Init; }
-  depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
-  depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
-  depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
-  depending on (Flow_GD_PP) { Validate F_Zero_Init; }
-  depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
-  depending on (Flow_Shutdown) { Validate F_Pump_Off; }
+   +1 > Drive Pinch Valve in 8000
+      Hold Until ( PVStat & 1 ) or 5
+      else Validate F_PV_Failure;
+      > Drive Pinch Valve out 0
+      Hold Until ( PVStep == 0 ) or 2
+      else { msg( 2, "Pinch Valve step did not reset" ); }
+      > Preset Pinch Valve Position to 0
+      depending on (Flow_Init) { Validate F_Pump_Off; }
+      depending on (Flow_Idle) { Validate F_Pump_Off; }
+      depending on (Flow_Zero) { Validate F_Zero_Init; }
+      depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
+      depending on (Flow_PV_Scan) { Validate F_PV_Scan; }
+      depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+      depending on (Flow_GD_PP) { Validate F_Zero_Init; }
+      depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+      depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
 #---------------------------------------------------------------
