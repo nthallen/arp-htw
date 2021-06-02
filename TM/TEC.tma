@@ -10,7 +10,7 @@ Partition
 State TEC_LTE_Idle {}
 
 State TEC_LTE_Init {
-  +1 > LTE TEC Enable
+  +1 > Laser TEC Enable
   +5 Validate TEC_LTE_Watch;
 }
 
@@ -46,20 +46,21 @@ State TEC_LTE_Watch NoLog {
 
 State TEC_LTE_OverTemp {
     +1 { msg(2, "LTE TEC Over Temp: SP:%.1f C  T:%.1f C", LTE_Set_T, LTE_T); }
-    +1 > LTE TEC Disable
-   +30 > LTE TEC Enable
+    +1 > Laser TEC Disable
+   +30 > Laser TEC Enable
  +3:00 Validate TEC_LTE_Watch;
 }
 
 State TEC_LTE_Disabled NoLog {
-  +1 > LTE TEC Enable
+  +1 > Laser TEC Enable
      Hold until (LTE_DevStatus == 2) or 30
      else Validate TEC_LTE_Disabled;
      Validate TEC_LTE_Watch;
 }
 
+
 #---------------------------------------------------------------
-# Partition 2: Laser Pressure Vessel TEC
+# Partition 2: LPV TEC
 #---------------------------------------------------------------
 Partition
 
@@ -111,6 +112,7 @@ State TEC_LPV_Disabled NoLog {
      else Validate TEC_LPV_Disabled;
      Validate TEC_LPV_Watch;
 }
+
 
 #---------------------------------------------------------------
 # Partition 3: Plate TEC
@@ -166,6 +168,7 @@ State TEC_Plate_Disabled NoLog {
      Validate TEC_Plate_Watch;
 }
 
+
 #---------------------------------------------------------------
 # Partition 4: Cover TEC
 #---------------------------------------------------------------
@@ -220,13 +223,14 @@ State TEC_Cover_Disabled NoLog {
      Validate TEC_Cover_Watch;
 }
 
+
 #---------------------------------------------------------------
-# Partition 5: Cell TEC
+# Partition 5: Cell Temp
 #---------------------------------------------------------------
 Partition
 
 State TEC_Cell_Init {
-  +1 > Cell TEC Enable
+  +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
 
@@ -262,20 +266,21 @@ State TEC_Cell_Watch NoLog {
 
 State TEC_Cell_OverTemp {
     +1 { msg(2, "Cell TEC Over Temp: SP:%.1f C  T:%.1f C", Cell_Set_T, Cell_T); }
-    +1 > Cell TEC Disable
-   +30 > Cell TEC Enable
+    +1 > Cell Temp Disable
+   +30 > Cell Temp Enable
  +3:00 Validate TEC_Cell_Watch;
 }
 
 State TEC_Cell_Disabled NoLog {
-  +1 > Cell TEC Enable
+  +1 > Cell Temp Enable
      Hold until (Cell_DevStatus == 2) or 30
      else Validate TEC_Cell_Disabled;
      Validate TEC_Cell_Watch;
 }
 
+
 #---------------------------------------------------------------
-# Partition 6: Detector Pressure Vessel TEC
+# Partition 6: DPV TEC
 #---------------------------------------------------------------
 Partition
 
@@ -328,13 +333,14 @@ State TEC_DPV_Disabled NoLog {
      Validate TEC_DPV_Watch;
 }
 
+
 #---------------------------------------------------------------
 # Partition 7: Bubbler TEC
 #---------------------------------------------------------------
 Partition
 
 State TEC_BubC_Init {
-  +1 > BubC TEC Enable
+  +1 > Bubbler TEC Enable
   +5 Validate TEC_BubC_Watch;
 }
 
@@ -370,14 +376,15 @@ State TEC_BubC_Watch NoLog {
 
 State TEC_BubC_OverTemp {
     +1 { msg(2, "BubC TEC Over Temp: SP:%.1f C  T:%.1f C", BubC_Set_T, BubC_T); }
-    +1 > BubC TEC Disable
-   +30 > BubC TEC Enable
+    +1 > Bubbler TEC Disable
+   +30 > Bubbler TEC Enable
  +3:00 Validate TEC_BubC_Watch;
 }
 
 State TEC_BubC_Disabled NoLog {
-  +1 > BubC TEC Enable
+  +1 > Bubbler TEC Enable
      Hold until (BubC_DevStatus == 2) or 30
      else Validate TEC_BubC_Disabled;
      Validate TEC_BubC_Watch;
 }
+

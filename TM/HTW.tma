@@ -171,7 +171,7 @@ State Ops_Pump_Over_Temp {
       Depending on (Shutdown) { Validate Ops_Is_Shutdown; }
       Hold until valid (F_Idle);
       Depending on (Pump_Watch) {
-        Validate Select_ICOSandRun;
+        Validate QCL_SelectICOSandRun;
         Validate Ops_Sample;
       }
 }

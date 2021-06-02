@@ -5,7 +5,7 @@
 Partition
 @IDLE@
 State TEC_@CHANNEL@_Init {
-  +1 > @CHANNEL@ TEC Enable
+  +1 > @DESC@ Enable
   +5 Validate TEC_@CHANNEL@_Watch;
 }
 
@@ -41,14 +41,15 @@ State TEC_@CHANNEL@_Watch NoLog {
 
 State TEC_@CHANNEL@_OverTemp {
     +1 { msg(2, "@CHANNEL@ TEC Over Temp: SP:%.1f C  T:%.1f C", @CHANNEL@_Set_T, @CHANNEL@_T); }
-    +1 > @CHANNEL@ TEC Disable
-   +30 > @CHANNEL@ TEC Enable
+    +1 > @DESC@ Disable
+   +30 > @DESC@ Enable
  +3:00 Validate TEC_@CHANNEL@_Watch;
 }
 
 State TEC_@CHANNEL@_Disabled NoLog {
-  +1 > @CHANNEL@ TEC Enable
+  +1 > @DESC@ Enable
      Hold until (@CHANNEL@_DevStatus == 2) or 30
      else Validate TEC_@CHANNEL@_Disabled;
      Validate TEC_@CHANNEL@_Watch;
 }
+
