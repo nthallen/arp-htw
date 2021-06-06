@@ -134,7 +134,7 @@ State Ops_Calibrate {
       Hold until valid (F_GD_PI);
    +1 > Command Bub_In_Vlv_D On
    +1 > Command Bub_Out_Vlv_D On
-      > Bubbler Flow SetPoint 5 sccm
++1:00 > Bubbler Flow SetPoint 5 sccm
       Hold until (SW_St == SWS_TIMEWARP) or 4:00;
       > Bubbler Flow SetPoint 10 sccm
       Hold until (SW_St == SWS_TIMEWARP) or 4:00;
@@ -317,7 +317,7 @@ State QCL_Fail {
     > Log Laser Has Failed
     > SSP Stop
     Validate QCLI_Stop;
-    > Laser TEC Disable
+#    > Laser TEC Disable
     depending on (Shutdown) { Validate QCL_Is_Shutdown; }
 }
 
@@ -326,7 +326,7 @@ State QCL_Shutdown {
  +1 Validate QCLI_Stop;
     Hold until valid (QCLI_Idle) or 20;
     > Log Laser Has Shutdown
-    > Laser TEC Disable
+#    > Laser TEC Disable
     Validate QCL_Is_Shutdown;
 }
 
@@ -477,6 +477,7 @@ State Pump_Watch NoLog {
       msg(0, "Pump over temp drill: PumpT %.1lf C PMotT %.1lf C",
             convert(PumpT), convert(PMotT));
       pump_OT_simulated = 1;
+      Validate Pump_Over_Temp;
     }
   }
 }

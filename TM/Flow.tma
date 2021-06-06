@@ -78,7 +78,7 @@ State F_Shutdown {}
 State F_Zero_Init {
   depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
   Hold until (convert(CellP) < 1.0) or 30;
-  Validate F_Zero;
+  +5 Validate F_Zero;
 }
 
 # F_Pump_On should only be reachable from F_Idle

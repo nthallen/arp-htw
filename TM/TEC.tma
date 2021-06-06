@@ -117,12 +117,12 @@ State TEC_LPV_Disabled NoLog {
 #---------------------------------------------------------------
 # Partition 3: Plate TEC
 #---------------------------------------------------------------
-Partition
+#Partition
 
-State TEC_Plate_Init {
-  +1 > Plate TEC Enable
-  +5 Validate TEC_Plate_Watch;
-}
+#State TEC_Plate_Init {
+#  +1 > Plate TEC Enable
+#  +5 Validate TEC_Plate_Watch;
+#}
 
 # Plate_DevStatus values are defined in ME.tmc
 #   0: Init
@@ -141,32 +141,32 @@ State TEC_Plate_Init {
 # We could also monitor Plate_Stale, which would indicate
 # that the device is not responding.
 
-State TEC_Plate_Watch NoLog {
-  { if (Plate_DevStatus != 2) {
-      msg(2, "Plate TEC Unexpectedly disabled: Status %d: %s",
-        Plate_DevStatus, text(Plate_DevStatus));
-      Validate TEC_Plate_Disabled;
-    }
-  }
-  Hold until (Plate_T > Plate_Set_T + 5);
-  Hold until (Plate_T < Plate_Set_T + 5) or 15
-  else Validate TEC_Plate_OverTemp;
-  Validate TEC_Plate_Watch;
-}
+#State TEC_Plate_Watch NoLog {
+#  { if (Plate_DevStatus != 2) {
+#      msg(2, "Plate TEC Unexpectedly disabled: Status %d: %s",
+#        Plate_DevStatus, text(Plate_DevStatus));
+#      Validate TEC_Plate_Disabled;
+#    }
+#  }
+#  Hold until (Plate_T > Plate_Set_T + 5);
+#  Hold until (Plate_T < Plate_Set_T + 5) or 15
+#  else Validate TEC_Plate_OverTemp;
+#  Validate TEC_Plate_Watch;
+#}
 
-State TEC_Plate_OverTemp {
-    +1 { msg(2, "Plate TEC Over Temp: SP:%.1f C  T:%.1f C", Plate_Set_T, Plate_T); }
-    +1 > Plate TEC Disable
-   +30 > Plate TEC Enable
- +3:00 Validate TEC_Plate_Watch;
-}
+#State TEC_Plate_OverTemp {
+#    +1 { msg(2, "Plate TEC Over Temp: SP:%.1f C  T:%.1f C", Plate_Set_T, Plate_T); }
+#    +1 > Plate TEC Disable
+#   +30 > Plate TEC Enable
+# +3:00 Validate TEC_Plate_Watch;
+#}
 
-State TEC_Plate_Disabled NoLog {
-  +1 > Plate TEC Enable
-     Hold until (Plate_DevStatus == 2) or 30
-     else Validate TEC_Plate_Disabled;
-     Validate TEC_Plate_Watch;
-}
+#State TEC_Plate_Disabled NoLog {
+#  +1 > Plate TEC Enable
+#     Hold until (Plate_DevStatus == 2) or 30
+#     else Validate TEC_Plate_Disabled;
+#     Validate TEC_Plate_Watch;
+#}
 
 
 #---------------------------------------------------------------
