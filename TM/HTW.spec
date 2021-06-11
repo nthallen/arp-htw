@@ -39,7 +39,7 @@ Module mains
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
-SCRIPT = interact runfile.FF
+SCRIPT = interact runfile.FC
 OBJ = address.h
 IGNORE = Makefile
 
