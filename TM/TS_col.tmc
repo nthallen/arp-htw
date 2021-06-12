@@ -12,5 +12,6 @@
 %}
 /* TM INITFUNC TS_req = pack_mread_request(18, "480:2:4A2"); */
 /* We can move TS0 to the second string by changing the address list: */
-TM INITFUNC TS_req = pack_mread_request(18, "480:2:4A4");
-
+/* TM INITFUNC TS_req = pack_mread_request(18, "480:2:4A2"); */
+/* 6/12/2021: We are only using TS[123], so we can drop TS[045] */
+TM INITFUNC TS_req = pack_mread_request(9, "486:2:49C");

@@ -36,6 +36,7 @@ Module Meerstetter src=Meerstetter.txt
 Module QCLI mode=noise
 Module mksflow src=mksflow.txt
 Module mains
+Module IWG1
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc

@@ -2,6 +2,7 @@
 
   #define to_double(x) (double)x
 %}
+/*
 TS_T_t TS0_T; Invalidate TS0_T;
 {
   if (TS0_cnt > 0) {
@@ -12,6 +13,7 @@ TS_T_t TS0_T; Invalidate TS0_T;
   }
   Validate TS0_T;
 }
+*/
 
 TS_T_t TS1_T; Invalidate TS1_T;
 {
@@ -46,6 +48,7 @@ TS_T_t TS3_T; Invalidate TS3_T;
   Validate TS3_T;
 }
 
+/*
 TS_T_t TS4_T; Invalidate TS4_T;
 {
   if (TS4_cnt > 0) {
@@ -67,3 +70,4 @@ TS_T_t TS5_T; Invalidate TS5_T;
   }
   Validate TS5_T;
 }
+*/

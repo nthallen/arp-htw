@@ -65,6 +65,7 @@ State TEC_LTE_Disabled NoLog {
 Partition
 
 State TEC_LPV_Init {
+     Hold until (LPV_Sink_T < 30);
   +1 > LPV TEC Enable
   +5 Validate TEC_LPV_Watch;
 }
@@ -88,11 +89,17 @@ State TEC_LPV_Init {
 
 State TEC_LPV_Watch NoLog {
   { if (LPV_DevStatus != 2) {
-      msg(2, "LPV TEC Unexpectedly disabled: Status %d: %s",
-        LPV_DevStatus, text(LPV_DevStatus));
-      Validate TEC_LPV_Disabled;
+      if (LPV_DevState == 3) {
+        msg(2, "LPV TEC Reporting Error");
+        Validate TEC_LPV_Error;
+      } else {
+        msg(2, "LPV TEC Unexpectedly disabled: Status %d: %s",
+          LPV_DevStatus, text(LPV_DevStatus));
+        Validate TEC_LPV_Disabled;
+      }
     }
   }
+  { if (LPV_Sink_T > 45) Validate TEC_LPV_OverTemp; }
   Hold until (LPV_T > LPV_Set_T + 5);
   Hold until (LPV_T < LPV_Set_T + 5) or 15
   else Validate TEC_LPV_OverTemp;
@@ -100,10 +107,18 @@ State TEC_LPV_Watch NoLog {
 }
 
 State TEC_LPV_OverTemp {
-    +1 { msg(2, "LPV TEC Over Temp: SP:%.1f C  T:%.1f C", LPV_Set_T, LPV_T); }
+    +1 { msg(2, "LPV TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                LPV_Set_T, LPV_T, LPV_Sink_T);
+       }
     +1 > LPV TEC Disable
-   +30 > LPV TEC Enable
- +3:00 Validate TEC_LPV_Watch;
+   +30 Validate TEC_LPV_Init;
+}
+
+State TEC_LPV_Error NoLog {
+  Hold until (LPV_DevStatus != 3);
+  Hold until (LPV_DevStatus == 3) or 20
+  else Validate TEC_LPV_Init;
+  Validate TEC_LPV_Error;
 }
 
 State TEC_LPV_Disabled NoLog {
