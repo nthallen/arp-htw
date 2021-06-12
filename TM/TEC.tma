@@ -89,7 +89,7 @@ State TEC_LPV_Init {
 
 State TEC_LPV_Watch NoLog {
   { if (LPV_DevStatus != 2) {
-      if (LPV_DevState == 3) {
+      if (LPV_DevStatus == 3) {
         msg(2, "LPV TEC Reporting Error");
         Validate TEC_LPV_Error;
       } else {
