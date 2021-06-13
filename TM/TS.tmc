@@ -9,12 +9,12 @@ TM typedef double TS_T_t { text "%7.2lf"; convert CELCIUS; }
 TM typedef double AmbTS_T_t { text "%7.2lf"; convert CELCIUS; }
 /* TM typedef double TS_T_t { text "%9.5lf"; } */
 
-TM 1 Hz TS_raw_t TS0_raw; TM 1 Hz TS_cnt_t TS0_cnt;
+/* TM 1 Hz TS_raw_t TS0_raw; TM 1 Hz TS_cnt_t TS0_cnt; */
 TM 1 Hz TS_raw_t TS1_raw; TM 1 Hz TS_cnt_t TS1_cnt;
 TM 1 Hz TS_raw_t TS2_raw; TM 1 Hz TS_cnt_t TS2_cnt;
 TM 1 Hz TS_raw_t TS3_raw; TM 1 Hz TS_cnt_t TS3_cnt;
-TM 1 Hz TS_raw_t TS4_raw; TM 1 Hz TS_cnt_t TS4_cnt;
-TM 1 Hz TS_raw_t TS5_raw; TM 1 Hz TS_cnt_t TS5_cnt;
+/* TM 1 Hz TS_raw_t TS4_raw; TM 1 Hz TS_cnt_t TS4_cnt; */
+/* TM 1 Hz TS_raw_t TS5_raw; TM 1 Hz TS_cnt_t TS5_cnt; */
 
 Group TS (
     /* TS0_cnt, TS0_raw, */
