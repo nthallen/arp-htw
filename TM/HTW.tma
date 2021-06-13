@@ -269,16 +269,18 @@ State QCL_Watch NoLog {
     }
     hold until ( SSP_Status != SSP_STATUS_TRIG ||
          !QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) ||
-         convert(Las_I) <= LOW_CURRENT );
+         convert(Las_I) <= LOW_CURRENT ||
+         LTE_DevStatus != 2);
     hold until ( SSP_Status == SSP_STATUS_TRIG &&
          QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) &&
-         convert(Las_I) >= LOW_CURRENT) or 2
+         convert(Las_I) >= LOW_CURRENT &&
+         LTE_DevStatus == 2) or 2
     else Validate QCL_Watch_Recover;
     Validate QCL_Watch;
 }
 
 State QCL_Watch_Recover NoLog {
-  { if (!QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)))
+  { if ((LTE_DevStatus != 2) || !QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)))
       Validate QCL_Out_TSpec;
     else if (convert(Las_I) <= LOW_CURRENT)
       Validate QCL_Out_Spec;
@@ -340,10 +342,11 @@ State QCL_Out_Spec {
 
 State QCL_Out_TSpec {
     Validate QCLI_Stop;
- +1 > Laser TEC Enable
+# +1 > Laser TEC Enable
     Hold until valid (QCLI_Idle);
     Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) &&
-                 LPV_TEMP_OK(convert(LPV_T),convert(LPV_Set_T)) );
+                 LPV_TEMP_OK(convert(LPV_T),convert(LPV_Set_T)) &&
+                 (LTE_DevStatus == 2));
  +10 Validate QCL_Start;
 }
 
@@ -512,8 +515,8 @@ Partition
 State Gas_Pressure_Watch NoLog {
   Hold until (GasHP < 100);
   Hold until (GasHP > 100) or 30
-  else Validate Gas_Pressure_Watch;
-  Validate Gas_Pressure_Low;
+  else Validate Gas_Pressure_Low;
+  Validate Gas_Pressure_Watch;
 }
 
 State Gas_Pressure_Low {

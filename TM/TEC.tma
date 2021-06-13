@@ -65,6 +65,7 @@ State TEC_LTE_Disabled NoLog {
 Partition
 
 State TEC_LPV_Init {
+     Hold until (LPV_Sink_T < 30);
   +1 > LPV TEC Enable
   +5 Validate TEC_LPV_Watch;
 }
@@ -88,11 +89,17 @@ State TEC_LPV_Init {
 
 State TEC_LPV_Watch NoLog {
   { if (LPV_DevStatus != 2) {
-      msg(2, "LPV TEC Unexpectedly disabled: Status %d: %s",
-        LPV_DevStatus, text(LPV_DevStatus));
-      Validate TEC_LPV_Disabled;
+      if (LPV_DevStatus == 3) {
+        msg(2, "LPV TEC Reporting Error");
+        Validate TEC_LPV_Error;
+      } else {
+        msg(2, "LPV TEC Unexpectedly disabled: Status %d: %s",
+          LPV_DevStatus, text(LPV_DevStatus));
+        Validate TEC_LPV_Disabled;
+      }
     }
   }
+  { if (LPV_Sink_T > 45) Validate TEC_LPV_OverTemp; }
   Hold until (LPV_T > LPV_Set_T + 5);
   Hold until (LPV_T < LPV_Set_T + 5) or 15
   else Validate TEC_LPV_OverTemp;
@@ -100,10 +107,18 @@ State TEC_LPV_Watch NoLog {
 }
 
 State TEC_LPV_OverTemp {
-    +1 { msg(2, "LPV TEC Over Temp: SP:%.1f C  T:%.1f C", LPV_Set_T, LPV_T); }
+    +1 { msg(2, "LPV TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                LPV_Set_T, LPV_T, LPV_Sink_T);
+       }
     +1 > LPV TEC Disable
-   +30 > LPV TEC Enable
- +3:00 Validate TEC_LPV_Watch;
+   +30 Validate TEC_LPV_Init;
+}
+
+State TEC_LPV_Error NoLog {
+  Hold until (LPV_DevStatus != 3);
+  Hold until (LPV_DevStatus == 3) or 20
+  else Validate TEC_LPV_Init;
+  Validate TEC_LPV_Error;
 }
 
 State TEC_LPV_Disabled NoLog {
@@ -175,6 +190,7 @@ State TEC_LPV_Disabled NoLog {
 Partition
 
 State TEC_Cover_Init {
+#    Hold until (Cover_Sink_T < 30);
   +1 > Cover TEC Enable
   +5 Validate TEC_Cover_Watch;
 }
@@ -198,11 +214,17 @@ State TEC_Cover_Init {
 
 State TEC_Cover_Watch NoLog {
   { if (Cover_DevStatus != 2) {
-      msg(2, "Cover TEC Unexpectedly disabled: Status %d: %s",
-        Cover_DevStatus, text(Cover_DevStatus));
-      Validate TEC_Cover_Disabled;
+      if (Cover_DevStatus == 3) {
+        msg(2, "Cover TEC Reporting Error");
+        Validate TEC_Cover_Error;
+      } else {
+        msg(2, "Cover TEC Unexpectedly disabled: Status %d: %s",
+          Cover_DevStatus, text(Cover_DevStatus));
+        Validate TEC_Cover_Disabled;
+      }
     }
   }
+# { if (Cover_Sink_T > 45) Validate TEC_Cover_OverTemp; }
   Hold until (Cover_T > Cover_Set_T + 5);
   Hold until (Cover_T < Cover_Set_T + 5) or 15
   else Validate TEC_Cover_OverTemp;
@@ -210,10 +232,18 @@ State TEC_Cover_Watch NoLog {
 }
 
 State TEC_Cover_OverTemp {
-    +1 { msg(2, "Cover TEC Over Temp: SP:%.1f C  T:%.1f C", Cover_Set_T, Cover_T); }
+    +1 { msg(2, "Cover TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                Cover_Set_T, Cover_T, Cover_Sink_T);
+       }
     +1 > Cover TEC Disable
-   +30 > Cover TEC Enable
- +3:00 Validate TEC_Cover_Watch;
+   +30 Validate TEC_Cover_Init;
+}
+
+State TEC_Cover_Error NoLog {
+  Hold until (Cover_DevStatus != 3);
+  Hold until (Cover_DevStatus == 3) or 20
+  else Validate TEC_Cover_Init;
+  Validate TEC_Cover_Error;
 }
 
 State TEC_Cover_Disabled NoLog {
@@ -225,11 +255,12 @@ State TEC_Cover_Disabled NoLog {
 
 
 #---------------------------------------------------------------
-# Partition 5: Cell Temp
+# Partition 5: Cell TEC
 #---------------------------------------------------------------
 Partition
 
 State TEC_Cell_Init {
+#    Hold until (Cell_Sink_T < 30);
   +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
@@ -253,11 +284,17 @@ State TEC_Cell_Init {
 
 State TEC_Cell_Watch NoLog {
   { if (Cell_DevStatus != 2) {
-      msg(2, "Cell TEC Unexpectedly disabled: Status %d: %s",
-        Cell_DevStatus, text(Cell_DevStatus));
-      Validate TEC_Cell_Disabled;
+      if (Cell_DevStatus == 3) {
+        msg(2, "Cell TEC Reporting Error");
+        Validate TEC_Cell_Error;
+      } else {
+        msg(2, "Cell TEC Unexpectedly disabled: Status %d: %s",
+          Cell_DevStatus, text(Cell_DevStatus));
+        Validate TEC_Cell_Disabled;
+      }
     }
   }
+# { if (Cell_Sink_T > 45) Validate TEC_Cell_OverTemp; }
   Hold until (Cell_T > Cell_Set_T + 5);
   Hold until (Cell_T < Cell_Set_T + 5) or 15
   else Validate TEC_Cell_OverTemp;
@@ -265,10 +302,18 @@ State TEC_Cell_Watch NoLog {
 }
 
 State TEC_Cell_OverTemp {
-    +1 { msg(2, "Cell TEC Over Temp: SP:%.1f C  T:%.1f C", Cell_Set_T, Cell_T); }
+    +1 { msg(2, "Cell TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                Cell_Set_T, Cell_T, Cell_Sink_T);
+       }
     +1 > Cell Temp Disable
-   +30 > Cell Temp Enable
- +3:00 Validate TEC_Cell_Watch;
+   +30 Validate TEC_Cell_Init;
+}
+
+State TEC_Cell_Error NoLog {
+  Hold until (Cell_DevStatus != 3);
+  Hold until (Cell_DevStatus == 3) or 20
+  else Validate TEC_Cell_Init;
+  Validate TEC_Cell_Error;
 }
 
 State TEC_Cell_Disabled NoLog {
@@ -285,6 +330,7 @@ State TEC_Cell_Disabled NoLog {
 Partition
 
 State TEC_DPV_Init {
+     Hold until (DPV_Sink_T < 30);
   +1 > DPV TEC Enable
   +5 Validate TEC_DPV_Watch;
 }
@@ -308,11 +354,17 @@ State TEC_DPV_Init {
 
 State TEC_DPV_Watch NoLog {
   { if (DPV_DevStatus != 2) {
-      msg(2, "DPV TEC Unexpectedly disabled: Status %d: %s",
-        DPV_DevStatus, text(DPV_DevStatus));
-      Validate TEC_DPV_Disabled;
+      if (DPV_DevStatus == 3) {
+        msg(2, "DPV TEC Reporting Error");
+        Validate TEC_DPV_Error;
+      } else {
+        msg(2, "DPV TEC Unexpectedly disabled: Status %d: %s",
+          DPV_DevStatus, text(DPV_DevStatus));
+        Validate TEC_DPV_Disabled;
+      }
     }
   }
+  { if (DPV_Sink_T > 45) Validate TEC_DPV_OverTemp; }
   Hold until (DPV_T > DPV_Set_T + 5);
   Hold until (DPV_T < DPV_Set_T + 5) or 15
   else Validate TEC_DPV_OverTemp;
@@ -320,10 +372,18 @@ State TEC_DPV_Watch NoLog {
 }
 
 State TEC_DPV_OverTemp {
-    +1 { msg(2, "DPV TEC Over Temp: SP:%.1f C  T:%.1f C", DPV_Set_T, DPV_T); }
+    +1 { msg(2, "DPV TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                DPV_Set_T, DPV_T, DPV_Sink_T);
+       }
     +1 > DPV TEC Disable
-   +30 > DPV TEC Enable
- +3:00 Validate TEC_DPV_Watch;
+   +30 Validate TEC_DPV_Init;
+}
+
+State TEC_DPV_Error NoLog {
+  Hold until (DPV_DevStatus != 3);
+  Hold until (DPV_DevStatus == 3) or 20
+  else Validate TEC_DPV_Init;
+  Validate TEC_DPV_Error;
 }
 
 State TEC_DPV_Disabled NoLog {
@@ -340,6 +400,7 @@ State TEC_DPV_Disabled NoLog {
 Partition
 
 State TEC_BubC_Init {
+#    Hold until (BubC_Sink_T < 30);
   +1 > Bubbler TEC Enable
   +5 Validate TEC_BubC_Watch;
 }
@@ -363,11 +424,17 @@ State TEC_BubC_Init {
 
 State TEC_BubC_Watch NoLog {
   { if (BubC_DevStatus != 2) {
-      msg(2, "BubC TEC Unexpectedly disabled: Status %d: %s",
-        BubC_DevStatus, text(BubC_DevStatus));
-      Validate TEC_BubC_Disabled;
+      if (BubC_DevStatus == 3) {
+        msg(2, "BubC TEC Reporting Error");
+        Validate TEC_BubC_Error;
+      } else {
+        msg(2, "BubC TEC Unexpectedly disabled: Status %d: %s",
+          BubC_DevStatus, text(BubC_DevStatus));
+        Validate TEC_BubC_Disabled;
+      }
     }
   }
+# { if (BubC_Sink_T > 45) Validate TEC_BubC_OverTemp; }
   Hold until (BubC_T > BubC_Set_T + 5);
   Hold until (BubC_T < BubC_Set_T + 5) or 15
   else Validate TEC_BubC_OverTemp;
@@ -375,10 +442,18 @@ State TEC_BubC_Watch NoLog {
 }
 
 State TEC_BubC_OverTemp {
-    +1 { msg(2, "BubC TEC Over Temp: SP:%.1f C  T:%.1f C", BubC_Set_T, BubC_T); }
+    +1 { msg(2, "BubC TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
+                BubC_Set_T, BubC_T, BubC_Sink_T);
+       }
     +1 > Bubbler TEC Disable
-   +30 > Bubbler TEC Enable
- +3:00 Validate TEC_BubC_Watch;
+   +30 Validate TEC_BubC_Init;
+}
+
+State TEC_BubC_Error NoLog {
+  Hold until (BubC_DevStatus != 3);
+  Hold until (BubC_DevStatus == 3) or 20
+  else Validate TEC_BubC_Init;
+  Validate TEC_BubC_Error;
 }
 
 State TEC_BubC_Disabled NoLog {
@@ -387,4 +462,3 @@ State TEC_BubC_Disabled NoLog {
      else Validate TEC_BubC_Disabled;
      Validate TEC_BubC_Watch;
 }
-
