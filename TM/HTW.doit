@@ -2,6 +2,7 @@ display gddisp
 display hkdisp
 display datadisp -C $FlightNode
 display TSdisp
+display IWG1disp
 client HTWclt
 memo
 batchfile interact

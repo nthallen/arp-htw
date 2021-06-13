@@ -54,6 +54,7 @@ hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc mains_conv.tmc gas.tbl
 datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc data.tbl /usr/local/share/oui/cic.oui
 TSdisp : TS_conv.tmc TS.tbl
+IWG1disp : IWG1.tbl
 doit : HTW.doit
 # labdisp : dstat.tmc lab.tbl
 # labdoit : lab.doit

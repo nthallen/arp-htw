@@ -62,6 +62,16 @@ TSdispnc.cc
 TSdispncoui.c
 TSdispncoui.o
 TSdispnc.o
+IWG1tbl.tmc
+IWG1disp.cc
+IWG1dispoui.c
+IWG1dispoui.o
+IWG1disp.o
+IWG1tblnc.tmc
+IWG1dispnc.cc
+IWG1dispncoui.c
+IWG1dispncoui.o
+IWG1dispnc.o
 doit.dep
 udpext.cc
 udpextoui.c
@@ -89,6 +99,8 @@ datatbl.tmc.dep
 datatblnc.tmc.dep
 TStbl.tmc.dep
 TStblnc.tmc.dep
+IWG1tbl.tmc.dep
+IWG1tblnc.tmc.dep
 *.err
 Makefile
 HTWcol
@@ -102,6 +114,8 @@ datadisp
 datadispnc
 TSdisp
 TSdispnc
+IWG1disp
+IWG1dispnc
 doit
 udpext
 HTWclt
