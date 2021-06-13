@@ -214,7 +214,7 @@ State TEC_Cover_Init {
 
 State TEC_Cover_Watch NoLog {
   { if (Cover_DevStatus != 2) {
-      if (Cover_DevState == 3) {
+      if (Cover_DevStatus == 3) {
         msg(2, "Cover TEC Reporting Error");
         Validate TEC_Cover_Error;
       } else {
@@ -261,7 +261,7 @@ Partition
 
 State TEC_Cell_Init {
 #    Hold until (Cell_Sink_T < 30);
-  +1 > Cell TEC Enable
+  +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
 
@@ -284,7 +284,7 @@ State TEC_Cell_Init {
 
 State TEC_Cell_Watch NoLog {
   { if (Cell_DevStatus != 2) {
-      if (Cell_DevState == 3) {
+      if (Cell_DevStatus == 3) {
         msg(2, "Cell TEC Reporting Error");
         Validate TEC_Cell_Error;
       } else {
@@ -305,7 +305,7 @@ State TEC_Cell_OverTemp {
     +1 { msg(2, "Cell TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
                 Cell_Set_T, Cell_T, Cell_Sink_T);
        }
-    +1 > Cell TEC Disable
+    +1 > Cell Temp Disable
    +30 Validate TEC_Cell_Init;
 }
 
@@ -317,7 +317,7 @@ State TEC_Cell_Error NoLog {
 }
 
 State TEC_Cell_Disabled NoLog {
-  +1 > Cell TEC Enable
+  +1 > Cell Temp Enable
      Hold until (Cell_DevStatus == 2) or 30
      else Validate TEC_Cell_Disabled;
      Validate TEC_Cell_Watch;
@@ -354,7 +354,7 @@ State TEC_DPV_Init {
 
 State TEC_DPV_Watch NoLog {
   { if (DPV_DevStatus != 2) {
-      if (DPV_DevState == 3) {
+      if (DPV_DevStatus == 3) {
         msg(2, "DPV TEC Reporting Error");
         Validate TEC_DPV_Error;
       } else {
@@ -401,7 +401,7 @@ Partition
 
 State TEC_BubC_Init {
 #    Hold until (BubC_Sink_T < 30);
-  +1 > BubC TEC Enable
+  +1 > Bubbler TEC Enable
   +5 Validate TEC_BubC_Watch;
 }
 
@@ -424,7 +424,7 @@ State TEC_BubC_Init {
 
 State TEC_BubC_Watch NoLog {
   { if (BubC_DevStatus != 2) {
-      if (BubC_DevState == 3) {
+      if (BubC_DevStatus == 3) {
         msg(2, "BubC TEC Reporting Error");
         Validate TEC_BubC_Error;
       } else {
@@ -445,7 +445,7 @@ State TEC_BubC_OverTemp {
     +1 { msg(2, "BubC TEC Over Temp: SP:%.1f C  T:%.1f C Sink:%.1f C",
                 BubC_Set_T, BubC_T, BubC_Sink_T);
        }
-    +1 > BubC TEC Disable
+    +1 > Bubbler TEC Disable
    +30 Validate TEC_BubC_Init;
 }
 
@@ -457,7 +457,7 @@ State TEC_BubC_Error NoLog {
 }
 
 State TEC_BubC_Disabled NoLog {
-  +1 > BubC TEC Enable
+  +1 > Bubbler TEC Enable
      Hold until (BubC_DevStatus == 2) or 30
      else Validate TEC_BubC_Disabled;
      Validate TEC_BubC_Watch;
