@@ -513,8 +513,8 @@ State PV_Failure NoLog {
 Partition
 
 State Gas_Pressure_Watch NoLog {
-  Hold until (GasHP < 100);
-  Hold until (GasHP > 100) or 30
+  Hold until (convert(GasHP) < 100);
+  Hold until (convert(GasHP) > 100) or 30
   else Validate Gas_Pressure_Low;
   Validate Gas_Pressure_Watch;
 }
