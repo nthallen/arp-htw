@@ -1,5 +1,5 @@
 PARTITION
-# PARTITION X: Throttle Valve
+# PARTITION 15: Throttle Valve
 #---------------------------------------------------------------
 # Summary:
 #   Throttle_Valve_Startup - Does nothing

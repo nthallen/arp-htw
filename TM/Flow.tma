@@ -12,7 +12,7 @@
 #===============================================================
 
 #---------------------------------------------------------------
-# Partition #F0: Flow Request States
+# Partition 12: Flow Request States
 #---------------------------------------------------------------
 Partition
 
@@ -37,7 +37,7 @@ State Flow_Shutdown {}    # Goal State: F_Shutdown
 #===============================================================
 
 #---------------------------------------------------------------
-# Partition #F1: Gas Deck, Pinch Valve and Pump work states
+# Partition 13: Gas Deck, Pinch Valve and Pump work states
 #---------------------------------------------------------------
 Partition
 
@@ -119,6 +119,7 @@ State F_GD_Init {
 }
 
 State F_GD_Close {
+      depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
       > Air Flow SetPoint 0 sccm
       > Bubbler Flow SetPoint 0 sccm
    +1 > Command Gas_Vlv_D Off
@@ -132,6 +133,16 @@ State F_GD_Close {
       depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
       depending on (Flow_GD_PP) { Validate F_Zero_Init; }
       depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
+      depending on (Flow_Shutdown) { Validate F_Pump_Off; }
+}
+
+State F_GD_Low_Pressure {
+      > Air Flow SetPoint 0 sccm
+      > Bubbler Flow SetPoint 0 sccm
+   +1 > Command Gas_Vlv_D Off
+   +1 > Command Bub_In_Vlv_D Off
+   +1 > Command Bub_Out_Vlv_D Off
+      depending on (Flow_Fill_Cell) { Validate F_Pump_Off; }
       depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
@@ -164,6 +175,7 @@ State F_GD_PI NoLog {
 
   "Regulating";
 
+  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
   depending on (Flow_Idle) { Validate F_GD_Close; }
   depending on (Flow_Zero) { Validate F_GD_Close; }
   depending on (Flow_PV_PI) { Validate F_GD_Close; }
@@ -175,6 +187,8 @@ State F_GD_PI NoLog {
 }
 
 State F_GD_Fill_Cell {
+  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
+
   > Command Exhaust_Vlv Off
   > Command Gas_Vlv_D On 
   > Air Flow SetPoint 10000 sccm
@@ -189,6 +203,7 @@ State F_GD_Fill_Cell {
 }
 
 State F_GD_Pump_Purge {
+        depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
         depending on (Flow_Idle) { Validate F_GD_Close; }
         depending on (Flow_Zero) { Validate F_GD_Close; }
         depending on (Flow_PV_PI) { Validate F_GD_Close; }
@@ -336,5 +351,20 @@ State F_PV_Scan {
     > Drive Pinch Valve Out 0
  +1 { if ( PVStep != 0 ) Validate F_PV_Close; }
     Validate F_PV_PI_Init;
+}
+
+#---------------------------------------------------------------
+# Partition 14: Gas Bottle Watchdog
+#---------------------------------------------------------------
+Partition
+
+State Gas_Pressure_Watch NoLog {
+  Hold until (convert(GasHP) < 100);
+  Hold until (convert(GasHP) > 100) or 30
+  else Validate Gas_Pressure_Low;
+  Validate Gas_Pressure_Watch;
+}
+
+State Gas_Pressure_Low {
 }
 

@@ -96,7 +96,7 @@ State IN_AIR {
 }
 
 #---------------------------------------------------------------
-# Partition 4: Operations
+# Partition 3: Operations
 #---------------------------------------------------------------
 Partition
 
@@ -187,7 +187,7 @@ State Ops_PV_Failure {
 State Ops_Is_Shutdown {}
 
 #---------------------------------------------------------------
-# Partition 5: Laser Control JPL 53
+# Partition 4: Laser Control JPL 53
 #---------------------------------------------------------------
 Partition
 
@@ -392,7 +392,7 @@ State QCL_SelectRingandRun {
 }
 
 #---------------------------------------------------------------
-# Partition 6: QCLI Control
+# Partition 5: QCLI Control
 #---------------------------------------------------------------
 Partition
 
@@ -462,7 +462,7 @@ State QCLI_Fail {
 State QCLI_Shutdown {}
 
 #---------------------------------------------------------------
-# Partition 7: Pumpkin Troll
+# Partition 6: Pumpkin Troll
 # Needs to be written!
 #---------------------------------------------------------------
 Partition
@@ -508,22 +508,7 @@ State PV_Failure NoLog {
 }
 
 #---------------------------------------------------------------
-# Partition 7: Gas Bottle Watchdog
-#---------------------------------------------------------------
-Partition
-
-State Gas_Pressure_Watch NoLog {
-  Hold until (convert(GasHP) < 100);
-  Hold until (convert(GasHP) > 100) or 30
-  else Validate Gas_Pressure_Low;
-  Validate Gas_Pressure_Watch;
-}
-
-State Gas_Pressure_Low {
-}
-
-#---------------------------------------------------------------
-# Partition 9: Realtime File Input
+# Partition 8: Realtime File Input
 #---------------------------------------------------------------
 Partition
 
@@ -534,7 +519,7 @@ State ReadFile "HTW.tmas" {
 }
 
 #---------------------------------------------------------------
-# Partition 10: ReadFile Conditions
+# Partition 9: ReadFile Conditions
 #---------------------------------------------------------------
 # Summary:
 #   RFCond_Idle: Nothing
@@ -551,7 +536,7 @@ State RFCond_TimeWarp {
 }
 
 #---------------------------------------------------------------
-# Partition 11: Analog Input Monitoring
+# Partition 10: Analog Input Monitoring
 #---------------------------------------------------------------
 Partition
 
@@ -597,7 +582,7 @@ State AI_Reset {
 State AI_Fail {}
 
 #--------------------------------------------------------------
-# Partition 12: Lab Calibration
+# Partition 11: Lab Calibration
 #--------------------------------------------------------------
 Partition
 
