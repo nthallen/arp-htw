@@ -107,7 +107,7 @@ Partition
 State Ops_Init {
       > Laser TEC Live SetPoints Enable
    +1 > Set Cell Pressure SetPoint 40.0
-# +10 Validate Throttle_Valve_Init;
+  +10 Validate Throttle_Valve_Init;
       Hold Until Valid (F_Idle);
       Depending on (Shutdown) { Validate Ops_Shutdown; }
       Depending on (Record) { Validate Ops_Start; }
@@ -135,9 +135,9 @@ State Ops_Calibrate {
    +1 > Command Bub_In_Vlv_D On
    +1 > Command Bub_Out_Vlv_D On
 +1:00 > Bubbler Flow SetPoint 5 sccm
-      Hold until (SW_St == SWS_TIMEWARP) or 4:00;
+      Hold until (SW_St == SWS_TIMEWARP) or 1:00;
       > Bubbler Flow SetPoint 10 sccm
-      Hold until (SW_St == SWS_TIMEWARP) or 4:00;
+      Hold until (SW_St == SWS_TIMEWARP) or 1:00;
       Validate Ops_Sample;
 }
 
@@ -361,7 +361,6 @@ State QCL_Stop {
 #Running Waveforms
 
 State QCL_SelectICOSandRun {
-      Depending on (Shutdown) { Validate QCL_Shutdown; }
       > SSP Stop
       Hold until ( SSP_Status == SSP_STATUS_READY ) or 5
       else { nl_error( 2, "Not Ready in QCL_SelectICOSandRun" ); }
@@ -376,7 +375,6 @@ State QCL_SelectICOSandRun {
 }
 
 State QCL_SelectRingandRun {
-      Depending on (Shutdown) { Validate QCL_Shutdown; }
       > SSP Stop
       Hold until ( SSP_Status == SSP_STATUS_READY ) or 5
       else { nl_error( 2, "Not Ready in QCL_SelectRingandRun" ); }

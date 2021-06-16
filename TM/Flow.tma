@@ -151,11 +151,12 @@ State F_GD_Low_Pressure {
       depending on (Flow_PV_Scan) { Validate F_Zero_Init; }
 #     depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
       depending on (Flow_GD_PP) { Validate F_Zero_Init; }
-      depending on (Flow_Fill_Cell) { Validate F_Pump_Off; }
+      depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
       depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
 State F_GD_PI_Init {
+  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
   { GP_sum = 0; }
     > Command Gas_Vlv_D On
   +1 Validate F_GD_PI;
@@ -196,8 +197,6 @@ State F_GD_PI NoLog {
 }
 
 State F_GD_Fill_Cell {
-  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
-
   > Command Exhaust_Vlv Off
   > Command Gas_Vlv_D On 
   > Air Flow SetPoint 10000 sccm
@@ -367,13 +366,21 @@ State F_PV_Scan {
 #---------------------------------------------------------------
 Partition
 
-State Gas_Pressure_Watch NoLog {
-  Hold until (convert(GasHP) < 100);
-  Hold until (convert(GasHP) > 100) or 30
-  else Validate Gas_Pressure_Low;
-  Validate Gas_Pressure_Watch;
+State Gas_Pressure_Watch {
+  { if (convert(GasHP) < 100) {
+      msg(2, "GasHP < 100: Proceeding to Gas_Pressure_Low");
+      Validate Gas_Pressure_Low;
+    }
+  }
 }
 
-State Gas_Pressure_Low {
+State Gas_Pressure_Low NoLog {
+  Hold until (convert(GasHP) > 100);
+  Hold until (convert(GasHP) < 100) or 60
+  else {
+    msg(0, "GasHP > 100 for 60 seconds: Returning to Gas_Pressure_Watch");
+    Validate Gas_Pressure_Watch;
+  }
+  Validate Gas_Pressure_Low;
 }
 

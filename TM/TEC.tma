@@ -65,9 +65,9 @@ State TEC_LTE_Disabled NoLog {
 Partition
 
 State TEC_LPV_Init {
-     Hold until (LPV_Sink_T < 30);
-  +1 > LPV TEC Enable
-  +5 Validate TEC_LPV_Watch;
+#    Hold until (LPV_Sink_T < 30);
+# +1 > LPV TEC Enable
+# +5 Validate TEC_LPV_Watch;
 }
 
 # LPV_DevStatus values are defined in ME.tmc
@@ -330,9 +330,9 @@ State TEC_Cell_Disabled NoLog {
 Partition
 
 State TEC_DPV_Init {
-     Hold until (DPV_Sink_T < 30);
-  +1 > DPV TEC Enable
-  +5 Validate TEC_DPV_Watch;
+#    Hold until (DPV_Sink_T < 30);
+# +1 > DPV TEC Enable
+# +5 Validate TEC_DPV_Watch;
 }
 
 # DPV_DevStatus values are defined in ME.tmc
