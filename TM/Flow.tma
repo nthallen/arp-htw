@@ -33,6 +33,8 @@ State Flow_Shutdown {}    # Goal State: F_Shutdown
 # F_PV_PI:    On     Open    Closed  Cntrl   Cell_SetP 
 # F_PV_Scan:  On     Open    Closed  Cntrl   varying
 # F_GD_PI:    On     Open    Cntrl   Closed  Cell_SetP
+# F_GD_Low_Pressure
+#             On     Open    Closed  Closed  undetermined
 # F_Shutdown: Off    Closed  Closed  Closed  ~1Atm (via Cell_SetP)
 #===============================================================
 
@@ -142,6 +144,13 @@ State F_GD_Low_Pressure {
    +1 > Command Gas_Vlv_D Off
    +1 > Command Bub_In_Vlv_D Off
    +1 > Command Bub_Out_Vlv_D Off
+   +1 depending on (Flow_Init) { Validate F_PV_Init; }
+      depending on (Flow_Idle) { Validate F_Pump_Off; }
+      depending on (Flow_Zero) { Validate F_Zero_Init; }
+      depending on (Flow_PV_PI) { Validate F_Zero_Init; }
+      depending on (Flow_PV_Scan) { Validate F_Zero_Init; }
+#     depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
+      depending on (Flow_GD_PP) { Validate F_Zero_Init; }
       depending on (Flow_Fill_Cell) { Validate F_Pump_Off; }
       depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
