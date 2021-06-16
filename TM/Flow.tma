@@ -366,13 +366,21 @@ State F_PV_Scan {
 #---------------------------------------------------------------
 Partition
 
-State Gas_Pressure_Watch NoLog {
-  Hold until (convert(GasHP) < 100);
-  Hold until (convert(GasHP) > 100) or 30
-  else Validate Gas_Pressure_Low;
-  Validate Gas_Pressure_Watch;
+State Gas_Pressure_Watch {
+  { if (convert(GasHP) < 100) {
+      msg(2, "GasHP < 100: Proceeding to Gas_Pressure_Low");
+      Validate Gas_Pressure_Low;
+    }
+  }
 }
 
-State Gas_Pressure_Low {
+State Gas_Pressure_Low NoLog {
+  Hold until (convert(GasHP) > 100);
+  Hold until (convert(GasHP) < 100) or 60
+  else {
+    msg(0, "GasHP > 100 for 60 seconds: Returning to Gas_Pressure_Watch");
+    Validate Gas_Pressure_Watch;
+  }
+  Validate Gas_Pressure_Low;
 }
 

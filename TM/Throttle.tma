@@ -35,8 +35,11 @@ State Throttle_Valve_Init {
   +1 > Set Inlet DP Gain Gi 4.0
   +1 > Set Inlet DP SetPoint 2.25
   +3 > Drive Throttle Valve in 8000
+     Hold Until (TVStat & 1) or 5
+     else { msg(2, "Throttle Valve In Limit not observed on init"); }
   +2 > Drive Throttle Valve out 0
   +2 > Drive Throttle Valve out 2100
+  +2 > Drive Throttle Valve To 2100
   depending on (RECORD) { Validate Throttle_Valve_PI_Init; }
 }
 

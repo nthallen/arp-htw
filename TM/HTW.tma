@@ -107,7 +107,7 @@ Partition
 State Ops_Init {
       > Laser TEC Live SetPoints Enable
    +1 > Set Cell Pressure SetPoint 40.0
-# +10 Validate Throttle_Valve_Init;
+  +10 Validate Throttle_Valve_Init;
       Hold Until Valid (F_Idle);
       Depending on (Shutdown) { Validate Ops_Shutdown; }
       Depending on (Record) { Validate Ops_Start; }
