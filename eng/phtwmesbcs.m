@@ -1,5 +1,5 @@
-function phtwme_stalebcs(varargin);
-% phtwme_stalebcs( [...] );
+function phtwmesbcs(varargin);
+% phtwmesbcs( [...] );
 % ME Stale Bub C Stale
 h = timeplot({'BubC_Stale'}, ...
       'ME Stale Bub C Stale', ...

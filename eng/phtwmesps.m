@@ -1,5 +1,5 @@
-function phtwme_staleps(varargin);
-% phtwme_staleps( [...] );
+function phtwmesps(varargin);
+% phtwmesps( [...] );
 % ME Stale Plate Stale
 h = timeplot({'Plate_Stale'}, ...
       'ME Stale Plate Stale', ...

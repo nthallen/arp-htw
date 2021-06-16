@@ -20,63 +20,79 @@ TM typedef uint8_t ME_DevStatus_t { text "%7u" ME_DevStatus_text(); }
 TM typedef uint8_t ME_Stale_t { text "%3u"; }
 TM typedef float ME_Temp_t { text "%7.2f"; }
 TM typedef uint8_t ME_Error_t { text"%3u"; }
+TM typedef float ME_Amps_t { text "%7.2f"; }
+TM typedef float ME_Volts_t { text "%7.2f"; }
 
 TM 1 Hz ME_Stale_t ME_Stale;
 TM 1 Hz ME_DevStatus_t LTE_DevStatus;
 TM 1 Hz ME_Error_t LTE_ErrorNumber;
 TM 1 Hz ME_Error_t LTE_ErrorInstance;
 TM 1 Hz ME_Error_t LTE_ErrorParameter;
-TM 1 Hz ME_Temp_t LTE_Set_T;
 TM 1 Hz ME_Temp_t LTE_T;
 TM 1 Hz ME_Temp_t LTE_Sink_T;
+TM 1 Hz ME_Temp_t LTE_Set_T;
+TM 1 Hz ME_Amps_t LTE_OutputCurrent;
+TM 1 Hz ME_Volts_t LTE_OutputVoltage;
 TM 1 Hz ME_Stale_t LTE_Stale;
 TM 1 Hz ME_DevStatus_t LPV_DevStatus;
 TM 1 Hz ME_Error_t LPV_ErrorNumber;
 TM 1 Hz ME_Error_t LPV_ErrorInstance;
 TM 1 Hz ME_Error_t LPV_ErrorParameter;
-TM 1 Hz ME_Temp_t LPV_Set_T;
 TM 1 Hz ME_Temp_t LPV_T;
 TM 1 Hz ME_Temp_t LPV_Sink_T;
+TM 1 Hz ME_Temp_t LPV_Set_T;
+TM 1 Hz ME_Amps_t LPV_OutputCurrent;
+TM 1 Hz ME_Volts_t LPV_OutputVoltage;
 TM 1 Hz ME_Stale_t LPV_Stale;
 TM 1 Hz ME_DevStatus_t Plate_DevStatus;
 TM 1 Hz ME_Error_t Plate_ErrorNumber;
 TM 1 Hz ME_Error_t Plate_ErrorInstance;
 TM 1 Hz ME_Error_t Plate_ErrorParameter;
-TM 1 Hz ME_Temp_t Plate_Set_T;
 TM 1 Hz ME_Temp_t Plate_T;
 TM 1 Hz ME_Temp_t Plate_Sink_T;
+TM 1 Hz ME_Temp_t Plate_Set_T;
+TM 1 Hz ME_Amps_t Plate_OutputCurrent;
+TM 1 Hz ME_Volts_t Plate_OutputVoltage;
 TM 1 Hz ME_Stale_t Plate_Stale;
 TM 1 Hz ME_DevStatus_t Cover_DevStatus;
 TM 1 Hz ME_Error_t Cover_ErrorNumber;
 TM 1 Hz ME_Error_t Cover_ErrorInstance;
 TM 1 Hz ME_Error_t Cover_ErrorParameter;
-TM 1 Hz ME_Temp_t Cover_Set_T;
 TM 1 Hz ME_Temp_t Cover_T;
 TM 1 Hz ME_Temp_t Cover_Sink_T;
+TM 1 Hz ME_Temp_t Cover_Set_T;
+TM 1 Hz ME_Amps_t Cover_OutputCurrent;
+TM 1 Hz ME_Volts_t Cover_OutputVoltage;
 TM 1 Hz ME_Stale_t Cover_Stale;
 TM 1 Hz ME_DevStatus_t Cell_DevStatus;
 TM 1 Hz ME_Error_t Cell_ErrorNumber;
 TM 1 Hz ME_Error_t Cell_ErrorInstance;
 TM 1 Hz ME_Error_t Cell_ErrorParameter;
-TM 1 Hz ME_Temp_t Cell_Set_T;
 TM 1 Hz ME_Temp_t Cell_T;
 TM 1 Hz ME_Temp_t Cell_Sink_T;
+TM 1 Hz ME_Temp_t Cell_Set_T;
+TM 1 Hz ME_Amps_t Cell_OutputCurrent;
+TM 1 Hz ME_Volts_t Cell_OutputVoltage;
 TM 1 Hz ME_Stale_t Cell_Stale;
 TM 1 Hz ME_DevStatus_t DPV_DevStatus;
 TM 1 Hz ME_Error_t DPV_ErrorNumber;
 TM 1 Hz ME_Error_t DPV_ErrorInstance;
 TM 1 Hz ME_Error_t DPV_ErrorParameter;
-TM 1 Hz ME_Temp_t DPV_Set_T;
 TM 1 Hz ME_Temp_t DPV_T;
 TM 1 Hz ME_Temp_t DPV_Sink_T;
+TM 1 Hz ME_Temp_t DPV_Set_T;
+TM 1 Hz ME_Amps_t DPV_OutputCurrent;
+TM 1 Hz ME_Volts_t DPV_OutputVoltage;
 TM 1 Hz ME_Stale_t DPV_Stale;
 TM 1 Hz ME_DevStatus_t BubC_DevStatus;
 TM 1 Hz ME_Error_t BubC_ErrorNumber;
 TM 1 Hz ME_Error_t BubC_ErrorInstance;
 TM 1 Hz ME_Error_t BubC_ErrorParameter;
-TM 1 Hz ME_Temp_t BubC_Set_T;
 TM 1 Hz ME_Temp_t BubC_T;
 TM 1 Hz ME_Temp_t BubC_Sink_T;
+TM 1 Hz ME_Temp_t BubC_Set_T;
+TM 1 Hz ME_Amps_t BubC_OutputCurrent;
+TM 1 Hz ME_Volts_t BubC_OutputVoltage;
 TM 1 Hz ME_Stale_t BubC_Stale;
 TM "Receive" ME 1;
 
@@ -101,6 +117,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   LTE_T = ME_drive(0,ObjectTemp);
   LTE_Sink_T = ME_drive(0,SinkTemp);
   LTE_Set_T = ME_drive(0,TargetObjectTemp);
+  LTE_OutputCurrent = ME_drive(0,ActualOutputCurrent);
+  LTE_OutputVoltage = ME_drive(0,ActualOutputVoltage);
   LTE_Stale = ME_drive(0,Stale);
   LPV_DevStatus = ME_drive(1,DeviceStatus);
   LPV_ErrorNumber = ME_drive(1,ErrorNumber);
@@ -109,6 +127,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   LPV_T = ME_drive(1,ObjectTemp);
   LPV_Sink_T = ME_drive(1,SinkTemp);
   LPV_Set_T = ME_drive(1,TargetObjectTemp);
+  LPV_OutputCurrent = ME_drive(1,ActualOutputCurrent);
+  LPV_OutputVoltage = ME_drive(1,ActualOutputVoltage);
   LPV_Stale = ME_drive(1,Stale);
   Plate_DevStatus = ME_drive(2,DeviceStatus);
   Plate_ErrorNumber = ME_drive(2,ErrorNumber);
@@ -117,6 +137,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   Plate_T = ME_drive(2,ObjectTemp);
   Plate_Sink_T = ME_drive(2,SinkTemp);
   Plate_Set_T = ME_drive(2,TargetObjectTemp);
+  Plate_OutputCurrent = ME_drive(2,ActualOutputCurrent);
+  Plate_OutputVoltage = ME_drive(2,ActualOutputVoltage);
   Plate_Stale = ME_drive(2,Stale);
   Cover_DevStatus = ME_drive(3,DeviceStatus);
   Cover_ErrorNumber = ME_drive(3,ErrorNumber);
@@ -125,6 +147,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   Cover_T = ME_drive(3,ObjectTemp);
   Cover_Sink_T = ME_drive(3,SinkTemp);
   Cover_Set_T = ME_drive(3,TargetObjectTemp);
+  Cover_OutputCurrent = ME_drive(3,ActualOutputCurrent);
+  Cover_OutputVoltage = ME_drive(3,ActualOutputVoltage);
   Cover_Stale = ME_drive(3,Stale);
   Cell_DevStatus = ME_drive(4,DeviceStatus);
   Cell_ErrorNumber = ME_drive(4,ErrorNumber);
@@ -133,6 +157,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   Cell_T = ME_drive(4,ObjectTemp);
   Cell_Sink_T = ME_drive(4,SinkTemp);
   Cell_Set_T = ME_drive(4,TargetObjectTemp);
+  Cell_OutputCurrent = ME_drive(4,ActualOutputCurrent);
+  Cell_OutputVoltage = ME_drive(4,ActualOutputVoltage);
   Cell_Stale = ME_drive(4,Stale);
   DPV_DevStatus = ME_drive(5,DeviceStatus);
   DPV_ErrorNumber = ME_drive(5,ErrorNumber);
@@ -141,6 +167,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   DPV_T = ME_drive(5,ObjectTemp);
   DPV_Sink_T = ME_drive(5,SinkTemp);
   DPV_Set_T = ME_drive(5,TargetObjectTemp);
+  DPV_OutputCurrent = ME_drive(5,ActualOutputCurrent);
+  DPV_OutputVoltage = ME_drive(5,ActualOutputVoltage);
   DPV_Stale = ME_drive(5,Stale);
   BubC_DevStatus = ME_drive(6,DeviceStatus);
   BubC_ErrorNumber = ME_drive(6,ErrorNumber);
@@ -149,6 +177,8 @@ Group ME (ME_Stale, LTE_DevStatus, LTE_ErrorNumber, LTE_ErrorInstance,
   BubC_T = ME_drive(6,ObjectTemp);
   BubC_Sink_T = ME_drive(6,SinkTemp);
   BubC_Set_T = ME_drive(6,TargetObjectTemp);
+  BubC_OutputCurrent = ME_drive(6,ActualOutputCurrent);
+  BubC_OutputVoltage = ME_drive(6,ActualOutputVoltage);
   BubC_Stale = ME_drive(6,Stale);
   ME_obj->synch();
 }

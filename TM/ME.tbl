@@ -1,5 +1,5 @@
 LTE {
-  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7) C;
+  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7)(LTE_OutputVoltage,7) (LTE_OutputCurrent,7);
 }
 
 LTE_v {
@@ -12,7 +12,7 @@ LTE_v {
 }
 
 LPV {
-  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7) C;
+  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7)(LPV_OutputVoltage,7) (LPV_OutputCurrent,7);
 }
 
 LPV_v {
@@ -25,7 +25,7 @@ LPV_v {
 }
 
 Plate {
-  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7) C;
+  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7)(Plate_OutputVoltage,7) (Plate_OutputCurrent,7);
 }
 
 Plate_v {
@@ -38,7 +38,7 @@ Plate_v {
 }
 
 Cover {
-  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7) C;
+  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7)(Cover_OutputVoltage,7) (Cover_OutputCurrent,7);
 }
 
 Cover_v {
@@ -51,7 +51,7 @@ Cover_v {
 }
 
 Cell {
-  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
+  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7)(Cell_OutputVoltage,7) (Cell_OutputCurrent,7);
 }
 
 Cell_v {
@@ -64,7 +64,7 @@ Cell_v {
 }
 
 DPV {
-  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7) C;
+  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7)(DPV_OutputVoltage,7) (DPV_OutputCurrent,7);
 }
 
 DPV_v {
@@ -77,7 +77,7 @@ DPV_v {
 }
 
 BubC {
-  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7) C;
+  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7)(BubC_OutputVoltage,7) (BubC_OutputCurrent,7);
 }
 
 BubC_v {
@@ -91,12 +91,12 @@ BubC_v {
 
 ME {
   HBox { +-; Title: ME; -+ };
-  (ME_Stale,3) >Status< >Stl< >Sink< >Set< >T<;
-  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7) C;
-  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7) C;
-  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7) C;
-  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7) C;
-  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7) C;
-  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7) C;
-  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7) C;
+  (ME_Stale,3) >Status< >Stl< >Sink< >Set< >T< >V< >A<;
+  LTE: (LTE_DevStatus,7) (LTE_Stale,3) (LTE_Sink_T,7) (LTE_Set_T,7) (LTE_T,7)(LTE_OutputVoltage,7) (LTE_OutputCurrent,7);
+  LPV: (LPV_DevStatus,7) (LPV_Stale,3) (LPV_Sink_T,7) (LPV_Set_T,7) (LPV_T,7)(LPV_OutputVoltage,7) (LPV_OutputCurrent,7);
+  Plate: (Plate_DevStatus,7) (Plate_Stale,3) (Plate_Sink_T,7) (Plate_Set_T,7) (Plate_T,7)(Plate_OutputVoltage,7) (Plate_OutputCurrent,7);
+  Cover: (Cover_DevStatus,7) (Cover_Stale,3) (Cover_Sink_T,7) (Cover_Set_T,7) (Cover_T,7)(Cover_OutputVoltage,7) (Cover_OutputCurrent,7);
+  Cell: (Cell_DevStatus,7) (Cell_Stale,3) (Cell_Sink_T,7) (Cell_Set_T,7) (Cell_T,7)(Cell_OutputVoltage,7) (Cell_OutputCurrent,7);
+  DPV: (DPV_DevStatus,7) (DPV_Stale,3) (DPV_Sink_T,7) (DPV_Set_T,7) (DPV_T,7)(DPV_OutputVoltage,7) (DPV_OutputCurrent,7);
+  BubC: (BubC_DevStatus,7) (BubC_Stale,3) (BubC_Sink_T,7) (BubC_Set_T,7) (BubC_T,7)(BubC_OutputVoltage,7) (BubC_OutputCurrent,7);
 }

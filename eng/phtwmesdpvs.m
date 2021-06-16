@@ -1,5 +1,5 @@
-function phtwme_staledpvs(varargin);
-% phtwme_staledpvs( [...] );
+function phtwmesdpvs(varargin);
+% phtwmesdpvs( [...] );
 % ME Stale DPV Stale
 h = timeplot({'DPV_Stale'}, ...
       'ME Stale DPV Stale', ...

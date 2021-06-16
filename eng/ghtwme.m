@@ -1,5 +1,5 @@
 function fig = ghtwme(varargin);
 % ghtwme(...)
 % ME
-ffig = ne_group(varargin,'ME','phtwmes','phtwmeltet','phtwmelpvt','phtwmept','phtwmect','phtwmecell_temp','phtwmedpvt','phtwmebct');
+ffig = ne_group(varargin,'ME','phtwmestale');
 if nargout > 0 fig = ffig; end

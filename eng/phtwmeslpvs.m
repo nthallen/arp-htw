@@ -1,5 +1,5 @@
-function phtwme_stalelpvs(varargin);
-% phtwme_stalelpvs( [...] );
+function phtwmeslpvs(varargin);
+% phtwmeslpvs( [...] );
 % ME Stale LPV Stale
 h = timeplot({'LPV_Stale'}, ...
       'ME Stale LPV Stale', ...

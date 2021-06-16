@@ -1,5 +1,5 @@
-function phtwme_stalecell_stale(varargin);
-% phtwme_stalecell_stale( [...] );
+function phtwmescell_stale(varargin);
+% phtwmescell_stale( [...] );
 % ME Stale Cell Stale
 h = timeplot({'Cell_Stale'}, ...
       'ME Stale Cell Stale', ...

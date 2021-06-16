@@ -1,6 +1,9 @@
 1.2.1: First Check Flight
-1.2.1: 6/12/2021:
+1.2.2: 6/12/2021:
   Add IWG1
   Remove TS[045]
   Fix GasHP Watchdog algo
   Update TEC_LPV algo
+1.2.3: 6/16/2021:
+  Collect Meerstetter power data
+

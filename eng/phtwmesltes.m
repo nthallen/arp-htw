@@ -1,5 +1,5 @@
-function phtwme_staleltes(varargin);
-% phtwme_staleltes( [...] );
+function phtwmesltes(varargin);
+% phtwmesltes( [...] );
 % ME Stale LTE Stale
 h = timeplot({'LTE_Stale'}, ...
       'ME Stale LTE Stale', ...

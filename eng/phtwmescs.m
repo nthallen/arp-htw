@@ -1,5 +1,5 @@
-function phtwme_stalecs(varargin);
-% phtwme_stalecs( [...] );
+function phtwmescs(varargin);
+% phtwmescs( [...] );
 % ME Stale Cover Stale
 h = timeplot({'Cover_Stale'}, ...
       'ME Stale Cover Stale', ...
