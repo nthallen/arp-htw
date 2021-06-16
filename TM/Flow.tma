@@ -151,11 +151,12 @@ State F_GD_Low_Pressure {
       depending on (Flow_PV_Scan) { Validate F_Zero_Init; }
 #     depending on (Flow_GD_PI) { Validate F_GD_PI_Init; }
       depending on (Flow_GD_PP) { Validate F_Zero_Init; }
-      depending on (Flow_Fill_Cell) { Validate F_Pump_Off; }
+      depending on (Flow_Fill_Cell) { Validate F_GD_Fill_Cell; }
       depending on (Flow_Shutdown) { Validate F_Pump_Off; }
 }
 
 State F_GD_PI_Init {
+  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
   { GP_sum = 0; }
     > Command Gas_Vlv_D On
   +1 Validate F_GD_PI;
@@ -196,8 +197,6 @@ State F_GD_PI NoLog {
 }
 
 State F_GD_Fill_Cell {
-  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
-
   > Command Exhaust_Vlv Off
   > Command Gas_Vlv_D On 
   > Air Flow SetPoint 10000 sccm
