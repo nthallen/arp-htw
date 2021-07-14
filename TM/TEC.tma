@@ -105,7 +105,7 @@ State TEC_LPV_Watch NoLog {
   }
   { if (LPV_Sink_T > 45) Validate TEC_LPV_OverTemp; }
   Hold until (LPV_T > LPV_Set_T + 5);
-  LPV_T_Actual = LPV_T;
+ +1 { LPV_T_Actual = LPV_T; }
  +30 Hold until (LPV_T <= LPV_T_Actual) or 15
  # Hold until (LPV_T < LPV_Set_T + 5) or 15
   else Validate TEC_LPV_OverTemp;
@@ -376,7 +376,7 @@ State TEC_DPV_Watch NoLog {
   }
   { if (DPV_Sink_T > 45) Validate TEC_DPV_OverTemp; }
   Hold until (DPV_T > DPV_Set_T + 5);
-  DPV_T_Actual = DPV_T;
+ +1 { DPV_T_Actual = DPV_T; }
  +30 Hold until (DPV_T <= DPV_T_Actual) or 15
 #  Hold until (DPV_T < DPV_Set_T + 5) or 15
   else Validate TEC_DPV_OverTemp;
