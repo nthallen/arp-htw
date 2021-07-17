@@ -17,6 +17,10 @@ T4 = E4.Thtweng_4;
 % PT.Tavg = (273.15 + 20).*T4./T4; % cell temperature (in K)
 % PT.ScanNum = E4.SSP_Num;
 % PT.QCLI_Wave = interp1(T1,E1.QCLI_Wave,T4,'nearest','extrap');
+%calibration of cell T 210504.1 using Fluke T probe accuracy +/- 0.05 oC
+E1.TS1_T=1.0269*E1.TS1_T-.9307;
+E1.TS2_T=1.0293*E1.TS2_T-.9699;
+E1.TS3_T=1.0266*E1.TS3_T-.8123;
 
 PT.TPT = T1;
 PT.CellP = E1.CellP; % cell pressure (in Torr)
