@@ -136,9 +136,9 @@ State Ops_Calibrate {
    +1 > Command Bub_In_Vlv_D On
    +1 > Command Bub_Out_Vlv_D On
 +1:00 > Bubbler Flow SetPoint 5 sccm
-      Hold until (SW_St == SWS_TIMEWARP) or 1:00;
+      Hold until (SW_St == SWS_TIMEWARP) or 2:00;
       > Bubbler Flow SetPoint 10 sccm
-      Hold until (SW_St == SWS_TIMEWARP) or 1:00;
+      Hold until (SW_St == SWS_TIMEWARP) or 2:00;
       Validate Ops_Sample;
 }
 
@@ -147,7 +147,7 @@ State Ops_Sample {
   Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
-  Hold until (SW_St == SWS_TIMEWARP) or 30:00;
+  Hold until (SW_St == SWS_TIMEWARP) or 55:00;
   Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
