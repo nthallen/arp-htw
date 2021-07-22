@@ -42,6 +42,11 @@ State Record {
         depending on (OFF_GROUND) { Validate Shutdown; }
 }
 
+State Pre_Shutdown {
+        depending on (ON_GROUND) { Validate Shutdown; }
+        depending on (AI_Fail)   { Validate Shutdown; }
+}
+
 # SHUTDOWN
 State Shutdown {
       Hold until valid (Ops_Is_Shutdown) or 5:00;
@@ -129,6 +134,7 @@ State Ops_Start {
 
 State Ops_Calibrate {
       Depending on (Shutdown) { Validate Ops_Shutdown; }
+      Depending on (Pre_Shutdown) { Validate Ops_Pre_Shutdown; }
       Depending on (Gas_Pressure_Low) { Validate Ops_Sample; }
       Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
       Validate Flow_GD_PI;
@@ -144,6 +150,7 @@ State Ops_Calibrate {
 
 State Ops_Sample {
   Depending on (Shutdown) { Validate Ops_Shutdown; }
+  Depending on (Pre_Shutdown) { Validate Ops_Pre_Shutdown; }
   Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
@@ -151,13 +158,17 @@ State Ops_Sample {
   Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
-State Ops_Shutdown {
+State Ops_Pre_Shutdown {
      Validate Flow_Zero;
      Hold until valid (F_Zero) or 2:00;
  +10 Validate Flow_GD_PI;
      Hold until valid (F_GD_PI) or 10;
      Validate QCL_SelectRingandRun;
  +30 Validate QCL_Stop;
+     Validate Ops_Shutdown;
+}
+
+State Ops_Shutdown {
      > Set Cell Pressure Setpoint 700
      Validate Flow_Fill_Cell;
      Hold until valid (F_Shutdown) or 2:00;
