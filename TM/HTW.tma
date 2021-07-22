@@ -39,7 +39,7 @@ State Record {
         depending on (AI_Fail)   { Validate Shutdown; }
         "In Record";
         Hold until valid (IN_AIR);
-        depending on (OFF_GROUND) { Validate Shutdown; }
+        depending on (OFF_GROUND) { Validate Pre_Shutdown; }
 }
 
 State Pre_Shutdown {
@@ -128,7 +128,7 @@ State Ops_Start {
   +10 Validate Flow_GD_PI;
       Hold until valid (F_GD_PI);
    +5 Validate QCL_SelectRingandRun;
-  +30 Validate QCL_SelectICOSandRun;
+  +60 Validate QCL_SelectICOSandRun;
       Validate Ops_Calibrate;
 }
 
@@ -160,16 +160,16 @@ State Ops_Sample {
 
 State Ops_Pre_Shutdown {
      Validate Flow_Zero;
-     Hold until valid (F_Zero) or 2:00;
+     Hold until valid (F_Zero) or 1:00;
  +10 Validate Flow_GD_PI;
      Hold until valid (F_GD_PI) or 10;
      Validate QCL_SelectRingandRun;
- +30 Validate QCL_Stop;
+ +60 Validate QCL_Stop;
      Validate Ops_Shutdown;
 }
 
 State Ops_Shutdown {
-     > Set Cell Pressure Setpoint 700
+     > Set Cell Pressure Setpoint 730
      Validate Flow_Fill_Cell;
      Hold until valid (F_Shutdown) or 2:00;
      Validate Ops_Is_Shutdown;
