@@ -202,7 +202,7 @@ State F_GD_Fill_Cell {
   > Air Flow SetPoint 10000 sccm
   Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 200 ) or 30;
   > Air Flow SetPoint 5000 sccm
-  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 100 ) or 30;
+  Hold Until ( convert(Cel2P) > convert(Cell_SetP) - 50 ) or 30;
   > Air Flow SetPoint 1000 sccm
   Hold Until ( convert(Cel2P) > convert(Cell_SetP) ) or 30;
   > Air Flow SetPoint 0 sccm
@@ -211,7 +211,7 @@ State F_GD_Fill_Cell {
 }
 
 State F_GD_Pump_Purge {
-        depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
+      #  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
         depending on (Flow_Idle) { Validate F_GD_Close; }
         depending on (Flow_Zero) { Validate F_GD_Close; }
         depending on (Flow_PV_PI) { Validate F_GD_Close; }

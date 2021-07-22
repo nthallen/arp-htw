@@ -141,9 +141,9 @@ State Ops_Calibrate {
       Hold until valid (F_GD_PI);
    +1 > Command Bub_In_Vlv_D On
    +1 > Command Bub_Out_Vlv_D On
-+1:00 > Bubbler Flow SetPoint 5 sccm
++1:00 > Bubbler Flow SetPoint 10 sccm
       Hold until (SW_St == SWS_TIMEWARP) or 2:00;
-      > Bubbler Flow SetPoint 10 sccm
+      > Bubbler Flow SetPoint 5 sccm
       Hold until (SW_St == SWS_TIMEWARP) or 2:00;
       Validate Ops_Sample;
 }
@@ -379,7 +379,7 @@ State QCL_SelectICOSandRun {
       Hold until valid (QCLI_Idle) or 2
       else Validate QCLI_Stop;
       Hold until valid (QCLI_Idle);
-   +1 > Laser TEC Setpoint 7.6 C
+   +1 > Laser TEC Setpoint 5.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
    +2 > Select QCLI Waveform JPL53_400Hz
@@ -393,7 +393,7 @@ State QCL_SelectRingandRun {
       Hold until valid (QCLI_Idle) or 2
       else Validate QCLI_Stop;
       Hold until valid (QCLI_Idle);
-   +1 > Laser TEC Setpoint 7.6 C
+   +1 > Laser TEC Setpoint 5.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
    +2 > Select QCLI Waveform RingRamp

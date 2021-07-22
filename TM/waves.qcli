@@ -29,14 +29,14 @@ ICOS Waveform JPL53_800Hz {
   SampleRate = 100 MHz/100;
   Ncoadd = 645;
   Tz = 5%;
-  Ramp from 425 mA to 550 mA in 1.25 msec;
+  Ramp from 455 mA to 580 mA in 1.25 msec;
 }
 
 ICOS Waveform JPL53_400Hz {
   SampleRate = 100 MHz/200;
   Ncoadd = 429;
   Tz = 5%;
-  Ramp from 425 mA to 550 mA in 2 msec;
+  Ramp from 400 mA to 525 mA in 2 msec;
 }
 
 ICOS Waveform JPL53_401Hz {
