@@ -31,6 +31,10 @@ State TEC_LTE_Init {
 # We could also monitor LTE_Stale, which would indicate
 # that the device is not responding.
 
+%{
+ double LTE_T_Actual;
+%}
+
 State TEC_LTE_Watch NoLog {
   { if (LTE_DevStatus != 2) {
       msg(2, "LTE TEC Unexpectedly disabled: Status %d: %s",
@@ -39,7 +43,8 @@ State TEC_LTE_Watch NoLog {
     }
   }
   Hold until (LTE_T > LTE_Set_T + 5);
-  Hold until (LTE_T < LTE_Set_T + 5) or 15
+ +1 { LTE_T_Actual = LTE_T; }
+ +30 Hold until (LTE_T <= LTE_T_Actual) or 15
   else Validate TEC_LTE_OverTemp;
   Validate TEC_LTE_Watch;
 }
@@ -197,8 +202,8 @@ Partition
 
 State TEC_Cover_Init {
 #    Hold until (Cover_Sink_T < 30);
-  +1 > Cover TEC Enable
-  +5 Validate TEC_Cover_Watch;
+# +1 > Cover TEC Enable
+# +5 Validate TEC_Cover_Watch;
 }
 
 # Cover_DevStatus values are defined in ME.tmc

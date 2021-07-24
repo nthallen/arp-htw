@@ -123,8 +123,9 @@ State Ops_Start {
       Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
       Validate Flow_Zero;
       Hold until valid (F_Zero);
-      Hold until (convert(LTE_T) <= 29);
+      Hold until (LTE_T <= 29);
       Validate TEC_LTE_Init;
+      Hold until (LTE_T <= LTE_Set_T + 0.1);
   +10 Validate Flow_GD_PI;
       Hold until valid (F_GD_PI);
    +5 Validate QCL_SelectRingandRun;

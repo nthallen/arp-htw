@@ -245,7 +245,7 @@ State F_GD_Pump_Purge {
   /* double P_set; */
 
   #define US_CAST(x) ((unsigned short)(x))
-  #define MAX_PINCH_STEPS 4000
+  #define MAX_PINCH_STEPS 2500
   #include <math.h> /* for fabs */
 %}
 
