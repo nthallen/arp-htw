@@ -3,9 +3,29 @@
   #include "tmctime.h"
 
   int status_stale = -1;
+  double h2o_mr = -999999.9;
+  double dD = -999999.9;
   UDPbcast UDP("10.9.1.255", "5100"); // ER-2 LAN
   // UDPbcast UDP("10.245.83.127", "5100"); // Link LAN
   // UDPbcast UDP("192.168.237.255", "5100"); // VMware private LAN
+  char h2o_mr_text[15];
+  char dD_text[15];
+  void mr_format(char *obuf, int obufsize, double val, int is_nan) {
+    if (is_nan) {
+      obuf[0] = '\0';
+    } else {
+      int rv = snprintf(obuf, obufsize, "%.2lf", val);
+      if (rv >= obufsize) {
+        if (!mr_overflow) {
+          nl_error(2,
+            "mr_format text overflow: %.2lf required %d chars",
+            val, rv);
+          mr_overflow = true;
+        }
+        obuf[0] = '\0';
+      }
+    }
+  }
 %}
 
 /*
@@ -23,9 +43,23 @@ depending on (h2o_lya_ppm) {
  */
 depending on (1 Hz) {
   int status;
-  double h2o_mr;
-  status = 1;
-  h2o_mr = 0.;
-  UDP.Broadcast("WI,%s,%d,%d,%.2lf\r\n", UDP.ISO8601(dtime()), status, SSP_Num, status_stale, h2o_mr);
+  status = 3;
+  mr_format(h2o_mr_text, 15, h2o_mr_tx, 1);
+  mr_format(dD_text, 15, dD_tx, 1);
+  UDP.Broadcast(
+    "WI,%s,%d,"
+    "%d,%s,%s,"
+    "%.1f,%.1f,%.1f,%.1f,"
+    "%.3f,%.3f,"
+    "%.1lf,%.1lf,%.1lf,"
+    "%.1lf"
+    "\r\n",
+    UDP.ISO8601(dtime()), status,
+    SSP_Num, h2o_mr_text, dD_text,
+    LTE_T, LPV_T, DPV_T, BubC_T,
+    BubF_Set, BubF_Flow,
+    convert(Cel2P), convert(Mains_PMotT), convert(Mains_PumpT),
+    convert(GasHP)
+  );
   if (status_stale >= 0) ++status_stale;
 }
