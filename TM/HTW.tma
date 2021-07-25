@@ -481,15 +481,15 @@ Partition
   int pump_OT_simulated = 0;
 %}
 State Pump_Watch NoLog {
-  { if ( convert(PumpT) > 75 || convert(PMotT) > 75 ) {
+  { if ( convert(Mains_PumpT) > 75 || convert(Mains_PMotT) > 75 ) {
       msg(2, "Pump over temp: PumpT %.1lf C PMotT %.1lf C",
-            convert(PumpT), convert(PMotT));
+            convert(Mains_PumpT), convert(Mains_PMotT));
       Validate Pump_Over_Temp;
     }
   }
   { if (SW_St == SWS_PUMP_OVER_TEMP) {
       msg(0, "Pump over temp drill: PumpT %.1lf C PMotT %.1lf C",
-            convert(PumpT), convert(PMotT));
+            convert(Mains_PumpT), convert(Mains_PMotT));
       pump_OT_simulated = 1;
       Validate Pump_Over_Temp;
     }
@@ -498,8 +498,8 @@ State Pump_Watch NoLog {
 
 State Pump_Over_Temp NoLog {
   { if (SW_St == SWS_PUMP_OT_CLEAR) pump_OT_simulated = 0; }
-  Hold until ( convert(PumpT) < 60 && convert(PMotT) < 60 && !pump_OT_simulated);
-  Hold until ( (convert(PumpT) > 75 || convert(PMotT) > 75) && !pump_OT_simulated) or 15
+  Hold until ( convert(Mains_PumpT) < 60 && convert(Mains_PMotT) < 60 && !pump_OT_simulated);
+  Hold until ( (convert(Mains_PumpT) > 75 || convert(Mains_PMotT) > 75) && !pump_OT_simulated) or 15
   else Validate Pump_Over_Temp;
   Validate Pump_Watch;
 }
