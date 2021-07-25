@@ -6,4 +6,19 @@
   Update TEC_LPV algo
 1.2.3: 6/16/2021:
   Collect Meerstetter power data
+1.3.0: 7/25/2021
+  TM cleanup.
+  New channels:
+    DetCT Detector control temp (in volts). Should be  2.048V
+    DTECI Detector TEC Current (in volts). Maybe 0.5V represents 2A
+  Renames:
+    SGs1T => Rov6T
+    SGs2T => Rov7T
+    Cel1T => Rov8T
+    Cel2T => Rov9T
+  Deleted Channels:
+    PMotT, PumpT (obsolete, replaced by Mains_PMotT and Mains_PumpT
+  Swapped Channels:
+    Mains_PMotT and Mains_PumpT were swapped when wiring based on
+    cable lengths. Only now getting corrected.
 

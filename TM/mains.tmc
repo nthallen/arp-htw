@@ -57,8 +57,8 @@ Group Mains1 (Mains_I2C_Status, Mains_ADC_Status, Mains_Ch0T,
     Mains_Ch1T = Mains_rvals[3];
     Mains_Ch2T = Mains_rvals[4];
     Mains_Ch3T = Mains_rvals[5];
-    Mains_PMotT = Mains_rvals[6];
-    Mains_PumpT = Mains_rvals[7];
+    Mains_PumpT = Mains_rvals[6];
+    Mains_PMotT = Mains_rvals[7];
     Mains_V80V = Mains_rvals[8];
     Mains_V80I = Mains_rvals[9];
     Mains_V28V = Mains_rvals[10];

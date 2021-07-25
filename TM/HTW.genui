@@ -51,6 +51,8 @@ ROWS 18
 1 11:DPV_PTRHS:11 DPV_PTRH Status %.0lf
 
 1 Det_T  DPV T
+1 DetCT  DPV CT
+1 DTECI  DPV Current
 # 1 DPVCT  DPV CT
 # 1 DPVTSt DPV CT
 
@@ -114,6 +116,10 @@ ROWS 18
 1 Rov3T TE Rovers 3
 1 Rov4T TE Rovers 4
 1 Rov5T TE Rovers 5
+1 Rov6T TE Rovers 6
+1 Rov7T TE Rovers 7
+1 Rov8T TE Rovers 8
+1 Rov9T TE Rovers 9
 1 Skn1T TE Skin 1
 1 Skn2T TE Skin 2
 1 Skn3T TE Skin 3
@@ -122,16 +128,12 @@ ROWS 18
 
 1 CellP  Cell P
 1 Cel2P  Cell P
-1 Cel1T  Cell T
-1 Cel2T  Cell T
-1 SGs1T  Cell T
-1 SGs2T  Cell T
 # 1 CelCT  Cell TS
 # 1 CelTSt Cell TS
 
-1 PMotT   Pump  T
-1 PumpT   Pump  T
-1 Scroll_Pump_DS:DS08:4 Pump Status
+#1 PMotT   Pump  T
+#1 PumpT   Pump  T
+#1 Scroll_Pump_DS:DS08:4 Pump Status
 
   1 Cmd0_I  Commands I 0
 # 1 Cmd1_I  Commands I 1

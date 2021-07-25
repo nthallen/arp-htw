@@ -130,8 +130,8 @@ TM 1 Hz AI_T30K Bub_T; Address Bub_T 0xCA6; /* AI03_5, J1CB.58, J20CB-17 Bubbler
 TM 1 Hz AI_T30K GD_1T; Address GD_1T 0xCC6; /* AI03_6, J1CB.61, J20CB-20 Gas Deck Temp 1 */
 TM 1 Hz AI_T30K GD_2T; Address GD_2T 0xCE6; /* AI03_7, J1CB.62, J20CB-22 Gas Deck Temp 2 */
 TM 1 Hz AI_T30K GD_3T; Address GD_3T 0xC08; /* AI04_0, J1CB.65, J20CB-24 Gas Deck Temp 3 */
-TM 1 Hz AI_T30K PumpT; Address PumpT 0xC28; /* AI04_1, J1CB.66, J18CB-3 Pump Temp */
-TM 1 Hz AI_T30K PMotT; Address PMotT 0xC48; /* AI04_2, J1CB.69, J18CB-5 Pump Motor Temp */
+/* TM 1 Hz AI_T30K PumpT; Address PumpT 0xC28; */ /* AI04_1, J1CB.66, J18CB-3 Pump Temp */
+/* TM 1 Hz AI_T30K PMotT; Address PMotT 0xC48; */ /* AI04_2, J1CB.69, J18CB-5 Pump Motor Temp */
 TM 1 Hz AI_X1 InlDP; Address InlDP 0xC68; /* AI04_3, J1CB.70, J126CB-1 Inlet Differential Pressure */
 TM 1 Hz AI_X1 PD__P; Address PD__P 0xC88; /* AI04_4, J1CB.73, J126CB-3 Pallet Duct Pressure */
 TM 1 Hz AI_X1 PD_DP; Address PD_DP 0xCA8; /* AI04_5, J1CB.74, J126CB-5 Pallet Duct Differential Pressure */
@@ -142,8 +142,8 @@ TM 1 Hz AI_T30K Inl_T; Address Inl_T 0xC2A; /* AI05_1, J1CB.82, J177CB-3 Inlet T
 TM 1 Hz AI_T30K Elb_T; Address Elb_T 0xC4A; /* AI05_2, J1CB.85, J177CB-1 Elbow Temp */
 TM 1 Hz AI_X1 PVPos; Address PVPos 0xC6A; /* AI05_3, J1CB.86, J126CB-13 Pinch Vlv Pot Position */
 TM 1 Hz AI_T30K SSP_T; Address SSP_T 0xC8A; /* AI05_4, J1CB.89, J345CB-11 SSP Bd Temp */
-/* TM 1 Hz AI_T30K QCLIT; Address QCLIT 0xCAA; */ /* AI05_5, J1CB.90, J346CB-3 QCLI Bd Temp */
-/* TM 1 Hz AI_T30K VtoIT; Address VtoIT 0xCCA; */ /* AI05_6, J1CB.93, J346CB-1 V to I Bd Temp */
+TM 1 Hz AI_X1 DetCT; Address DetCT 0xCAA; /* AI05_5, J1CB.90, J346CB-3 Was QCLI Bd Temp */
+TM 1 Hz AI_X1 DTECI; Address DTECI 0xCCA; /* AI05_6, J1CB.93, J346CB-1 Was V to I Bd Temp */
 TM 1 Hz AI_XP768 Cal1F; Address Cal1F 0xCEA; /* AI05_7, J1CB.94, J21CB-11 Calibration Bench Flow 1 (Main) */
 TM 1 Hz AI_XP768 Cal2F; Address Cal2F 0xC0C; /* AI06_0, J1CB.97, J21CB-13 Calibration Bench Flow 2 (Bubbler) */
 TM 1 Hz AI_XP768 Cal3F; Address Cal3F 0xC2C; /* AI06_1, J1CB.98, J21CB-15 Calibration Bench Flow 3 (Bubbler) */

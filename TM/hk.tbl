@@ -17,22 +17,32 @@ Diag_T {
   HBox { +-; Title: "Diagnostic Temps"; -+ };
   { "Las Mnt T:" (LH__T,6) C;
     "Det Mnt T:" (Det_T,6) C;
+    DetCT:       (DetCT,7) V;
+    DTECI:       (DTECI,7) V;
 #   SGs1T:       (SGs1T,6) C;
 #   SGs2T:       (SGs2T,6) C;
     PC__T:       (PC__T,6) C;
     PS__T:       (PS__T,6) C;
   };
 }
-Skin_Rvr {
+Skin {
+  HBox { +-; Title: "Skin Temps"; -+ };
+  "1:" (Skn1T,6) C;
+  "2:" (Skn2T,6) C;
+  "3:" (Skn3T,6) C;
+  "4:" (Skn4T,6) C;
+  "5:" (Skn5T,6) C;
+# "G:" (SGs1T,6)  (SGs2T,6) C;
+# "C:" (Cel1T,6)  (Cel2T,6) C;
+}
+
+Rovers {
   HBox { +-; Title: "Rover Temps"; -+ };
-  ""   >Skin      >Rover;
-  "1:" (Skn1T,6)  (Rov1T,6) C;
-  "2:" (Skn2T,6)  (Rov2T,6) C;
-  "3:" (Skn3T,6)  (Rov3T,6) C;
-  "4:" (Skn4T,6)  (Rov4T,6) C;
-  "5:" (Skn5T,6)  (Rov5T,6) C;
-  "G:" (SGs1T,6)  (SGs2T,6) C;
-  "C:" (Cel1T,6)  (Cel2T,6) C;
+  "1:" (Rov1T,6) C "6:" (Rov6T,6) C;
+  "2:" (Rov2T,6) C "7:" (Rov7T,6) C;
+  "3:" (Rov3T,6) C "8:" (Rov8T,6) C;
+  "4:" (Rov4T,6) C "9:" (Rov9T,6) C;
+  "5:" (Rov5T,6) C;
 }
 
 Pump {
@@ -97,7 +107,7 @@ SW {
 	}; |; {
 	  [Diag_T];
 	  VGlue 0+1;
-	  [Skin_Rvr]
+	  [Skin]
 	}
       };
     }; |+; {
@@ -105,7 +115,7 @@ SW {
       [MKS_hk];
       HBox { [VM]; |; [SW] };
       VGlue 0+1;
-      HBox { [Pump]; |; [TMbaseB] };
+      HBox { [Rovers]; |; [TMbaseB] };
     }; |+;
   };
   -;
