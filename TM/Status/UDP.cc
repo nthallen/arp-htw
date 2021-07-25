@@ -84,7 +84,7 @@ int UDPbcast::Broadcast(const char *fmt, ...) {
   va_list args;
   int msglen;
   va_start(args, fmt);
-  msglen = vsnprintf(buf, 80, fmt, args);
+  msglen = vsnprintf(buf, buflen, fmt, args);
   va_end(args);
   if (msglen >= buflen) {
     if (!ov_status) {

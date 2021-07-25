@@ -7,7 +7,7 @@
   double dD_tx = -999999.9;
   bool mr_overflow = false;
 
-  UDPbcast UDP("10.9.1.255", "5100"); // ER-2 LAN
+  UDPbcast UDP("10.9.1.255", "5100", 256); // ER-2 LAN
   // UDPbcast UDP("10.245.83.127", "5100"); // Link LAN
   // UDPbcast UDP("192.168.237.255", "5100"); // VMware private LAN
   char h2o_mr_text[15];
