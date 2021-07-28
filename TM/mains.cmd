@@ -16,6 +16,10 @@
   : Mains Pump Disable * { CAN->write_ack((1<<8)+0x20, 1); }
   : Mains Pump Stop * { CAN->write_ack((1<<8)+0x20, 2); }
   : Mains Pump Start * { CAN->write_ack((1<<8)+0x20, 5); }
+  : Mains Pump Speed 0 RPM * { CAN->write_ack((1<<8)+0x20, 2); }
+  : Mains Pump Speed 1000 RPM * { CAN->write_ack((1<<8)+0x20, 3); }
+  : Mains Pump Speed 1500 RPM * { CAN->write_ack((1<<8)+0x20, 4); }
+  : Mains Pump Speed 1250 RPM * { CAN->write_ack((1<<8)+0x20, 5); }
   : Mains &BMM_LED &BMM_Off_On * {
       CAN->write_ack((1<<8)+0x20, $2+$3);
     }
