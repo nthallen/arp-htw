@@ -159,6 +159,8 @@ ROWS 18
 1 Gas_Vlv_D_S:DS16:0 GasDeck Commands
 1 Bub_In_Vlv_DS:DS14:4 GasDeck Commands
 1 Bub_Out_Vlv_DS:DS14:5 GasDeck Commands
+1 Enc_Vlv_DS:DS09:0 GasDeck Commands
+1 Enc_Vlv_S:DS17:0 GasDeck Commands
 
 1 PC__T   PDACS T
 1 PS__T   PDACS T

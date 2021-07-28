@@ -16,8 +16,9 @@
 #---------------------------------------------------------------
 Partition
 
-State Flow_Init {}        # Goal State: F_idle
+State Flow_Init {}        # Goal State: F_Idle
 State Flow_Idle {}        # Goal State: F_Idle
+State Flow_Cool {}        # Goal State: F_Cool
 State Flow_Zero {}        # Goal State: F_Zero
 State Flow_PV_PI {}       # Goal State: F_PV_PI
 State Flow_PV_Scan {}     # Goal State: F_PV_PI (after scan)
@@ -53,6 +54,7 @@ State F_Idle {
 # depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
 # depending on (Flow_Init) { Validate F_Idle; }
 # depending on (Flow_Idle) { Validate F_Idle; }
+  depending on (Flow_Cool) { Validate F_Cool; }
   depending on (Flow_Zero) { Validate F_Pump_On; }
   depending on (Flow_PV_PI) { Validate F_Pump_On; }
   depending on (Flow_PV_Scan) { Validate F_Pump_On; }
@@ -65,6 +67,7 @@ State F_Idle {
 State F_Zero {
 # depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
 # depending on (Flow_Init) { Validate F_Idle; }
+# depending on (Flow_Cool) { Validate F_Idle; }
   depending on (Flow_Idle) { Validate F_Pump_Off; }
 # depending on (Flow_Zero) { Validate F_Zero_Init; }
   depending on (Flow_PV_PI) { Validate F_PV_PI_Init; }
@@ -82,6 +85,36 @@ State F_Zero_Init {
   Hold until (convert(CellP) < 1.0) or 30;
   +5 Validate F_Zero;
 }
+
+State F_Cool {
+# depending on (Pump_Over_Temp) { Validate F_Pump_Over_Temp; }
+# depending on (Flow_Init) { Validate F_Idle; }
+  depending on (Flow_Idle) { Validate F_Cool_Exit; } # on pump over temp
+# depending on (Flow_Cool) { Validate F_Cool; }
+  depending on (Flow_Zero) { Validate F_Cool_Exit; }
+  depending on (Flow_PV_PI) { Validate F_Cool_Exit; }
+  depending on (Flow_PV_Scan) { Validate F_Cool_Exit; }
+  depending on (Flow_GD_PI) { Validate F_Cool_Exit; }
+  depending on (Flow_GD_PP) { Validate F_Cool_Exit; }
+  depending on (Flow_Fill_Cell) { Validate F_Cool_Exit; }
+  depending on (Flow_Shutdown) { Validate F_Cool_Exit; }
+        > Command Enclosure_Vlv On
+     +1 > Mains Pump Start
+  +5:00 > Mains Pump Stop
+    +10 > Mains Pump Disable
+     +1 > Mains Pump Enable
+        Validate F_Cool;
+}
+
+State F_Cool_Exit {
+        > Command Enclosure_Vlv Off
+        > Mains Pump Stop
+    +10 > Mains Pump Disable
+     +1 > Mains Pump Enable
+     +1 depending  on (Flow_Idle) { Validate F_Idle; }
+     +1 Validate F_Pump_On;
+}
+
 
 # F_Pump_On should only be reachable from F_Idle
 State F_Pump_On {
