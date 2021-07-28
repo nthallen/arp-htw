@@ -1,5 +1,5 @@
- 1 Mains_I2C_Status Mains Status %.0lf
- 1 Mains_ADC_Status Mains Status %.0lf
+ 1 Mains_I2C_Status Mains StatusV %.0lf
+ 1 Mains_ADC_Status Mains StatusV %.0lf
  1 Mains_Ch0T Mains Temps
  1 Mains_Ch1T Mains Temps
  1 Mains_Ch2T Mains Temps
