@@ -102,10 +102,10 @@ TM 1 Hz AI_T30K LH__T; Address LH__T 0xC20; /* AI00_1, J1CB.2, J60CB-10 2.7 lase
 /* TM 1 Hz AI_X1 LPVCT; Address LPVCT 0xC40; */ /* AI00_2, J1CB.5, J59CB-3 Laser Pressure Vessel Control Temp */
 TM 1 Hz AI_T30K Det_T; Address Det_T 0xC60; /* AI00_3, J1CB.6, J25CB-8 Detector Temp (on Mount) */
 /* TM 1 Hz AI_X1 DPVCT; Address DPVCT 0xC80; */ /* AI00_4, J1CB.9, J59CB-15 Detector Pressure Vessel Control Temp */
-TM 1 Hz AI_T30K SGs1T; Address SGs1T 0xCA0; /* AI00_5, J1CB.10, J40CB-22 Sample Gas Temp 1 */
-TM 1 Hz AI_T30K SGs2T; Address SGs2T 0xCC0; /* AI00_6, J1CB.13, J40CB-24 Sample Gas Temp 2 */
-TM 1 Hz AI_T30K Cel1T; Address Cel1T 0xCE0; /* AI00_7, J1CB.14, J40CB-26 Cell Temp 1 */
-TM 1 Hz AI_T30K Cel2T; Address Cel2T 0xC02; /* AI01_0, J1CB.17, J40CB-28 Cell Temp 2 */
+TM 1 Hz AI_T30K Rov6T; Address Rov6T 0xCA0; /* AI00_5, J1CB.10, J40CB-22 Sample Gas Temp 1 */
+TM 1 Hz AI_T30K Rov7T; Address Rov7T 0xCC0; /* AI00_6, J1CB.13, J40CB-24 Sample Gas Temp 2 */
+TM 1 Hz AI_T30K Rov8T; Address Rov8T 0xCE0; /* AI00_7, J1CB.14, J40CB-26 Cell Temp 1 */
+TM 1 Hz AI_T30K Rov9T; Address Rov9T 0xC02; /* AI01_0, J1CB.17, J40CB-28 Cell Temp 2 */
 TM 1 Hz AI_T30K Skn1T; Address Skn1T 0xC22; /* AI01_1, J1CB.18, J40CB-11 Skin Temp 1 */
 TM 1 Hz AI_T30K Skn2T; Address Skn2T 0xC42; /* AI01_2, J1CB.21, J40CB-13 Skin Temp 2 */
 TM 1 Hz AI_T30K Skn3T; Address Skn3T 0xC62; /* AI01_3, J1CB.22, J40CB-15 Skin Temp 3 */

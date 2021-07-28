@@ -10,8 +10,8 @@ Idx {
 
 Cell {
   HBox { +-; Title: Cell; -+ };
-  T1:  (Cel1T,6) C;
-  T2:  (Cel2T,6) C;
+# T1:  (Cel1T,6) C;
+# T2:  (Cel2T,6) C;
   HP:  (Cel2P,5) Torr;
   LP:  (CellP,5) Torr;
   Set: (Cell_SetP,5) Torr;
