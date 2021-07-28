@@ -21,6 +21,7 @@ Valves {
   +-+;
   Exhaust: (Exh_Vlv_DS,3)      (Exh_Vlv_S,6)      (Cmd4_I,7) "I/V";
   Gas:     (Gas_Vlv_DS,1)      (Gas_Vlv_S,3)      (Cmd0_I,7) "I/V";
+  Enc:     (Enc_Vlv_DS,3)      (Enc_Vlv_S,6)      (Cmd8_I,7) "I/V";
 }
 
 GD {
@@ -102,13 +103,16 @@ SW {
       HBox { [Cell]; |; [MKS_flows] };
       +-+;
       HBox { " "; [Diagram]; " " };
-      HBox { [GD]; |+; [GDT] };
+#     HBox { [GD]; |+; [GDT] };
       +-+;
       >[SW]<;
     };
     |+;
-    [Mains];
-    |+;
+    {
+      [Mains];
+      [GD];
+      [GDT];
+    }; |+;
   };
   -;
 }

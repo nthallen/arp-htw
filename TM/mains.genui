@@ -9,4 +9,9 @@
  1 Mains_V80V Mains Volts
  1 Mains_V80I Mains Amps
  1 Mains_V28V Mains Volts
- 1 Mains_Cmd_Status Mains Status %.0lf
+ 1 PumpEn:Mains_Cmd_Status:0 Mains Status %.0lf
+ 1 PumpSA:Mains_Cmd_Status:1 Mains Status %.0lf
+ 1 PumpSB:Mains_Cmd_Status:2 Mains Status %.0lf
+ 1 MainsLED1:Mains_Cmd_Status:3 Mains Status %.0lf
+ 1 MainsLED2:Mains_Cmd_Status:4 Mains Status %.0lf
+ 1 MainsLED3:Mains_Cmd_Status:5 Mains Status %.0lf

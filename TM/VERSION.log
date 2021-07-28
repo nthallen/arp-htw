@@ -21,4 +21,6 @@
   Swapped Channels:
     Mains_PMotT and Mains_PumpT were swapped when wiring based on
     cable lengths. Only now getting corrected.
-
+1.3.1: 7/28/2021
+  Enclosure Air Valve and  Cmd 8
+  DS09, DS17, Cmd8_I

@@ -29,8 +29,8 @@
   SPARE, 1, 0x2000; /* 13: Cmd_6_Off: DPV_HC */
   SPARE, 1, 0x4000; /* 14: Cmd_7_On: SpCmd1 */
   SPARE, 1, 0x8000; /* 15: Cmd_7_Off: SpCmd1 */
-  SPARE, 2, 0x0001; /* 16: Cmd_8_On: SpCmd2 */
-  SPARE, 2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 */
+  STRB,  2, 0x0001; /* 16: Cmd_8_On: SpCmd2: Enclosure Air */
+  STRB,  2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 Enclosure Air */
   SPARE, 2, 0x0004; /* 18: Cmd_9_On: L1Cmd */
   SPARE, 2, 0x0008; /* 19: Cmd_9_Off: L1Cmd */
   SPARE, 2, 0x0010; /* 20: Cmd_10_On: TE_HC2 */

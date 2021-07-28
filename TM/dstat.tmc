@@ -19,18 +19,22 @@ TM typedef unsigned char OX_t { text "%1d" OX_text[]; }
 /* TM typedef unsigned char OC_t { text "%2d" OC_text[]; } */
 
 OX_t Gas_Vlv_DS; Invalidate Gas_Vlv_DS;
-  { Gas_Vlv_DS = (DS08>>0x0)&1; Validate Gas_Vlv_DS; }
+  { Gas_Vlv_DS = (DS08>>0)&1; Validate Gas_Vlv_DS; }
 On_Off_t Gas_Vlv_S; Invalidate Gas_Vlv_S;
-  { Gas_Vlv_S = (DS16>>0x0)&1; Validate Gas_Vlv_S; }
+  { Gas_Vlv_S = (DS16>>0)&1; Validate Gas_Vlv_S; }
 On_Off_t Exh_Vlv_DS; Invalidate Exh_Vlv_DS;
-  { Exh_Vlv_DS = (DS08>>0x4)&1; Validate Exh_Vlv_DS; }
+  { Exh_Vlv_DS = (DS08>>4)&1; Validate Exh_Vlv_DS; }
 Open_Closed_t Exh_Vlv_S; Invalidate Exh_Vlv_S;
-  { Exh_Vlv_S = (DS16>>0x4)&1; Validate Exh_Vlv_S; }
+  { Exh_Vlv_S = (DS16>>4)&1; Validate Exh_Vlv_S; }
 OX_t Bub_In_Vlv_DS; Invalidate Bub_In_Vlv_DS;
-  { Bub_In_Vlv_DS = (DS14>>0x4)&1; Validate Bub_In_Vlv_DS; }
+  { Bub_In_Vlv_DS = (DS14>>4)&1; Validate Bub_In_Vlv_DS; }
 OX_t Bub_Out_Vlv_DS; Invalidate Bub_Out_Vlv_DS;
-  { Bub_Out_Vlv_DS = (DS14>>0x5)&1; Validate Bub_Out_Vlv_DS; }
+  { Bub_Out_Vlv_DS = (DS14>>5)&1; Validate Bub_Out_Vlv_DS; }
 On_Off_t Scroll_Pump_DS; Invalidate Scroll_Pump_DS;
-  { Scroll_Pump_DS = (DS16>>0x4)&1; Validate Scroll_Pump_DS; }
+  { Scroll_Pump_DS = (DS16>>4)&1; Validate Scroll_Pump_DS; }
 On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
-  { QCLI_Reset_DS = (DS14>>0x2)&1; Validate QCLI_Reset_DS; }
+  { QCLI_Reset_DS = (DS14>>2)&1; Validate QCLI_Reset_DS; }
+On_Off_t Enc_Vlv_DS; Invalidate Enc_Vlv_DS;
+  { Enc_Vlv_DS = (DS09>>0)&1; Validate Enc_Vlv_DS; }
+Open_Closed_t Enc_Vlv_S; Invalidate Enc_Vlv_S;
+  { Enc_Vlv_S = (DS17>>0)&1; Validate Enc_Vlv_S; }

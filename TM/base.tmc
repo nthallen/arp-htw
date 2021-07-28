@@ -182,7 +182,7 @@ TM 1 Hz AI_X1 Cmd4_I; Address Cmd4_I 0xD18; /* AI15_0_4 Power Board Command Curr
 /* TM 1 Hz AI_X1 Cmd5_I; Address Cmd5_I 0xD1A; */ /* AI15_0_5 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd6_I; Address Cmd6_I 0xD1C; */ /* AI15_0_6 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd7_I; Address Cmd7_I 0xD1E; */ /* AI15_0_7 Power Board Command Current */
-/* TM 1 Hz AI_X1 Cmd8_I; Address Cmd8_I 0xD30; */ /* AI15_2_0 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd8_I; Address Cmd8_I 0xD30; /* AI15_2_0 Power Board Command Current Cmd8_I */
 /* TM 1 Hz AI_X1 Cmd9_I; Address Cmd9_I 0xD32; */ /* AI15_2_1 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd10_I; Address Cmd10_I 0xD34; */ /* AI15_2_2 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd11_I; Address Cmd11_I 0xD36; */ /* AI15_2_3 Power Board Command Current */
@@ -219,11 +219,13 @@ TM 1 Hz AIStat_i AIStat; Address AIStat 0xE00;
 
 /* Status */
 TM 1 Hz DStat DS08; Address DS08 0x82A;
+TM 1 Hz DStat DS09; Address DS09 0x833;
 /* TM 1 Hz DStat DS10; Address DS10 0x82C; */
 /* TM 1 Hz DStat DS13; Address DS13 0x851; */
 TM 1 Hz DStat DS14; Address DS14 0x84A;
 TM 1 Hz DStat DS16; Address DS16 0x84C;
   Collect DS16 = sbrba(DS16.address) ^ 0x11;
+TM 1 Hz DStat DS17; Address DS17 0x845;
 /* TM 1 Hz DStat DS18; Address DS18 0x868; */
 
 /* TM 1 Hz DSWord DS822; Address DS822 0x822; */
