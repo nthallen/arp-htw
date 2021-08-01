@@ -124,7 +124,7 @@ State Ops_Start {
    +1 > Set Cell Pressure SetPoint 140.0
         Validate Flow_PV_PI;
         Hold until (SW_St == SWS_TIMEWARP) or 20:00;
-     +2 Hold until (convert(DPV_T) < 25 || SW_St == SWS_TIMEWARP) or 45:00;
+     +2 Hold until (convert(DPV_T) < 25 || SW_St == SWS_TIMEWARP) or 70:00;
         Validate TEC_DPV_Init;
         Validate TEC_LPV_Init;
         Validate Flow_Zero;

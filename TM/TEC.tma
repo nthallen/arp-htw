@@ -72,7 +72,7 @@ Partition
 State TEC_LPV_Idle {}
 
 State TEC_LPV_Init {
-#    Hold until (LPV_Sink_T < 30);
+     Hold until (LPV_Sink_T < 30);
   +1 > LPV TEC Enable
   +5 Validate TEC_LPV_Watch;
 }
@@ -275,7 +275,7 @@ Partition
 State TEC_Cell_Idle {}
 
 State TEC_Cell_Init {
-#    Hold until (Cell_Sink_T < 30);
+     Hold until (Cell_Sink_T < 30);
   +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
@@ -347,7 +347,7 @@ Partition
 State TEC_DPV_Idle {}
 
 State TEC_DPV_Init {
-#    Hold until (DPV_Sink_T < 30);
+     Hold until (DPV_T < 25);
   +1 > DPV TEC Enable
   +5 Validate TEC_DPV_Watch;
 }
