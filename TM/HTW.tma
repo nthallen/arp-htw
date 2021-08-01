@@ -28,7 +28,7 @@ State Init {
 
 # WAIT 
 State Standby {
-#       depending on (OFF_GROUND) { Validate Record; }
+        depending on (OFF_GROUND) { Validate Record; }
         depending on (IN_AIR) { Validate Record; }
         depending on (AI_Fail) { Validate Shutdown; }
 }
@@ -139,7 +139,7 @@ State Ops_Start {
         Hold until valid (F_GD_PI);
      +5 Validate QCL_SelectRingandRun;
     +60 Validate QCL_SelectICOSandRun;
-        Validate Ops_Calibrate;
+        Validate Ops_Sample;
 }
 
 State Ops_Calibrate {
@@ -165,7 +165,7 @@ State Ops_Sample {
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
   Hold until (SW_St == SWS_TIMEWARP) or 55:00;
-  Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
+# Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
 State Ops_Pre_Shutdown {
