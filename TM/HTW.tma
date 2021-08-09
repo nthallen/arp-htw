@@ -28,7 +28,7 @@ State Init {
 
 # WAIT 
 State Standby {
-        depending on (OFF_GROUND) { Validate Record; }
+#       depending on (OFF_GROUND) { Validate Record; }
         depending on (IN_AIR) { Validate Record; }
         depending on (AI_Fail) { Validate Shutdown; }
 }
@@ -124,7 +124,7 @@ State Ops_Start {
    +1 > Set Cell Pressure SetPoint 140.0
         Validate Flow_PV_PI;
         Hold until (SW_St == SWS_TIMEWARP) or 20:00;
-     +2 Hold until (convert(DPV_T) < 25 || SW_St == SWS_TIMEWARP) or 70:00;
+     +2 Hold until (convert(DPV_T) < 25 || SW_St == SWS_TIMEWARP) or 2:00:00;
         Validate TEC_DPV_Init;
         Validate TEC_LPV_Init;
         Validate Flow_Zero;
@@ -138,8 +138,9 @@ State Ops_Start {
     +10 Validate Flow_GD_PI;
         Hold until valid (F_GD_PI);
      +5 Validate QCL_SelectRingandRun;
-    +60 Validate QCL_SelectICOSandRun;
-        Validate Ops_Sample;
+        Hold until (SW_St == SWS_TIMEWARP) or 60;
+        Validate QCL_SelectICOSandRun;
+        Validate Ops_Calibrate;
 }
 
 State Ops_Calibrate {
@@ -164,8 +165,8 @@ State Ops_Sample {
   Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
-  Hold until (SW_St == SWS_TIMEWARP) or 55:00;
-# Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
+  Hold until (SW_St == SWS_TIMEWARP) or 1:55:00;
+  Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
 State Ops_Pre_Shutdown {
