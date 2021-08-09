@@ -176,7 +176,8 @@ State Ops_Pre_Shutdown {
  +10 Validate Flow_GD_PI;
      Hold until valid (F_GD_PI) or 10;
      Validate QCL_SelectRingandRun;
- +60 Validate QCL_Stop;
+     Hold until (SW_St == SWS_TIMEWARP) or 60;
+     Validate QCL_Stop;
      Validate Ops_Shutdown;
 }
 
