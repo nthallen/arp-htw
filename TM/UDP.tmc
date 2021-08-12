@@ -60,8 +60,10 @@ depending on (1 Hz) {
     SSP_Num, h2o_mr_text, dD_text,
     LTE_T, LPV_T, DPV_T, BubC_T,
     BubF_Set, BubF_Flow,
-    convert(Cel2P), convert(Mains_PMotT), convert(Mains_PumpT),
-    convert(GasHP)
+    convert(Cel2P),
+    convert(DPV_Sink_T), /* convert(Mains_PMotT), */
+    convert(Mains_PumpT),
+    convert(Rov8T) /* convert(GasHP) */
   );
   if (status_stale >= 0) ++status_stale;
 }
