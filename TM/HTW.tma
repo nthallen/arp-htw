@@ -617,23 +617,23 @@ State Calibrate_Start {
   Hold Until ( convert(CellP) == convert(Cell_SetP) ) or 30;
   +1 > Command Bub_In_Vlv_D On
   +1 > Command Bub_Out_Vlv_D On
-  +4:00 > Bubbler Flow SetPoint 5 sccm
-  +4:00 > Bubbler Flow SetPoint 10 sccm
-  +4:00 > Bubbler Flow SetPoint 15 sccm
-  +4:00 > Bubbler Flow SetPoint 20 sccm
-  +4:00 > Bubbler Flow SetPoint 30 sccm
-  +4:00 > Bubbler Flow SetPoint 40 sccm
-  +4:00 > Bubbler Flow SetPoint 50 sccm
-  +4:00 > Bubbler Flow SetPoint 40 sccm
-  +4:00 > Bubbler Flow SetPoint 30 sccm
-  +4:00 > Bubbler Flow SetPoint 20 sccm
-  +4:00 > Bubbler Flow SetPoint 15 sccm
-  +4:00 > Bubbler Flow SetPoint 10 sccm
-  +4:00 > Bubbler Flow SetPoint 5 sccm
-  +4:00 > Bubbler Flow SetPoint 0 sccm
-  +4:00 > Bubbler Flow SetPoint 10 sccm
-  +25:00 > Bubbler Flow SetPoint 0 sccm
-  +1    Validate Calibrate_Stop;
+  +5:00 > Bubbler Flow SetPoint 40 sccm
+  +5:00 > Bubbler Flow SetPoint 20 sccm
+  +5:00 > Bubbler Flow SetPoint 10 sccm
+  +5:00 > Bubbler Flow SetPoint 8 sccm
+  +5:00 > Bubbler Flow SetPoint 6 sccm
+  +5:00 > Bubbler Flow SetPoint 4 sccm
+  +5:00 > Bubbler Flow SetPoint 2 sccm
+  +5:00 > Bubbler Flow SetPoint 1 sccm
+  +5:00 > Bubbler Flow SetPoint 2 sccm
+  +5:00 > Bubbler Flow SetPoint 4 sccm
+  +5:00 > Bubbler Flow SetPoint 6 sccm
+  +5:00 > Bubbler Flow SetPoint 8 sccm
+  +5:00 > Bubbler Flow SetPoint 10 sccm
+  +5:00 > Bubbler Flow SetPoint 20 sccm
+  +5:00 > Bubbler Flow SetPoint 40 sccm
+  +5:00 > Bubbler Flow SetPoint 0 sccm
+  +5:00    Validate Calibrate_Stop;
 }
 
 State Calibrate_Stop {
