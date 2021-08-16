@@ -347,7 +347,7 @@ Partition
 State TEC_DPV_Idle {}
 
 State TEC_DPV_Init {
-#    Hold until (DPV_T < 25);
+     Hold until (DPV_Sink_T < 25);
   +1 > DPV TEC Enable
   +5 Validate TEC_DPV_Watch;
 }
