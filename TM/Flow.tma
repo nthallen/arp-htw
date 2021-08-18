@@ -98,7 +98,7 @@ State F_Cool {
   depending on (Flow_GD_PP) { Validate F_Cool_Exit; }
   depending on (Flow_Fill_Cell) { Validate F_Cool_Exit; }
   depending on (Flow_Shutdown) { Validate F_Cool_Exit; }
-        > Command Enclosure_Vlv On
+#       > Command Enclosure_Vlv On
      +1 > Mains Pump Start
   +5:00 > Mains Pump Stop
     +10 > Mains Pump Disable
@@ -107,7 +107,7 @@ State F_Cool {
 }
 
 State F_Cool_Exit {
-        > Command Enclosure_Vlv Off
+#       > Command Enclosure_Vlv Off
         > Mains Pump Stop
     +10 > Mains Pump Disable
      +1 > Mains Pump Enable
