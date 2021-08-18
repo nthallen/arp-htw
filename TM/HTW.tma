@@ -127,13 +127,14 @@ State Ops_Start {
      +2 Hold until (convert(DPV_Sink_T) < 25 || SW_St == SWS_TIMEWARP) or 2:00:00;
         Validate TEC_DPV_Init;
         Validate TEC_LPV_Init;
-        Hold until (convert(DetCT) >= 2.05) or 1:00:00;
+        Hold until (convert(Det_T) < 24.0) or 1:00:00;
+        Validate TEC_Cell_Init;
+        Validate TEC_LTE_Init;
+        > Command Detector TEC On
+        Hold until (LTE_T <= LTE_Set_T + 0.1 && convert(DetCT) >= 2.05) or 3:00;
         Validate Flow_Zero;
         Hold until valid (F_Zero);
    +1 > Set Cell Pressure SetPoint 40.0
-        Validate TEC_Cell_Init;
-        Validate TEC_LTE_Init;
-        Hold until (LTE_T <= LTE_Set_T + 0.1) or 3:00;
     +10 Validate Flow_GD_PI;
         Hold until valid (F_GD_PI);
      +5 Validate QCL_SelectRingandRun;
