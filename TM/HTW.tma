@@ -130,7 +130,8 @@ State Ops_Start {
         Hold until (convert(Det_T) < 24.0) or 1:00:00;
         Validate TEC_Cell_Init;
         Validate TEC_LTE_Init;
-        > Command Detector TEC On
+        Validate Detector_TEC_On;
+#       > Command Detector TEC On
         Hold until (LTE_T <= LTE_Set_T + 0.1 && convert(DetCT) >= 2.05) or 3:00;
         Validate Flow_Zero;
         Hold until valid (F_Zero);
@@ -166,7 +167,7 @@ State Ops_Sample {
   Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
-  Hold until (SW_St == SWS_TIMEWARP) or 1:55:00;
+  Hold until (SW_St == SWS_TIMEWARP) or 45:00;
   Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
@@ -485,8 +486,34 @@ State QCLI_Fail {
 State QCLI_Shutdown {}
 
 #---------------------------------------------------------------
+# Partition 6: Detector TEC Control
+#---------------------------------------------------------------
+Partition
+
+State Detector_TEC_Idle {}
+
+State Detector_TEC_On {
+  > Command Detector TEC On
+  Validate Detector_TEC_Watch;
+}
+
+State Detector_TEC_Watch {
+  Hold Until (convert(DetCT) > 1.0) or 1:00
+  else Validate Detector_TEC_Fail;
+  Hold Until (convert(DetCT) < 1.0);
+  Hold Until (convert(DetCT) > 1.0) or 30
+  else Validate Detector_TEC_Fail;
+  Validate Detector_TEC_On;
+}
+
+State Detector_TEC_Fail {
+      > Command Detector TEC Off
+   +5 > Command Detector TEC On
+      Validate Detector_TEC_Watch;
+}
+
+#---------------------------------------------------------------
 # Partition 6: Pumpkin Troll
-# Needs to be written!
 #---------------------------------------------------------------
 Partition
 %{
