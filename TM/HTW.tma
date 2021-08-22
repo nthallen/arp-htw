@@ -503,7 +503,7 @@ State Detector_TEC_Watch {
   Hold Until (convert(DetCT) < 1.0);
   Hold Until (convert(DetCT) > 1.0) or 30
   else Validate Detector_TEC_Fail;
-  Validate Detector_TEC_On;
+  Validate Detector_TEC_Watch;
 }
 
 State Detector_TEC_Fail {
