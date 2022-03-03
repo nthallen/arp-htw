@@ -1,104 +1,102 @@
 function [Tout,ScanNum] = DCOTSS_time_correction
-% [Tout,ScanNum] = DCOTSS_time_correction
-% Determines appropriate time values for each ICOS scan number
-%%
-% Need a continuous range of ssp values
-[wvs,ranges] = waves_used;
-wvi = find([wvs.ISICOS]);
-ranges = ranges(wvi).ranges;
-if size(ranges,1) > 1
-  warning('More than one range for waveform %s', wvs(wvi).Name);
-end
-ssp = (ranges(1):ranges(2))';
-T = round(time2d(scantime(ssp)));
-%%
-% dT1 = diff(T)==1;
-% % We divide the entire span into contiguous regions where time advances by
-% % 1 sec/scan:
-% %   starts is the index into ssp1 and T where a region starts
-% %   ends is the index into ssp1 and T where a region ends
-% %   durs is the number of samples in each region
-% starts = find(diff([0;dT1])>0);
-% ends = find(diff([dT1;0])<0)+1;
-% dur = ends-starts+1;
-%%
-% If we exclude the first region and the last region, then we can expect
-% the remaining regions to be either quite short (less than 60 seconds?) or
-% quite long (more than 2000 seconds). The first and last region could be
-% any length from 0 up to the 2200s. We can pick an arbitrary threshold of,
-% say 100 seconds. If the first region is less than 100 seconds, we will
-% consider it part of the unstable period. We will treat the last region
-% similarly.
-% figure;
-% ax = [nsubplot(2,1,1) nsubplot(2,1,2)];
-% plot(ax(1),T(starts),dur,'*');
-% plot(ax(2),T,T-ssp1);
-% title(ax(1),getrun);
-%%
-% Now combine any pair of contiguous regions where time can simply be
-% extended across the gap:
-% i=1:length(starts)-1;
-% ends(i)
-%%
-% % Long internal regions
-% LIR = find(dur(2:end-1) > 2000)+1;
-% T2 = T;
-% % We will extend time at 1 sec/scan from the end of each LIR until the
-% % beginning of the next LIR (i.e. through the unstable period), effectively
-% % inserting a leap second at the end of the unstable period.
-% % We will extend time backward with a leap second from the first LIR to the
-% % beginning. If the last region is long (>100), we will extend time after
-% % the last LIR up until the start of the last region. Otherwise, we will
-% % extend time from the last LIR to the end.
-% if isempty(LIR) % very short flight?
-%   T2 = (1:length(T))';
-%   T2 = T2 + mean(T-T2);
-% else
-%   lsi = starts(LIR(1)); % leap second index
-%   Tlsi = T(lsi);
-%   T2(1:lsi-1) = (-lsi:-2)'+Tlsi;
-%   for i=1:length(LIR)-1
-%     unst = ends(LIR(i))+1:starts(LIR(i+1))-1;
-%     T2(unst) = (1:length(unst))' + T(unst(1)-1);
-%   end
-%   if dur(end) > 100
-%     endi = starts(end)-1;
-%   else
-%     endi = ends(end);
-%   end
-%   unst = ends(LIR(end))+1:endi;
-%   T2(unst) = (1:length(unst))' + T(unst(1)-1);
-% end
-% figure;
-% plot(T,T-ssp1,T,T2-ssp1);
-% title(getrun);
-%%
-% figure;
-% plot(ssp1,T-ssp1);
-%%
-before = T-ssp;
-start = 1;
-T2 = T;
-%%
-while start < length(T)
+  % [Tout,ScanNum] = DCOTSS_time_correction
+  % Determines appropriate time values for each ICOS scan number
   %%
-  mindiff = min(T2(start:end)-ssp(start:end));
-  Ttest = ssp(start:end) + mindiff;
-  lastmatch = find(Ttest == T2(start:end),1,'last');
-  T2(start:start+lastmatch-1) = Ttest(1:lastmatch);
-  start = start+lastmatch;
+  % Need a continuous range of ssp values
+  [wvs,ranges] = waves_used;
+  wvi = find([wvs.ISICOS]);
+  ranges = ranges(wvi).ranges;
+  if size(ranges,1) > 1
+    warning('More than one range for waveform %s', wvs(wvi).Name);
+  end
+  ssp = (ranges(1):ranges(2))';
+  T = round(scantime(ssp)); %time2d
+  %%
+  % Look at IWG1 correction
+  H1 = ne_load('htweng_1','HTW_Data_Dir');
+  T1 = H1.Thtweng_1;
+  V = T1 >= T(1) & T1 <= T(end);
+  T1V = T1(V);
+  if isfield(H1,'TDrift')
+    TDrift = H1.TDrift - H1.IWG1_Stale;
+    TDrift = TDrift(V);
+    TDfit = simple_fit(T1V-T1V(1),TDrift);
+  else
+    fprintf(1,'No TDDrift in %s\n',getrun);
+    TDfit = zeros(size(T1V));
+  end
+  
+  Tfit = simple_fit(ssp,T-T(1)-ssp);
+  T2 = ssp+T(1)+Tfit;
+  TDfit2 = interp1(T1V,TDfit,T2);
+  T2a = T2-TDfit2;
+  T3 = round(T2a);
+  figure;
+  T0 = T(1)-time2d(T(1));
+  h = plot(ssp,T-T0-ssp,ssp,T2-T0-ssp,ssp,T2a-T0-ssp,ssp,T3-T0-ssp);
+  h(4).LineWidth = 3;
+  title(sprintf('Time correction: %s', getrun));
+  xlabel('Scan Number');
+  ylabel('T-Scan Number');
+  legend('scantime()','linear','IWG1','corrected','Location','SouthEast');
+  
+  if nargout > 0
+    Tout = T3;
+    if nargout > 1
+      ScanNum = ssp;
+    end
+  end
 end
-figure;
-h = plot(ssp,before,ssp,T2-ssp);
-h(2).LineWidth = 3;
-title(sprintf('Time correction: %s', getrun));
-xlabel('Scan Number');
-ylabel('T-Scan Number');
-legend('scantime()','corrected','Location','SouthEast');
 
-if nargout > 0
-  Tout = T2;
-  if nargout > 1
-    ScanNum = ssp;
+function fit = simple_fit(X,Y)
+  Y2 = stair_fit(X,Y);
+  fit = Y2;
+  dY2 = diff(Y2);
+  adY2 = abs(dY2);
+  breaks = [0;find(adY2>1);length(Y2)];
+  for i = 1:length(breaks)-1
+    start = breaks(i)+1;
+    endreg = breaks(i+1);
+    R = start:endreg;
+    steps = find(dY2(start:endreg-1))+start-1;
+    if ~isempty(steps)
+      if length(steps) == 1
+        V = polyfit(X(R),Y2(R),1);
+        fit(R) = polyval(V,X(R));
+      else % fit to verticals
+        Xvals = (X(steps) + X(steps+1))/2;
+        Yvals = (Y(steps) + Y(steps+1))/2;
+        V = polyfit(Xvals,Yvals,1);
+        fit(R) = polyval(V,X(R));
+      end
+    end % else fit = Y2
+  end
+end
+
+function fit = stair_fit(X,Y)
+  % This if for cases where Y is integral and drifting slowly with respect to
+  % X. There may be oscillations when crossing an integer boundary, but
+  % overall, the trend should be stepwise and monotonic. The output fit will
+  % be linear with X.
+  vals = unique(Y);
+  if length(vals) == 1
+    fit = Y;
+  else
+    V = polyfit(X,Y,1);
+    increasing = V(1) > 0;
+    % First eliminate any dithering, then fit between the vertical breaks
+    % before = Y;
+    start = 1;
+    fit = Y;
+    while start < length(fit)
+      if increasing
+        newval = min(fit(start:end));
+      else
+        newval = max(fit(start:end));
+      end
+      lastmatch = find(fit(start:end)==newval,1,'last') + start -1;
+      fit(start:lastmatch) = newval;
+      start = lastmatch+1;
+    end
   end
 end
