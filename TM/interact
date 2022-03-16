@@ -26,5 +26,5 @@
   Launch - qclidacsd -h QCLI -d 0
   Launch - meerstetter -p /dev/serusb3 -a 1:LTE,2:LPV,3:Plate,4:Cover,5:Cell,6:DPV,7:BubC
   Launch - mksflow -p /dev/serusb4 -a 1:Air,2:Bub
-  Launch - udpext
+# Launch - udpext
   Launch - HTWalgo -v
