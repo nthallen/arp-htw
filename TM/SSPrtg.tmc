@@ -31,5 +31,9 @@ ci_sendfcmd(2, "PhRTG Datum DPV_Volts %lu %s\n", itime(),
   text(DPV_OutputVoltage));
 ci_sendfcmd(2, "PhRTG Datum DPV_Amps %lu %s\n", itime(),
   text(DPV_OutputCurrent));
+ci_sendfcmd(2, "PhRTG Datum DetCT %lu %s\n", itime(),
+  text(DetCT));
+ci_sendfcmd(2, "PhRTG Datum DTECI %lu %s\n", itime(),
+  text(DTECI));
 ci_sendfcmd(2, "PhRTG Datum BubC %lu %s %.2lf %.2lf\n", itime(),
   text(BubC_T), convert(BubC_Set_T), convert(BubC_Sink_T));
