@@ -11,6 +11,8 @@
   : Exhaust_Vlv { $0 = 4; }
   : Detector TEC  { $0 = 8; }
   : Gas_Vlv_D { $0 = 0; }
+  : Forward Enclosure Exhaust Fan { $0 = 12; }
+  : Aft Enclosure Exhaust Fan { $0 = 14; }
   : QCLI_Reset { $0 = 34; }
   : Bub_In_Vlv_D { $0 = 36; }
   : Bub_Out_Vlv_D { $0 = 37; }

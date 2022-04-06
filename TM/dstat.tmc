@@ -34,7 +34,16 @@ On_Off_t Scroll_Pump_DS; Invalidate Scroll_Pump_DS;
   { Scroll_Pump_DS = (DS16>>4)&1; Validate Scroll_Pump_DS; }
 On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
   { QCLI_Reset_DS = (DS14>>2)&1; Validate QCLI_Reset_DS; }
-On_Off_t Enc_Vlv_DS; Invalidate Enc_Vlv_DS;
-  { Enc_Vlv_DS = (DS09>>0)&1; Validate Enc_Vlv_DS; }
-Open_Closed_t Enc_Vlv_S; Invalidate Enc_Vlv_S;
-  { Enc_Vlv_S = (DS17>>0)&1; Validate Enc_Vlv_S; }
+On_Off_t Det_TEC_DS; Invalidate Det_TEC_DS;
+  { Det_TEC_DS = (DS09>>0)&1; Validate Det_TEC_DS; }
+Open_Closed_t Det_TEC_S; Invalidate Det_TEC_S;
+  { Det_TEC_S = (DS17>>0)&1; Validate Det_TEC_S; }
+
+On_Off_t Fwd_Exh_DS; Invalidate Fwd_Exh_DS;
+  { Fwd_Exh_DS = (DS09>>4)&1; Validate Fwd_Exh_DS; }
+On_Off_t Fwd_Exh_S; Invalidate Fwd_Exh_S;
+  { Fwd_Exh_S = (DS17>>4)&1; Validate Fwd_Exh_S; }
+On_Off_t Aft_Exh_DS; Invalidate Aft_Exh_DS;
+  { Aft_Exh_DS = (DS09>>6)&1; Validate Aft_Exh_DS; }
+On_Off_t Aft_Exh_S; Invalidate Aft_Exh_S;
+  { Aft_Exh_S = (DS17>>6)&1; Validate Aft_Exh_S; }

@@ -24,3 +24,7 @@
 1.3.1: 7/28/2021
   Enclosure Air Valve and  Cmd 8
   DS09, DS17, Cmd8_I
+1.3.2: 4/6/2022
+  Det_TEC command replaces Enclosure Air Valve Cmd 8
+    (Actual change was in the field after 7/28/2021)
+  Forward and Aft Exhaust Fan commands 12 and 14

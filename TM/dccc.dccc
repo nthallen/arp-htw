@@ -29,20 +29,20 @@
   SPARE, 1, 0x2000; /* 13: Cmd_6_Off: DPV_HC */
   SPARE, 1, 0x4000; /* 14: Cmd_7_On: SpCmd1 */
   SPARE, 1, 0x8000; /* 15: Cmd_7_Off: SpCmd1 */
-  STRB,  2, 0x0001; /* 16: Cmd_8_On: SpCmd2: Enclosure Air */
-  STRB,  2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 Enclosure Air */
+  STRB,  2, 0x0001; /* 16: Cmd_8_On: SpCmd2: Det TEC */
+  STRB,  2, 0x0002; /* 17: Cmd_8_Off: SpCmd2 Det TEC */
   SPARE, 2, 0x0004; /* 18: Cmd_9_On: L1Cmd */
   SPARE, 2, 0x0008; /* 19: Cmd_9_Off: L1Cmd */
   SPARE, 2, 0x0010; /* 20: Cmd_10_On: TE_HC2 */
   SPARE, 2, 0x0020; /* 21: Cmd_10_Off: TE_HC2 */
   SPARE, 2, 0x0080; /* 22: Cmd_11_On: Gas_Vlv */
   SPARE, 2, 0x0040; /* 23: Cmd_11_Off: Gas_Vlv */
-  SPARE, 3, 0x0100; /* 24: Cmd_12_On: Edw_Vlv */
-  SPARE, 3, 0x0200; /* 25: Cmd_12_Off: Edw_Vlv */
+  STRB,  3, 0x0100; /* 24: Cmd_12_On: Fwd_Enc_Exh_Fan */
+  STRB,  3, 0x0200; /* 25: Cmd_12_Off: Fwd_Enc_Exh_Fan */
   SPARE, 3, 0x0800; /* 26: Cmd_13_On: Bub_Gas_Vlv */
   SPARE, 3, 0x0400; /* 27: Cmd_13_Off: Bub_Gas_Vlv */
-  SPARE, 3, 0x1000; /* 28: Cmd_14_On:  */
-  SPARE, 3, 0x2000; /* 29: Cmd_14_Off:  */
+  STRB,  3, 0x1000; /* 28: Cmd_14_On: Aft_Enc_Exh_Fan */
+  STRB,  3, 0x2000; /* 29: Cmd_14_Off: Aft_Enc_Exh_Fan */
   SPARE, 3, 0x4000; /* 30: Cmd_15_On:  */
   SPARE, 3, 0x8000; /* 31: Cmd_15_Off:  */
   SPARE, 4, 0x0001; /* 32: Cmd_16_On:  */

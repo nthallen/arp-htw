@@ -186,8 +186,9 @@ TM 1 Hz AI_X1 Cmd8_I; Address Cmd8_I 0xD30; /* AI15_2_0 Power Board Command Curr
 /* TM 1 Hz AI_X1 Cmd9_I; Address Cmd9_I 0xD32; */ /* AI15_2_1 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd10_I; Address Cmd10_I 0xD34; */ /* AI15_2_2 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd11_I; Address Cmd11_I 0xD36; */ /* AI15_2_3 Power Board Command Current */
-/* TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; */ /* AI15_2_4 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd12_I; Address Cmd12_I 0xD38; /* AI15_2_4 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd13_I; Address Cmd13_I 0xD3A; */ /* AI15_2_5 Power Board Command Current */
+TM 1 Hz AI_X1 Cmd14_I; Address Cmd14_I 0xD3C; /* AI15_2_6 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd20_I; Address Cmd20_I 0xD56; */ /* AI15_4_5 Power Board Command Current */
 /* TM 1 Hz AI_X1 Cmd23_I; Address Cmd23_I 0xD50; */ /* AI15_4_5 Power Board Command Current */
 
