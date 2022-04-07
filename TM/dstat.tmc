@@ -36,7 +36,7 @@ On_Off_t QCLI_Reset_DS; Invalidate QCLI_Reset_DS;
   { QCLI_Reset_DS = (DS14>>2)&1; Validate QCLI_Reset_DS; }
 On_Off_t Det_TEC_DS; Invalidate Det_TEC_DS;
   { Det_TEC_DS = (DS09>>0)&1; Validate Det_TEC_DS; }
-Open_Closed_t Det_TEC_S; Invalidate Det_TEC_S;
+On_Off_t Det_TEC_S; Invalidate Det_TEC_S;
   { Det_TEC_S = (DS17>>0)&1; Validate Det_TEC_S; }
 
 On_Off_t Fwd_Exh_DS; Invalidate Fwd_Exh_DS;

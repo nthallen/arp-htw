@@ -21,9 +21,9 @@ Valves {
   +-+;
   Exhaust: (Exh_Vlv_DS,3)      (Exh_Vlv_S,6)      (Cmd4_I,7)  "I/V";
   Gas:     (Gas_Vlv_DS,1)      (Gas_Vlv_S,3)      (Cmd0_I,7)  "I/V";
-  Det_TEC: (Det_TEC_DS,3)      (Det_TEC_S,6)      (Cmd8_I,7)  "I/V";
-  Fwd_Exh: (Fwd_Exh_DS,3)      (Fwd_Exh_S,6)      (Cmd12_I,7) "I/V";
-  Aft_Exh: (Aft_Exh_DS,3)      (Aft_Exh_S,6)      (Cmd14_I,7) "I/V";
+  Det_TEC: (Det_TEC_DS,3)      (Det_TEC_S,3)      (Cmd8_I,7)  "I/V";
+  Fwd_Exh: (Fwd_Exh_DS,3)      (Fwd_Exh_S,3)      (Cmd12_I,7) "I/V";
+  Aft_Exh: (Aft_Exh_DS,3)      (Aft_Exh_S,3)      (Cmd14_I,7) "I/V";
 }
 
 GD {
