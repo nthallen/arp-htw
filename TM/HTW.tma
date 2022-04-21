@@ -557,6 +557,34 @@ State PV_Failure NoLog {
         Validate PV_Watch;
 }
 
+
+#---------------------------------------------------------------
+# Partition 8: Cover Fan Control
+#---------------------------------------------------------------
+Partition
+
+%{
+  #define BOX_TEMP_HOT 27
+  #define BOX_TEMP_COLD 25
+  #define BOX_TEMP_TOO_HOT(x) (x > BOX_TEMP_HOT)
+  #define BOX_TEMP_TOO_COLD(x) (x < BOX_TEMP_COLD)
+%}
+
+State Fan_Control_Watch_Too_Hot {
+    Hold until ( BOX_TEMP_TOO_HOT(convert(Rov6T)) );
+ +1 > Command Forward Enclosure Exhaust Fan On
+ +1 > Command Aft Enclosure Exhaust Fan On
+ +1 Validate Fan_Control_Watch_Too_Cold;
+}
+
+State Fan_Control_Watch_Too_Cold {
+    Hold until ( BOX_TEMP_TOO_COLD(convert(Rov6T)) ); 
+ +1 > Command Forward Enclosure Exhaust Fan Off
+ +1 > Command Aft Enclosure Exhaust Fan Off
+    Validate Fan_Control_Watch_Too_Hot;
+
+}
+
 #---------------------------------------------------------------
 # Partition 8: Realtime File Input
 #---------------------------------------------------------------
