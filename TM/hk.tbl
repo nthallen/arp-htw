@@ -57,9 +57,9 @@ PTRH {
   HBox { +-; Title: "PTRH"; -+ };
   ""  >DACS    >LPV     >DPV;
   P:  (DACS_P,7)   (LPV_P,7)   (DPV_P,7) mbar;
-  T1: (DACS_T1C,5) (LPV_T1C,5) (DPV_T1C,5) C;
-  T2: (DACS_T2C,5) (LPV_T2C,5) (DPV_T2C,5) C;
-  RH: (DACS_RHC,5) (LPV_RHC,5) (DPV_RHC,5) C;
+  T1: (DACS_T1C,5) (LPV_T1C,5) (DPV_T1C,5)  C;
+  T2: (DACS_T2C,5) (LPV_T2C,5) (DPV_T2C,5)  C;
+  RH: (DACS_RHC,5) (LPV_RHC,5) (DPV_RHC,5) "%";
   St: (DACS_PTRHS,3) (LPV_PTRHS,3) (DPV_PTRHS,3);
 }
 
