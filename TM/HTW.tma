@@ -115,23 +115,23 @@ State Ops_Init {
 # +10 Validate Throttle_Valve_Init;
       Hold Until Valid (F_Idle);
       Depending on (Shutdown) { Validate Ops_Shutdown; }
-      Depending on (Record) { Validate Ops_Start; }
+#   Depending on flight switch go to Ops_Start
+#      Depending on (Record) { Validate Ops_Start; }
 }
 
 State Ops_Start {
         Depending on (Shutdown) { Validate Ops_Shutdown; }
         Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
-   +1 > Set Cell Pressure SetPoint 140.0
-        Validate Flow_PV_PI;
-        Hold until (SW_St == SWS_TIMEWARP) or 20:00;
-     +2 Hold until (convert(DPV_Sink_T) < 25 || SW_St == SWS_TIMEWARP) or 2:00:00;
+#   +1 > Set Cell Pressure SetPoint 140.0
+#        Validate Flow_PV_PI;
+#        Hold until (SW_St == SWS_TIMEWARP) or 20:00;
+     +2 Hold until (convert(DPV_Sink_T) < 34 || SW_St == SWS_TIMEWARP) or 1:00:00;
         Validate TEC_DPV_Init;
-        Validate TEC_LPV_Init;
-        Hold until (convert(Det_T) < 24.0) or 1:00:00;
+#        Validate TEC_LPV_Init;
+        Hold until (convert(Det_T) < 17.0) or 1:00:00;
         Validate TEC_Cell_Init;
         Validate TEC_LTE_Init;
         Validate Detector_TEC_On;
-#       > Command Detector TEC On
         Hold until (LTE_T <= LTE_Set_T + 0.1 && convert(DetCT) >= 2.05) or 3:00;
         Validate Flow_Zero;
         Hold until valid (F_Zero);
@@ -141,7 +141,10 @@ State Ops_Start {
      +5 Validate QCL_SelectRingandRun;
         Hold until (SW_St == SWS_TIMEWARP) or 60;
         Validate QCL_SelectICOSandRun;
-        Validate Ops_Calibrate;
+    +60 Validate Flow_Zero;
+        Hold until valid (F_Zero);
+#        Depending on (Record) { Validate Ops_Calibrate; }
+        Depending on (Record) { Validate Ops_Sample; }
 }
 
 State Ops_Calibrate {
@@ -167,8 +170,8 @@ State Ops_Sample {
   Depending on (Pump_Over_Temp) { Validate Ops_Pump_Over_Temp; }
   Validate Flow_PV_PI;
   Hold until valid (F_PV_PI);
-  Hold until (SW_St == SWS_TIMEWARP) or 45:00;
-  Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
+#  Hold until (SW_St == SWS_TIMEWARP) or 45:00;
+#  Depending on (Gas_Pressure_Watch) { Validate Ops_Calibrate; }
 }
 
 State Ops_Pre_Shutdown {
