@@ -1,0 +1,28 @@
+Moduledef icosfitd [ Panel= RAW=SSP COADD= ] {
+  Panel is used in genui file for tabbed interface
+  RAW is the path to the root of the scan subtree
+    and defaults to SSP
+  COADD set to coadd to handle coadding
+}
+
+mode (default) {
+  tmcbase = icosfitd.tmc
+  colbase = icosfitd_col.tmc
+  genuibase = icosfitd.genui:icosfitd.genui.in
+  cmdbase = icosfitd.cmd
+  extbase = icosfitd_conv.tmc:icosfitd_conv.tmc.in
+  - : icosfitd.tbl:icosfitd.tbl.in
+  - : icosfit.RT.in:icosfit.RT.in.in
+  DISTRIB = @MODDIR@/../icosfitd icosfit.RT.in
+  IDISTRIB = @MODDIR@/sbase.5p1e.ptb
+  OBJ = icosfitd.tbl icosfitd_conv.tmc
+  CPPFLAGS = -I @MODDIR@/..
+}
+
+%%
+.PHONY : clean-icosfitd @MODDIR@/../icosfitd
+@MODDIR@/../icosfitd :
+	$(MAKE) --directory=@MODDIR@/..
+clean-dist : clean-icosfitd
+clean-icosfitd :
+	$(MAKE) --directory=@MODDIR@/.. clean
