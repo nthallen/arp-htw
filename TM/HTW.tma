@@ -116,7 +116,7 @@ State Ops_Init {
       Hold Until Valid (F_Idle);
       Depending on (Shutdown) { Validate Ops_Shutdown; }
       Depending on (Record) { Validate Ops_Start; }
-      { if ((IOSwS & 3) == 3) Validate Ops_Start; }
+      { if ((IOSwS & 3) == 0) Validate Ops_Start; }
 }
 
 State Ops_Start {
