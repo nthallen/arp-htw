@@ -11,7 +11,7 @@ if ~isscalar(wvi)
     error('More than one ICOS waveform found');
   end
 end
-if size(regions(wvi).ranges,1) > 1; warn('More than on ICOS range'); end
+if size(regions(wvi).ranges,1) > 1; warn('More than one ICOS range'); end
 scans = regions(wvi).ranges(1,:);
 scans = (scans(1):scans(2))';
 scanview(scans);
@@ -33,14 +33,17 @@ eft.view_tune;
 % Update ICOSfit cfg to point to the SSPf
 edit_ICOSfit_cfg
 %%
+% Do ringdown measurements
+edit_cell_cfg
+%%
 fitline
 % Define suffix for 7LF and save
-% Define suffix for 1LF, disable all but bit line, save
+% Define suffix for 1LF, disable all but big line, save
 % Define region 'opt' for baseline optimization
 % matchline to  create icosfit.opt.1LF
 %%
 % Setup for the 1L baseline optimization
-icosfit_reconfig('icosfit.opt.1LF','', ...
+icosfit_reconfig('icosfit.Opt.1LF','', ...
   'nu0', '3777', ...
   'MaxEnsembleDriftPerScan','2e-3 cm-1', ...
   'MaxIterations','20', ...
@@ -71,7 +74,7 @@ icosfit_reconfig('icosfit.all.1LF','', ...
   'MaxEnsembleDriftPerScan','2e-3 cm-1', ...
   'MaxIterations','20', ...
   'PTEFile','PTE.txt', ...
-  'Verbosity', '3', ...
+  'Verbosity', '2', ...
   'FineTuned', []);
 
 %%
