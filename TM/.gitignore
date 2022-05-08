@@ -3,6 +3,9 @@ waves.out
 waves.tmc
 waves.m
 waves.log
+icosfitd.tbl
+icosfitd_conv.tmc
+icosfit.RT.in
 address.h
 HTWcol.cc
 tm.dac
@@ -102,6 +105,7 @@ TStblnc.tmc.dep
 IWG1tbl.tmc.dep
 IWG1tblnc.tmc.dep
 *.err
+icosfit.RT.in
 Makefile
 HTWcol
 HTWsrvr

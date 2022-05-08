@@ -37,6 +37,7 @@ Module QCLI mode=noise
 Module mksflow src=mksflow.txt
 Module mains
 Module IWG1
+Module icosfitd
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
@@ -52,7 +53,8 @@ HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc \
           mains_conv.tmc HTW.tma Flow.tma Throttle.tma TEC.tma HTW.sws
 hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc mains_conv.tmc gas.tbl
-datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc data.tbl /usr/local/share/oui/cic.oui
+datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc icosfitd_conv.tmc \
+           data.tbl /usr/local/share/oui/cic.oui
 TSdisp : TS_conv.tmc TS.tbl
 IWG1disp : IWG1.tbl
 doit : HTW.doit
