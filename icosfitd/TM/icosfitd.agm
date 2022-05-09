@@ -1,4 +1,4 @@
-Moduledef icosfitd [ Panel= RAW=SSP COADD=coadd ] {
+Moduledef icosfitd [ Panel= RAW=SSP COADD=coadd MirrorLoss=365.0 ] {
   Panel is used in genui file for tabbed interface
   RAW is the path to the root of the scan subtree
     and defaults to SSP

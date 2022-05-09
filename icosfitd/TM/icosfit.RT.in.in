@@ -15,13 +15,13 @@ Threshold = 1e-06;
 # Fix Doppler;
 # Fix Lorentz;
 Lines = {
-  1 1  3777.949200  2.683e-21 0.0975   173.3658 0.55  0.000100 556534, Group H2O, Position=557, Fix Doppler, Fix Lorentz;
+  1 1  3777.949200  2.683e-21 0.0975   173.3658 0.55  0.000100 556534, Group H2O, Position=%d, Fix Doppler, Fix Lorentz;
 };
 
 LineMargin = 0.10 cm-1;
 LineMarginMultiplier = 8;
 epsilon2 = 1e-4;
-MirrorLoss = 365.0 ppm;
+MirrorLoss = @MirrorLoss@ ppm;
 CavityLength = 50.000;
 EtalonFSR = 0.031500 cm-1;
 Binary;

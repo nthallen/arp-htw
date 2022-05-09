@@ -37,3 +37,5 @@ ci_sendfcmd(2, "PhRTG Datum DTECI %lu %s\n", itime(),
   text(DTECI));
 ci_sendfcmd(2, "PhRTG Datum BubC %lu %s %.2lf %.2lf\n", itime(),
   text(BubC_T), convert(BubC_Set_T), convert(BubC_Sink_T));
+ci_sendfcmd(2, "PhRTG Datum icos_ppm %lu %s\n", itime(),
+  text(icos_ppm_latest));
