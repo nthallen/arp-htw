@@ -61,7 +61,7 @@ IWG1disp : IWG1.tbl
 doit : HTW.doit
 # labdisp : dstat.tmc lab.tbl
 # labdoit : lab.doit
-udpext : Status/UDP.cc UDP.tmc -lsocket
+udpext : Status/UDP.cc icosfitd_conv.tmc UDP.tmc -lsocket
 
 %%
 CFLAGS=-Wall -g
