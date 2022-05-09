@@ -5,11 +5,12 @@
   icosfitd -I $TMBASE/icosfit.RT.in # icosfit config input
     -L # log ICOSsum.fifo data to ICOSsum.log
     -S SSP # Where the scan files are to be found
-    -l 240:840 # Look for lines between samples 240 and 840
-    -P #16,18,29 # Report columns
-       Vals[0] #16 Line 1 Floating
-       Vals[1] #18 nu_F0 Value
-       Vals[2] #29 N[H2O] Value
+    -l 440:580 # Look for lines between samples 480 and 580
+    -P #17,19,32 # Report columns
+       Vals[0] #17 Line 1 Floating
+       Vals[1] #19 nu_F0 Value
+       Vals[2] #32 N[H2O] Value
+    -C 4 # coadd up to 4 scans
 */
 TM typedef uint32_t icos_scan_t { text "%7u"; }
 TM typedef float icos_float { text "%6.1f"; }

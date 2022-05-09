@@ -1,4 +1,4 @@
-Moduledef icosfitd [ Panel= RAW=SSP COADD= ] {
+Moduledef icosfitd [ Panel= RAW=SSP COADD=coadd ] {
   Panel is used in genui file for tabbed interface
   RAW is the path to the root of the scan subtree
     and defaults to SSP
@@ -14,7 +14,7 @@ mode (default) {
   - : icosfitd.tbl:icosfitd.tbl.in
   - : icosfit.RT.in:icosfit.RT.in.in
   DISTRIB = @MODDIR@/../icosfitd icosfit.RT.in
-  IDISTRIB = @MODDIR@/sbase.5p1e.ptb
+  IDISTRIB = @MODDIR@/sbase.3p3er.ptb
   OBJ = icosfitd.tbl icosfitd_conv.tmc icosfit.RT.in
   CPPFLAGS = -I @MODDIR@/..
   IGNORE = icosfit.RT.in
