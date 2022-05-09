@@ -47,7 +47,7 @@ depending on (h2o_lya_ppm) {
 depending on (1 Hz) {
   int status;
   status = 3;
-  mr_format(h2o_mr_text, 15, icos_ppm, icosd_status != res_Fit);
+  mr_format(h2o_mr_text, 15, icos_ppm, icosd_fit_status != res_Fit);
   mr_format(dD_text, 15, dD_tx, 1);
   UDP.Broadcast(
     "WI,%s,%d,"
