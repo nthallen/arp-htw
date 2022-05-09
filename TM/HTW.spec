@@ -50,7 +50,8 @@ TGTDIR = $(TGTNODE)/home/HTW
 HTWcol : -lsubbus
 HTWsrvr : -lsubbus mains.oui
 HTWalgo : ptrh_conv.tmc idxflag.tmc dstat.tmc \
-          mains_conv.tmc HTW.tma Flow.tma Throttle.tma TEC.tma HTW.sws
+          mains_conv.tmc TS_conv.tmc HTW.tma Flow.tma \
+          Throttle.tma TEC.tma icosfitd.tma HTW.sws
 hkdisp : dstat.tmc QCLI_conv.tmc ptrh_conv.tmc hk.tbl
 gddisp : dstat.tmc idxflag.tmc mains_conv.tmc gas.tbl
 datadisp : dstat.tmc QCLI_conv.tmc SSPrtg.tmc icosfitd_conv.tmc \
