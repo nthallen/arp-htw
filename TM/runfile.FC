@@ -29,4 +29,5 @@
   Launch - icosfitd -I $TMBINDIR/icosfit.RT.in -L -S SSP \
               -l440:580 -P17,19,30 -C 10
   Launch - udpext
+  Launch - uplink_rcvr
   Launch - HTWalgo -v

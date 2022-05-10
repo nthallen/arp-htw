@@ -38,6 +38,7 @@ Module mksflow src=mksflow.txt
 Module mains
 Module IWG1
 Module icosfitd MirrorLoss=365.0
+Module Uplink
 
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
