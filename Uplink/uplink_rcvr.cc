@@ -26,7 +26,7 @@ int UDP_uplink_port = 26130;
  * uplink_rcvr will check the validity of the data from uplink, and then
  * process the command the same as in flight.
  */
-UplinkRcvrUDP::UplinkRcvrUDP(const char *port, const char *addr) :
+UplinkRcvrUDP::UplinkRcvrUDP() :
           Ser_Sel(0, 0, 80) {
   Bind(UDP_uplink_port);
   flags = Selector::Sel_Read;
@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
   oui_init_options(argc, argv);
   nl_error(0, "Starting V1.0");
   { Selector S;
-    UplinkRcvrUDP UDP(uplink_port, uplink_addr);
+    UplinkRcvrUDP UDP;
     Cmd_Selectee UC;
     S.add_child(&UC);
     S.add_child(&UDP);

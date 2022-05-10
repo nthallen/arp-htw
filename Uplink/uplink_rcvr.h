@@ -9,7 +9,7 @@ extern int UDP_uplink_port;
 
 class UplinkRcvrUDP : public Ser_Sel {
   public:
-    UplinkRcvrUDP(const char *port, const char *addr);
+    UplinkRcvrUDP();
     ~UplinkRcvrUDP();
     int ProcessData(int flag);
     // Timeout *GetTimeout();

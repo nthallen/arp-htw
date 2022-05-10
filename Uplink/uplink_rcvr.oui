@@ -10,7 +10,7 @@
 
 <switch>
   case 'P':
-    uplink_port = atoi(optarg);
+    UDP_uplink_port = atoi(optarg);
     break;
 
 <package> msghdr_default

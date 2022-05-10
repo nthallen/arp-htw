@@ -1,7 +1,7 @@
 LDFLAGS=-Wl,-rpath -Wl,/usr/local/lib -L /usr/local/lib
 CPPFLAGS=-I /usr/local/include
 CXXFLAGS=-Wall -g
-LIBS=-ltmpp -ltm -lnort
+LIBS=-ltmpp -ltm -lnort -lsocket
 .PHONY : clean all
 
 SRC = uplink.cc uplinkoui.c
