@@ -27,7 +27,7 @@
   Launch - meerstetter -p /dev/serusb3 -a 1:LTE,2:LPV,3:Plate,4:Cover,5:Cell,6:DPV,7:BubC
   Launch - mksflow -p /dev/serusb4 -a 1:Air,2:Bub
   Launch - icosfitd -I $TMBINDIR/icosfit.RT.in -L -S SSP \
-              -l440:580 -P17,19,30 -C 10
+              -l440:580 -P17,19,32 -C 4
   Launch - udpext
   Launch - uplink_rcvr
   Launch - HTWalgo -v
