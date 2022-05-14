@@ -567,8 +567,8 @@ State PV_Failure NoLog {
 Partition
 
 %{
-  #define BOX_TEMP_HOT 27
-  #define BOX_TEMP_COLD 25
+  #define BOX_TEMP_HOT 25
+  #define BOX_TEMP_COLD 20
   #define BOX_TEMP_TOO_HOT(x) (x > BOX_TEMP_HOT)
   #define BOX_TEMP_TOO_COLD(x) (x < BOX_TEMP_COLD)
 %}
