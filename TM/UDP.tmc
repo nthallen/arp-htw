@@ -59,7 +59,7 @@ depending on (1 Hz) {
     "\r\n",
     UDP.ISO8601(dtime()), status,
     SSP_Num, h2o_mr_text, dD_text,
-    LTE_T, LPV_T, DPV_T, BubC_T,
+    LTE_T, LPV_T, DPV_T, convert(Rov6T) /* BubC_T */,
     convert(DetCT), /* BubF_Set, */ BubF_Flow,
     convert(Cel2P),
     convert(DPV_Sink_T), /* convert(Mains_PMotT), */
