@@ -275,7 +275,7 @@ Partition
 State TEC_Cell_Idle {}
 
 State TEC_Cell_Init {
-     Hold until (Cell_Sink_T < 30);
+     Hold until (Cell_T < 25);
   +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
@@ -310,8 +310,8 @@ State TEC_Cell_Watch NoLog {
     }
   }
 # { if (Cell_Sink_T > 45) Validate TEC_Cell_OverTemp; }
-  Hold until (Cell_T > Cell_Set_T + 5);
-  Hold until (Cell_T < Cell_Set_T + 5) or 15
+  Hold until (Cell_T > Cell_Set_T + 10);
+  Hold until (Cell_T < Cell_Set_T + 10) or 15
   else Validate TEC_Cell_OverTemp;
   Validate TEC_Cell_Watch;
 }
