@@ -37,7 +37,7 @@ Module QCLI mode=noise
 Module mksflow src=mksflow.txt
 Module mains
 Module IWG1
-Module icosfitd MirrorLoss=365.0
+Module icosfitd MirrorLoss=380.0
 Module Uplink
 
 SCRIPT = idx.idx64
