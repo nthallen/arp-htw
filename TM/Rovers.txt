@@ -1,0 +1,11 @@
+Rover Postions
+
+1: On inlet tube near bulkhead
+2: On tee between PV and GD vavle
+3: On plate
+4: Air on DPV side of instrument
+5: Air intake to DPV heatsink. Near vicors/cover
+6: Air mid-instrument. Attached to cell inlet tubing.
+7: Air intake to DPV heatsink. Top, middle instrument
+8: Midbody temperature outside rear. 
+9: DPV heatsink fan exhaust.
