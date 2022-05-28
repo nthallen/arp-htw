@@ -48,7 +48,7 @@ depending on (1 Hz) {
   int status;
   status = 3;
   mr_format(h2o_mr_text, 15, icos_ppm, icosd_fit_status != res_Fit);
-  mr_format(dD_text, 15, dD_tx, 1);
+  /* mr_format(dD_text, 15, dD_tx, 1); */
   UDP.Broadcast(
     "WI,%s,%d,"
     "%d,%s,%s,"
@@ -58,9 +58,12 @@ depending on (1 Hz) {
     "%.1lf"
     "\r\n",
     UDP.ISO8601(dtime()), status,
-    SSP_Num, h2o_mr_text, dD_text,
-    LTE_T, LPV_T, DPV_T, convert(Rov6T) /* BubC_T */,
-    convert(DetCT), /* BubF_Set, */ BubF_Flow,
+    SSP_Num, h2o_mr_text,
+    convert(Rov5T), /* dD_text */
+    LTE_T, LPV_T, DPV_T,
+    convert(Rov6T) /* BubC_T */,
+    convert(DetCT), /* BubF_Set, */
+    convert(Rov7T), /* BubF_Flow */
     convert(Cel2P),
     convert(DPV_Sink_T), /* convert(Mains_PMotT), */
     convert(Mains_PumpT),
