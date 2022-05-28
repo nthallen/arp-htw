@@ -43,6 +43,7 @@ Module Uplink
 SCRIPT = idx.idx64
 SCRIPT = dccc.dccc
 SCRIPT = interact runfile.FC
+SRCDIST = Rovers.txt
 OBJ = address.h
 IGNORE = Makefile
 
