@@ -51,7 +51,7 @@ depending on (1 Hz) {
   /* mr_format(dD_text, 15, dD_tx, 1); */
   UDP.Broadcast(
     "WI,%s,%d,"
-    "%d,%s,%s,"
+    "%d,%s,%.1lf,"
     "%.1f,%.1f,%.1f,%.1f,"
     "%.3f,%.3f,"
     "%.1lf,%.1lf,%.1lf,"
