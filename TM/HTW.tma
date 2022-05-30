@@ -562,29 +562,52 @@ State PV_Failure NoLog {
 
 
 #---------------------------------------------------------------
-# Partition 8: Cover Fan Control
+# Partition 8: Forward Cover Fan Control
 #---------------------------------------------------------------
 Partition
 
 %{
-  #define BOX_TEMP_HOT 20
-  #define BOX_TEMP_COLD 15
-  #define BOX_TEMP_TOO_HOT(x) (x > BOX_TEMP_HOT)
-  #define BOX_TEMP_TOO_COLD(x) (x < BOX_TEMP_COLD)
+  #define FWD_TEMP_HOT 20
+  #define FWD_TEMP_COLD 15
+  #define FWD_TEMP_TOO_HOT(x) (x > FWD_TEMP_HOT)
+  #define FWD_TEMP_TOO_COLD(x) (x < FWD_TEMP_COLD)
 %}
 
-State Fan_Control_Watch_Too_Hot {
-    Hold until ( BOX_TEMP_TOO_HOT(convert(Rov6T)) );
+State FWD_Fan_Control_Watch_Too_Hot {
+    Hold until ( FWD_TEMP_TOO_HOT(convert(Rov6T)) );
  +1 > Command Forward Enclosure Exhaust Fan On
- +1 > Command Aft Enclosure Exhaust Fan On
- +1 Validate Fan_Control_Watch_Too_Cold;
+ +1 Validate FWD_Fan_Control_Watch_Too_Cold;
 }
 
-State Fan_Control_Watch_Too_Cold {
-    Hold until ( BOX_TEMP_TOO_COLD(convert(Rov6T)) ); 
+State FWD_Fan_Control_Watch_Too_Cold {
+    Hold until ( FWD_TEMP_TOO_COLD(convert(Rov6T)) ); 
  +1 > Command Forward Enclosure Exhaust Fan Off
+    Validate FWD_Fan_Control_Watch_Too_Hot;
+
+}
+
+#---------------------------------------------------------------
+# Partition 9: Aft Cover Fan Control
+#---------------------------------------------------------------
+Partition
+
+%{
+  #define AFT_TEMP_HOT 20
+  #define AFT_TEMP_COLD 15
+  #define AFT_TEMP_TOO_HOT(x) (x > AFT_TEMP_HOT)
+  #define AFT_TEMP_TOO_COLD(x) (x < AFT_TEMP_COLD)
+%}
+
+State AFT_Fan_Control_Watch_Too_Hot {
+    Hold until ( AFT_TEMP_TOO_HOT(convert(Rov4T)) );
+ +1 > Command Aft Enclosure Exhaust Fan On
+ +1 Validate AFT_Fan_Control_Watch_Too_Cold;
+}
+
+State AFT_Fan_Control_Watch_Too_Cold {
+    Hold until ( AFT_TEMP_TOO_COLD(convert(Rov4T)) ); 
  +1 > Command Aft Enclosure Exhaust Fan Off
-    Validate Fan_Control_Watch_Too_Hot;
+    Validate AFT_Fan_Control_Watch_Too_Hot;
 
 }
 
