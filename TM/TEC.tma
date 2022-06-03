@@ -275,7 +275,7 @@ Partition
 State TEC_Cell_Idle {}
 
 State TEC_Cell_Init {
-     Hold until (Cell_T < 25);
+     Hold until (Cell_T < 40);
   +1 > Cell Temp Enable
   +5 Validate TEC_Cell_Watch;
 }
