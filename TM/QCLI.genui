@@ -14,7 +14,7 @@
   1 SSP_SN      QCLI_stat SN
   1 QCLI_Stale  QCLI_stat Stale
   1 SSP_Stale   QCLI_stat Stale
-  1 QCLI_err    QCLI_stat err
+  1 QCLI_err    QCLI_stat err %.0lf
   1 QCLI_fifodep QCLI_stat fifodep
   1 QCLI_flash   QCLI_stat flash
   1 QCLI_mode    QCLI_stat mode %.0lf
