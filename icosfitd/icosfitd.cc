@@ -33,6 +33,7 @@ const char *scan_ibase = "SSP";
 const char *column_list;
 const char *command_file;
 int max_coadd = 0;
+int line_position_offset;
 
 void set_icosfit_file(bool is_output, const char *path) {
   if (is_output) {
