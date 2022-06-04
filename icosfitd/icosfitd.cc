@@ -515,7 +515,7 @@ void fitd::generate_icosfit_file(int linepos) {
         icosfit_file_out);
   while (fgets(buf, 255, ifp)) {
     if (strstr(buf, "Position=%d")) {
-      fprintf(ofp, buf, linepos);
+      fprintf(ofp, buf, linepos+line_position_offset);
     } else {
       fprintf(ofp, "%s", buf);
     }

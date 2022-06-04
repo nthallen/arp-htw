@@ -168,6 +168,7 @@ extern const char *scan_ibase;
 extern const char *column_list;
 extern const char *command_file;
 extern int max_coadd;
+extern int line_position_offset;
 extern FILE *memo_fp, *file_fp;
 
 #endif

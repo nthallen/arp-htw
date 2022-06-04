@@ -14,6 +14,7 @@
 	-l <from>:<to> : Sample range for line search
 	-P <col_list> : Specify columns from ICOSsum.dat to send to telemetry
   -C <NC> : Coadd up to NC scans
+  -p <offset> : Integer line position offset to account for skew, detrending
 <unsort>
 Data sent to telemetry always includes scan number, pressure and temperature.
 The -P option specifies what additional columns should be saved and forwarded.
@@ -29,6 +30,7 @@ with no spaces.
   case 'P': column_list = optarg; break;
   case 'R': command_file = optarg; break;
   case 'C': max_coadd = atoi(optarg); break;
+  case 'p': line_position_offset = atoi(optarg); break;
 
 <package> msghdr_init
 <init>
