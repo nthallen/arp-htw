@@ -17,7 +17,7 @@ Partition
 State icosd_init {
   +10 Hold until (icos_stale == 0);
       # from 220504.3 PTEref.txt
-      > icosfit PTE params 2.5000000e+02   3.9692640e+00   3.5306580e+01  -3.6066130e-01  -3.4674200e+00   1.4049050e-01   0.0000000e+00   6.8977900e-02  0.0000000e+00 
+      > icosfit PTE params 152 6.43098 35.656090 -0.47053290 -7.5131020 0.12481810 0 0.068977900 0
       Validate icosd_restart;
 }
 
