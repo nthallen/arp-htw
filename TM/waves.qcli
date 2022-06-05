@@ -25,13 +25,20 @@ ICOS Waveform JPL53_long {
   Ramp from 220 mA to 570 mA in 4 msec;
 }
 
-ICOS Waveform JPL53_800Hz {
-  SampleRate = 100 MHz/100;
-  Ncoadd = 645;
+ICOS Waveform JPL53_200Hz {
+  SampleRate = 100 MHz/200;
+  Ncoadd = 227;
   Tz = 5%;
-  Ramp from 385 mA to 525 mA in 1.5 msec;
+  Ramp from 385 mA to 525 mA in 4 msec;
 }
 
+ICOS Waveform JPL53_300Hz {
+# Use with temperature set to 5.6 C
+  SampleRate = 100 MHz/150;
+  Ncoadd = 295;
+  Tz = 5%;
+  Ramp from 385 mA to 525 mA in 3 msec;
+}
 ICOS Waveform JPL53_400Hz {
 # Use with temperature set to 5.6 C
   SampleRate = 100 MHz/100;

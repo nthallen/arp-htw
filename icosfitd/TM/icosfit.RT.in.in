@@ -8,9 +8,9 @@
 # Verbosity & 0x40 64 => V_CHKDER Estimate derivatives via finite differences and include in fit curves files
 # Verbosity & 0x80 128 => V_VOIGT Output X and K values for each voigt line in verbose(1) fits
 QCLI_Wave = 2; # Waveform JPL53_400Hz
-SignalRegion = [ 200, 2066 ];
-BackgroundRegion = [ 5, 53 ];
-SampleRate = 1000000 Hz;
+SignalRegion = [ 250, 2053 ];
+BackgroundRegion = [ 5, 52 ];
+SampleRate = 666667 Hz;
 Threshold = 1e-06;
 # Fix Doppler;
 # Fix Lorentz;
@@ -26,13 +26,13 @@ CavityLength = 50.000;
 EtalonFSR = 0.031500 cm-1;
 Binary;
 ICOSdir = @RAW@;
-BaselineFile = sbase.3p3er.ptb;
+BaselineFile = sbase.3p.ptb;
 OutputFile = ICOSsum.fifo;
 LogFile = ICOSfit.log;
 NoTee;
 nu0 = 3777;
 OutputDir = ./;
-MaxEnsembleDriftPerScan = 2e-3 cm-1;
+MaxEnsembleDriftPerScan = 2e-2 cm-1;
 MaxIterations = 20;
 PTEFile = PTE.fifo @COADD@;
 Verbosity = 2;

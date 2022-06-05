@@ -399,7 +399,7 @@ State QCL_SelectICOSandRun {
    +1 > Laser TEC Setpoint 5.6 C
    +1 > Laser TEC Enable
       Hold until ( QCL_TEMP_OK(convert(LTE_T),convert(LTE_Set_T)) );
-   +2 > Select QCLI Waveform JPL53_400Hz
+   +2 > Select QCLI Waveform JPL53_300Hz
    +3 Validate QCL_Start;
 }
 
