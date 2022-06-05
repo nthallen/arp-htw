@@ -32,7 +32,7 @@ LogFile = ICOSfit.log;
 NoTee;
 nu0 = 3777;
 OutputDir = ./;
-MaxEnsembleDriftPerScan = 2e-2 cm-1;
+MaxEnsembleDriftPerScan = 2e-3 cm-1;
 MaxIterations = 20;
 PTEFile = PTE.fifo @COADD@;
 Verbosity = 2;
