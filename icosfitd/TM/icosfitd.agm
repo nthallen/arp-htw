@@ -14,7 +14,7 @@ mode (default) {
   - : icosfitd.tbl:icosfitd.tbl.in
   - : icosfit.RT.in:icosfit.RT.in.in
   DISTRIB = @MODDIR@/../icosfitd icosfit.RT.in
-  IDISTRIB = @MODDIR@/sbase.3p3er.ptb
+  IDISTRIB = @MODDIR@/sbase.3p.ptb
   OBJ = icosfitd.tbl icosfitd_conv.tmc icosfit.RT.in
   CPPFLAGS = -I @MODDIR@/..
   IGNORE = icosfit.RT.in
