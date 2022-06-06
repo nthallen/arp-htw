@@ -11,6 +11,13 @@
        Vals[1] #19 nu_F0 Value
        Vals[2] #32 N[H2O] Value
     -C 4 # coadd up to 4 scans
+  6/6/2022
+    New mirrors and a new waveform. New baseline file
+    -l 350:420 # Look for lines between samples 350 and 420
+    -P #17,23,34 # Report columns
+       Vals[0] #17 Line 1 Floating
+       Vals[1] #23 nu_F0 Value
+       Vals[2] #25 N[H2O] Value
 */
 TM typedef uint32_t icos_scan_t { text "%7u"; }
 TM typedef float icos_float { text "%6.1f"; }
