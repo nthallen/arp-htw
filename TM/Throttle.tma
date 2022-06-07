@@ -18,12 +18,52 @@ PARTITION
   // double TV_Gi = 4.0;
   // double TV_DP_Set = 2.25;
   int scan_done = 0;
+  double TVPos0;
 
   #define MAX_TV_STEPS 4000
   #include <math.h> /* for fabs */
 %}
 
-State Throttle_Valve_Startup {}
+State Throttle_Valve_Startup {
+  +5 { double Step;
+       uint16_t IStep;
+       TVPos0 = convert(TVPos);
+       Step = (TVPos0-0.493149)/0.000591;
+       if (Step > 10000) IStep = 10000;
+       else if (Step < 0) IStep = 0;
+       else IStep = Step;
+       ci_sendfcmd(0, "Preset Throttle Valve Position To %u\n", IStep);
+       Validate Throttle_Valve_Test_Drive;
+     }
+}
+
+State Throttle_Valve_Test_Drive {
+   +5 > Drive Throttle Valve out 200
+   +1 { double dPos;
+        dPos = convert(TVPos) - TVPos0;
+        if (dPos > 0.0782 && dPos < 0.1582) {
+          msg(0, "Throttle initial drive of 200 steps produced pot change of %.4lf V: In bounds", dPos);
+          Validate Throttle_Init_OK;
+        } else if (dPos < -0.0782 && dPos > -0.1582) {
+          msg(2, "Throttle initial drive of 200 steps produced pot change of %.4lf V: Direction inverted", dPos);
+          Validate Throttle_Inverted;
+        } else {
+          msg(2, "Throttle initial drive of 200 steps produced pot change of %.4lf V: Out of bounds", dPos);
+          Validate Throttle_Not_Driving_Properly;
+        }
+}
+
+State Throttle_Init_OK {
+   +1 > Drive Throttle Valve in 200
+      Validate Throttle_Valve_Idle;
+}
+
+State Throttle_Inverted {
+   +1 > Drive Throttle Valve in 200
+      Validate Throttle_Valve_Idle;
+}
+
+State Throttle_Valve_Idle {}
 
 #---------------------------------------------------------------
 # Initialization is triggered by the mainline, since we may
