@@ -42,15 +42,19 @@ State Throttle_Valve_Test_Drive {
    +1 { double dPos;
         dPos = convert(TVPos) - TVPos0;
         if (dPos > 0.0782 && dPos < 0.1582) {
-          msg(0, "Throttle initial drive of 200 steps produced pot change of %.4lf V: In bounds", dPos);
+          msg(0, "Throttle initial drive of 200 steps produced "
+                "pot change of %.4lf V: In bounds", dPos);
           Validate Throttle_Init_OK;
         } else if (dPos < -0.0782 && dPos > -0.1582) {
-          msg(2, "Throttle initial drive of 200 steps produced pot change of %.4lf V: Direction inverted", dPos);
+          msg(2, "Throttle initial drive of 200 steps produced "
+                "pot change of %.4lf V: Direction inverted", dPos);
           Validate Throttle_Inverted;
         } else {
-          msg(2, "Throttle initial drive of 200 steps produced pot change of %.4lf V: Out of bounds", dPos);
+          msg(2, "Throttle initial drive of 200 steps produced "
+                "pot change of %.4lf V: Out of bounds", dPos);
           Validate Throttle_Not_Driving_Properly;
         }
+      }
 }
 
 State Throttle_Init_OK {
@@ -62,6 +66,8 @@ State Throttle_Inverted {
    +1 > Drive Throttle Valve in 200
       Validate Throttle_Valve_Idle;
 }
+
+State Throttle_Not_Driving_Properly {}
 
 State Throttle_Valve_Idle {}
 
