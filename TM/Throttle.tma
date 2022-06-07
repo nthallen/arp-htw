@@ -33,7 +33,7 @@ State Throttle_Valve_Idle {}
 # want to wait for something.
 #---------------------------------------------------------------
 State Throttle_Valve_Init {
-# +1 > Set Throttle Valve Speed 1067 Hz
+  +1 > Set Throttle Valve Speed 1067 Hz
   +1 > Set Inlet DP Gain Gp 16.0
   +1 > Set Inlet DP Gain Gi 4.0
   +1 > Set Inlet DP SetPoint 2.25
