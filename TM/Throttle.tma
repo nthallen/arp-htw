@@ -20,13 +20,31 @@ PARTITION
   int scan_done = 0;
   double TVPos0;
   uint16_t TVStep0;
-  double dP_PI_Dir = 1.0;
+  int dP_PI_Dir = 1;
 
   #define MAX_TV_STEPS 4000
   #include <math.h> /* for fabs */
 %}
 
-State Throttle_Valve_Startup {
+State Throttle_Valve_Idle {}
+
+#---------------------------------------------------------------
+# Initialization is triggered by the mainline, since we may
+# want to wait for something.
+#---------------------------------------------------------------
+State Throttle_Valve_Init {
+# +1 > Set Throttle Valve Speed 1067 Hz
+  +1 > Set Inlet DP Gain Gp 16.0
+  +1 > Set Inlet DP Gain Gi 4.0
+  +1 > Set Inlet DP SetPoint 2.25
+# +3 > Drive Throttle Valve in 8000
+#    Hold Until (TVStat & 1) or 5
+#    else { msg(2, "Throttle Valve In Limit not observed on init"); }
+# +2 > Drive Throttle Valve out 0
+# +2 > Drive Throttle Valve out 2100
+# +2 > Drive Throttle Valve To 2100
+
+
   +5 { double Step;
        uint16_t IStep;
        TVPos0 = convert(TVPos);
@@ -47,17 +65,17 @@ State Throttle_Valve_Test_Drive {
         if (dPos > 0.0782 && dPos < 0.1582) {
           msg(0, "Throttle initial drive of 200 steps produced "
                 "pot change of %.4lf V: In bounds", dPos);
-          dP_PI_Dir = 1.0;
+          dP_PI_Dir = 1;
           Validate Throttle_Init_OK;
         } else if (dPos < -0.0782 && dPos > -0.1582) {
           msg(2, "Throttle initial drive of 200 steps produced "
                 "pot change of %.4lf V: Direction inverted", dPos);
-          dP_PI_Dir = -1.0;
-          Validate Throttle_Inverted;
+          dP_PI_Dir = -1;
+          Validate Throttle_Init_OK;
         } else {
           msg(2, "Throttle initial drive of 200 steps produced "
                 "pot change of %.4lf V: Out of bounds", dPos);
-          dP_PI_Dir = 0.;
+          dP_PI_Dir = 0;
           Validate Throttle_Not_Driving_Properly;
         }
       }
@@ -65,33 +83,12 @@ State Throttle_Valve_Test_Drive {
 
 State Throttle_Init_OK {
    +1 > Drive Throttle Valve in 200
-      Validate Throttle_Valve_Idle;
-}
-
-State Throttle_Inverted {
-   +1 > Drive Throttle Valve in 200
-      Validate Throttle_Valve_Idle;
+      Validate Throttle_Valve_Ready;
 }
 
 State Throttle_Not_Driving_Properly {}
 
-State Throttle_Valve_Idle {}
-
-#---------------------------------------------------------------
-# Initialization is triggered by the mainline, since we may
-# want to wait for something.
-#---------------------------------------------------------------
-State Throttle_Valve_Init {
-# +1 > Set Throttle Valve Speed 1067 Hz
-  +1 > Set Inlet DP Gain Gp 16.0
-  +1 > Set Inlet DP Gain Gi 4.0
-  +1 > Set Inlet DP SetPoint 2.25
-# +3 > Drive Throttle Valve in 8000
-#    Hold Until (TVStat & 1) or 5
-#    else { msg(2, "Throttle Valve In Limit not observed on init"); }
-# +2 > Drive Throttle Valve out 0
-# +2 > Drive Throttle Valve out 2100
-# +2 > Drive Throttle Valve To 2100
+State Throttle_Valve_Ready {
   depending on (RECORD) { Validate Throttle_Valve_PI_Init; }
 }
 
@@ -135,8 +132,8 @@ State Throttle_Valve_PI NoLog {
     unsigned short ustep;
     DP = convert(InlDP);
     DP_set = convert(TV_DP_Set);
-    Gp = dP_PI_Dir * convert(TV_Gp);
-    Gi = dP_PI_Dir * convert(TV_Gi);
+    Gp = convert(TV_Gp);
+    Gi = convert(TV_Gi);
     DP_diff = DP - DP_set;
     DP_sum += DP_diff * Gi;
     if ( DP_sum > MAX_TV_STEPS )
@@ -144,7 +141,8 @@ State Throttle_Valve_PI NoLog {
     else if ( DP_sum < -MAX_TV_STEPS )
       DP_sum = -MAX_PINCH_STEPS/Gi;
 
-    dstep = DP_diff * Gp + DP_sum + TVStep0;
+    dstep = DP_diff * Gp + DP_sum;
+    dstep = TVStep0 + dP_PI_Dir * (dstep - TVStep0);
     if (dstep<0) dstep = 0;
     else if (dstep > MAX_TV_STEPS) dstep = MAX_TV_STEPS;
     ustep = US_CAST(dstep);
