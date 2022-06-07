@@ -568,6 +568,24 @@ State PV_Failure NoLog {
 
 
 #---------------------------------------------------------------
+# Partition 7A: Cell Pressure Assistance
+#---------------------------------------------------------------
+Partition
+
+State Cell_P_Assist_Off {
+      Hold Until (convert(DACS_P) < 55.);
+      Validate Cell_P_Assist_On;
+}
+
+State Cell_P_Assist_Off {
+      > Set Inlet dP setpoint 5
+      Hold Until (convert(DACS_P) >= 60.);
+  +1  > Set Inlet dP setpoint 2.25
+      Validate Cell_P_Assist_On;
+}
+
+
+#---------------------------------------------------------------
 # Partition 8: Forward Cover Fan Control
 #---------------------------------------------------------------
 Partition
