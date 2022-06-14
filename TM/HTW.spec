@@ -31,13 +31,13 @@ genuibase = HTW.genui
 genuibase = TS.genui
 genuibase = SW.genui
 
-Module TMbase
-Module Meerstetter src=Meerstetter.txt
-Module QCLI mode=noise
-Module mksflow src=mksflow.txt
+Module TMbase Panel=HK:
+Module Meerstetter src=Meerstetter.txt Panel=ME:
+Module QCLI mode=noise Panel=HK:
+Module mksflow src=mksflow.txt Panel=Flows:
 Module mains
-Module IWG1
-Module icosfitd MirrorLoss=114.0
+Module IWG1 Panel=IWG1:
+Module icosfitd MirrorLoss=114.0 Panel=Detection:
 Module Uplink
 
 SCRIPT = idx.idx64

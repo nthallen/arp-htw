@@ -3,26 +3,120 @@ MNEMONIC htw
 HOMEDIR HTW_Data_Dir
 ROWS 18
 
-1 GD_1T GasDeck T
-1 GD_2T GasDeck T
-1 GD_3T GasDeck T
-1 GasFl GasDeck Flow
-1 GasHP GasDeck HP
-1 GasLP GasDeck LP
-# 1 GsFl1St GasDeck Flow
+1 LPV_P   Detection:LPV P
+1 LPV_T1C Detection:LPV T %.3lf 1
+1 LPV_T2C Detection:LPV T %.3lf 2
+1 LPV_RHC Detection:LPV RH RH
+1 0:LPV_PTRHS:0 Detection:LPV Status %.0lf
+1 1:LPV_PTRHS:1 Detection:LPV Status %.0lf
+1 2:LPV_PTRHS:2 Detection:LPV Status %.0lf
+1 3:LPV_PTRHS:3 Detection:LPV Status %.0lf
+1 4:LPV_PTRHS:4 Detection:LPV Status %.0lf
+1 5:LPV_PTRHS:5 Detection:LPV Status %.0lf
+1 6:LPV_PTRHS:6 Detection:LPV Status %.0lf
+1 7:LPV_PTRHS:7 Detection:LPV Status %.0lf
+1 8:LPV_PTRHS:8 Detection:LPV Status %.0lf
+1 9:LPV_PTRHS:9 Detection:LPV Status %.0lf
+1 10:LPV_PTRHS:10 Detection:LPV Status %.0lf
+1 11:LPV_PTRHS:11 Detection:LPV Status %.0lf
+1 LH__T  Detection:LPV T
+# 1 LPVCT  Detection:LPV CT
+# 1 LPVTSt Detection:LPV CT
+# 1 LTE2R7T Detection:LPV LaserT
+1 Las_I   Detection:LPV LaserI
 
-# 1 BGsFlSt Bubbler Flow
-1 BubFl   Bubbler Flow
-1 BubLP   Bubbler P
-1 Bub_P   Bubbler P
-1 Bub_T   Bubbler T
+1 CellP  Detection:Cell P
+1 Cel2P  Detection:Cell P
+# 1 CelCT  Detection:Cell TS
+# 1 CelTSt Detection:Cell TS
+
+1 DPV_P   Detection:DPV P
+1 DPV_T1C Detection:DPV T %.3lf 1
+1 DPV_T2C Detection:DPV T %.3lf 2
+1 DPV_RHC Detection:DPV RH RH
+1 0:DPV_PTRHS:0 Detection:DPV Status %.0lf
+1 1:DPV_PTRHS:1 Detection:DPV Status %.0lf
+1 2:DPV_PTRHS:2 Detection:DPV Status %.0lf
+1 3:DPV_PTRHS:3 Detection:DPV Status %.0lf
+1 4:DPV_PTRHS:4 Detection:DPV Status %.0lf
+1 5:DPV_PTRHS:5 Detection:DPV Status %.0lf
+1 6:DPV_PTRHS:6 Detection:DPV Status %.0lf
+1 7:DPV_PTRHS:7 Detection:DPV Status %.0lf
+1 8:DPV_PTRHS:8 Detection:DPV Status %.0lf
+1 9:DPV_PTRHS:9 Detection:DPV Status %.0lf
+1 10:DPV_PTRHS:10 Detection:DPV Status %.0lf
+1 11:DPV_PTRHS:11 Detection:DPV Status %.0lf
+1 Det_T  Detection:DPV T
+1 DetCT  Detection:DPV CT
+1 DTECI  Detection:DPV Current
+# 1 DPVCT  Detection:DPV CT
+# 1 DPVTSt Detection:DPV CT
+
+1 InlDP Flows:Inlet DP
+1 Inl_T Flows:Inlet T
+1 WingT Flows:Inlet T
+1 Elb_T Flows:Inlet T
+
+1 TVStep Flows:TV Step
+1 TVPos Flows:TV Pot
+# 1 TVStat
+1 C:TVStat:7 Flows:TV Bits
+1 Z:TVStat:6 Flows:TV Bits
+1 B:TVStat:5 Flows:TV Bits
+1 A:TVStat:4 Flows:TV Bits
+1 R:TVStat:3 Flows:TV Bits
+1 D:TVStat:2 Flows:TV Bits
+1 O:TVStat:1 Flows:TV Bits
+1 I:TVStat:0 Flows:TV Bits
+4 TVScan:IXStt:1 Flows:TV Bits
+
+1 PD_DP   Flows:PD    DP
+1 PDSkT   Flows:PD    T
+1 PD__P   Flows:PD    P
+1 PD__T   Flows:PD    T
+
+1 PVStep  Flows:PV  Step
+1 PVPos   Flows:PV  Pot
+1 C:PVStat:7 Flows:PV Bits
+1 Z:PVStat:6 Flows:PV Bits
+1 B:PVStat:5 Flows:PV Bits
+1 A:PVStat:4 Flows:PV Bits
+1 R:PVStat:3 Flows:PV Bits
+1 D:PVStat:2 Flows:PV Bits
+1 O:PVStat:1 Flows:PV Bits
+1 I:PVStat:0 Flows:PV Bits
+1 PV_Gi Flows:PV Gains
+1 PV_Gp Flows:PV Gains
+1 Cel2P  Flows:PV P
+
+1 GD_1T Flows:GasDeck T
+1 GD_2T Flows:GasDeck T
+1 GD_3T Flows:GasDeck T
+1 GasFl Flows:GasDeck Flow
+1 GasHP Flows:GasDeck HP
+1 GasLP Flows:GasDeck LP
+# 1 GsFl1St Flows:GasDeck Flow
+
+1 Exh_Vlv_DS:DS08:4 Flows:GasDeck Commands
+1 Exh_Vlv_S:DS16:4 Flows:GasDeck Commands
+1 Gas_Vlv_D_DS:DS08:0 Flows:GasDeck Commands
+1 Gas_Vlv_D_S:DS16:0 Flows:GasDeck Commands
+1 Bub_In_Vlv_DS:DS14:4 Flows:GasDeck Commands
+1 Bub_Out_Vlv_DS:DS14:5 Flows:GasDeck Commands
+1 Det_TEC_DS:DS09:0 Flows:GasDeck Commands
+1 Det_TEC_S:DS17:0 Flows:GasDeck Commands
+1 Fwd_Exh_DS:DS09:4 Flows:GasDeck Commands
+1 Fwd_Exh_S:DS17:4 Flows:GasDeck Commands
+1 Aft_Exh_DS:DS09:6 Flows:GasDeck Commands
+1 Aft_Exh_S:DS17:6 Flows:GasDeck Commands
+
+# 1 BGsFlSt Flows:Bubbler Flow
+1 BubFl   Flows:Bubbler Flow
+1 BubLP   Flows:Bubbler P
+1 Bub_P   Flows:Bubbler P
+1 Bub_T   Flows:Bubbler T
 
 # 4 IXStt
-
-1 InlDP Inlet DP
-1 Inl_T Inlet T
-1 WingT Inlet T
-1 Elb_T Inlet T
 
 #1 L1Flw
 #1 L2Flw
@@ -33,184 +127,88 @@ ROWS 18
 #1 LFB_T
 #1 LFT_P
 
-1 DPV_P   DPV_PTRH P
-1 DPV_T1C DPV_PTRH T %.3lf 1
-1 DPV_T2C DPV_PTRH T %.3lf 2
-1 DPV_RHC DPV_PTRH RH RH
-1 0:DPV_PTRHS:0 DPV_PTRH Status %.0lf
-1 1:DPV_PTRHS:1 DPV_PTRH Status %.0lf
-1 2:DPV_PTRHS:2 DPV_PTRH Status %.0lf
-1 3:DPV_PTRHS:3 DPV_PTRH Status %.0lf
-1 4:DPV_PTRHS:4 DPV_PTRH Status %.0lf
-1 5:DPV_PTRHS:5 DPV_PTRH Status %.0lf
-1 6:DPV_PTRHS:6 DPV_PTRH Status %.0lf
-1 7:DPV_PTRHS:7 DPV_PTRH Status %.0lf
-1 8:DPV_PTRHS:8 DPV_PTRH Status %.0lf
-1 9:DPV_PTRHS:9 DPV_PTRH Status %.0lf
-1 10:DPV_PTRHS:10 DPV_PTRH Status %.0lf
-1 11:DPV_PTRHS:11 DPV_PTRH Status %.0lf
-
-1 Det_T  DPV T
-1 DetCT  DPV CT
-1 DTECI  DPV Current
-# 1 DPVCT  DPV CT
-# 1 DPVTSt DPV CT
-
-1 LPV_P   LPV_PTRH P
-1 LPV_T1C LPV_PTRH T %.3lf 1
-1 LPV_T2C LPV_PTRH T %.3lf 2
-1 LPV_RHC LPV_PTRH RH RH
-1 0:LPV_PTRHS:0 LPV_PTRH Status %.0lf
-1 1:LPV_PTRHS:1 LPV_PTRH Status %.0lf
-1 2:LPV_PTRHS:2 LPV_PTRH Status %.0lf
-1 3:LPV_PTRHS:3 LPV_PTRH Status %.0lf
-1 4:LPV_PTRHS:4 LPV_PTRH Status %.0lf
-1 5:LPV_PTRHS:5 LPV_PTRH Status %.0lf
-1 6:LPV_PTRHS:6 LPV_PTRH Status %.0lf
-1 7:LPV_PTRHS:7 LPV_PTRH Status %.0lf
-1 8:LPV_PTRHS:8 LPV_PTRH Status %.0lf
-1 9:LPV_PTRHS:9 LPV_PTRH Status %.0lf
-1 10:LPV_PTRHS:10 LPV_PTRH Status %.0lf
-1 11:LPV_PTRHS:11 LPV_PTRH Status %.0lf
-
-1 LH__T  LPV T
-# 1 LPVCT  LPV CT
-# 1 LPVTSt LPV CT
-# 1 LTE2R7T LPV LaserT
-1 Las_I   LPV LaserI
-
-1 PDSkT   PD    T
-1 PD_DP   PD    DP
-1 PD__P   PD    P
-1 PD__T   PD    T
-
-1 TVStep TV Step
-1 TVPos TV Pot
-# 1 TVStat
-1 C:TVStat:7 TV Bits
-1 Z:TVStat:6 TV Bits
-1 B:TVStat:5 TV Bits
-1 A:TVStat:4 TV Bits
-1 R:TVStat:3 TV Bits
-1 D:TVStat:2 TV Bits
-1 O:TVStat:1 TV Bits
-1 I:TVStat:0 TV Bits
-4 TVScan:IXStt:1 TV Bits
-
-1 PVStep  PV  Step
-1 PVPos   PV  Pot
-1 C:PVStat:7 PV Bits
-1 Z:PVStat:6 PV Bits
-1 B:PVStat:5 PV Bits
-1 A:PVStat:4 PV Bits
-1 R:PVStat:3 PV Bits
-1 D:PVStat:2 PV Bits
-1 O:PVStat:1 PV Bits
-1 I:PVStat:0 PV Bits
-1 PV_Gi PV Gains
-1 PV_Gp PV Gains
-1 Cel2P  PV P
-
-1 Rov1T TE Rovers 1
-1 Rov2T TE Rovers 2
-1 Rov3T TE Rovers 3
-1 Rov4T TE Rovers 4
-1 Rov5T TE Rovers 5
-1 Rov6T TE Rovers 6
-1 Rov7T TE Rovers 7
-1 Rov8T TE Rovers 8
-1 Rov9T TE Rovers 9
-1 Skn1T TE Skin 1
-1 Skn2T TE Skin 2
-1 Skn3T TE Skin 3
-1 Skn4T TE Skin 4
-1 Skn5T TE Skin 5
-
-1 CellP  Cell P
-1 Cel2P  Cell P
-# 1 CelCT  Cell TS
-# 1 CelTSt Cell TS
+1 Rov1T HK:Temps Rovers 1
+1 Rov2T HK:Temps Rovers 2
+1 Rov3T HK:Temps Rovers 3
+1 Rov4T HK:Temps Rovers 4
+1 Rov5T HK:Temps Rovers 5
+1 Rov6T HK:Temps Rovers 6
+1 Rov7T HK:Temps Rovers 7
+1 Rov8T HK:Temps Rovers 8
+1 Rov9T HK:Temps Rovers 9
+1 Skn1T HK:Temps Skin 1
+1 Skn2T HK:Temps Skin 2
+1 Skn3T HK:Temps Skin 3
+1 Skn4T HK:Temps Skin 4
+1 Skn5T HK:Temps Skin 5
 
 #1 PMotT   Pump  T
 #1 PumpT   Pump  T
 #1 Scroll_Pump_DS:DS08:4 Pump Status
 
-  1 Cmd0_I  Commands I 0
-# 1 Cmd1_I  Commands I 1
-# 1 Cmd2_I  Commands I 2
-# 1 Cmd3_I  Commands I 3
-  1 Cmd4_I  Commands I 4
-# 1 Cmd5_I  Commands I 5
-# 1 Cmd6_I  Commands I 6
-# 1 Cmd7_I  Commands I 7
-# 1 Cmd8_I  Commands I 8
-# 1 Cmd9_I  Commands I 9
-# 1 Cmd10_I Commands I 10
-# 1 Cmd11_I Commands I 11
-# 1 Cmd12_I Commands I 12
-# 1 Cmd13_I Commands I 13
-# 1 Cmd20_I Commands I 20
-# 1 Cmd23_I Commands I 23
 
+1 PC__T   HK:PDACS T
+1 PS__T   HK:PDACS T
+1 SSP_T   HK:PDACS T
+1 IOSwS   HK:PDACS IOSwS %.0lf
+1 V28V1   HK:PDACS V
+1 V28V2   HK:PDACS V
+1 V28V3   HK:PDACS V
+1 V28V4   HK:PDACS V
+1 V28I1   HK:PDACS I
+1 V28I2   HK:PDACS I
+1 V28I3   HK:PDACS I
+1 V28I4   HK:PDACS I
+1 VM1_S   HK:PDACS PMStat %.0lf
+1 VM2_S   HK:PDACS PMStat %.0lf
+1 0:AIStat:0 HK:PDACS AIStat %.0lf
+1 1:AIStat:1 HK:PDACS AIStat %.0lf
+1 2:AIStat:2 HK:PDACS AIStat %.0lf
+1 3:AIStat:3 HK:PDACS AIStat %.0lf
+1 4:AIStat:4 HK:PDACS AIStat %.0lf
+1 5:AIStat:5 HK:PDACS AIStat %.0lf
+1 6:AIStat:6 HK:PDACS AIStat %.0lf
+1 7:AIStat:7 HK:PDACS AIStat %.0lf
+1 8:AIStat:8 HK:PDACS AIStat %.0lf
+1 9:AIStat:9 HK:PDACS AIStat %.0lf
+1 10:AIStat:10 HK:PDACS AIStat %.0lf
+1 11:AIStat:11 HK:PDACS AIStat %.0lf
 
-1 Exh_Vlv_DS:DS08:4 GasDeck Commands
-1 Exh_Vlv_S:DS16:4 GasDeck Commands
-1 Gas_Vlv_D_DS:DS08:0 GasDeck Commands
-1 Gas_Vlv_D_S:DS16:0 GasDeck Commands
-1 Bub_In_Vlv_DS:DS14:4 GasDeck Commands
-1 Bub_Out_Vlv_DS:DS14:5 GasDeck Commands
-1 Det_TEC_DS:DS09:0 GasDeck Commands
-1 Det_TEC_S:DS17:0 GasDeck Commands
-1 Fwd_Exh_DS:DS09:4 GasDeck Commands
-1 Fwd_Exh_S:DS17:4 GasDeck Commands
-1 Aft_Exh_DS:DS09:6 GasDeck Commands
-1 Aft_Exh_S:DS17:6 GasDeck Commands
+1 DACS_P   HK:PDACS P
+1 DACS_T1C HK:PDACS T DACS1
+1 DACS_T2C HK:PDACS T DACS2
+1 DACS_RHC HK:PDACS RH RH
+1 0:DACS_PTRHS:0 HK:PDACS PTRH %.0lf
+1 1:DACS_PTRHS:1 HK:PDACS PTRH %.0lf
+1 2:DACS_PTRHS:2 HK:PDACS PTRH %.0lf
+1 3:DACS_PTRHS:3 HK:PDACS PTRH %.0lf
+1 4:DACS_PTRHS:4 HK:PDACS PTRH %.0lf
+1 5:DACS_PTRHS:5 HK:PDACS PTRH %.0lf
+1 6:DACS_PTRHS:6 HK:PDACS PTRH %.0lf
+1 7:DACS_PTRHS:7 HK:PDACS PTRH %.0lf
+1 8:DACS_PTRHS:8 HK:PDACS PTRH %.0lf
+1 9:DACS_PTRHS:9 HK:PDACS PTRH %.0lf
+1 10:DACS_PTRHS:10 HK:PDACS PTRH %.0lf
+1 11:DACS_PTRHS:11 HK:PDACS PTRH %.0lf
 
-1 PC__T   PDACS T
-1 PS__T   PDACS T
-1 SSP_T   PDACS T
-1 IOSwS   PDACS IOSwS %.0lf
-1 V28V1   PDACS V
-1 V28V2   PDACS V
-1 V28V3   PDACS V
-1 V28V4   PDACS V
-1 V28I1   PDACS I
-1 V28I2   PDACS I
-1 V28I3   PDACS I
-1 V28I4   PDACS I
-1 VM1_S   PDACS PMStat %.0lf
-1 VM2_S   PDACS PMStat %.0lf
-1 0:AIStat:0 PDACS AIStat %.0lf
-1 1:AIStat:1 PDACS AIStat %.0lf
-1 2:AIStat:2 PDACS AIStat %.0lf
-1 3:AIStat:3 PDACS AIStat %.0lf
-1 4:AIStat:4 PDACS AIStat %.0lf
-1 5:AIStat:5 PDACS AIStat %.0lf
-1 6:AIStat:6 PDACS AIStat %.0lf
-1 7:AIStat:7 PDACS AIStat %.0lf
-1 8:AIStat:8 PDACS AIStat %.0lf
-1 9:AIStat:9 PDACS AIStat %.0lf
-1 10:AIStat:10 PDACS AIStat %.0lf
-1 11:AIStat:11 PDACS AIStat %.0lf
+  1 Cmd0_I  HK:PDACS I 0
+# 1 Cmd1_I  HK:PDACS I 1
+# 1 Cmd2_I  HK:PDACS I 2
+# 1 Cmd3_I  HK:PDACS I 3
+  1 Cmd4_I  HK:PDACS I 4
+# 1 Cmd5_I  HK:PDACS I 5
+# 1 Cmd6_I  HK:PDACS I 6
+# 1 Cmd7_I  HK:PDACS I 7
+# 1 Cmd8_I  HK:PDACS I 8
+# 1 Cmd9_I  HK:PDACS I 9
+# 1 Cmd10_I HK:PDACS I 10
+# 1 Cmd11_I HK:PDACS I 11
+# 1 Cmd12_I HK:PDACS I 12
+# 1 Cmd13_I HK:PDACS I 13
+# 1 Cmd20_I HK:PDACS I 20
+# 1 Cmd23_I HK:PDACS I 23
 
-1 DACS_P   DACS_PTRH P
-1 DACS_T1C DACS_PTRH T 1
-1 DACS_T2C DACS_PTRH T 2
-1 DACS_RHC DACS_PTRH RH RH
-1 0:DACS_PTRHS:0 DACS_PTRH Status %.0lf
-1 1:DACS_PTRHS:1 DACS_PTRH Status %.0lf
-1 2:DACS_PTRHS:2 DACS_PTRH Status %.0lf
-1 3:DACS_PTRHS:3 DACS_PTRH Status %.0lf
-1 4:DACS_PTRHS:4 DACS_PTRH Status %.0lf
-1 5:DACS_PTRHS:5 DACS_PTRH Status %.0lf
-1 6:DACS_PTRHS:6 DACS_PTRH Status %.0lf
-1 7:DACS_PTRHS:7 DACS_PTRH Status %.0lf
-1 8:DACS_PTRHS:8 DACS_PTRH Status %.0lf
-1 9:DACS_PTRHS:9 DACS_PTRH Status %.0lf
-1 10:DACS_PTRHS:10 DACS_PTRH Status %.0lf
-1 11:DACS_PTRHS:11 DACS_PTRH Status %.0lf
-
-1 SW_St  Misc SW_St
+1 SW_St  HK:Misc SW_St
 # 1 PampT  Misc PampT
 
 

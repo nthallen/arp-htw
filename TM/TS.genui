@@ -1,14 +1,14 @@
-#1 TS0_T Temp_Sensors Temp %.2lf
- 1 TS1_T Temp_Sensors Temp %.2lf
- 1 TS1_T Cell T %.2lf
- 1 TS2_T Temp_Sensors Temp %.2lf
- 1 TS2_T Cell T %.2lf
- 1 TS3_T Temp_Sensors Temp %.2lf
-#1 TS4_T Temp_Sensors Temp %.2lf
-#1 TS5_T Temp_Sensors Temp %.2lf
-#1 TS0_cnt Temp_Sensors Count %.0lf
- 1 TS1_cnt Temp_Sensors Count %.0lf
- 1 TS2_cnt Temp_Sensors Count %.0lf
- 1 TS3_cnt Temp_Sensors Count %.0lf
-#1 TS4_cnt Temp_Sensors Count %.0lf
-#1 TS5_cnt Temp_Sensors Count %.0lf
+#1 TS0_T HK:Temps Temp_Sensors %.2lf
+#1 TS1_T HK:Temps Temp_Sensors %.2lf
+ 1 TS1_T Detection:Cell T %.2lf
+#1 TS2_T HK:Temps Temp_Sensors %.2lf
+ 1 TS2_T Detection:Cell T %.2lf
+ 1 TS3_T HK:Temps Temp_Sensors %.2lf
+#1 TS4_T HK:Temps Temp_Sensors %.2lf
+#1 TS5_T HK:Temps Temp_Sensors %.2lf
+#1 TS0_cnt HK:Misc TS_Counts %.0lf
+ 1 TS1_cnt HK:Misc TS_Counts %.0lf
+ 1 TS2_cnt HK:Misc TS_Counts %.0lf
+ 1 TS3_cnt HK:Misc TS_Counts %.0lf
+#1 TS4_cnt HK:Misc TS_Counts %.0lf
+#1 TS5_cnt HK:Misc TS_Counts %.0lf
