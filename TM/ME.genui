@@ -1,72 +1,71 @@
-  1 ME_Stale ME_Stale ME_Stale
-  1 LTE_ErrorNumber ME_Errors LTE_Errors
-  1 LTE_ErrorInstance ME_Errors LTE_Errors
-  1 LTE_ErrorParameter ME_Errors LTE_Errors
-  1 LTE_Stale ME_Stale LTE_Stale
-  1 LTE_T ME_LTE Temp %.2lf
-  1 LTE_Set_T ME_LTE Temp
-  1 LTE_Sink_T ME_LTE Temp
-  1 LTE_OutputCurrent ME_LTE Current
-  1 LTE_OutputVoltage ME_LTE Voltage
-  1 LTE_DevStatus ME_LTE Status %.0lf
-  1 LPV_ErrorNumber ME_Errors LPV_Errors
-  1 LPV_ErrorInstance ME_Errors LPV_Errors
-  1 LPV_ErrorParameter ME_Errors LPV_Errors
-  1 LPV_Stale ME_Stale LPV_Stale
-  1 LPV_T ME_LPV Temp %.2lf
-  1 LPV_Set_T ME_LPV Temp
-  1 LPV_Sink_T ME_LPV Temp
-  1 LPV_OutputCurrent ME_LPV Current
-  1 LPV_OutputVoltage ME_LPV Voltage
-  1 LPV_DevStatus ME_LPV Status %.0lf
-  1 Plate_ErrorNumber ME_Errors Plate_Errors
-  1 Plate_ErrorInstance ME_Errors Plate_Errors
-  1 Plate_ErrorParameter ME_Errors Plate_Errors
-  1 Plate_Stale ME_Stale Plate_Stale
-  1 Plate_T ME_Plate Temp %.2lf
-  1 Plate_Set_T ME_Plate Temp
-  1 Plate_Sink_T ME_Plate Temp
-  1 Plate_OutputCurrent ME_Plate Current
-  1 Plate_OutputVoltage ME_Plate Voltage
-  1 Plate_DevStatus ME_Plate Status %.0lf
-  1 Cover_ErrorNumber ME_Errors Cover_Errors
-  1 Cover_ErrorInstance ME_Errors Cover_Errors
-  1 Cover_ErrorParameter ME_Errors Cover_Errors
-  1 Cover_Stale ME_Stale Cover_Stale
-  1 Cover_T ME_Cover Temp %.2lf
-  1 Cover_Set_T ME_Cover Temp
-  1 Cover_Sink_T ME_Cover Temp
-  1 Cover_OutputCurrent ME_Cover Current
-  1 Cover_OutputVoltage ME_Cover Voltage
-  1 Cover_DevStatus ME_Cover Status %.0lf
-  1 Cell_ErrorNumber ME_Errors Cell_Errors
-  1 Cell_ErrorInstance ME_Errors Cell_Errors
-  1 Cell_ErrorParameter ME_Errors Cell_Errors
-  1 Cell_Stale ME_Stale Cell_Stale
-  1 Cell_T ME_Cell Temp %.2lf
-  1 Cell_Set_T ME_Cell Temp
-  1 Cell_Sink_T ME_Cell Temp
-  1 Cell_OutputCurrent ME_Cell Current
-  1 Cell_OutputVoltage ME_Cell Voltage
-  1 Cell_DevStatus ME_Cell Status %.0lf
-  1 DPV_ErrorNumber ME_Errors DPV_Errors
-  1 DPV_ErrorInstance ME_Errors DPV_Errors
-  1 DPV_ErrorParameter ME_Errors DPV_Errors
-  1 DPV_Stale ME_Stale DPV_Stale
-  1 DPV_T ME_DPV Temp %.2lf
-  1 DPV_Set_T ME_DPV Temp
-  1 DPV_Sink_T ME_DPV Temp
-  1 DPV_OutputCurrent ME_DPV Current
-  1 DPV_OutputVoltage ME_DPV Voltage
-  1 DPV_DevStatus ME_DPV Status %.0lf
-  1 BubC_ErrorNumber ME_Errors BubC_Errors
-  1 BubC_ErrorInstance ME_Errors BubC_Errors
-  1 BubC_ErrorParameter ME_Errors BubC_Errors
-  1 BubC_Stale ME_Stale BubC_Stale
-  1 BubC_T ME_BubC Temp %.2lf
-  1 BubC_Set_T ME_BubC Temp
-  1 BubC_Sink_T ME_BubC Temp
-  1 BubC_OutputCurrent ME_BubC Current
-  1 BubC_OutputVoltage ME_BubC Voltage
-  1 BubC_DevStatus ME_BubC Status %.0lf
-  1 ME_Stale ME Stale
+  1 ME_Stale ME:ME_Stale ME_Stale
+  1 LTE_ErrorNumber ME:ME_Errors LTE_Errors
+  1 LTE_ErrorInstance ME:ME_Errors LTE_Errors
+  1 LTE_ErrorParameter ME:ME_Errors LTE_Errors
+  1 LTE_Stale ME:ME_Stale LTE_Stale
+  1 LTE_T ME:ME_LTE Temp %.2lf
+  1 LTE_Set_T ME:ME_LTE Temp
+  1 LTE_Sink_T ME:ME_LTE Temp
+  1 LTE_OutputCurrent ME:ME_LTE Current
+  1 LTE_OutputVoltage ME:ME_LTE Voltage
+  1 LTE_DevStatus ME:ME_LTE Status %.0lf
+  1 LPV_ErrorNumber ME:ME_Errors LPV_Errors
+  1 LPV_ErrorInstance ME:ME_Errors LPV_Errors
+  1 LPV_ErrorParameter ME:ME_Errors LPV_Errors
+  1 LPV_Stale ME:ME_Stale LPV_Stale
+  1 LPV_T ME:ME_LPV Temp %.2lf
+  1 LPV_Set_T ME:ME_LPV Temp
+  1 LPV_Sink_T ME:ME_LPV Temp
+  1 LPV_OutputCurrent ME:ME_LPV Current
+  1 LPV_OutputVoltage ME:ME_LPV Voltage
+  1 LPV_DevStatus ME:ME_LPV Status %.0lf
+  1 Plate_ErrorNumber ME:ME_Errors Plate_Errors
+  1 Plate_ErrorInstance ME:ME_Errors Plate_Errors
+  1 Plate_ErrorParameter ME:ME_Errors Plate_Errors
+  1 Plate_Stale ME:ME_Stale Plate_Stale
+  1 Plate_T ME:ME_Plate Temp %.2lf
+  1 Plate_Set_T ME:ME_Plate Temp
+  1 Plate_Sink_T ME:ME_Plate Temp
+  1 Plate_OutputCurrent ME:ME_Plate Current
+  1 Plate_OutputVoltage ME:ME_Plate Voltage
+  1 Plate_DevStatus ME:ME_Plate Status %.0lf
+  1 Cover_ErrorNumber ME:ME_Errors Cover_Errors
+  1 Cover_ErrorInstance ME:ME_Errors Cover_Errors
+  1 Cover_ErrorParameter ME:ME_Errors Cover_Errors
+  1 Cover_Stale ME:ME_Stale Cover_Stale
+  1 Cover_T ME:ME_Cover Temp %.2lf
+  1 Cover_Set_T ME:ME_Cover Temp
+  1 Cover_Sink_T ME:ME_Cover Temp
+  1 Cover_OutputCurrent ME:ME_Cover Current
+  1 Cover_OutputVoltage ME:ME_Cover Voltage
+  1 Cover_DevStatus ME:ME_Cover Status %.0lf
+  1 Cell_ErrorNumber ME:ME_Errors Cell_Errors
+  1 Cell_ErrorInstance ME:ME_Errors Cell_Errors
+  1 Cell_ErrorParameter ME:ME_Errors Cell_Errors
+  1 Cell_Stale ME:ME_Stale Cell_Stale
+  1 Cell_T ME:ME_Cell Temp %.2lf
+  1 Cell_Set_T ME:ME_Cell Temp
+  1 Cell_Sink_T ME:ME_Cell Temp
+  1 Cell_OutputCurrent ME:ME_Cell Current
+  1 Cell_OutputVoltage ME:ME_Cell Voltage
+  1 Cell_DevStatus ME:ME_Cell Status %.0lf
+  1 DPV_ErrorNumber ME:ME_Errors DPV_Errors
+  1 DPV_ErrorInstance ME:ME_Errors DPV_Errors
+  1 DPV_ErrorParameter ME:ME_Errors DPV_Errors
+  1 DPV_Stale ME:ME_Stale DPV_Stale
+  1 DPV_T ME:ME_DPV Temp %.2lf
+  1 DPV_Set_T ME:ME_DPV Temp
+  1 DPV_Sink_T ME:ME_DPV Temp
+  1 DPV_OutputCurrent ME:ME_DPV Current
+  1 DPV_OutputVoltage ME:ME_DPV Voltage
+  1 DPV_DevStatus ME:ME_DPV Status %.0lf
+  1 BubC_ErrorNumber ME:ME_Errors BubC_Errors
+  1 BubC_ErrorInstance ME:ME_Errors BubC_Errors
+  1 BubC_ErrorParameter ME:ME_Errors BubC_Errors
+  1 BubC_Stale ME:ME_Stale BubC_Stale
+  1 BubC_T ME:ME_BubC Temp %.2lf
+  1 BubC_Set_T ME:ME_BubC Temp
+  1 BubC_Sink_T ME:ME_BubC Temp
+  1 BubC_OutputCurrent ME:ME_BubC Current
+  1 BubC_OutputVoltage ME:ME_BubC Voltage
+  1 BubC_DevStatus ME:ME_BubC Status %.0lf
