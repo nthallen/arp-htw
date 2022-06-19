@@ -18,6 +18,15 @@
        Vals[0] #17 Line 1 Floating
        Vals[1] #23 nu_F0 Value
        Vals[2] #25 N[H2O] Value
+  6/19/2022
+    Adjusted the waveform to provide more baseline on the left.
+    Reverted to a 3p3er, which restores the original column
+    parameters. This also moved the line out about 150 samples.
+    -l 470:620
+    -P #17,19,32 # Report columns
+       Vals[0] #17 Line 1 Floating
+       Vals[1] #19 nu_F0 Value
+       Vals[2] #32 N[H2O] Value
 */
 TM typedef uint32_t icos_scan_t { text "%7u"; }
 TM typedef float icos_float { text "%6.1f"; }
