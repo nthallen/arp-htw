@@ -18,15 +18,15 @@ Lines = {
   1 1  3777.949200  2.683e-21 0.0975   173.3658 0.55  0.000100 556534, Group H2O, Position=%d, Fix Doppler, Fix Lorentz;
 };
 
-LineMargin = 0.05 cm-1;
-LineMarginMultiplier = 8;
+LineMargin = 0.1 cm-1;
+LineMarginMultiplier = 16;
 epsilon2 = 1e-4;
 MirrorLoss = @MirrorLoss@ ppm;
 CavityLength = 50.000;
 EtalonFSR = 0.031500 cm-1;
 Binary;
 ICOSdir = @RAW@;
-BaselineFile = sbase.3p.ptb;
+BaselineFile = sbase.3p3er.ptb;
 OutputFile = ICOSsum.fifo;
 LogFile = ICOSfit.log;
 NoTee;
