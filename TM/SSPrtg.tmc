@@ -13,6 +13,8 @@ ci_sendfcmd(2, "PhRTG Datum SSP_noise %.2lf %7.1f %7.1f\n",
 ci_sendfcmd(2, "PhRTG Datum SSP_noise_pct %.2lf %.5f %.5f\n",
     dtime(), SSP_noise_pct0, SSP_noise_pct1);
 
+ci_sendfcmd(2, "PhRTG Datum TVPos %lu %s\n", itime(), text(TVPos));
+ci_sendfcmd(2, "PhRTG Datum TVStep %lu %s\n", itime(), text(TVStep));
 ci_sendfcmd(2, "PhRTG Datum InlDP %lu %s %.1lf\n", itime(),
   text(InlDP), convert(TV_DP_Set));
 ci_sendfcmd(2, "PhRTG Datum LTE %lu %s %.2lf %.2lf\n", itime(),
