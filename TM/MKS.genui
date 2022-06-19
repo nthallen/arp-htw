@@ -1,15 +1,15 @@
-  1 AirF_Status MKS_HK Status %.0lf
-  1 AirF_Stale  MKS_HK Stale
-  1 AirF_ACK    MKS_HK ACK %.0lf
-  1 AirF_ACK2   MKS_HK ACK2 %.0lf
-  1 AirF_T      MKS_HK Temp
-  1 AirF_Set    MKS AirF_Flow
-  1 AirF_Flow   MKS AirF_Flow
-  1 BubF_Status MKS_HK Status %.0lf
-  1 BubF_Stale  MKS_HK Stale
-  1 BubF_ACK    MKS_HK ACK %.0lf
-  1 BubF_ACK2   MKS_HK ACK2 %.0lf
-  1 BubF_T      MKS_HK Temp
-  1 BubF_Set    MKS BubF_Flow
-  1 BubF_Flow   MKS BubF_Flow
-  1 MKS_Stale MKS_HK Stale
+  1 AirF_Status Flows:MKS_HK Status %.0lf
+  1 AirF_Stale  Flows:MKS_HK Stale
+  1 AirF_ACK    Flows:MKS_HK ACK %.0lf
+  1 AirF_ACK2   Flows:MKS_HK ACK2 %.0lf
+  1 AirF_T      Flows:MKS_HK Temp
+  1 AirF_Set    Flows:MKS AirF_Flow
+  1 AirF_Flow   Flows:MKS AirF_Flow
+  1 BubF_Status Flows:MKS_HK Status %.0lf
+  1 BubF_Stale  Flows:MKS_HK Stale
+  1 BubF_ACK    Flows:MKS_HK ACK %.0lf
+  1 BubF_ACK2   Flows:MKS_HK ACK2 %.0lf
+  1 BubF_T      Flows:MKS_HK Temp
+  1 BubF_Set    Flows:MKS BubF_Flow
+  1 BubF_Flow   Flows:MKS BubF_Flow
+  1 MKS_Stale Flows:MKS_HK Stale

@@ -13,8 +13,8 @@
     }
   : &ME Live SetPoints Enable * { if_ME.Turf("W%d:50011:00000001\n", $1); }
   : &ME Live SetPoints Disable * { if_ME.Turf("W%d:50011:00000000\n", $1); }
-  : &ME Query Int %d (Enter Address) * { if_ME.Turf("RI%d:%d\n", $1, $4); }
-  : &ME Query Float %d (Enter Address) * { if_ME.Turf("RF%d:%d\n", $1, $4); }
+# : &ME Query Int %d (Enter Address) * { if_ME.Turf("RI%d:%d\n", $1, $4); }
+# : &ME Query Float %d (Enter Address) * { if_ME.Turf("RF%d:%d\n", $1, $4); }
   ;
 
 &ME <int>

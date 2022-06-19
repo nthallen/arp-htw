@@ -1,17 +1,17 @@
- 1 Mains_I2C_Status Mains StatusV %.0lf
- 1 Mains_ADC_Status Mains StatusV %.0lf
- 1 Mains_Ch0T Mains Temps
- 1 Mains_Ch1T Mains Temps
- 1 Mains_Ch2T Mains Temps
- 1 Mains_Ch3T Mains Temps
- 1 Mains_PMotT Mains Temps
- 1 Mains_PumpT Mains Temps
- 1 Mains_V80V Mains Volts
- 1 Mains_V80I Mains Amps
- 1 Mains_V28V Mains Volts
- 1 PumpEn:Mains_Cmd_Status:0 Mains Status %.0lf
- 1 PumpSA:Mains_Cmd_Status:1 Mains Status %.0lf
- 1 PumpSB:Mains_Cmd_Status:2 Mains Status %.0lf
- 1 MainsLED1:Mains_Cmd_Status:3 Mains Status %.0lf
- 1 MainsLED2:Mains_Cmd_Status:4 Mains Status %.0lf
- 1 MainsLED3:Mains_Cmd_Status:5 Mains Status %.0lf
+ 1 Mains_I2C_Status HK:Mains StatusV %.0lf
+ 1 Mains_ADC_Status HK:Mains StatusV %.0lf
+ 1 Mains_Ch0T HK:Temps Mains
+ 1 Mains_Ch1T HK:Temps Mains
+ 1 Mains_Ch2T HK:Temps Mains
+ 1 Mains_Ch3T HK:Temps Mains
+ 1 Mains_PMotT HK:Temps Mains
+ 1 Mains_PumpT HK:Temps Mains
+ 1 Mains_V80V HK:Mains Volts
+ 1 Mains_V80I HK:Mains Amps
+ 1 Mains_V28V HK:Mains Volts
+ 1 PumpEn:Mains_Cmd_Status:0 HK:Mains Status %.0lf
+ 1 PumpSA:Mains_Cmd_Status:1 HK:Mains Status %.0lf
+ 1 PumpSB:Mains_Cmd_Status:2 HK:Mains Status %.0lf
+ 1 MainsLED1:Mains_Cmd_Status:3 HK:Mains Status %.0lf
+ 1 MainsLED2:Mains_Cmd_Status:4 HK:Mains Status %.0lf
+ 1 MainsLED3:Mains_Cmd_Status:5 HK:Mains Status %.0lf

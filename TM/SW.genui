@@ -1,4 +1,4 @@
-1 TV_DP_Set Inlet DP
-1 TV_Gi Inlet Gains
-1 TV_Gp Inlet Gains
+1 TV_DP_Set Flows:Inlet DP
+1 TV_Gi Flows:Inlet Gains
+1 TV_Gp Flows:Inlet Gains
 
