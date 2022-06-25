@@ -243,7 +243,9 @@ State F_GD_Fill_Cell {
   Validate F_Pump_Off;
 }
 
-State F_GD_Pump_Purge {
+State F_GD_Pump_Purge { 
+      > Command Gas_Vlv_D On
+
       #  depending on (Gas_Pressure_Low) { Validate F_GD_Low_Pressure; }
         depending on (Flow_Idle) { Validate F_GD_Close; }
         depending on (Flow_Zero) { Validate F_GD_Close; }
