@@ -46,7 +46,7 @@ State icosd_fit {
       icosd_T_sum = 0;
       icosd_n_sum = 0;
       icosd_scan1 = SSP_num;
-      if (SSP_num > icosd_scan0 + 4) {
+      if (SSP_num > icosd_scan0 + 4 && icosd_P_avg >= 3) {
         ci_sendfcmd(2, "icosfit Scan %lu %.3f %.3f\n",
           SSP_num, icosd_P_avg, icosd_T_avg);
       }
