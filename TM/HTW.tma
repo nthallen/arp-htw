@@ -592,13 +592,13 @@ Partition
 %}
 
 State FWD_Fan_Control_Watch_Too_Hot {
-    Hold until ( FWD_TEMP_TOO_HOT(convert(Rov6T)) );
+    Hold until ( FWD_TEMP_TOO_HOT(convert(Rov5T)) );
  +1 > Command Forward Enclosure Exhaust Fan On
  +1 Validate FWD_Fan_Control_Watch_Too_Cold;
 }
 
 State FWD_Fan_Control_Watch_Too_Cold {
-    Hold until ( FWD_TEMP_TOO_COLD(convert(Rov6T)) ); 
+    Hold until ( FWD_TEMP_TOO_COLD(convert(Rov5T)) ); 
  +1 > Command Forward Enclosure Exhaust Fan Off
     Validate FWD_Fan_Control_Watch_Too_Hot;
 
